@@ -1,0 +1,39 @@
+import type { Metadata } from 'next';
+import { cabinetGrotesk, dmSans, geistMono } from '@/lib/fonts';
+import { I18nProvider } from '@/lib/i18n/context';
+import './globals.css';
+
+export const metadata: Metadata = {
+  title: 'agency99 — Professionaalne veeb kuni 7 päevaga',
+  description:
+    'Inimese loovus ja AI kiirus. Veebilehed, e-poed ja platvormid alates €500. Valmis kuni 7 päevaga.',
+  keywords: 'veebileht, e-pood, Next.js, Vercel, Eesti, web studio, agency',
+  openGraph: {
+    title: 'agency99 — Professionaalne veeb kuni 7 päevaga',
+    description:
+      'Inimese loovus ja AI kiirus. Veebilehed, e-poed ja platvormid alates €500.',
+    type: 'website',
+    locale: 'et_EE',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="et"
+      className={`${cabinetGrotesk.variable} ${dmSans.variable} ${geistMono.variable}`}
+    >
+      <body>
+        <I18nProvider>{children}</I18nProvider>
+      </body>
+    </html>
+  );
+}
