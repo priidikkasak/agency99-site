@@ -28,6 +28,7 @@ html {
   --border-bright: #3A3A37;
   --accent:        #9B8BFF;
   --accent-rgb:    155, 139, 255;
+  --accent-gradient: linear-gradient(135deg, #8B7BFF 0%, #B8B0FF 100%);
   --available:     #4DFFB4;
 
   --font-display: var(--font-cabinet), 'Neue Montreal', system-ui, sans-serif;
@@ -41,6 +42,7 @@ html {
   --sp-2:  16px;
   --sp-3:  24px;
   --sp-4:  32px;
+  --sp-5:  40px;
   --sp-6:  48px;
   --sp-8:  64px;
   --sp-10: 80px;

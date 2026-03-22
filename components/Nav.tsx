@@ -15,6 +15,7 @@ export function Nav() {
   const { t, lang, setLang } = useI18n();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const ids = NAV_LINKS.map((l) => l.href.slice(1));
@@ -32,6 +33,12 @@ export function Nav() {
   }, []);
 
   useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
@@ -39,12 +46,15 @@ export function Nav() {
   const toggleLang = () => setLang(lang === 'ET' ? 'EN' : 'ET');
 
   return (
-    <header className={styles.header}>
+    <header className={[styles.header, scrolled ? styles.headerScrolled : ''].join(' ')}>
       <nav className={styles.nav} aria-label="Main navigation">
-          <a href="#" className={styles.logo} aria-label="agency99 — avaleht">
-            agency99
-          </a>
+        {/* Logo */}
+        <a href="#" className={styles.logoLink} aria-label="agency99 — home">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="agency99" className={styles.logoImg} />
+        </a>
 
+        {/* Center links */}
         <ul className={styles.links} role="list">
           {NAV_LINKS.map(({ key, href }) => {
             const id = href.slice(1);
@@ -59,16 +69,17 @@ export function Nav() {
               </li>
             );
           })}
-          <li>
-            <button onClick={toggleLang} className={styles.langToggle} aria-label={`Switch to ${t.nav.langToggle}`}>
-              {t.nav.langToggle}
-            </button>
-          </li>
-          <li>
-            <a href="#kontakt" className={styles.ctaBtn}>{t.nav.cta}</a>
-          </li>
         </ul>
 
+        {/* Right: lang + CTA */}
+        <div className={styles.right}>
+          <button onClick={toggleLang} className={styles.langToggle} aria-label={`Switch to ${t.nav.langToggle}`}>
+            {t.nav.langToggle}
+          </button>
+          <a href="#kontakt" className={styles.ctaBtn}>{t.nav.cta}</a>
+        </div>
+
+        {/* Mobile controls */}
         <div className={styles.mobileRight}>
           <button onClick={toggleLang} className={styles.langToggle} aria-label={`Switch to ${t.nav.langToggle}`}>
             {t.nav.langToggle}

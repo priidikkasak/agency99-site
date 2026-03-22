@@ -174,7 +174,7 @@
   justify-content: center;
   height: 44px;
   padding: 0 var(--sp-4);
-  background: var(--accent);
+  background: var(--accent-gradient);
   color: var(--bg-primary);
   font-family: var(--font-body);
   font-size: 14px;
