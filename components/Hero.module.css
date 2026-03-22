@@ -41,12 +41,13 @@
 }
 
 .headline {
-  font-size: clamp(54px, 8.5vw, 104px);
+  font-size: clamp(52px, 7.5vw, 96px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.96;
   color: var(--text-primary);
   font-family: var(--font-display);
+  max-width: 720px;
 }
 
 .word {

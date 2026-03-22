@@ -41,17 +41,9 @@ export function Nav() {
   return (
     <header className={styles.header}>
       <nav className={styles.nav} aria-label="Main navigation">
-        <div className={styles.left}>
           <a href="#" className={styles.logo} aria-label="agency99 — avaleht">
             agency99
           </a>
-          <div className={styles.status} aria-label="Projektide vabadus">
-            <span className={styles.statusDot} aria-hidden="true" />
-            <span className={styles.statusText}>
-              {lang === 'ET' ? 'Vaba projektideks' : 'Available'}
-            </span>
-          </div>
-        </div>
 
         <ul className={styles.links} role="list">
           {NAV_LINKS.map(({ key, href }) => {

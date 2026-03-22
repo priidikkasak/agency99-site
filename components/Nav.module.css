@@ -20,12 +20,6 @@
   -webkit-backdrop-filter: blur(16px);
 }
 
-.left {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-4);
-}
-
 .logo {
   font-family: var(--font-display);
   font-weight: 700;
@@ -33,34 +27,6 @@
   letter-spacing: -0.03em;
   color: var(--text-primary);
   flex-shrink: 0;
-}
-
-/* Available status */
-.status {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 10px;
-  border: 1px solid rgba(77, 255, 180, 0.2);
-  border-radius: 100px;
-  background: rgba(77, 255, 180, 0.05);
-}
-
-.statusDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--available);
-  flex-shrink: 0;
-  animation: statusPulse 2.4s ease-in-out infinite;
-}
-
-.statusText {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  color: var(--available);
-  white-space: nowrap;
 }
 
 /* Desktop links */
@@ -217,10 +183,5 @@
 
 @media (max-width: 767px) {
   .links { display: none; }
-  .status { display: none; }
   .mobileRight { display: flex; }
-}
-
-@media (max-width: 1023px) {
-  .status { display: none; }
 }

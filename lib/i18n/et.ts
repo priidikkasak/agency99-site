@@ -51,6 +51,12 @@ export interface Translations {
     ctaPrimary: string;
     ctaGhost: string;
   };
+  statement: {
+    line1: string;
+    line2: string;
+    sub: string;
+    cta: string;
+  };
   pillars: {
     sectionLabel: string;
     items: PillarItem[];
@@ -73,14 +79,11 @@ export interface Translations {
     headline: string;
     steps: ProcessStep[];
   };
-  techStack: {
-    sectionLabel: string;
-    headline: string;
-  };
   finalCta: {
     headline: string;
     subtext: string;
     cta: string;
+    responseNote: string;
   };
   footer: {
     legal: string;
@@ -103,26 +106,32 @@ export const et: Translations = {
     cta: 'Alustame',
   },
   hero: {
-    headline: 'Veebimaailm, mis töötab sinu eest.',
+    headline: 'Veeb, mis töötab.',
     subtext:
-      'Inimese loovus ja AI kiirus ühes kohas. Professionaalne veeb kuni 7 päevaga.',
+      'Professionaalne disain ilma agentuurihinnata. Valmis 7 päevaga.',
     ctaPrimary: 'Alustame',
     ctaGhost: 'Tööd',
+  },
+  statement: {
+    line1: 'Agentuuri kvaliteet.',
+    line2: 'Startup hind.',
+    sub: 'Üks inimene + AI. Ilma katteta, ilma ülehinnata.',
+    cta: 'Pärida pakkumist',
   },
   pillars: {
     sectionLabel: 'Mida sa saad',
     items: [
       {
         title: 'Disain, mis konverteerib',
-        body: 'Iga detail teenib eesmärki. Mitte ilu pärast ilu, vaid tulemusi toov visuaalne loogika.',
+        body: 'Iga detail teenib eesmärki. Mitte ilu pärast ilu — visuaalne loogika, mis toob tulemusi.',
       },
       {
         title: 'AI kiirus, inimese hinnang',
-        body: 'AI kiirendab ehitust — inimene tagab kvaliteedi. Sa saad mõlemad, maksad ühe eest.',
+        body: 'AI kiirendab ehitust, inimene tagab kvaliteedi. Sa saad mõlemad, maksad ühe eest.',
       },
       {
         title: 'Kõik ühes kohas',
-        body: 'Logo, veeb, maksed, e-post, analüütika. Ei mingeid 10 erinevat teenusepakkujat.',
+        body: 'Logo, veeb, maksed, analüütika. Ei mingeid 10 erinevat teenusepakkujat.',
       },
     ],
   },
@@ -133,12 +142,12 @@ export const et: Translations = {
       {
         tag: '01',
         title: 'Veebileht',
-        body: "Kiire, mobiilisõbralik, SEO-optimeeritud. Next.js + Vercel — laadimine alla 1 sekundi.",
+        body: 'Kiire, mobiilisõbralik, SEO-optimeeritud. Next.js + Vercel — laadimine alla 1 sekundi.',
       },
       {
         tag: '02',
         title: 'E-pood',
-        body: "Tooted, ostukorv, maksed Stripe'iga. Täielik e-kaubandus lahendus.",
+        body: "Tooted, ostukorv, Stripe maksed. Täielik e-kaubandus lahendus.",
       },
       {
         tag: '03',
@@ -155,13 +164,12 @@ export const et: Translations = {
   pricing: {
     sectionLabel: 'Hinnad',
     headline: 'Lihtne hinnakiri',
-    subtext: 'Tasuta hinnapakkumine 24 tunni jooksul. Ei mingeid üllatusi.',
+    subtext: 'Tasuta hinnapakkumine 24 tunni jooksul.',
     starter: {
       name: 'Starter',
       price: 'Alates €500',
       duration: 'Kuni 3 päeva',
-      description:
-        'Ideaalne ettevõtetele, kes vajavad kiiret ja professionaalset veebikohalolekut.',
+      description: 'Ideaalne ettevõtetele, kes vajavad kiiret ja professionaalset veebikohalolekut.',
       features: [
         'Kuni 5 lehte',
         'Mobiilisõbralik disain',
@@ -177,8 +185,7 @@ export const et: Translations = {
       badge: 'Populaarne',
       price: 'Kuni €2 000',
       duration: 'Kuni 7 päeva',
-      description:
-        'E-poodide, platvormide ja keerukate veebilahenduste jaoks.',
+      description: 'E-poodide, platvormide ja keerukate veebilahenduste jaoks.',
       features: [
         'Piiramatu arv lehti',
         'E-pood + Stripe maksed',
@@ -218,14 +225,11 @@ export const et: Translations = {
       },
     ],
   },
-  techStack: {
-    sectionLabel: 'Tehnoloogiad',
-    headline: 'Mida kasutan',
-  },
   finalCta: {
     headline: 'Valmis alustama?',
-    subtext: 'Kirjuta mulle — saad hinnapakkumise 24 tunni jooksul.',
+    subtext: 'Kirjuta mulle.',
     cta: 'Alustame',
+    responseNote: 'Vastus 24 tunni jooksul.',
   },
   footer: {
     legal: `© ${new Date().getFullYear()} agency99. Kõik õigused kaitstud.`,

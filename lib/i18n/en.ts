@@ -10,26 +10,32 @@ export const en: Translations = {
     cta: 'Start a project',
   },
   hero: {
-    headline: 'A website that works while you sleep.',
+    headline: 'Websites that win.',
     subtext:
-      'Human creativity and AI speed in one place. Professional web in days, not weeks.',
+      'Premium web design without the agency price tag. Delivered in 7 days.',
     ctaPrimary: 'Start a project',
     ctaGhost: 'Our work',
+  },
+  statement: {
+    line1: 'Agency quality.',
+    line2: 'Startup price.',
+    sub: 'One human + AI. No overhead, no markup, no agency rates.',
+    cta: 'Get a quote',
   },
   pillars: {
     sectionLabel: 'What you get',
     items: [
       {
         title: 'Design that converts',
-        body: "Every detail serves a purpose. Not beauty for beauty's sake — visual logic that drives results.",
+        body: "Every detail serves a purpose. Not beauty for its own sake — visual logic that drives results.",
       },
       {
         title: 'AI speed, human judgment',
-        body: 'AI accelerates the build — the human ensures quality. You get both, pay for one.',
+        body: 'AI accelerates the build, the human ensures quality. You get both, pay for one.',
       },
       {
         title: 'Everything in one place',
-        body: 'Logo, website, payments, email, analytics. No juggling 10 different service providers.',
+        body: 'Logo, website, payments, analytics. No juggling 10 different service providers.',
       },
     ],
   },
@@ -45,7 +51,7 @@ export const en: Translations = {
       {
         tag: '02',
         title: 'E-commerce',
-        body: 'Products, cart, payments with Stripe. Complete e-commerce solution.',
+        body: 'Products, cart, Stripe payments. Complete e-commerce solution.',
       },
       {
         tag: '03',
@@ -62,13 +68,12 @@ export const en: Translations = {
   pricing: {
     sectionLabel: 'Pricing',
     headline: 'Simple pricing',
-    subtext: 'Free quote within 24 hours. No surprises.',
+    subtext: 'Free quote within 24 hours.',
     starter: {
       name: 'Starter',
       price: 'From €500',
       duration: 'Up to 3 days',
-      description:
-        'Ideal for businesses that need a fast, professional web presence.',
+      description: 'Ideal for businesses that need a fast, professional web presence.',
       features: [
         'Up to 5 pages',
         'Mobile-friendly design',
@@ -84,8 +89,7 @@ export const en: Translations = {
       badge: 'Popular',
       price: 'Up to €2,000',
       duration: 'Up to 7 days',
-      description:
-        'For e-commerce, platforms and complex web solutions.',
+      description: 'For e-commerce, platforms and complex web solutions.',
       features: [
         'Unlimited pages',
         'E-commerce + Stripe payments',
@@ -106,7 +110,7 @@ export const en: Translations = {
       {
         num: '01',
         title: 'Brief',
-        body: 'Fill out a short form. I understand your business, goals and preferences.',
+        body: 'Fill out a short form. I learn your business, goals and preferences.',
       },
       {
         num: '02',
@@ -116,23 +120,20 @@ export const en: Translations = {
       {
         num: '03',
         title: 'Build',
-        body: 'Fast and precise build with Next.js + AI assistance. Daily updates.',
+        body: 'Fast and precise build with Next.js + AI. Daily updates.',
       },
       {
         num: '04',
         title: 'Launch',
-        body: 'Deploy to Vercel, domain configured, analytics running. Ready.',
+        body: 'Deploy to Vercel, domain configured, analytics running. Done.',
       },
     ],
   },
-  techStack: {
-    sectionLabel: 'Tech stack',
-    headline: 'What I use',
-  },
   finalCta: {
     headline: 'Ready to build?',
-    subtext: 'Write to me — get a quote within 24 hours.',
+    subtext: "Let's talk.",
     cta: 'Start a project',
+    responseNote: 'Response within 24 hours.',
   },
   footer: {
     legal: `© ${new Date().getFullYear()} agency99. All rights reserved.`,

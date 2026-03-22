@@ -5,7 +5,7 @@ import { Section } from './Section';
 import styles from './FinalCTA.module.css';
 
 export function FinalCTA() {
-  const { t, lang } = useI18n();
+  const { t } = useI18n();
 
   return (
     <Section id="kontakt" className={styles.ctaSection}>
@@ -29,9 +29,7 @@ export function FinalCTA() {
             {t.finalCta.cta} →
           </a>
 
-          <span className={styles.note}>
-            {lang === 'ET' ? 'Vastus 24 tunni jooksul.' : 'Response within 24 hours.'}
-          </span>
+          <span className={styles.note}>{t.finalCta.responseNote}</span>
         </div>
       </div>
     </Section>
