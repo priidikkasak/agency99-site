@@ -13,10 +13,6 @@ export function StatementBlock() {
           <p className={styles.line}>{t.statement.line1}</p>
           <p className={styles.line}>{t.statement.line2}</p>
         </div>
-        <div className={styles.footer}>
-          <p className={styles.sub}>{t.statement.sub}</p>
-          <a href="#kontakt" className={styles.cta}>{t.statement.cta} →</a>
-        </div>
       </div>
     </section>
   );

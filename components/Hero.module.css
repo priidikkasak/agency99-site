@@ -116,8 +116,7 @@
   display: flex;
   gap: 0;
   margin-top: var(--sp-10);
-  border-top: 1px solid var(--border);
-  padding-top: var(--sp-4);
+  padding-top: 0;
 }
 
 .stat {

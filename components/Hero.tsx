@@ -5,13 +5,6 @@ import { useI18n } from '@/lib/i18n/context';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import styles from './Hero.module.css';
 
-const TICKER_ITEMS = [
-  'Next.js', 'React', 'TypeScript', 'Vercel', 'Stripe',
-  'Supabase', 'n8n', 'Make', 'Framer Motion', 'AI-powered',
-  'Next.js', 'React', 'TypeScript', 'Vercel', 'Stripe',
-  'Supabase', 'n8n', 'Make', 'Framer Motion', 'AI-powered',
-];
-
 export function Hero() {
   const { t, lang } = useI18n();
   const reduced = useReducedMotion();
@@ -111,20 +104,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Marquee strip */}
-      <div className={styles.ticker} aria-hidden="true">
-        <div
-          className={styles.tickerTrack}
-          style={reduced ? { animation: 'none' } : undefined}
-        >
-          {TICKER_ITEMS.map((item, i) => (
-            <span key={i} className={styles.tickerItem}>
-              {item}
-              <span className={styles.tickerDot}>·</span>
-            </span>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }
