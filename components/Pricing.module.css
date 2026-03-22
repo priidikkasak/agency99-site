@@ -25,7 +25,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--sp-3);
-  align-items: start;
 }
 
 .card {

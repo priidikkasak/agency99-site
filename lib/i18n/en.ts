@@ -99,7 +99,7 @@ export const en: Translations = {
         'Analytics setup',
         '3 months support',
       ],
-      cta: 'Request a quote',
+      cta: "Let's start",
     },
     note: 'Quote within 24 hours. Price depends on project scope.',
   },

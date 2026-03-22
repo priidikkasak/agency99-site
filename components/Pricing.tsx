@@ -34,7 +34,7 @@ export function Pricing() {
               </li>
             ))}
           </ul>
-          <a href="#kontakt" className={styles.ctaGhost}>{starter.cta}</a>
+          <a href="#kontakt" className={styles.ctaPrimary}>{starter.cta}</a>
         </div>
 
         {/* Advanced — featured */}

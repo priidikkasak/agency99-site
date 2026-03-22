@@ -203,7 +203,7 @@ export const et: Translations = {
         'Analüütika seadistus',
         '3 kuud tugi',
       ],
-      cta: 'Pärida pakkumist',
+      cta: 'Alustame',
     },
     note: 'Hinnapakkumine 24 tunni jooksul. Hind sõltub projekti mahust.',
   },

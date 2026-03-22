@@ -10,13 +10,11 @@ function ProcessStep({
   title,
   body,
   delay,
-  isLast,
 }: {
   num: string;
   title: string;
   body: string;
   delay: number;
-  isLast: boolean;
 }) {
   const [ref, inView] = useScrollReveal<HTMLLIElement>();
 
@@ -26,10 +24,7 @@ function ProcessStep({
       className={['reveal', inView ? 'visible' : '', styles.step].join(' ')}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className={styles.stepTop}>
-        <span className={styles.num}>{num}</span>
-        {!isLast && <div className={styles.connector} aria-hidden="true" />}
-      </div>
+      <span className={styles.num} aria-hidden="true">{num}</span>
       <h3 className={styles.title}>{title}</h3>
       <p className={styles.body}>{body}</p>
     </li>
@@ -52,7 +47,6 @@ export function Process() {
             title={step.title}
             body={step.body}
             delay={i * 100}
-            isLast={i === t.process.steps.length - 1}
           />
         ))}
       </ol>
