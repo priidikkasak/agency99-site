@@ -43,7 +43,6 @@ export function Process() {
     <Section id="protsess" noReveal>
       <div className={styles.header}>
         <span className={styles.label}>{t.process.sectionLabel}</span>
-        <h2 className={styles.headline}>{t.process.headline}</h2>
       </div>
       <ol className={styles.steps} role="list">
         {t.process.steps.map((step, i) => (

@@ -12,7 +12,6 @@ export function Pricing() {
     <Section id="hinnad">
       <div className={styles.header}>
         <span className={styles.label}>{t.pricing.sectionLabel}</span>
-        <h2 className={styles.headline}>{t.pricing.headline}</h2>
       </div>
 
       <div className={styles.grid}>

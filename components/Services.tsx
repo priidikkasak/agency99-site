@@ -48,7 +48,6 @@ export function Services() {
     <Section noReveal>
       <div className={styles.header}>
         <span className={styles.label}>{t.services.sectionLabel}</span>
-        <h2 className={styles.headline}>{t.services.headline}</h2>
       </div>
       <ul className={styles.grid} role="list">
         {t.services.items.map((item, i) => (
