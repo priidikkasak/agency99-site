@@ -30,7 +30,6 @@ export function FinalCTA() {
         {/* Left */}
         <div className={styles.left}>
           <h2 className={styles.headline}>{t.finalCta.headline}</h2>
-          <p className={styles.subtext}>{t.finalCta.subtext}</p>
 
           <div className={styles.socialBtns}>
             <a
