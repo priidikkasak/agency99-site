@@ -4,9 +4,8 @@
 
 .label {
   display: block;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-tertiary);
@@ -18,19 +17,11 @@
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.04;
-  color: var(--text-primary);
-  margin-bottom: var(--sp-2);
-}
-
-.subtext {
-  font-size: 16px;
-  color: var(--text-secondary);
-  max-width: none;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 5fr 7fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--sp-3);
   align-items: start;
 }
@@ -43,21 +34,35 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-4);
+  gap: var(--sp-3);
 }
 
 .cardFeatured {
-  border: 2px solid var(--accent);
+  border: 1.5px solid var(--accent);
   background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
 }
 
-.cardTop {
+.cardFeatured::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.6), transparent);
+}
+
+.cardHeader {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: var(--sp-2);
 }
 
-.planNameRow {
+.nameRow {
   display: flex;
   align-items: center;
   gap: var(--sp-2);
@@ -65,74 +70,82 @@
 
 .planName {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+}
+
+.duration {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 3px 10px;
-  background: rgba(var(--accent-rgb), 0.12);
+  padding: 2px 8px;
+  background: rgba(var(--accent-rgb), 0.1);
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.06em;
+  font-size: 9px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: 4px;
-  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
 }
 
-.priceRow {
-  display: flex;
-  align-items: baseline;
-  gap: var(--sp-2);
-  flex-wrap: wrap;
+/* BIG price — the star of the show */
+.priceBlock {
+  padding: var(--sp-2) 0;
 }
 
 .price {
   font-family: var(--font-display);
-  font-size: 36px;
+  font-size: clamp(48px, 5.5vw, 72px);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  line-height: 1;
   color: var(--text-primary);
-}
-
-.duration {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-tertiary);
-  letter-spacing: 0.04em;
+  display: block;
 }
 
 .description {
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 300;
   color: var(--text-secondary);
   line-height: 1.6;
   max-width: none;
 }
 
+.divider {
+  height: 1px;
+  background: var(--border-subtle);
+}
+
 .features {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-2);
+  gap: 10px;
+  flex: 1;
 }
 
 .feature {
   display: flex;
   align-items: baseline;
   gap: var(--sp-2);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 300;
   color: var(--text-secondary);
+  line-height: 1.5;
 }
 
-.featureIcon {
+.tick {
   color: var(--text-tertiary);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   flex-shrink: 0;
 }
 
@@ -149,13 +162,11 @@
   font-weight: 400;
   border: 1px solid var(--border-bright);
   border-radius: 6px;
-  transition: border-color 0.25s ease, color 0.25s ease;
+  transition: border-color 0.25s ease;
   text-align: center;
 }
 
-.ctaGhost:hover {
-  border-color: var(--text-secondary);
-}
+.ctaGhost:hover { border-color: var(--text-secondary); }
 
 .ctaPrimary {
   display: inline-flex;
@@ -180,24 +191,16 @@
 
 .note {
   margin-top: var(--sp-4);
-  font-size: 13px;
-  font-weight: 300;
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: var(--text-tertiary);
-  max-width: none;
   text-align: center;
+  letter-spacing: 0.04em;
+  max-width: none;
 }
 
 @media (max-width: 767px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    padding: var(--sp-3);
-  }
-
-  .ctaGhost,
-  .ctaPrimary {
-    width: 100%;
-  }
+  .grid { grid-template-columns: 1fr; }
+  .card { padding: var(--sp-3); }
+  .ctaGhost, .ctaPrimary { width: 100%; }
 }

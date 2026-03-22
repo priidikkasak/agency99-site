@@ -5,11 +5,13 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Section } from './Section';
 import styles from './ValuePillars.module.css';
 
-function PillarCard({
+function PillarRow({
+  num,
   title,
   body,
   delay,
 }: {
+  num: string;
   title: string;
   body: string;
   delay: number;
@@ -19,13 +21,12 @@ function PillarCard({
   return (
     <li
       ref={ref}
-      className={['reveal', inView ? 'visible' : '', styles.card].join(' ')}
+      className={['reveal', inView ? 'visible' : '', styles.row].join(' ')}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className={styles.cardInner}>
-        <h3 className={styles.cardTitle}>{title}</h3>
-        <p className={styles.cardBody}>{body}</p>
-      </div>
+      <span className={styles.num}>{num}</span>
+      <h3 className={styles.title}>{title}</h3>
+      <p className={styles.body}>{body}</p>
     </li>
   );
 }
@@ -38,9 +39,15 @@ export function ValuePillars() {
       <div className={styles.header}>
         <span className={styles.label}>{t.pillars.sectionLabel}</span>
       </div>
-      <ul className={styles.grid} role="list">
+      <ul className={styles.list} role="list">
         {t.pillars.items.map((item, i) => (
-          <PillarCard key={i} title={item.title} body={item.body} delay={i * 100} />
+          <PillarRow
+            key={i}
+            num={`0${i + 1}`}
+            title={item.title}
+            body={item.body}
+            delay={i * 80}
+          />
         ))}
       </ul>
     </Section>

@@ -5,21 +5,39 @@ import { useI18n } from '@/lib/i18n/context';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import styles from './Hero.module.css';
 
+const TICKER_ITEMS = [
+  'Next.js', 'React', 'TypeScript', 'Vercel', 'Stripe',
+  'Supabase', 'n8n', 'Make', 'Framer Motion', 'AI-powered',
+  'Next.js', 'React', 'TypeScript', 'Vercel', 'Stripe',
+  'Supabase', 'n8n', 'Make', 'Framer Motion', 'AI-powered',
+];
+
 export function Hero() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const reduced = useReducedMotion();
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setStarted(true), 200);
+    const timer = setTimeout(() => setStarted(true), 150);
     return () => clearTimeout(timer);
   }, []);
 
   const words = t.hero.headline.split(' ');
 
+  const stats = lang === 'ET'
+    ? [
+        { value: '€500+', label: 'alates' },
+        { value: '7', label: 'päeva max' },
+        { value: '∞', label: 'kohandatud' },
+      ]
+    : [
+        { value: '€500+', label: 'starting from' },
+        { value: '7', label: 'days max' },
+        { value: '∞', label: 'custom' },
+      ];
+
   return (
     <section className={styles.hero} aria-label="Hero">
-      {/* Radial accent glow */}
       <div className={styles.glow} aria-hidden="true" />
 
       <div className={`container ${styles.inner}`}>
@@ -33,10 +51,10 @@ export function Hero() {
                   !reduced && started
                     ? {
                         animationName: 'wordReveal',
-                        animationDuration: '0.5s',
+                        animationDuration: '0.55s',
                         animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
                         animationFillMode: 'both',
-                        animationDelay: `${200 + i * 55}ms`,
+                        animationDelay: `${150 + i * 60}ms`,
                       }
                     : { opacity: 1 }
                 }
@@ -47,16 +65,64 @@ export function Hero() {
             ))}
           </h1>
 
-          <p className={styles.subtext}>{t.hero.subtext}</p>
+          <p
+            className={styles.subtext}
+            style={
+              !reduced && started
+                ? { animation: 'fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.55s both' }
+                : { opacity: 1 }
+            }
+          >
+            {t.hero.subtext}
+          </p>
 
-          <div className={styles.ctas}>
+          <div
+            className={styles.ctas}
+            style={
+              !reduced && started
+                ? { animation: 'fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s both' }
+                : { opacity: 1 }
+            }
+          >
             <a href="#kontakt" className={styles.ctaPrimary}>
               {t.hero.ctaPrimary}
             </a>
             <a href="#teenused" className={styles.ctaGhost}>
-              {t.hero.ctaGhost}
+              {t.hero.ctaGhost} ↓
             </a>
           </div>
+        </div>
+
+        {/* Stat strip */}
+        <div
+          className={styles.stats}
+          style={
+            !reduced && started
+              ? { animation: 'fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.9s both' }
+              : { opacity: 1 }
+          }
+        >
+          {stats.map((s, i) => (
+            <div key={i} className={styles.stat}>
+              <span className={styles.statValue}>{s.value}</span>
+              <span className={styles.statLabel}>{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Marquee strip */}
+      <div className={styles.ticker} aria-hidden="true">
+        <div
+          className={styles.tickerTrack}
+          style={reduced ? { animation: 'none' } : undefined}
+        >
+          {TICKER_ITEMS.map((item, i) => (
+            <span key={i} className={styles.tickerItem}>
+              {item}
+              <span className={styles.tickerDot}>·</span>
+            </span>
+          ))}
         </div>
       </div>
     </section>

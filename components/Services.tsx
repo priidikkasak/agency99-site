@@ -10,23 +10,33 @@ function ServiceCard({
   title,
   body,
   delay,
+  featured,
 }: {
   tag: string;
   title: string;
   body: string;
   delay: number;
+  featured?: boolean;
 }) {
   const [ref, inView] = useScrollReveal<HTMLLIElement>();
 
   return (
     <li
       ref={ref}
-      className={['reveal', inView ? 'visible' : '', styles.card].join(' ')}
+      className={[
+        'reveal',
+        inView ? 'visible' : '',
+        styles.card,
+        featured ? styles.cardFeatured : '',
+      ].join(' ')}
       style={{ transitionDelay: `${delay}ms` }}
     >
       <span className={styles.tag}>{tag}</span>
-      <h3 className={styles.title}>{title}</h3>
-      <p className={styles.body}>{body}</p>
+      <div className={styles.cardContent}>
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.body}>{body}</p>
+      </div>
+      <span className={styles.arrow} aria-hidden="true">↗</span>
     </li>
   );
 }
@@ -47,7 +57,8 @@ export function Services() {
             tag={item.tag}
             title={item.title}
             body={item.body}
-            delay={i * 100}
+            delay={i * 80}
+            featured={i === 0 || i === 3}
           />
         ))}
       </ul>

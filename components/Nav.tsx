@@ -32,37 +32,35 @@ export function Nav() {
   }, []);
 
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
   const toggleLang = () => setLang(lang === 'ET' ? 'EN' : 'ET');
 
-  const closeMenu = () => setMenuOpen(false);
-
   return (
     <header className={styles.header}>
       <nav className={styles.nav} aria-label="Main navigation">
-        <a href="#" className={styles.logo} aria-label="agency99 — home">
-          agency99
-        </a>
+        <div className={styles.left}>
+          <a href="#" className={styles.logo} aria-label="agency99 — avaleht">
+            agency99
+          </a>
+          <div className={styles.status} aria-label="Projektide vabadus">
+            <span className={styles.statusDot} aria-hidden="true" />
+            <span className={styles.statusText}>
+              {lang === 'ET' ? 'Vaba projektideks' : 'Available'}
+            </span>
+          </div>
+        </div>
 
-        {/* Desktop links */}
         <ul className={styles.links} role="list">
           {NAV_LINKS.map(({ key, href }) => {
-            const sectionId = href.slice(1);
+            const id = href.slice(1);
             return (
               <li key={key}>
                 <a
                   href={href}
-                  className={[
-                    styles.link,
-                    activeSection === sectionId ? styles.active : '',
-                  ].join(' ')}
+                  className={[styles.link, activeSection === id ? styles.active : ''].join(' ')}
                 >
                   {t.nav[key]}
                 </a>
@@ -70,34 +68,23 @@ export function Nav() {
             );
           })}
           <li>
-            <button
-              onClick={toggleLang}
-              className={styles.langToggle}
-              aria-label={`Switch to ${t.nav.langToggle}`}
-            >
+            <button onClick={toggleLang} className={styles.langToggle} aria-label={`Switch to ${t.nav.langToggle}`}>
               {t.nav.langToggle}
             </button>
           </li>
           <li>
-            <a href="#kontakt" className={styles.ctaBtn}>
-              {t.nav.cta}
-            </a>
+            <a href="#kontakt" className={styles.ctaBtn}>{t.nav.cta}</a>
           </li>
         </ul>
 
-        {/* Mobile right side */}
         <div className={styles.mobileRight}>
-          <button
-            onClick={toggleLang}
-            className={styles.langToggle}
-            aria-label={`Switch to ${t.nav.langToggle}`}
-          >
+          <button onClick={toggleLang} className={styles.langToggle} aria-label={`Switch to ${t.nav.langToggle}`}>
             {t.nav.langToggle}
           </button>
           <button
             className={styles.hamburger}
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? 'Sulge menüü' : 'Ava menüü'}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
           >
@@ -107,7 +94,6 @@ export function Nav() {
         </div>
       </nav>
 
-      {/* Mobile overlay */}
       <div
         id="mobile-menu"
         className={[styles.overlay, menuOpen ? styles.overlayVisible : ''].join(' ')}
@@ -116,21 +102,15 @@ export function Nav() {
         <ul className={styles.overlayLinks} role="list">
           {NAV_LINKS.map(({ key, href }) => (
             <li key={key}>
-              <a
-                href={href}
-                className={styles.overlayLink}
-                onClick={closeMenu}
-              >
+              <a href={href} className={styles.overlayLink} onClick={() => setMenuOpen(false)}>
                 {t.nav[key]}
               </a>
             </li>
           ))}
-          <li>
-            <a href="#kontakt" className={styles.overlayCtaBtn} onClick={closeMenu}>
-              {t.nav.cta}
-            </a>
-          </li>
         </ul>
+        <a href="#kontakt" className={styles.overlayCtaBtn} onClick={() => setMenuOpen(false)}>
+          {t.nav.cta} →
+        </a>
       </div>
     </header>
   );

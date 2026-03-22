@@ -1,12 +1,16 @@
-.header {
+.section {
+  padding: var(--sp-12) 0;
+  overflow: hidden;
+}
+
+.headerWrap {
   margin-bottom: var(--sp-8);
 }
 
 .label {
   display: block;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-tertiary);
@@ -18,37 +22,63 @@
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.04;
-  color: var(--text-primary);
 }
 
-.badges {
+/* Marquee strip */
+.marqueeWrap {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+  padding: var(--sp-3) 0;
+}
+
+.marqueeWrap::before,
+.marqueeWrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marqueeWrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-secondary), transparent);
+}
+
+.marqueeWrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-secondary), transparent);
+}
+
+.track {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-2);
+  width: max-content;
+  animation: marqueeScroll 32s linear infinite;
 }
 
-.badge {
+.item {
   display: inline-flex;
   align-items: center;
-  height: 32px;
-  padding: 0 var(--sp-2);
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  gap: var(--sp-4);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-secondary);
   letter-spacing: 0.02em;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  padding: 0 var(--sp-4);
 }
 
-.badge:hover {
-  border-color: var(--border-bright);
-  color: var(--text-primary);
+.sep {
+  color: var(--text-tertiary);
+  font-size: 10px;
 }
 
 @media (max-width: 767px) {
-  .badge {
-    font-size: 11px;
-  }
+  .section { padding: var(--sp-8) 0; }
+  .headerWrap { margin-bottom: var(--sp-6); }
 }
