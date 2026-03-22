@@ -24,16 +24,17 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 7fr 5fr;
-  gap: var(--sp-16);
-  align-items: center;
+  grid-template-columns: 5fr 7fr;
+  gap: var(--sp-12);
+  align-items: start;
   padding: var(--sp-12) 0;
 }
 
+/* Left */
 .left {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-3);
+  gap: var(--sp-4);
 }
 
 .headline {
@@ -48,38 +49,120 @@
   font-size: 16px;
   font-weight: 300;
   color: var(--text-secondary);
-  max-width: 46ch;
+  max-width: 36ch;
   line-height: 1.65;
 }
 
-/* Right panel */
-.right {
+/* Social buttons */
+.socialBtns {
   display: flex;
-  flex-direction: column;
-  gap: var(--sp-4);
-  align-items: flex-start;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
 }
 
-.email {
-  font-family: var(--font-display);
-  font-size: clamp(15px, 1.8vw, 22px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: var(--sp-3);
-  width: 100%;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.email:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.cta {
+.socialBtn {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 var(--sp-3);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.whatsappBtn:hover {
+  border-color: #25D366;
+  color: #25D366;
+  background: rgba(37, 211, 102, 0.05);
+}
+
+.telegramBtn:hover {
+  border-color: #26A5E4;
+  color: #26A5E4;
+  background: rgba(38, 165, 228, 0.05);
+}
+
+/* Response note */
+.responseNote {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-top: var(--sp-2);
+}
+
+.responseDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--available);
+  flex-shrink: 0;
+  animation: statusPulse 2.4s ease-in-out infinite;
+}
+
+/* Right: form */
+.right {
+  padding-top: var(--sp-2);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-2);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  -webkit-appearance: none;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--accent);
+  background: var(--bg-tertiary);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: 48px;
   padding: 0 var(--sp-4);
   background: var(--accent-gradient);
@@ -87,21 +170,16 @@
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 500;
-  border-radius: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
   transition: box-shadow 0.3s ease, opacity 0.25s ease;
-  box-shadow: 0 0 60px rgba(var(--accent-rgb), 0.1);
+  align-self: flex-start;
 }
 
-.cta:hover {
-  box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.35);
-  opacity: 0.92;
-}
-
-.note {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-tertiary);
-  letter-spacing: 0.04em;
+.submit:hover {
+  box-shadow: 0 0 32px rgba(var(--accent-rgb), 0.35);
+  opacity: 0.9;
 }
 
 @media (max-width: 1023px) {
@@ -113,7 +191,15 @@
 }
 
 @media (max-width: 767px) {
-  .split { padding: var(--sp-6) 0; }
+  .split {
+    padding: var(--sp-6) 0;
+  }
 
-  .cta { width: 100%; justify-content: center; }
+  .fieldRow {
+    grid-template-columns: 1fr;
+  }
+
+  .submit {
+    width: 100%;
+  }
 }

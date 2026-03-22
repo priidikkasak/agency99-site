@@ -134,6 +134,14 @@ export const en: Translations = {
     subtext: "Let's talk.",
     cta: 'Start a project',
     responseNote: 'Response within 24 hours.',
+    whatsapp: 'WhatsApp',
+    telegram: 'Telegram',
+    form: {
+      namePlaceholder: 'Your name',
+      emailPlaceholder: 'you@email.com',
+      messagePlaceholder: 'Describe your project briefly...',
+      submit: 'Send message →',
+    },
   },
   footer: {
     legal: `© ${new Date().getFullYear()} agency99. All rights reserved.`,

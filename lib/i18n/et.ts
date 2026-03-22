@@ -84,6 +84,14 @@ export interface Translations {
     subtext: string;
     cta: string;
     responseNote: string;
+    whatsapp: string;
+    telegram: string;
+    form: {
+      namePlaceholder: string;
+      emailPlaceholder: string;
+      messagePlaceholder: string;
+      submit: string;
+    };
   };
   footer: {
     legal: string;
@@ -230,6 +238,14 @@ export const et: Translations = {
     subtext: 'Kirjuta mulle.',
     cta: 'Alustame',
     responseNote: 'Vastus 24 tunni jooksul.',
+    whatsapp: 'WhatsApp',
+    telegram: 'Telegram',
+    form: {
+      namePlaceholder: 'Sinu nimi',
+      emailPlaceholder: 'sinu@email.com',
+      messagePlaceholder: 'Kirjelda oma projekti lühidalt...',
+      submit: 'Saada sõnum →',
+    },
   },
   footer: {
     legal: `© ${new Date().getFullYear()} agency99. Kõik õigused kaitstud.`,
