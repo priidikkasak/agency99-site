@@ -11,11 +11,17 @@ const NAV_LINKS = [
   { key: 'contact' as const, href: '#kontakt' },
 ] as const;
 
+const LANGS = [
+  { code: 'ET' as const, flag: '🇪🇪', label: 'Eesti' },
+  { code: 'EN' as const, flag: '🇬🇧', label: 'English' },
+];
+
 export function Nav() {
   const { t, lang, setLang } = useI18n();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
 
   useEffect(() => {
     const ids = NAV_LINKS.map((l) => l.href.slice(1));
@@ -43,6 +49,18 @@ export function Nav() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (!langOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (!(e.target as Element).closest('[data-lang-container]')) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [langOpen]);
+
+  const currentLang = LANGS.find((l) => l.code === lang)!;
   const toggleLang = () => setLang(lang === 'ET' ? 'EN' : 'ET');
 
   return (
@@ -71,18 +89,42 @@ export function Nav() {
           })}
         </ul>
 
-        {/* Right: lang + CTA */}
+        {/* Right: lang dropdown + CTA */}
         <div className={styles.right}>
-          <button onClick={toggleLang} className={styles.langToggle} aria-label={`Switch to ${t.nav.langToggle}`}>
-            {t.nav.langToggle}
-          </button>
+          <div className={styles.langContainer} data-lang-container>
+            <button
+              onClick={() => setLangOpen(!langOpen)}
+              className={styles.langToggle}
+              aria-label="Change language"
+              aria-expanded={langOpen}
+            >
+              <span className={styles.langFlag}>{currentLang.flag}</span>
+              <span className={styles.langCode}>{currentLang.code}</span>
+              <span className={[styles.chevron, langOpen ? styles.chevronOpen : ''].join(' ')}>▾</span>
+            </button>
+            {langOpen && (
+              <div className={styles.langDropdown}>
+                {LANGS.map(({ code, flag, label }) => (
+                  <button
+                    key={code}
+                    onClick={() => { setLang(code); setLangOpen(false); }}
+                    className={[styles.langOption, lang === code ? styles.langOptionActive : ''].join(' ')}
+                  >
+                    <span className={styles.langFlag}>{flag}</span>
+                    <span className={styles.langLabel}>{label}</span>
+                    {lang === code && <span className={styles.langCheck}>✓</span>}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
           <a href="#kontakt" className={styles.ctaBtn}>{t.nav.cta}</a>
         </div>
 
         {/* Mobile controls */}
         <div className={styles.mobileRight}>
-          <button onClick={toggleLang} className={styles.langToggle} aria-label={`Switch to ${t.nav.langToggle}`}>
-            {t.nav.langToggle}
+          <button onClick={toggleLang} className={styles.langToggleMobile} aria-label="Toggle language">
+            {currentLang.flag}
           </button>
           <button
             className={styles.hamburger}
