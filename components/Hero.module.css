@@ -208,9 +208,9 @@
   }
 
   .inner {
-    padding-top: var(--sp-4);
+    padding-top: var(--sp-6);
     padding-bottom: var(--sp-8);
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 
   .headline {
