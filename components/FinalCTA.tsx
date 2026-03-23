@@ -108,11 +108,11 @@ export function FinalCTA() {
               aria-label="Message"
             />
             <button type="submit" className={styles.submit} disabled={status === 'loading'}>
-              {status === 'loading' ? '...' : status === 'success' ? (t.finalCta.form.successMsg ?? 'Saadetud ✓') : t.finalCta.form.submit}
+              {status === 'loading' ? '...' : status === 'success' ? 'Saadetud ✓' : t.finalCta.form.submit}
             </button>
             {status === 'error' && (
               <p style={{ color: '#ff6b6b', fontSize: '13px', marginTop: '8px' }}>
-                {t.finalCta.form.errorMsg ?? 'Saatmine ebaõnnestus. Proovi uuesti.'}
+                Saatmine ebaõnnestus. Proovi uuesti.
               </p>
             )}
           </form>
