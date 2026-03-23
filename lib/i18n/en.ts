@@ -10,14 +10,14 @@ export const en: Translations = {
     cta: 'Start a project',
   },
   hero: {
-    headline: 'New website. Ready in 3 days.\nAgency quality.\nAffordable price.',
+    headline: 'New website. 3 days.\nAgency quality.\nAffordable price.',
     subtext: '',
     ctaPrimary: 'Start a project',
     ctaGhost: 'Portfolio',
   },
   statement: {
-    line1: 'Startup speed.',
-    line2: 'Pro results.',
+    line1: 'Less talk.',
+    line2: 'More results.',
     sub: 'One human + AI. No overhead, no markup, no agency rates.',
     cta: 'Get a quote',
   },

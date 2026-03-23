@@ -113,14 +113,14 @@ export const et: Translations = {
     cta: 'Alustame',
   },
   hero: {
-    headline: 'Uus veeb. Valmis 3 päevaga.\nAgentuuri kvaliteet.\nTaskukohane hind.',
+    headline: 'Uus veeb. 3 päevaga.\nAgentuuri kvaliteet.\nTaskukohane hind.',
     subtext: '',
     ctaPrimary: 'Alustame',
     ctaGhost: 'Portfoolio',
   },
   statement: {
-    line1: 'Startup kiirus.',
-    line2: 'Profi tulemus.',
+    line1: 'Vähem juttu.',
+    line2: 'Rohkem tulemust.',
     sub: 'Üks inimene + AI. Ilma katteta, ilma ülehinnata.',
     cta: 'Pärida pakkumist',
   },

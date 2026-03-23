@@ -269,11 +269,11 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  color: var(--text-tertiary);
+  color: var(--text-primary);
   transition: color 0.15s ease;
 }
 
-.overlayLink:hover { color: var(--text-primary); }
+.overlayLink:hover { color: var(--accent); }
 
 .overlayCtaBtn {
   display: inline-flex;
