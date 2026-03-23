@@ -4,7 +4,7 @@ import { I18nProvider } from '@/lib/i18n/context';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'agency99 — Professionaalne veeb kuni 7 päevaga',
+  title: 'AGENCY99',
   description:
     'Inimese loovus ja AI kiirus. Veebilehed, e-poed ja platvormid alates €500. Valmis kuni 7 päevaga.',
   keywords: 'veebileht, e-pood, Next.js, Vercel, Eesti, web studio, agency',
