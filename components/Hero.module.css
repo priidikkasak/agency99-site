@@ -203,9 +203,14 @@
 }
 
 @media (max-width: 767px) {
+  .hero {
+    min-height: 88svh;
+  }
+
   .inner {
-    padding-top: var(--sp-5);
-    padding-bottom: var(--sp-6);
+    padding-top: var(--sp-4);
+    padding-bottom: var(--sp-8);
+    justify-content: flex-end;
   }
 
   .headline {
