@@ -78,16 +78,25 @@
 }
 
 @media (max-width: 767px) {
+  .header {
+    margin-bottom: var(--sp-5);
+  }
+
   .steps {
     grid-template-columns: 1fr;
   }
 
   .step {
-    padding-left: 0;
+    padding: var(--sp-3) 0;
   }
 
   .step + .step {
     border-left: none;
     padding-left: 0;
+  }
+
+  .num {
+    font-size: 40px;
+    margin-bottom: var(--sp-1);
   }
 }

@@ -239,7 +239,7 @@
   .stats {
     gap: 0;
     flex-wrap: nowrap;
-    margin-top: var(--sp-8);
+    margin-top: var(--sp-5);
     justify-content: center;
   }
 

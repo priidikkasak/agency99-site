@@ -128,12 +128,16 @@
 }
 
 @media (max-width: 767px) {
+  .header {
+    margin-bottom: var(--sp-5);
+  }
+
   .grid {
     grid-template-columns: 1fr;
     gap: var(--sp-2);
   }
 
-  .card:nth-child(n) { grid-column: span 1; border-radius: 10px; min-height: 220px; }
+  .card:nth-child(n) { grid-column: span 1; border-radius: 10px; min-height: 180px; }
 
   .card { padding: var(--sp-3); }
 }
