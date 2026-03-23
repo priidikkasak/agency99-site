@@ -39,13 +39,12 @@ export function Hero() {
 
       <div className={`container ${styles.inner}`}>
         <div className={styles.content}>
-          <div className={styles.badge}>
-            <span className={styles.badgeDot} />
-            {lang === 'ET' ? 'Saadaval' : 'Available'}
-          </div>
           <h1 className={styles.headline} aria-label={t.hero.headline.replace(/\n/g, ' ')}>
             {lineData.map((line, lineIdx) => (
-              <span key={lineIdx} className={styles.headlineLine}>
+              <span
+                key={lineIdx}
+                className={`${styles.headlineLine}${lineIdx === lineData.length - 1 ? ' ' + styles.headlineLineAccent : ''}`}
+              >
                 {line.words.map(({ word, delay }, wordIdx) => (
                   <span
                     key={wordIdx}

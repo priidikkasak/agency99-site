@@ -14,8 +14,8 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <StatementBlock />
         <ValuePillars />
+        <StatementBlock />
         <Services />
         <Pricing />
         <Process />
