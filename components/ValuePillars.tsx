@@ -1,7 +1,6 @@
 'use client';
 
 import { useI18n } from '@/lib/i18n/context';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Section } from './Section';
 import styles from './ValuePillars.module.css';
 
@@ -16,13 +15,9 @@ function PillarRow({
   body: string;
   delay: number;
 }) {
-  const [ref, inView] = useScrollReveal<HTMLLIElement>();
-
   return (
     <li
-      ref={ref}
-      className={['reveal', inView ? 'visible' : '', styles.row].join(' ')}
-      style={{ transitionDelay: `${delay}ms` }}
+      className={styles.row}
     >
       <span className={styles.num}>{num}</span>
       <h3 className={styles.title}>{title}</h3>

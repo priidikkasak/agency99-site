@@ -1,7 +1,6 @@
 'use client';
 
 import { useI18n } from '@/lib/i18n/context';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { Section } from './Section';
 import styles from './Services.module.css';
 
@@ -18,18 +17,12 @@ function ServiceCard({
   delay: number;
   featured?: boolean;
 }) {
-  const [ref, inView] = useScrollReveal<HTMLLIElement>();
-
   return (
     <li
-      ref={ref}
       className={[
-        'reveal',
-        inView ? 'visible' : '',
         styles.card,
         featured ? styles.cardFeatured : '',
       ].join(' ')}
-      style={{ transitionDelay: `${delay}ms` }}
     >
       <span className={styles.tag}>{tag}</span>
       <div className={styles.cardContent}>
