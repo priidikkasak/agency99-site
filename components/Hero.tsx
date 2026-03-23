@@ -15,23 +15,17 @@ export function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
-  const lines = t.hero.headline.split('\n');
-
-  // Pre-compute delays for each word across all lines
-  let wordCounter = 0;
-  const lineData = lines.map(line => ({
-    words: line.split(' ').map(word => ({ word, delay: 200 + wordCounter++ * 60 })),
-  }));
+  const words = t.hero.headline.split(' ');
 
   const stats = lang === 'ET'
     ? [
         { value: '€500+', label: 'alates' },
-        { value: '3', label: 'päeva max' },
+        { value: '7', label: 'päeva max' },
         { value: '∞', label: 'kohandatud' },
       ]
     : [
         { value: '€500+', label: 'starting from' },
-        { value: '3', label: 'days max' },
+        { value: '7', label: 'days max' },
         { value: '∞', label: 'custom' },
       ];
 
@@ -41,39 +35,45 @@ export function Hero() {
 
       <div className={`container ${styles.inner}`}>
         <div className={styles.content}>
-
-          <h1 className={styles.headline} aria-label={t.hero.headline.replace(/\n/g, ' ')}>
-            {lineData.map((line, lineIdx) => (
-              <span key={lineIdx} className={styles.headlineLine}>
-                {line.words.map(({ word, delay }, wordIdx) => (
-                  <span
-                    key={wordIdx}
-                    className={styles.word}
-                    style={
-                      !reduced && started
-                        ? {
-                            animationName: 'wordReveal',
-                            animationDuration: '0.55s',
-                            animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-                            animationFillMode: 'both',
-                            animationDelay: `${delay}ms`,
-                          }
-                        : { opacity: 1 }
-                    }
-                  >
-                    {word}
-                    {wordIdx < line.words.length - 1 ? ' ' : ''}
-                  </span>
-                ))}
+          <h1 className={styles.headline} aria-label={t.hero.headline}>
+            {words.map((word, i) => (
+              <span
+                key={i}
+                className={styles.word}
+                style={
+                  !reduced && started
+                    ? {
+                        animationName: 'wordReveal',
+                        animationDuration: '0.55s',
+                        animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                        animationFillMode: 'both',
+                        animationDelay: `${150 + i * 60}ms`,
+                      }
+                    : { opacity: 1 }
+                }
+              >
+                {word}
+                {i < words.length - 1 ? '\u00a0' : ''}
               </span>
             ))}
           </h1>
+
+          <p
+            className={styles.subtext}
+            style={
+              !reduced && started
+                ? { animation: 'fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.55s both' }
+                : { opacity: 1 }
+            }
+          >
+            {t.hero.subtext}
+          </p>
 
           <div
             className={styles.ctas}
             style={
               !reduced && started
-                ? { animation: 'fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.75s both' }
+                ? { animation: 'fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s both' }
                 : { opacity: 1 }
             }
           >
@@ -81,7 +81,7 @@ export function Hero() {
               {t.hero.ctaPrimary}
             </a>
             <a href="#teenused" className={styles.ctaGhost}>
-              {t.hero.ctaGhost}
+              {t.hero.ctaGhost} ↓
             </a>
           </div>
         </div>
@@ -91,7 +91,7 @@ export function Hero() {
           className={styles.stats}
           style={
             !reduced && started
-              ? { animation: 'fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.95s both' }
+              ? { animation: 'fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.9s both' }
               : { opacity: 1 }
           }
         >

@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1002;
+  z-index: 1000;
   height: var(--nav-height);
   background: rgba(15, 15, 13, 0.92);
   backdrop-filter: blur(20px);
@@ -200,14 +200,12 @@
   font-weight: 500;
   letter-spacing: 0.02em;
   border-radius: 6px;
-  box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.18);
-  transition: box-shadow 0.3s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  transition: box-shadow 0.3s ease, opacity 0.2s ease;
 }
 
 .ctaBtn:hover {
-  box-shadow: 0 0 28px rgba(var(--accent-rgb), 0.48), 0 4px 14px rgba(var(--accent-rgb), 0.2);
-  transform: translateY(-1px);
-  opacity: 1;
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.35);
+  opacity: 0.88;
 }
 
 /* Mobile */
@@ -243,7 +241,7 @@
   position: fixed;
   inset: 0;
   background: var(--bg-primary);
-  z-index: 1001;
+  z-index: 999;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

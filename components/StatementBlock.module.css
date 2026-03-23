@@ -61,26 +61,16 @@
   border-radius: 6px;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.2s ease;
 }
 
 .cta:hover {
-  opacity: 0.82;
-  transform: translateY(-2px);
+  opacity: 0.8;
 }
 
 @media (max-width: 767px) {
-  .block {
-    margin: 0 var(--sp-2);
-    border-radius: 20px;
-  }
-
-  .inner {
-    padding: var(--sp-8) var(--sp-2);
-  }
-
   .line {
-    font-size: clamp(28px, 8.5vw, 42px);
+    font-size: clamp(48px, 13.5vw, 80px);
   }
 
   .footer {
