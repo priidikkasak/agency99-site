@@ -21,12 +21,7 @@ export function Section({
 }: SectionProps) {
   const [ref, inView] = useScrollReveal<HTMLElement>();
 
-  const classes = [
-    styles.section,
-    !noReveal && 'reveal',
-    !noReveal && inView && 'visible',
-    className,
-  ]
+  const classes = [styles.section, className]
     .filter(Boolean)
     .join(' ');
 
