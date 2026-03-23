@@ -9,17 +9,32 @@ import styles from './FinalCTA.module.css';
 const WHATSAPP_URL = 'https://wa.me/37255555555';
 const TELEGRAM_URL = 'https://t.me/agency99';
 
+type Status = 'idle' | 'loading' | 'success' | 'error';
+
 export function FinalCTA() {
   const { t } = useI18n();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<Status>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = `Projektipäring – ${name}`;
-    const body = `Nimi: ${name}\nEmail: ${email}\n\nSõnum:\n${message}`;
-    window.location.href = `mailto:hello@agency99.ee?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus('loading');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus('success');
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -58,10 +73,6 @@ export function FinalCTA() {
             </a>
           </div>
 
-          <div className={styles.responseNote}>
-            <span className={styles.responseDot} aria-hidden="true" />
-            {t.finalCta.responseNote}
-          </div>
         </div>
 
         {/* Right: form */}
@@ -96,9 +107,14 @@ export function FinalCTA() {
               rows={5}
               aria-label="Message"
             />
-            <button type="submit" className={styles.submit}>
-              {t.finalCta.form.submit}
+            <button type="submit" className={styles.submit} disabled={status === 'loading'}>
+              {status === 'loading' ? '...' : status === 'success' ? (t.finalCta.form.successMsg ?? 'Saadetud ✓') : t.finalCta.form.submit}
             </button>
+            {status === 'error' && (
+              <p style={{ color: '#ff6b6b', fontSize: '13px', marginTop: '8px' }}>
+                {t.finalCta.form.errorMsg ?? 'Saatmine ebaõnnestus. Proovi uuesti.'}
+              </p>
+            )}
           </form>
         </div>
 
