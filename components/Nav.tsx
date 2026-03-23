@@ -64,81 +64,84 @@ export function Nav() {
   const toggleLang = () => setLang(lang === 'ET' ? 'EN' : 'ET');
 
   return (
-    <header className={[styles.header, scrolled ? styles.headerScrolled : ''].join(' ')}>
-      <nav className={styles.nav} aria-label="Main navigation">
-        {/* Logo */}
-        <a href="#" className={styles.logoLink} aria-label="agency99 — home">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="agency99" className={styles.logoImg} />
-        </a>
+    <>
+      <header className={[styles.header, scrolled ? styles.headerScrolled : ''].join(' ')}>
+        <nav className={styles.nav} aria-label="Main navigation">
+          {/* Logo */}
+          <a href="#" className={styles.logoLink} aria-label="agency99 — home">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="agency99" className={styles.logoImg} />
+          </a>
 
-        {/* Center links */}
-        <ul className={styles.links} role="list">
-          {NAV_LINKS.map(({ key, href }) => {
-            const id = href.slice(1);
-            return (
-              <li key={key}>
-                <a
-                  href={href}
-                  className={[styles.link, activeSection === id ? styles.active : ''].join(' ')}
-                >
-                  {t.nav[key]}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Right: lang dropdown + CTA */}
-        <div className={styles.right}>
-          <div className={styles.langContainer} data-lang-container>
-            <button
-              onClick={() => setLangOpen(!langOpen)}
-              className={styles.langToggle}
-              aria-label="Change language"
-              aria-expanded={langOpen}
-            >
-              <span className={styles.langFlag}>{currentLang.flag}</span>
-              <span className={styles.langCode}>{currentLang.code}</span>
-              <span className={[styles.chevron, langOpen ? styles.chevronOpen : ''].join(' ')}>▾</span>
-            </button>
-            {langOpen && (
-              <div className={styles.langDropdown}>
-                {LANGS.map(({ code, flag, label }) => (
-                  <button
-                    key={code}
-                    onClick={() => { setLang(code); setLangOpen(false); }}
-                    className={[styles.langOption, lang === code ? styles.langOptionActive : ''].join(' ')}
+          {/* Center links */}
+          <ul className={styles.links} role="list">
+            {NAV_LINKS.map(({ key, href }) => {
+              const id = href.slice(1);
+              return (
+                <li key={key}>
+                  <a
+                    href={href}
+                    className={[styles.link, activeSection === id ? styles.active : ''].join(' ')}
                   >
-                    <span className={styles.langFlag}>{flag}</span>
-                    <span className={styles.langLabel}>{label}</span>
-                    {lang === code && <span className={styles.langCheck}>✓</span>}
-                  </button>
-                ))}
-              </div>
-            )}
+                    {t.nav[key]}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Right: lang dropdown + CTA */}
+          <div className={styles.right}>
+            <div className={styles.langContainer} data-lang-container>
+              <button
+                onClick={() => setLangOpen(!langOpen)}
+                className={styles.langToggle}
+                aria-label="Change language"
+                aria-expanded={langOpen}
+              >
+                <span className={styles.langFlag}>{currentLang.flag}</span>
+                <span className={styles.langCode}>{currentLang.code}</span>
+                <span className={[styles.chevron, langOpen ? styles.chevronOpen : ''].join(' ')}>▾</span>
+              </button>
+              {langOpen && (
+                <div className={styles.langDropdown}>
+                  {LANGS.map(({ code, flag, label }) => (
+                    <button
+                      key={code}
+                      onClick={() => { setLang(code); setLangOpen(false); }}
+                      className={[styles.langOption, lang === code ? styles.langOptionActive : ''].join(' ')}
+                    >
+                      <span className={styles.langFlag}>{flag}</span>
+                      <span className={styles.langLabel}>{label}</span>
+                      {lang === code && <span className={styles.langCheck}>✓</span>}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <a href="#kontakt" className={styles.ctaBtn}>{t.nav.cta}</a>
           </div>
-          <a href="#kontakt" className={styles.ctaBtn}>{t.nav.cta}</a>
-        </div>
 
-        {/* Mobile controls */}
-        <div className={styles.mobileRight}>
-          <button onClick={toggleLang} className={styles.langToggleMobile} aria-label="Toggle language">
-            {currentLang.flag}
-          </button>
-          <button
-            className={styles.hamburger}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Sulge menüü' : 'Ava menüü'}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-          >
-            <span className={[styles.bar, menuOpen ? styles.barOpen1 : ''].join(' ')} />
-            <span className={[styles.bar, menuOpen ? styles.barOpen2 : ''].join(' ')} />
-          </button>
-        </div>
-      </nav>
+          {/* Mobile controls */}
+          <div className={styles.mobileRight}>
+            <button onClick={toggleLang} className={styles.langToggleMobile} aria-label="Toggle language">
+              {currentLang.flag}
+            </button>
+            <button
+              className={styles.hamburger}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? 'Sulge menüü' : 'Ava menüü'}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+            >
+              <span className={[styles.bar, menuOpen ? styles.barOpen1 : ''].join(' ')} />
+              <span className={[styles.bar, menuOpen ? styles.barOpen2 : ''].join(' ')} />
+            </button>
+          </div>
+        </nav>
+      </header>
 
+      {/* Mobile menu overlay — outside header so z-index works correctly */}
       <div
         id="mobile-menu"
         className={[styles.overlay, menuOpen ? styles.overlayVisible : ''].join(' ')}
@@ -157,6 +160,6 @@ export function Nav() {
           {t.nav.cta} →
         </a>
       </div>
-    </header>
+    </>
   );
 }

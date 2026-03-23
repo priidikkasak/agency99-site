@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1002;
   height: var(--nav-height);
   background: rgba(15, 15, 13, 0.92);
   backdrop-filter: blur(20px);
@@ -241,7 +241,7 @@
   position: fixed;
   inset: 0;
   background: var(--bg-primary);
-  z-index: 999;
+  z-index: 1001;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

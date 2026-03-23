@@ -10,15 +10,14 @@ export const en: Translations = {
     cta: 'Start a project',
   },
   hero: {
-    headline: 'Websites that win.',
-    subtext:
-      'Premium web design without the agency price tag. Delivered in 7 days.',
+    headline: 'New website. Ready in 3 days.\nAgency quality.\nAffordable price.',
+    subtext: '',
     ctaPrimary: 'Start a project',
-    ctaGhost: 'Our work',
+    ctaGhost: 'Portfolio',
   },
   statement: {
-    line1: 'Agency quality.',
-    line2: 'Startup price.',
+    line1: 'Startup speed.',
+    line2: 'Pro results.',
     sub: 'One human + AI. No overhead, no markup, no agency rates.',
     cta: 'Get a quote',
   },
@@ -133,7 +132,6 @@ export const en: Translations = {
     headline: 'Ready to build?',
     subtext: "Let's talk.",
     cta: 'Start a project',
-    responseNote: 'Response within 24 hours.',
     whatsapp: 'WhatsApp',
     telegram: 'Telegram',
     form: {

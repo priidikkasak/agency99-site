@@ -83,7 +83,6 @@ export interface Translations {
     headline: string;
     subtext: string;
     cta: string;
-    responseNote: string;
     whatsapp: string;
     telegram: string;
     form: {
@@ -114,15 +113,14 @@ export const et: Translations = {
     cta: 'Alustame',
   },
   hero: {
-    headline: 'Veeb, mis töötab.',
-    subtext:
-      'Professionaalne disain ilma agentuurihinnata. Valmis 7 päevaga.',
+    headline: 'Uus veeb. Valmis 3 päevaga.\nAgentuuri kvaliteet.\nTaskukohane hind.',
+    subtext: '',
     ctaPrimary: 'Alustame',
-    ctaGhost: 'Tööd',
+    ctaGhost: 'Portfoolio',
   },
   statement: {
-    line1: 'Agentuuri kvaliteet.',
-    line2: 'Startup hind.',
+    line1: 'Startup kiirus.',
+    line2: 'Profi tulemus.',
     sub: 'Üks inimene + AI. Ilma katteta, ilma ülehinnata.',
     cta: 'Pärida pakkumist',
   },
@@ -237,7 +235,6 @@ export const et: Translations = {
     headline: 'Valmis alustama?',
     subtext: 'Kirjuta mulle.',
     cta: 'Alustame',
-    responseNote: 'Vastus 24 tunni jooksul.',
     whatsapp: 'WhatsApp',
     telegram: 'Telegram',
     form: {

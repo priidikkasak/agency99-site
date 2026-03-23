@@ -50,6 +50,11 @@
   max-width: 720px;
 }
 
+.headlineLine {
+  display: block;
+  white-space: nowrap;
+}
+
 .word {
   display: inline;
 }
@@ -100,16 +105,21 @@
   align-items: center;
   justify-content: center;
   height: 48px;
-  padding: 0 var(--sp-3);
+  padding: 0 var(--sp-4);
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 400;
-  transition: color 0.2s ease;
+  font-weight: 500;
+  border: 1px solid rgba(var(--accent-rgb), 0.55);
+  border-radius: 6px;
+  transition: border-color 0.25s ease, box-shadow 0.3s ease;
 }
 
-.ctaGhost:hover { color: var(--text-primary); }
+.ctaGhost:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.18);
+}
 
 /* Stat strip */
 .stats {
@@ -191,24 +201,26 @@
   }
 
   .headline {
-    font-size: clamp(46px, 13vw, 72px);
-    letter-spacing: -0.035em;
+    font-size: clamp(32px, 9.5vw, 46px);
+    letter-spacing: -0.03em;
   }
 
-  .subtext { font-size: 15px; }
+  .headlineLine {
+    white-space: normal;
+  }
 
   .ctas { flex-direction: column; align-items: flex-start; }
   .ctaPrimary, .ctaGhost { width: 100%; justify-content: center; }
 
   .stats {
     gap: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .stat {
-    padding-right: var(--sp-4);
-    margin-right: var(--sp-4);
+    padding-right: var(--sp-2);
+    margin-right: var(--sp-2);
   }
 
-  .statValue { font-size: 24px; }
+  .statValue { font-size: 18px; }
 }
