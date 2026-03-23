@@ -85,22 +85,6 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Stat strip */}
-        <div
-          className={styles.stats}
-          style={
-            !reduced && started
-              ? { animation: 'fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.9s both' }
-              : { opacity: 1 }
-          }
-        >
-          {stats.map((s, i) => (
-            <div key={i} className={styles.stat}>
-              <span className={styles.statValue}>{s.value}</span>
-              <span className={styles.statLabel}>{s.label}</span>
-            </div>
-          ))}
-        </div>
       </div>
 
     </section>
