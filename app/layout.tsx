@@ -1,7 +1,11 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { cabinetGrotesk, dmSans, geistMono } from '@/lib/fonts';
 import { I18nProvider } from '@/lib/i18n/context';
 import './globals.css';
+
+export const viewport: Viewport = {
+  viewportFit: 'cover',
+};
 
 export const metadata: Metadata = {
   title: 'AGENCY99',

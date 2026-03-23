@@ -4,7 +4,8 @@
   left: 0;
   right: 0;
   z-index: 1002;
-  height: var(--nav-height);
+  height: calc(var(--nav-height) + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
   background: rgba(15, 15, 13, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);

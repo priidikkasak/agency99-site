@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  padding-top: var(--nav-height);
+  padding-top: calc(var(--nav-height) + env(safe-area-inset-top));
 }
 
 .glow {
