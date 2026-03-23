@@ -11,9 +11,6 @@
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.4s ease;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .headerScrolled {
