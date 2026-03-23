@@ -156,9 +156,6 @@ export function Nav() {
             </li>
           ))}
         </ul>
-        <a href="#kontakt" className={styles.overlayCtaBtn} onClick={() => setMenuOpen(false)}>
-          {t.nav.cta} →
-        </a>
       </div>
     </>
   );
