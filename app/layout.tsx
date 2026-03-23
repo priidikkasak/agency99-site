@@ -5,6 +5,7 @@ import './globals.css';
 
 export const viewport: Viewport = {
   viewportFit: 'cover',
+  themeColor: '#0f0f0d',
 };
 
 export const metadata: Metadata = {
