@@ -8,12 +8,10 @@ function PillarRow({
   num,
   title,
   body,
-  delay,
 }: {
   num: string;
   title: string;
   body: string;
-  delay: number;
 }) {
   return (
     <li
@@ -30,7 +28,7 @@ export function ValuePillars() {
   const { t } = useI18n();
 
   return (
-    <Section id="teenused" noReveal>
+    <Section id="teenused">
       <div className={styles.header}>
         <span className={styles.label}>{t.pillars.sectionLabel}</span>
       </div>
@@ -41,7 +39,6 @@ export function ValuePillars() {
             num={`0${i + 1}`}
             title={item.title}
             body={item.body}
-            delay={i * 80}
           />
         ))}
       </ul>

@@ -27,46 +27,6 @@
   color: var(--bg-primary);
 }
 
-.lineIndent {
-  margin-left: 8%;
-}
-
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--sp-6);
-  border-top: 1px solid rgba(15, 15, 13, 0.15);
-  padding-top: var(--sp-6);
-}
-
-.sub {
-  font-size: 15px;
-  font-weight: 400;
-  color: rgba(15, 15, 13, 0.65);
-  max-width: 44ch;
-  line-height: 1.6;
-}
-
-.cta {
-  display: inline-flex;
-  align-items: center;
-  height: 48px;
-  padding: 0 var(--sp-5);
-  background: var(--bg-primary);
-  color: var(--accent);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 6px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: opacity 0.2s ease;
-}
-
-.cta:hover {
-  opacity: 0.8;
-}
 
 @media (max-width: 767px) {
   .inner {

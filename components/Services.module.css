@@ -137,7 +137,5 @@
     gap: var(--sp-2);
   }
 
-  .card:nth-child(n) { grid-column: span 1; border-radius: 10px; min-height: 180px; }
-
-  .card { padding: var(--sp-3); }
+  .card { padding: var(--sp-3); min-height: 180px; }
 }

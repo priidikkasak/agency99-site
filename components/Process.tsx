@@ -8,12 +8,10 @@ function ProcessStep({
   num,
   title,
   body,
-  delay,
 }: {
   num: string;
   title: string;
   body: string;
-  delay: number;
 }) {
   return (
     <li
@@ -30,7 +28,7 @@ export function Process() {
   const { t } = useI18n();
 
   return (
-    <Section id="protsess" noReveal>
+    <Section id="protsess">
       <div className={styles.header}>
         <span className={styles.label}>{t.process.sectionLabel}</span>
       </div>
@@ -41,7 +39,6 @@ export function Process() {
             num={step.num}
             title={step.title}
             body={step.body}
-            delay={i * 100}
           />
         ))}
       </ol>

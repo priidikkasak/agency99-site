@@ -5,9 +5,8 @@ import { useI18n } from '@/lib/i18n/context';
 import { Section } from './Section';
 import styles from './FinalCTA.module.css';
 
-// TODO: update with actual contact details
-const WHATSAPP_URL = 'https://wa.me/37255555555';
-const TELEGRAM_URL = 'https://t.me/agency99';
+const WHATSAPP_URL = 'https://wa.me/3725100017';
+const TELEGRAM_URL = 'https://t.me/agency99io';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -108,12 +107,10 @@ export function FinalCTA() {
               aria-label="Message"
             />
             <button type="submit" className={styles.submit} disabled={status === 'loading'}>
-              {status === 'loading' ? '...' : status === 'success' ? 'Saadetud ✓' : t.finalCta.form.submit}
+              {status === 'loading' ? '...' : status === 'success' ? t.finalCta.form.success : t.finalCta.form.submit}
             </button>
             {status === 'error' && (
-              <p style={{ color: '#ff6b6b', fontSize: '13px', marginTop: '8px' }}>
-                Saatmine ebaõnnestus. Proovi uuesti.
-              </p>
+              <p className={styles.errorMsg}>{t.finalCta.form.error}</p>
             )}
           </form>
         </div>

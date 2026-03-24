@@ -90,6 +90,8 @@ export interface Translations {
       emailPlaceholder: string;
       messagePlaceholder: string;
       submit: string;
+      success: string;
+      error: string;
     };
   };
   footer: {
@@ -242,6 +244,8 @@ export const et: Translations = {
       emailPlaceholder: 'sinu@email.com',
       messagePlaceholder: 'Kirjelda oma projekti lühidalt...',
       submit: 'Saada sõnum →',
+      success: 'Saadetud ✓',
+      error: 'Saatmine ebaõnnestus. Proovi uuesti.',
     },
   },
   footer: {

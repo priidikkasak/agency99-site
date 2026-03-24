@@ -11,7 +11,7 @@ export function StatementBlock() {
       <div className={styles.inner}>
         <div className={styles.lines}>
           <p className={styles.line}>{t.statement.line1}</p>
-          <p className={[styles.line, styles.lineIndent].join(' ')}>{t.statement.line2}</p>
+          <p className={styles.line}>{t.statement.line2}</p>
         </div>
       </div>
     </section>

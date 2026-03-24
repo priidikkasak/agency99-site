@@ -139,6 +139,8 @@ export const en: Translations = {
       emailPlaceholder: 'you@email.com',
       messagePlaceholder: 'Describe your project briefly...',
       submit: 'Send message →',
+      success: 'Sent ✓',
+      error: 'Failed to send. Please try again.',
     },
   },
   footer: {

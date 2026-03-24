@@ -8,13 +8,11 @@ function ServiceCard({
   tag,
   title,
   body,
-  delay,
   featured,
 }: {
   tag: string;
   title: string;
   body: string;
-  delay: number;
   featured?: boolean;
 }) {
   return (
@@ -38,7 +36,7 @@ export function Services() {
   const { t } = useI18n();
 
   return (
-    <Section noReveal>
+    <Section>
       <div className={styles.header}>
         <span className={styles.label}>{t.services.sectionLabel}</span>
       </div>
@@ -49,7 +47,6 @@ export function Services() {
             tag={item.tag}
             title={item.title}
             body={item.body}
-            delay={i * 80}
             featured={i === 0 || i === 3}
           />
         ))}

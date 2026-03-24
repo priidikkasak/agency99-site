@@ -208,15 +208,15 @@
   }
 
   .inner {
-    padding-top: var(--sp-6);
-    padding-bottom: var(--sp-8);
+    padding-top: var(--sp-12);
+    padding-bottom: var(--sp-4);
     justify-content: flex-start;
   }
 
   .headline {
-    font-size: clamp(28px, 8.5vw, 36px);
-    letter-spacing: -0.05em;
-    line-height: 0.86;
+    font-size: clamp(32px, 9.5vw, 44px);
+    letter-spacing: -0.04em;
+    line-height: 1.08;
   }
 
   .headlineLineAccent {
