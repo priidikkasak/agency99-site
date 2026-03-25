@@ -108,6 +108,35 @@
   opacity: 1;
 }
 
+/* Cold Email distinctive link */
+.coldEmailItem {
+  counter-increment: none;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border-subtle);
+}
+
+.coldEmailLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1px solid rgba(var(--accent-rgb), 0.45);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.coldEmailLink:hover {
+  background: rgba(var(--accent-rgb), 0.08);
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.2);
+  transform: translateY(-1px);
+}
+
 /* Right side */
 .right {
   display: flex;
@@ -340,6 +369,18 @@
 }
 
 .overlayLink:hover { color: var(--accent); }
+
+.overlayColdEmail {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--accent);
+  transition: opacity 0.15s ease;
+}
+
+.overlayColdEmail:hover { opacity: 0.7; }
 
 .overlayCtaBtn {
   display: inline-flex;

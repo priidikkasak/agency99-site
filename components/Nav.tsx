@@ -68,7 +68,7 @@ export function Nav() {
       <header className={[styles.header, scrolled ? styles.headerScrolled : ''].join(' ')}>
         <nav className={styles.nav} aria-label="Main navigation">
           {/* Logo */}
-          <a href="#" className={styles.logoLink} aria-label="agency99 — home">
+          <a href="/" className={styles.logoLink} aria-label="agency99 — home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt="agency99" className={styles.logoImg} />
           </a>
@@ -88,6 +88,11 @@ export function Nav() {
                 </li>
               );
             })}
+            <li className={styles.coldEmailItem}>
+              <a href="/cold-email" className={styles.coldEmailLink}>
+                {t.nav.coldEmail}
+              </a>
+            </li>
           </ul>
 
           {/* Right: status + lang + CTA */}
@@ -159,6 +164,11 @@ export function Nav() {
               </a>
             </li>
           ))}
+          <li>
+            <a href="/cold-email" className={styles.overlayColdEmail} onClick={() => setMenuOpen(false)}>
+              {t.nav.coldEmail}
+            </a>
+          </li>
         </ul>
       </div>
     </>

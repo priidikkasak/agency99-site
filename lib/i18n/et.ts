@@ -5,6 +5,13 @@ export interface NavItem {
   contact: string;
   langToggle: string;
   cta: string;
+  coldEmail: string;
+}
+
+export interface ColdEmailFeature {
+  num: string;
+  title: string;
+  body: string;
 }
 
 export interface PillarItem {
@@ -103,6 +110,14 @@ export interface Translations {
       contact: string;
     };
   };
+  coldEmailPage: {
+    eyebrow: string;
+    headline: string;
+    sub: string;
+    features: ColdEmailFeature[];
+    cta: string;
+    note: string;
+  };
 }
 
 export const et: Translations = {
@@ -113,6 +128,7 @@ export const et: Translations = {
     contact: 'Kontakt',
     langToggle: 'EN',
     cta: 'Alustame',
+    coldEmail: 'Cold Email',
   },
   hero: {
     headline: 'Uus veeb. 3\u00A0päevaga.\nAgentuuri kvaliteet.\nTaskukohane hind.',
@@ -247,6 +263,30 @@ export const et: Translations = {
       success: 'Saadetud ✓',
       error: 'Saatmine ebaõnnestus. Proovi uuesti.',
     },
+  },
+  coldEmailPage: {
+    eyebrow: 'B2B müügikasvatus',
+    headline: 'Cold email süsteem.\nVõtmed kätte.',
+    sub: 'Ehitame täpse lead list\'i sinu ideaalsele kliendile, kirjutame sõnumid mis saavad vastuse ja käivitame kampaania. Sina ainult vasta kõnedele.',
+    features: [
+      {
+        num: '01',
+        title: 'Lead List',
+        body: 'Sinu ideaalne klient - firma, amet, kontakt. Verifitseeritud emailid, nullist põrgatusi. Andmed rikastatud ja segmenteeritud.',
+      },
+      {
+        num: '02',
+        title: 'Copywriting',
+        body: 'Sõnumid, mis avavad ja saavad vastuse. Iga sõna teenib eesmärki. Järelkirjad ja A/B testimine kaasas.',
+      },
+      {
+        num: '03',
+        title: 'Saatmine',
+        body: 'Tehniline seadistus, domeeni soojendus, deliverability tagatud. Avamised, klõpsud, vastused - reaalajas.',
+      },
+    ],
+    cta: 'Võta ühendust',
+    note: 'Hinnapakkumine 24 tunni jooksul.',
   },
   footer: {
     legal: `© ${new Date().getFullYear()} agency99. Kõik õigused kaitstud.`,

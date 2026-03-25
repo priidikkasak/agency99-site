@@ -8,6 +8,7 @@ export const en: Translations = {
     contact: 'Contact',
     langToggle: 'ET',
     cta: 'Start a project',
+    coldEmail: 'Cold Email',
   },
   hero: {
     headline: 'New website. 3\u00A0days.\nAgency quality.\nAffordable price.',
@@ -142,6 +143,30 @@ export const en: Translations = {
       success: 'Sent ✓',
       error: 'Failed to send. Please try again.',
     },
+  },
+  coldEmailPage: {
+    eyebrow: 'B2B lead generation',
+    headline: 'Cold email system.\nTurnkey.',
+    sub: 'We build a precise lead list of your ideal customer, write copy that gets replies, and run the campaign. You just take the calls.',
+    features: [
+      {
+        num: '01',
+        title: 'Lead List',
+        body: 'Your ideal customer - company, title, contact. Verified emails, zero bounces. Data enriched and segmented.',
+      },
+      {
+        num: '02',
+        title: 'Copywriting',
+        body: 'Messages that get opened and replied to. Every word earns its place. Follow-ups and A/B testing included.',
+      },
+      {
+        num: '03',
+        title: 'Sending',
+        body: 'Technical setup, domain warmup, deliverability guaranteed. Opens, clicks, replies - in real time.',
+      },
+    ],
+    cta: 'Get in touch',
+    note: 'Quote within 24 hours.',
   },
   footer: {
     legal: `© ${new Date().getFullYear()} agency99. All rights reserved.`,
