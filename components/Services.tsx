@@ -19,7 +19,7 @@ function ServiceCard({
   featured,
   icon,
   chips,
-  inactive,
+  active,
 }: {
   tag: string;
   title: string;
@@ -27,13 +27,13 @@ function ServiceCard({
   featured?: boolean;
   icon: string;
   chips: readonly string[];
-  inactive?: boolean;
+  active?: boolean;
 }) {
   return (
     <li className={[
       styles.card,
       featured ? styles.cardFeatured : '',
-      inactive ? styles.inactive : '',
+      active ? styles.cardActive : '',
     ].join(' ')}>
       <span className={styles.ghostNum} aria-hidden="true">{tag}</span>
       <div className={styles.cardTop}>
@@ -94,7 +94,7 @@ export function Services() {
             featured={i === 0 || i === 3}
             icon={SERVICE_META[i].icon}
             chips={SERVICE_META[i].chips}
-            inactive={activeIdx !== null && activeIdx !== i}
+            active={activeIdx === i}
           />
         ))}
       </ul>

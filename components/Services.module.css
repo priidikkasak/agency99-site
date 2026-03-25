@@ -69,10 +69,10 @@
   );
 }
 
-/* Inactive state — JS (mobile) + CSS :has (desktop) */
-.inactive {
-  opacity: 0.3;
-  filter: saturate(0.1);
+/* Mobile active: accent border only, no dimming */
+.cardActive {
+  border-color: rgba(var(--accent-rgb), 0.55) !important;
+  box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.15);
 }
 
 /* Desktop: dim all other cards when one is hovered */
