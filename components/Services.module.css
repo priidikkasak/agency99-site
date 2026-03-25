@@ -41,15 +41,17 @@
   justify-content: space-between;
   padding: var(--sp-4);
   background: var(--bg-secondary);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   min-height: 280px;
   overflow: hidden;
   cursor: default;
   transition:
     background 0.25s ease,
-    border-color 0.25s ease,
+    border-color 0.3s ease,
     transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease,
+    filter 0.35s ease;
 }
 
 /* Z-pattern */
@@ -65,6 +67,20 @@
     var(--bg-secondary) 0%,
     rgba(var(--accent-rgb), 0.045) 100%
   );
+}
+
+/* Inactive state — JS (mobile) + CSS :has (desktop) */
+.inactive {
+  opacity: 0.3;
+  filter: saturate(0.1);
+}
+
+/* Desktop: dim all other cards when one is hovered */
+@media (hover: hover) {
+  .grid:has(.card:hover) .card:not(:hover) {
+    opacity: 0.3;
+    filter: saturate(0.1);
+  }
 }
 
 /* Top accent strip */
@@ -95,12 +111,14 @@
 @media (prefers-reduced-motion: no-preference) {
   .card:hover {
     background: var(--bg-tertiary);
-    border-color: rgba(var(--accent-rgb), 0.22);
+    border-color: rgba(var(--accent-rgb), 0.35);
     transform: translateY(-2px);
     box-shadow:
-      0 12px 48px rgba(0, 0, 0, 0.45),
-      0 0 0 1px rgba(var(--accent-rgb), 0.07),
-      inset 0 0 80px rgba(var(--accent-rgb), 0.025);
+      0 16px 56px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(var(--accent-rgb), 0.12),
+      inset 0 0 100px rgba(var(--accent-rgb), 0.04);
+    opacity: 1;
+    filter: saturate(1);
   }
 
   .cardFeatured:hover {
@@ -206,9 +224,9 @@
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.03em;
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
   padding: 3px 8px;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
