@@ -10,7 +10,7 @@ export const en: Translations = {
     cta: 'Start a project',
   },
   hero: {
-    headline: 'New website. 3 days.\nAgency quality.\nAffordable price.',
+    headline: 'New website.\n3 days.\nAgency quality.\nAffordable price.',
     subtext: '',
     ctaPrimary: 'Start a project',
     ctaGhost: 'Portfolio',
