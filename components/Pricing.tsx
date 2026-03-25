@@ -11,7 +11,11 @@ export function Pricing() {
   return (
     <Section id="hinnad">
       <div className={styles.header}>
-        <span className={styles.label}>{t.pricing.sectionLabel}</span>
+        <span className={styles.eyebrow}>{t.pricing.sectionLabel}</span>
+        <h2 className={styles.headline}>{t.pricing.headline}</h2>
+        {t.pricing.subtext && (
+          <p className={styles.subtext}>{t.pricing.subtext}</p>
+        )}
       </div>
 
       <div className={styles.grid}>
@@ -29,7 +33,7 @@ export function Pricing() {
           <ul className={styles.features} role="list">
             {starter.features.map((f, i) => (
               <li key={i} className={styles.feature}>
-                <span className={styles.tick} aria-hidden="true">—</span>
+                <span className={styles.tick} aria-hidden="true">✓</span>
                 {f}
               </li>
             ))}
@@ -54,7 +58,7 @@ export function Pricing() {
           <ul className={styles.features} role="list">
             {advanced.features.map((f, i) => (
               <li key={i} className={styles.feature}>
-                <span className={styles.tick} aria-hidden="true">—</span>
+                <span className={[styles.tick, styles.tickAccent].join(' ')} aria-hidden="true">✓</span>
                 {f}
               </li>
             ))}

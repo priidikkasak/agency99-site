@@ -14,12 +14,12 @@ function PillarRow({
   body: string;
 }) {
   return (
-    <li
-      className={styles.row}
-    >
-      <span className={styles.num}>{num}</span>
-      <h3 className={styles.title}>{title}</h3>
-      <p className={styles.body}>{body}</p>
+    <li className={styles.row}>
+      <span className={styles.num} aria-hidden="true">{num}</span>
+      <div className={styles.content}>
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.body}>{body}</p>
+      </div>
     </li>
   );
 }
@@ -28,9 +28,9 @@ export function ValuePillars() {
   const { t } = useI18n();
 
   return (
-    <Section id="teenused">
+    <Section>
       <div className={styles.header}>
-        <span className={styles.label}>{t.pillars.sectionLabel}</span>
+        <h2 className={styles.label}>{t.pillars.sectionLabel}</h2>
       </div>
       <ul className={styles.list} role="list">
         {t.pillars.items.map((item, i) => (

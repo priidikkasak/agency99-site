@@ -14,9 +14,7 @@ function ProcessStep({
   body: string;
 }) {
   return (
-    <li
-      className={styles.step}
-    >
+    <li className={styles.step}>
       <span className={styles.num} aria-hidden="true">{num}</span>
       <h3 className={styles.title}>{title}</h3>
       <p className={styles.body}>{body}</p>
@@ -30,7 +28,8 @@ export function Process() {
   return (
     <Section id="protsess">
       <div className={styles.header}>
-        <span className={styles.label}>{t.process.sectionLabel}</span>
+        <span className={styles.eyebrow}>{t.process.sectionLabel}</span>
+        <h2 className={styles.headline}>{t.process.headline}</h2>
       </div>
       <ol className={styles.steps} role="list">
         {t.process.steps.map((step, i) => (

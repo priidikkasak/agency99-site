@@ -1,17 +1,25 @@
 .header {
   margin-bottom: var(--sp-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
 }
 
-.label {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(28px, 3.5vw, 44px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--accent);
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
   color: var(--text-primary);
-  line-height: 1.04;
-  margin-bottom: var(--sp-3);
 }
 
 .steps {
@@ -25,7 +33,20 @@
   flex-direction: column;
   gap: var(--sp-2);
   padding: var(--sp-4) var(--sp-4) var(--sp-4) 0;
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--border);
+  position: relative;
+  transition: border-color 0.25s ease;
+}
+
+.step::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-gradient);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .step + .step {
@@ -33,15 +54,30 @@
   padding-left: var(--sp-4);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .step:hover::before {
+    width: 100%;
+  }
+
+  .step:hover .title {
+    color: var(--accent);
+  }
+}
+
 .num {
   font-family: var(--font-display);
-  font-size: clamp(48px, 5.5vw, 72px);
+  font-size: clamp(52px, 6vw, 80px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
-  color: var(--border-bright);
+  color: rgba(var(--accent-rgb), 0.22);
   margin-bottom: var(--sp-2);
   display: block;
+  transition: color 0.25s ease;
+}
+
+.step:hover .num {
+  color: rgba(var(--accent-rgb), 0.5);
 }
 
 .title {
@@ -51,6 +87,7 @@
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--text-primary);
+  transition: color 0.2s ease;
 }
 
 .body {
@@ -73,7 +110,8 @@
   }
 
   .step:nth-child(n+3) {
-    border-top: 1px solid var(--border);
+    border-top: 2px solid var(--border);
+    margin-top: var(--sp-2);
   }
 }
 
@@ -96,7 +134,7 @@
   }
 
   .num {
-    font-size: 40px;
+    font-size: 44px;
     margin-bottom: var(--sp-1);
   }
 }
