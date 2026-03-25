@@ -115,7 +115,7 @@ export const et: Translations = {
     cta: 'Alustame',
   },
   hero: {
-    headline: 'Uus veeb. 3 päevaga.\nAgentuuri kvaliteet.\nTaskukohane hind.',
+    headline: 'Uus veeb. 3\u00A0päevaga.\nAgentuuri kvaliteet.\nTaskukohane hind.',
     subtext: '',
     ctaPrimary: 'Alustame',
     ctaGhost: 'Portfoolio',

@@ -216,12 +216,17 @@
   .headline {
     font-size: clamp(54px, 15vw, 72px);
     letter-spacing: -0.05em;
-    line-height: 0.93;
+    line-height: 0.97;
     max-width: 100%;
   }
 
   .headlineLine {
     white-space: normal;
+    margin-bottom: 0.14em;
+  }
+
+  .headlineLine:last-child {
+    margin-bottom: 0;
   }
 
   .headlineLineAccent {
