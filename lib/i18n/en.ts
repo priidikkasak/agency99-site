@@ -11,7 +11,7 @@ export const en: Translations = {
     coldEmail: 'Cold Email',
   },
   hero: {
-    headline: 'New website. 3\u00A0days.\nAgency quality.\nAffordable price.',
+    headline: 'New website. 3\u00A0days.\nAffordable price.\nAgency quality.',
     subtext: '',
     ctaPrimary: 'Start a project',
     ctaGhost: 'Portfolio',

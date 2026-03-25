@@ -43,7 +43,7 @@ export function Hero() {
             {lineData.map((line, lineIdx) => (
               <span
                 key={lineIdx}
-                className={`${styles.headlineLine}${lineIdx === lineData.length - 1 ? ' ' + styles.headlineLineAccent : ''}`}
+                className={`${styles.headlineLine}${lineIdx === 1 ? ' ' + styles.headlineLineAccent : ''}`}
               >
                 {line.words.map(({ word, delay }, wordIdx) => (
                   <span

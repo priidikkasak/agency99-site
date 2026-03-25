@@ -131,7 +131,7 @@ export const et: Translations = {
     coldEmail: 'Cold Email',
   },
   hero: {
-    headline: 'Uus veeb. 3\u00A0päevaga.\nAgentuuri kvaliteet.\nTaskukohane hind.',
+    headline: 'Uus veeb. 3\u00A0päevaga.\nTaskukohane hind.\nAgentuuri kvaliteet.',
     subtext: '',
     ctaPrimary: 'Alustame',
     ctaGhost: 'Portfoolio',
