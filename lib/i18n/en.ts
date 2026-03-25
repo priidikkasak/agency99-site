@@ -26,7 +26,7 @@ export const en: Translations = {
     items: [
       {
         title: 'Design that converts',
-        body: "Every detail serves a purpose. Not beauty for its own sake — visual logic that drives results.",
+        body: "Every detail serves a purpose. Not beauty for its own sake - visual logic that drives results.",
       },
       {
         title: 'AI speed, human judgment',
@@ -45,7 +45,7 @@ export const en: Translations = {
       {
         tag: '01',
         title: 'Website',
-        body: 'Fast, mobile-friendly, SEO-optimized. Next.js + Vercel — under 1 second load time.',
+        body: 'Fast, mobile-friendly, SEO-optimized. Next.js + Vercel - under 1 second load time.',
       },
       {
         tag: '02',
@@ -60,7 +60,7 @@ export const en: Translations = {
       {
         tag: '04',
         title: 'Design services',
-        body: 'Logo, branding, UI/UX design. Figma file included — your files, your rights.',
+        body: 'Logo, branding, UI/UX design. Design file included - your files, your rights.',
       },
     ],
   },

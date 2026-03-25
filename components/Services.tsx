@@ -8,7 +8,7 @@ const SERVICE_META = [
   { icon: '○', chips: ['Next.js', 'Vercel', 'SEO'] },
   { icon: '□', chips: ['Stripe', 'Ostukorv'] },
   { icon: '△', chips: ['Supabase', 'API', 'Auth'] },
-  { icon: '◇', chips: ['Figma', 'Logo', 'Bränding'] },
+  { icon: '◇', chips: ['Logo', 'Bränding', 'UI/UX'] },
 ] as const;
 
 function ServiceCard({

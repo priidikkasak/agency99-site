@@ -131,7 +131,7 @@ export const et: Translations = {
     items: [
       {
         title: 'Disain, mis konverteerib',
-        body: 'Iga detail teenib eesmärki. Mitte ilu pärast ilu — visuaalne loogika, mis toob tulemusi.',
+        body: 'Iga detail teenib eesmärki. Mitte ilu pärast ilu - visuaalne loogika, mis toob tulemusi.',
       },
       {
         title: 'AI kiirus, inimese hinnang',
@@ -150,7 +150,7 @@ export const et: Translations = {
       {
         tag: '01',
         title: 'Veebileht',
-        body: 'Kiire, mobiilisõbralik, SEO-optimeeritud. Next.js + Vercel — laadimine alla 1 sekundi.',
+        body: 'Kiire, mobiilisõbralik, SEO-optimeeritud. Next.js + Vercel - laadimine alla 1 sekundi.',
       },
       {
         tag: '02',
@@ -165,7 +165,7 @@ export const et: Translations = {
       {
         tag: '04',
         title: 'Kujundus',
-        body: 'Logo, bränding, UI/UX disain. Figma fail kaasas — omad failid, omad õigused.',
+        body: 'Logo, bränding, UI/UX disain. Disainifail kaasas - omad failid, omad õigused.',
       },
     ],
   },
