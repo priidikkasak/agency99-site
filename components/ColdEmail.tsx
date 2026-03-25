@@ -27,7 +27,7 @@ export function ColdEmailPage() {
           <p className={styles.sub}>{c.sub}</p>
           <div className={styles.heroCtas}>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.ctaPrimary}>
-              {c.cta}
+              WhatsApp
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className={styles.ctaGhost}>
               Telegram
@@ -61,7 +61,7 @@ export function ColdEmailPage() {
             </p>
             <p className={styles.ctaNote}>{c.note}</p>
           </div>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={styles.ctaLg}>
+          <a href="/#kontakt" className={styles.ctaLg}>
             {c.cta} →
           </a>
         </div>

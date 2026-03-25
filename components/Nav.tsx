@@ -97,10 +97,6 @@ export function Nav() {
 
           {/* Right: status + lang + CTA */}
           <div className={styles.right}>
-            <span className={styles.status} aria-hidden="true">
-              <span className={styles.statusDot} />
-              {lang === 'ET' ? 'Saadaval' : 'Available'}
-            </span>
             <div className={styles.langContainer} data-lang-container>
               <button
                 onClick={() => setLangOpen(!langOpen)}
