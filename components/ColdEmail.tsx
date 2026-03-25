@@ -17,8 +17,6 @@ export function ColdEmailPage() {
       <section className={styles.hero}>
         <div className={styles.heroGlow} aria-hidden="true" />
         <div className={`container ${styles.heroInner}`}>
-          <a href="/" className={styles.back}>← agency99.io</a>
-          <p className={styles.eyebrow}>{c.eyebrow}</p>
           <h1 className={styles.headline}>
             {c.headline.split('\n').map((line, i) => (
               <span key={i} className={styles.headlineLine}>{line}</span>
