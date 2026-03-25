@@ -90,8 +90,12 @@ export function Nav() {
             })}
           </ul>
 
-          {/* Right: lang dropdown + CTA */}
+          {/* Right: status + lang + CTA */}
           <div className={styles.right}>
+            <span className={styles.status} aria-hidden="true">
+              <span className={styles.statusDot} />
+              {lang === 'ET' ? 'Saadaval' : 'Available'}
+            </span>
             <div className={styles.langContainer} data-lang-container>
               <button
                 onClick={() => setLangOpen(!langOpen)}
@@ -141,7 +145,7 @@ export function Nav() {
         </nav>
       </header>
 
-      {/* Mobile menu overlay — outside header so z-index works correctly */}
+      {/* Mobile menu overlay */}
       <div
         id="mobile-menu"
         className={[styles.overlay, menuOpen ? styles.overlayVisible : ''].join(' ')}
