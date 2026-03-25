@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { et, type Translations } from './et';
 import { en } from './en';
 
@@ -15,7 +15,17 @@ interface I18nContextValue {
 const I18nContext = createContext<I18nContextValue | null>(null);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>('ET');
+  const [lang, setLangState] = useState<Lang>('ET');
+
+  useEffect(() => {
+    const stored = localStorage.getItem('lang');
+    if (stored === 'ET' || stored === 'EN') setLangState(stored);
+  }, []);
+
+  const setLang = (l: Lang) => {
+    setLangState(l);
+    localStorage.setItem('lang', l);
+  };
 
   const t = lang === 'ET' ? et : en;
 

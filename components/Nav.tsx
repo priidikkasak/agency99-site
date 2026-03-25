@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useI18n } from '@/lib/i18n/context';
 import styles from './Nav.module.css';
 
@@ -68,10 +69,10 @@ export function Nav() {
       <header className={[styles.header, scrolled ? styles.headerScrolled : ''].join(' ')}>
         <nav className={styles.nav} aria-label="Main navigation">
           {/* Logo */}
-          <a href="/" className={styles.logoLink} aria-label="agency99 — home">
+          <Link href="/" className={styles.logoLink} aria-label="agency99 — home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt="agency99" className={styles.logoImg} />
-          </a>
+          </Link>
 
           {/* Center links */}
           <ul className={styles.links} role="list">
@@ -89,9 +90,9 @@ export function Nav() {
               );
             })}
             <li className={styles.coldEmailItem}>
-              <a href="/cold-email" className={styles.coldEmailLink}>
+              <Link href="/cold-email" className={styles.coldEmailLink}>
                 {t.nav.coldEmail}
-              </a>
+              </Link>
             </li>
           </ul>
 
@@ -161,9 +162,9 @@ export function Nav() {
             </li>
           ))}
           <li>
-            <a href="/cold-email" className={styles.overlayColdEmail} onClick={() => setMenuOpen(false)}>
+            <Link href="/cold-email" className={styles.overlayColdEmail} onClick={() => setMenuOpen(false)}>
               {t.nav.coldEmail}
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
