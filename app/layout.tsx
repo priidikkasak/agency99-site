@@ -11,10 +11,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'AGENCY99',
   description:
-    'Inimese loovus ja AI kiirus. Veebilehed, e-poed ja platvormid alates €500. Valmis kuni 7 päevaga.',
+    'Inimese loovus ja AI kiirus. Veebilehed, e-poed ja platvormid alates €500.',
   keywords: 'veebileht, e-pood, Next.js, Vercel, Eesti, web studio, agency',
   openGraph: {
-    title: 'AGENCY99 - Professionaalne veeb 3 päevaga',
+    title: 'AGENCY99 – Inimese loovus ja AI kiirus',
     description:
       'Inimese loovus ja AI kiirus. Veebilehed, e-poed ja platvormid alates €500.',
     type: 'website',
