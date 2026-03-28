@@ -49,11 +49,6 @@ export function Portfolio() {
         ))}
       </ul>
 
-      <div className={styles.footer}>
-        <Link href="/portfoolio" className={styles.viewAllBtn}>
-          {t.portfolio.viewAll} →
-        </Link>
-      </div>
     </Section>
   );
 }
