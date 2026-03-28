@@ -50,6 +50,15 @@ export interface ProcessStep {
   body: string;
 }
 
+export interface PortfolioItem {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  chips: string[];
+  url?: string;
+}
+
 export interface Translations {
   nav: NavItem;
   hero: {
@@ -85,6 +94,13 @@ export interface Translations {
     sectionLabel: string;
     headline: string;
     steps: ProcessStep[];
+  };
+  portfolio: {
+    sectionLabel: string;
+    headline: string;
+    viewAll: string;
+    viewProject: string;
+    items: PortfolioItem[];
   };
   finalCta: {
     headline: string;
@@ -246,6 +262,49 @@ export const et: Translations = {
         num: '04',
         title: 'Launch',
         body: 'Deploy Vercelile, domeen seadistatud, analüütika käimas. Valmis.',
+      },
+    ],
+  },
+  portfolio: {
+    sectionLabel: 'Portfoolio',
+    headline: 'Tehtud tööd',
+    viewAll: 'Vaata kõiki töid',
+    viewProject: 'Vaata projekti',
+    items: [
+      {
+        id: 'riidepuu',
+        title: 'Riidepuu',
+        category: 'E-pood',
+        description: 'Eesti rõivabrändi täielik e-kaubandus lahendus koos Stripe maksetega.',
+        chips: ['Next.js', 'Stripe', 'Supabase'],
+      },
+      {
+        id: 'lexlaw',
+        title: 'LexLaw',
+        category: 'Veebileht',
+        description: 'Juriidilise büroo esindusleht. Kiire laadimine, tugev SEO.',
+        chips: ['Next.js', 'Vercel', 'SEO'],
+      },
+      {
+        id: 'movefit',
+        title: 'MoveFit',
+        category: 'Platvorm',
+        description: 'Fitness platvormi MVP kasutajate halduse ja treeninguplaanidega.',
+        chips: ['Next.js', 'Supabase', 'Auth'],
+      },
+      {
+        id: 'bistro',
+        title: 'Bistro Nord',
+        category: 'Veebileht',
+        description: 'Restorani veebileht online reserveerimisega.',
+        chips: ['Next.js', 'Vercel'],
+      },
+      {
+        id: 'realty',
+        title: 'Realty One',
+        category: 'Veebileht',
+        description: 'Kinnisvarabüroo koduleht kinnisvara otsingu ja filtriga.',
+        chips: ['Next.js', 'Supabase', 'CMS'],
       },
     ],
   },

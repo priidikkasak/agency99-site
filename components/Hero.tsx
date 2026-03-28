@@ -79,7 +79,7 @@ export function Hero() {
             <a href="#kontakt" className={styles.ctaPrimary}>
               {t.hero.ctaPrimary}
             </a>
-            <a href="#teenused" className={styles.ctaGhost}>
+            <a href="#portfoolio" className={styles.ctaGhost}>
               {t.hero.ctaGhost}
             </a>
           </div>
