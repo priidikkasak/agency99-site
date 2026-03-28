@@ -5,6 +5,7 @@ export interface NavItem {
   contact: string;
   langToggle: string;
   cta: string;
+  portfolio: string;
   coldEmail: string;
 }
 
@@ -144,6 +145,7 @@ export const et: Translations = {
     contact: 'Kontakt',
     langToggle: 'EN',
     cta: 'Alustame',
+    portfolio: 'Portfoolio',
     coldEmail: 'Cold Email',
   },
   hero: {

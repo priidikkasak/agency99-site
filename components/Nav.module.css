@@ -108,12 +108,42 @@
   opacity: 1;
 }
 
-/* Cold Email distinctive link */
-.coldEmailItem {
+/* Portfolio link — separator group start */
+.portfolioItem {
   counter-increment: none;
   margin-left: 10px;
   padding-left: 10px;
   border-left: 1px solid var(--border-subtle);
+}
+
+.portfolioLink {
+  display: flex;
+  align-items: center;
+  padding: 6px 11px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 450;
+  letter-spacing: 0.02em;
+  color: var(--text-tertiary);
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolioLink:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.055);
+  transform: translateY(-1px);
+}
+
+.portfolioLinkActive {
+  color: var(--text-primary);
+  background: rgba(var(--accent-rgb), 0.09);
+}
+
+/* Cold Email distinctive link */
+.coldEmailItem {
+  counter-increment: none;
+  margin-left: 4px;
 }
 
 .coldEmailLink {

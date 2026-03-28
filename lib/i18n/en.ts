@@ -8,6 +8,7 @@ export const en: Translations = {
     contact: 'Contact',
     langToggle: 'ET',
     cta: 'Start a project',
+    portfolio: 'Portfolio',
     coldEmail: 'Cold Email',
   },
   hero: {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useI18n } from '@/lib/i18n/context';
 import styles from './Nav.module.css';
 
@@ -19,6 +20,7 @@ const LANGS = [
 
 export function Nav() {
   const { t, lang, setLang } = useI18n();
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
@@ -89,6 +91,14 @@ export function Nav() {
                 </li>
               );
             })}
+            <li className={styles.portfolioItem}>
+              <Link
+                href="/portfoolio"
+                className={[styles.portfolioLink, pathname === '/portfoolio' ? styles.portfolioLinkActive : ''].join(' ')}
+              >
+                {t.nav.portfolio}
+              </Link>
+            </li>
             <li className={styles.coldEmailItem}>
               <Link href="/cold-email" className={styles.coldEmailLink}>
                 {t.nav.coldEmail}
@@ -161,6 +171,11 @@ export function Nav() {
               </a>
             </li>
           ))}
+          <li>
+            <Link href="/portfoolio" className={styles.overlayLink} onClick={() => setMenuOpen(false)}>
+              {t.nav.portfolio}
+            </Link>
+          </li>
           <li>
             <Link href="/cold-email" className={styles.overlayColdEmail} onClick={() => setMenuOpen(false)}>
               {t.nav.coldEmail}
