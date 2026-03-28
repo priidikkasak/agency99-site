@@ -21,6 +21,7 @@ const LANGS = [
 export function Nav() {
   const { t, lang, setLang } = useI18n();
   const pathname = usePathname();
+  const isHome = pathname === '/';
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
@@ -80,11 +81,12 @@ export function Nav() {
           <ul className={styles.links} role="list">
             {NAV_LINKS.map(({ key, href }) => {
               const id = href.slice(1);
+              const resolvedHref = isHome ? href : `/${href}`;
               return (
                 <li key={key}>
                   <a
-                    href={href}
-                    className={[styles.link, activeSection === id ? styles.active : ''].join(' ')}
+                    href={resolvedHref}
+                    className={[styles.link, isHome && activeSection === id ? styles.active : ''].join(' ')}
                   >
                     {t.nav[key]}
                   </a>
@@ -135,7 +137,7 @@ export function Nav() {
                 </div>
               )}
             </div>
-            <a href="#kontakt" className={styles.ctaBtn}>{t.nav.cta}</a>
+            <a href={isHome ? '#kontakt' : '/#kontakt'} className={styles.ctaBtn}>{t.nav.cta}</a>
           </div>
 
           {/* Mobile controls */}
@@ -166,7 +168,7 @@ export function Nav() {
         <ul className={styles.overlayLinks} role="list">
           {NAV_LINKS.map(({ key, href }) => (
             <li key={key}>
-              <a href={href} className={styles.overlayLink} onClick={() => setMenuOpen(false)}>
+              <a href={isHome ? href : `/${href}`} className={styles.overlayLink} onClick={() => setMenuOpen(false)}>
                 {t.nav[key]}
               </a>
             </li>
