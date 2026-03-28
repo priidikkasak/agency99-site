@@ -14,12 +14,7 @@ export function Portfolio() {
   return (
     <Section id="portfoolio">
       <div className={styles.header}>
-        <div className={styles.headerTop}>
-          <span className={styles.eyebrow}>{t.portfolio.sectionLabel}</span>
-          <Link href="/portfoolio" className={styles.viewAllLink}>
-            {t.portfolio.viewAll} →
-          </Link>
-        </div>
+        <span className={styles.eyebrow}>{t.portfolio.sectionLabel}</span>
         <h2 className={styles.headline}>{t.portfolio.headline}</h2>
       </div>
 
@@ -49,6 +44,11 @@ export function Portfolio() {
         ))}
       </ul>
 
+      <div className={styles.footer}>
+        <Link href="/portfoolio" className={styles.viewAllBtn}>
+          {t.portfolio.viewAll} →
+        </Link>
+      </div>
     </Section>
   );
 }
