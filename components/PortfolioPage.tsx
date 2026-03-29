@@ -18,7 +18,7 @@ export function PortfolioPage() {
         {t.portfolio.items.map((item, i) => (
           <li key={item.id} className={styles.card}>
             <div className={styles.visual} aria-hidden="true">
-              {item.image && <img src={item.image} alt="" className={styles.visualImg} />}
+              {item.image && <img src={item.image} alt="" className={styles.visualImg} style={item.imageWidth ? { width: item.imageWidth } : undefined} />}
               <div className={styles.visualOverlay} />
             </div>
             <div className={styles.cardBody}>

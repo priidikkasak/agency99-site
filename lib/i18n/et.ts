@@ -59,6 +59,7 @@ export interface PortfolioItem {
   chips: string[];
   url?: string;
   image?: string;
+  imageWidth?: string;
 }
 
 export interface Translations {
@@ -282,6 +283,7 @@ export const et: Translations = {
         chips: ['Next.js', 'GitHub', 'i18n', 'Resend'],
         url: 'https://heva.me',
         image: '/portfolio/HEVA.png',
+        imageWidth: '40%',
       },
       {
         id: 'alfaweld',

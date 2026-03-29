@@ -144,6 +144,7 @@ export const en: Translations = {
         chips: ['Next.js', 'GitHub', 'i18n', 'Resend'],
         url: 'https://heva.me',
         image: '/portfolio/HEVA.png',
+        imageWidth: '40%',
       },
       {
         id: 'alfaweld',
