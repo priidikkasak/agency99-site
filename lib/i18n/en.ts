@@ -143,7 +143,7 @@ export const en: Translations = {
         description: 'Freight logistics marketplace connecting shippers and drivers in Estonia.',
         chips: ['Next.js', 'GitHub', 'i18n', 'Resend'],
         url: 'https://heva.me',
-        favicon: 'https://www.google.com/s2/favicons?domain=heva.me&sz=128',
+        image: '/portfolio/HEVA.png',
       },
       {
         id: 'alfaweld',
@@ -152,7 +152,7 @@ export const en: Translations = {
         description: 'B2B welding & metalwork company site serving Scandinavia and the Baltics.',
         chips: ['Next.js', 'GitHub', 'i18n', 'Resend'],
         url: 'https://www.alfaweldpro.com',
-        favicon: 'https://www.google.com/s2/favicons?domain=alfaweldpro.com&sz=128',
+        image: '/portfolio/ALFAWELD.png',
       },
       {
         id: 'dangerouspoems',
@@ -161,7 +161,7 @@ export const en: Translations = {
         description: 'Poetry platform curating works on masculinity and personal growth.',
         chips: ['Next.js', 'GitHub', 'Vercel'],
         url: 'https://www.dangerouspoems.com',
-        favicon: 'https://www.google.com/s2/favicons?domain=dangerouspoems.com&sz=128',
+        image: '/portfolio/DANGEROUS POEMS.png',
       },
     ],
   },

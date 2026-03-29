@@ -58,7 +58,7 @@ export interface PortfolioItem {
   description: string;
   chips: string[];
   url?: string;
-  favicon?: string;
+  image?: string;
 }
 
 export interface Translations {
@@ -281,7 +281,7 @@ export const et: Translations = {
         description: 'Kaubavedude turuplatvorm, mis ühendab saatjad ja autojuhid Eestis.',
         chips: ['Next.js', 'GitHub', 'i18n', 'Resend'],
         url: 'https://heva.me',
-        favicon: 'https://www.google.com/s2/favicons?domain=heva.me&sz=128',
+        image: '/portfolio/HEVA.png',
       },
       {
         id: 'alfaweld',
@@ -290,7 +290,7 @@ export const et: Translations = {
         description: 'B2B keevitus- ja metallitöö ettevõtte sait Skandinaavia ja Baltikumi turgudele.',
         chips: ['Next.js', 'GitHub', 'i18n', 'Resend'],
         url: 'https://www.alfaweldpro.com',
-        favicon: 'https://www.google.com/s2/favicons?domain=alfaweldpro.com&sz=128',
+        image: '/portfolio/ALFAWELD.png',
       },
       {
         id: 'dangerouspoems',
@@ -299,7 +299,7 @@ export const et: Translations = {
         description: 'Luuleplatvorm, mis koondab teoseid mehelikkuse ja isikliku kasvu teemadel.',
         chips: ['Next.js', 'GitHub', 'Vercel'],
         url: 'https://www.dangerouspoems.com',
-        favicon: 'https://www.google.com/s2/favicons?domain=dangerouspoems.com&sz=128',
+        image: '/portfolio/DANGEROUS POEMS.png',
       },
     ],
   },

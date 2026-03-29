@@ -17,8 +17,9 @@ export function PortfolioPage() {
       <ul className={styles.grid} role="list">
         {t.portfolio.items.map((item, i) => (
           <li key={item.id} className={styles.card}>
-            <div className={[styles.visual, styles[`visual${(i % 5) + 1}` as keyof typeof styles]].join(' ')} aria-hidden="true">
-              {item.favicon && <img src={item.favicon} alt="" className={styles.faviconImg} />}
+            <div className={styles.visual} aria-hidden="true">
+              {item.image && <img src={item.image} alt="" className={styles.visualImg} />}
+              <div className={styles.visualOverlay} />
             </div>
             <div className={styles.cardBody}>
               <div className={styles.cardTop}>
