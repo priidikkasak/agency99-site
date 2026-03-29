@@ -19,7 +19,16 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem('lang');
-    if (stored === 'ET' || stored === 'EN') setLangState(stored);
+    if (stored === 'ET' || stored === 'EN') {
+      setLangState(stored);
+    } else {
+      // IP-based default: middleware sets ip_country cookie
+      const country = document.cookie
+        .split('; ')
+        .find((r) => r.startsWith('ip_country='))
+        ?.split('=')[1];
+      setLangState(country === 'EE' ? 'ET' : 'EN');
+    }
   }, []);
 
   const setLang = (l: Lang) => {

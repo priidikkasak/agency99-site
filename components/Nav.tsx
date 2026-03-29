@@ -142,9 +142,6 @@ export function Nav() {
 
           {/* Mobile controls */}
           <div className={styles.mobileRight}>
-            <button onClick={toggleLang} className={styles.langToggleMobile} aria-label="Toggle language">
-              {currentLang.flag}
-            </button>
             <button
               className={styles.hamburger}
               onClick={() => setMenuOpen(!menuOpen)}
@@ -184,6 +181,18 @@ export function Nav() {
             </Link>
           </li>
         </ul>
+        <div className={styles.overlayLang}>
+          {LANGS.map(({ code, flag, label }) => (
+            <button
+              key={code}
+              onClick={() => setLang(code)}
+              className={[styles.overlayLangBtn, lang === code ? styles.overlayLangBtnActive : ''].join(' ')}
+            >
+              <span className={styles.overlayLangFlag}>{flag}</span>
+              <span>{label}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );
