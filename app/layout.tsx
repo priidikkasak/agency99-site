@@ -15,10 +15,14 @@ export const metadata: Metadata = {
   description:
     'Inimese loovus ja AI kiirus. Veebilehed, e-poed ja platvormid alates €500.',
   keywords: 'veebileht, e-pood, Next.js, Vercel, Eesti, web studio, agency',
+  alternates: {
+    canonical: 'https://agency99.io',
+  },
   openGraph: {
     title: 'AGENCY99 – Inimese loovus ja AI kiirus',
     description:
       'Inimese loovus ja AI kiirus. Veebilehed, e-poed ja platvormid alates €500.',
+    url: 'https://agency99.io',
     type: 'website',
     locale: 'et_EE',
   },
