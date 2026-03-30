@@ -39,6 +39,11 @@ export function PortfolioPage() {
                   <span key={chip} className={styles.chip}>{chip}</span>
                 ))}
               </div>
+              {item.url && (
+                <a href={item.url} target="_blank" rel="noopener noreferrer" className={styles.siteLink}>
+                  {new URL(item.url).hostname.replace('www.', '')} ↗
+                </a>
+              )}
             </div>
           </li>
         ))}
