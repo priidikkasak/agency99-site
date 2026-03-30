@@ -162,6 +162,8 @@ export const en: Translations = {
         description: 'Forest retreat in Lahemaa National Park — sauna, natural pond bathing, and eco-wellness.',
         chips: ['Next.js', 'GitHub', 'Vercel'],
         url: 'https://www.oanduaia.ee',
+        image: '/portfolio/OANDUAIA.png',
+        imageWidth: '70%',
       },
       {
         id: 'dangerouspoems',

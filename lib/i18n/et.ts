@@ -301,6 +301,8 @@ export const et: Translations = {
         description: 'Loodusretriidi koduleht Lahemaa rahvuspargis — sauna, loodusujula ja ökoheaolu.',
         chips: ['Next.js', 'GitHub', 'Vercel'],
         url: 'https://www.oanduaia.ee',
+        image: '/portfolio/OANDUAIA.png',
+        imageWidth: '70%',
       },
       {
         id: 'dangerouspoems',
