@@ -1,5 +1,5 @@
 .block {
-  background: var(--accent);
+  background: linear-gradient(135deg, #7060EF 0%, #B8ACFF 100%);
   overflow: hidden;
 }
 
