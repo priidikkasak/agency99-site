@@ -295,6 +295,14 @@ export const et: Translations = {
         image: '/portfolio/ALFAWELD.png',
       },
       {
+        id: 'oanduaia',
+        title: 'Oanduaia',
+        category: 'Veebileht',
+        description: 'Loodusretriidi koduleht Lahemaa rahvuspargis — sauna, loodusujula ja ökoheaolu.',
+        chips: ['Next.js', 'GitHub', 'Vercel'],
+        url: 'https://www.oanduaia.ee',
+      },
+      {
         id: 'dangerouspoems',
         title: 'Dangerous Poems',
         category: 'Veebileht',

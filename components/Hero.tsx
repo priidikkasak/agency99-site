@@ -11,7 +11,7 @@ export function Hero() {
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setStarted(true), 150);
+    const timer = setTimeout(() => setStarted(true), 0);
     return () => clearTimeout(timer);
   }, []);
 

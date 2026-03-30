@@ -156,6 +156,14 @@ export const en: Translations = {
         image: '/portfolio/ALFAWELD.png',
       },
       {
+        id: 'oanduaia',
+        title: 'Oanduaia',
+        category: 'Website',
+        description: 'Forest retreat in Lahemaa National Park — sauna, natural pond bathing, and eco-wellness.',
+        chips: ['Next.js', 'GitHub', 'Vercel'],
+        url: 'https://www.oanduaia.ee',
+      },
+      {
         id: 'dangerouspoems',
         title: 'Dangerous Poems',
         category: 'Website',

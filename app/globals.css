@@ -62,7 +62,6 @@ body {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  animation: pageFadeIn 0.35s ease both;
   overflow-x: clip;
 }
 
