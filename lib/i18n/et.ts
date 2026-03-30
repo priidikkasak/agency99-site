@@ -167,7 +167,7 @@ export const et: Translations = {
     items: [
       {
         title: 'Disain, mis konverteerib',
-        body: 'Iga detail teenib eesmärki. Mitte ilu pärast ilu - visuaalne loogika, mis toob tulemusi.',
+        body: 'Iga detail teenib eesmärki. Visuaalne loogika, mis toob tulemusi.',
       },
       {
         title: 'AI kiirus, inimese hinnang',
@@ -175,7 +175,7 @@ export const et: Translations = {
       },
       {
         title: 'Kõik ühes kohas',
-        body: 'Logo, veeb, maksed, analüütika. Ei mingeid 10 erinevat teenusepakkujat.',
+        body: 'Logo, veeb, analüütika, domeen, emaili kontod, jms.',
       },
     ],
   },
