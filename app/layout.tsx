@@ -11,17 +11,15 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://agency99.io'),
-  title: 'AGENCY99',
-  description:
-    'Inimese loovus ja AI kiirus. Veebilehed, e-poed ja platvormid alates €500.',
+  title: 'AGENCY99 – Inimese loovus ja AI kiirus',
+  description: 'Veebilehed, e-poed ja platvormid.',
   keywords: 'veebileht, e-pood, Next.js, Vercel, Eesti, web studio, agency',
   alternates: {
     canonical: 'https://agency99.io',
   },
   openGraph: {
     title: 'AGENCY99 – Inimese loovus ja AI kiirus',
-    description:
-      'Inimese loovus ja AI kiirus. Veebilehed, e-poed ja platvormid alates €500.',
+    description: 'Veebilehed, e-poed ja platvormid.',
     url: 'https://agency99.io',
     type: 'website',
     locale: 'et_EE',
