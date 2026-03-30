@@ -24,13 +24,6 @@ export function PortfolioPage() {
             <div className={styles.cardBody}>
               <div className={styles.cardTop}>
                 <span className={styles.category}>{item.category}</span>
-                {item.url ? (
-                  <a href={item.url} target="_blank" rel="noopener noreferrer" className={styles.arrow} aria-label={t.portfolio.viewProject}>
-                    ↗
-                  </a>
-                ) : (
-                  <span className={styles.arrowStatic} aria-hidden="true">↗</span>
-                )}
               </div>
               <h2 className={styles.title}>{item.title}</h2>
               <p className={styles.description}>{item.description}</p>
