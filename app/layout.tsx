@@ -11,18 +11,21 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://agency99.io'),
-  title: 'AGENCY99 – Inimese loovus ja AI kiirus',
-  description: 'Veebilehed, e-poed ja platvormid.',
-  keywords: 'veebileht, e-pood, Next.js, Vercel, Eesti, web studio, agency',
+  title: 'Human creativity meets AI speed',
+  description:
+    'Design that converts. Every detail serves a purpose. Not beauty for its own sake - visual logic that drives results.',
+  keywords: 'website, e-commerce, platform, Next.js, Vercel, web studio, agency, conversion design',
   alternates: {
     canonical: 'https://agency99.io',
   },
   openGraph: {
-    title: 'AGENCY99 – Inimese loovus ja AI kiirus',
-    description: 'Veebilehed, e-poed ja platvormid.',
+    title: 'Human creativity meets AI speed',
+    description:
+      'Design that converts. Every detail serves a purpose. Not beauty for its own sake - visual logic that drives results.',
     url: 'https://agency99.io',
+    siteName: 'AGENCY99',
     type: 'website',
-    locale: 'et_EE',
+    locale: 'en_US',
   },
   robots: {
     index: true,
@@ -37,10 +40,22 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="et"
+      lang="en"
       className={`${cabinetGrotesk.variable} ${dmSans.variable} ${geistMono.variable}`}
     >
       <body>
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+        >
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'AGENCY99',
+            url: 'https://agency99.io',
+          })}
+        </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-C6E3CYETET"
           strategy="afterInteractive"
