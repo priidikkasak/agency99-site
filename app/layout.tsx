@@ -44,18 +44,17 @@ export default function RootLayout({
       className={`${cabinetGrotesk.variable} ${dmSans.variable} ${geistMono.variable}`}
     >
       <body>
-        <Script
-          id="website-schema"
+        <script
           type="application/ld+json"
-          strategy="beforeInteractive"
-        >
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'AGENCY99',
-            url: 'https://agency99.io',
-          })}
-        </Script>
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'AGENCY99',
+              url: 'https://agency99.io',
+            }),
+          }}
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-C6E3CYETET"
           strategy="afterInteractive"
