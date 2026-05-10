@@ -13,8 +13,8 @@ export function Footer() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.png" alt="agency99" className={styles.logoImg} />
         </a>
-        <a href="mailto:hello@agency99.ee" className={styles.email}>
-          hello@agency99.ee
+        <a href="mailto:priidik@agency99.io" className={styles.email}>
+          priidik@agency99.io
         </a>
       </div>
     </footer>
