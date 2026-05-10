@@ -37,6 +37,7 @@ html {
   --font-mono:    var(--font-geist-mono), 'Fira Code', monospace;
 
   --nav-height:    64px;
+  --nav-gap-top:   12px;
   --container-max: 1040px;
 
   --sp-1:  8px;
@@ -77,7 +78,7 @@ body::before {
   background-size: 300px 300px;
 }
 
-[id] { scroll-margin-top: var(--nav-height); }
+[id] { scroll-margin-top: calc(var(--nav-height) + var(--nav-gap-top)); }
 
 :focus-visible {
   outline: none;
