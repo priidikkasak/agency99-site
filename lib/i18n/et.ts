@@ -286,6 +286,15 @@ export const et: Translations = {
         imageWidth: '40%',
       },
       {
+        id: 'alneva',
+        title: 'Alneva',
+        category: 'Veebileht',
+        description: 'Korporatiivne veebileht Leedu ettevõttele Alneva UAB — esindusplatvorm B2B klientidele Vilniuse turul.',
+        chips: ['Next.js', 'GitHub', 'Vercel'],
+        url: 'https://alneva.lt',
+        image: '/portfolio/ALNEVA.png',
+      },
+      {
         id: 'heva',
         title: 'Heva',
         category: 'Platvorm',

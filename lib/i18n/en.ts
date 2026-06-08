@@ -147,6 +147,15 @@ export const en: Translations = {
         imageWidth: '40%',
       },
       {
+        id: 'alneva',
+        title: 'Alneva',
+        category: 'Website',
+        description: 'Corporate website for Lithuanian company Alneva UAB — B2B presence platform for the Vilnius market.',
+        chips: ['Next.js', 'GitHub', 'Vercel'],
+        url: 'https://alneva.lt',
+        image: '/portfolio/ALNEVA.png',
+      },
+      {
         id: 'heva',
         title: 'Heva',
         category: 'Platform',
