@@ -276,6 +276,16 @@ export const et: Translations = {
     viewProject: 'Vaata projekti',
     items: [
       {
+        id: 'btcdeal',
+        title: 'BTC Deal',
+        category: 'Platvorm',
+        description: 'OTC Bitcoin tehingute platvorm — ühendab era-müüjad ja -ostjad 1 000+ BTC tehinguteks Euroopas.',
+        chips: ['Next.js', 'GitHub', 'Resend', 'Vercel'],
+        url: 'https://btcdeal.space',
+        image: '/portfolio/BTCDEAL.png',
+        imageWidth: '40%',
+      },
+      {
         id: 'heva',
         title: 'Heva',
         category: 'Platvorm',

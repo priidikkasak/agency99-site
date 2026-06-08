@@ -137,6 +137,16 @@ export const en: Translations = {
     viewProject: 'View project',
     items: [
       {
+        id: 'btcdeal',
+        title: 'BTC Deal',
+        category: 'Platform',
+        description: 'OTC Bitcoin trading platform — connects private sellers and buyers for 1,000+ BTC deals across Europe.',
+        chips: ['Next.js', 'GitHub', 'Resend', 'Vercel'],
+        url: 'https://btcdeal.space',
+        image: '/portfolio/BTCDEAL.png',
+        imageWidth: '40%',
+      },
+      {
         id: 'heva',
         title: 'Heva',
         category: 'Platform',
