@@ -154,6 +154,7 @@ export const en: Translations = {
         chips: ['Next.js', 'GitHub', 'Vercel'],
         url: 'https://alneva.lt',
         image: '/portfolio/ALNEVA.png',
+        imageWidth: '40%',
       },
       {
         id: 'heva',
