@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://agency99.io'),
-  title: 'Human creativity meets AI speed',
+  title: 'AGENCY99',
   description:
     'Design that converts. Every detail serves a purpose. Not beauty for its own sake - visual logic that drives results.',
   keywords: 'website, e-commerce, platform, Next.js, Vercel, web studio, agency, conversion design',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     canonical: 'https://agency99.io',
   },
   openGraph: {
-    title: 'Human creativity meets AI speed',
+    title: 'AGENCY99',
     description:
       'Design that converts. Every detail serves a purpose. Not beauty for its own sake - visual logic that drives results.',
     url: 'https://agency99.io',
