@@ -211,7 +211,7 @@ export const et: Translations = {
     subtext: 'Tasuta hinnapakkumine 24 tunni jooksul.',
     starter: {
       name: 'Starter',
-      price: 'Alates €500',
+      price: 'Alates €750',
       duration: 'Kuni 3 päeva',
       description: 'Ideaalne ettevõtetele, kes vajavad kiiret ja professionaalset veebikohalolekut.',
       features: [
@@ -227,7 +227,7 @@ export const et: Translations = {
     advanced: {
       name: 'Advanced',
       badge: 'Populaarne',
-      price: 'Kuni €2 000',
+      price: 'Kuni €5 000',
       duration: 'Kuni 7 päeva',
       description: 'E-poodide, platvormide ja keerukate veebilahenduste jaoks.',
       features: [

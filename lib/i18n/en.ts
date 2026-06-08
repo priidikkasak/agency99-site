@@ -72,7 +72,7 @@ export const en: Translations = {
     subtext: 'Free quote within 24 hours.',
     starter: {
       name: 'Starter',
-      price: 'From €500',
+      price: 'From €750',
       duration: 'Up to 3 days',
       description: 'Ideal for businesses that need a fast, professional web presence.',
       features: [
@@ -88,7 +88,7 @@ export const en: Translations = {
     advanced: {
       name: 'Advanced',
       badge: 'Popular',
-      price: 'Up to €2,000',
+      price: 'Up to €5,000',
       duration: 'Up to 7 days',
       description: 'For e-commerce, platforms and complex web solutions.',
       features: [

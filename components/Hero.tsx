@@ -23,12 +23,12 @@ export function Hero() {
 
   const stats = lang === 'ET'
     ? [
-        { value: '€500+', label: 'alates' },
+        { value: '€750+', label: 'alates' },
         { value: '7', label: 'päeva max' },
         { value: '∞', label: 'kohandatud' },
       ]
     : [
-        { value: '€500+', label: 'starting from' },
+        { value: '€750+', label: 'starting from' },
         { value: '7', label: 'days max' },
         { value: '∞', label: 'custom' },
       ];
