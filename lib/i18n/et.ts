@@ -26,21 +26,17 @@ export interface ServiceItem {
   body: string;
 }
 
-export interface PricingTierStarter {
+export interface PricingTier {
   name: string;
-  price: string;
+  badge?: string;
+  featured?: boolean;
   duration: string;
-  description: string;
-  features: string[];
-  cta: string;
-}
-
-export interface PricingTierAdvanced {
-  name: string;
-  badge: string;
   price: string;
-  duration: string;
+  oldPrice?: string;
+  priceSuffix?: string;
+  oldPriceSuffix?: string;
   description: string;
+  featuresLabel?: string;
   features: string[];
   cta: string;
 }
@@ -89,8 +85,7 @@ export interface Translations {
     sectionLabel: string;
     headline: string;
     subtext: string;
-    starter: PricingTierStarter;
-    advanced: PricingTierAdvanced;
+    tiers: PricingTier[];
     note: string;
   };
   process: {
@@ -209,38 +204,63 @@ export const et: Translations = {
     sectionLabel: 'Hinnad',
     headline: 'Lihtne hinnakiri',
     subtext: 'Tasuta hinnapakkumine 24 tunni jooksul.',
-    starter: {
-      name: 'Starter',
-      price: 'Alates €750',
-      duration: 'Kuni 3 päeva',
-      description: 'Ideaalne ettevõtetele, kes vajavad kiiret ja professionaalset veebikohalolekut.',
-      features: [
-        'Kuni 5 lehte',
-        'Mobiilisõbralik disain',
-        'SEO alused',
-        'Kontaktivorm',
-        'Vercel deploy',
-        '1 kuu tugi',
-      ],
-      cta: 'Alustame',
-    },
-    advanced: {
-      name: 'Advanced',
-      badge: 'Populaarne',
-      price: 'Kuni €5 000',
-      duration: 'Kuni 7 päeva',
-      description: 'E-poodide, platvormide ja keerukate veebilahenduste jaoks.',
-      features: [
-        'Piiramatu arv lehti',
-        'E-pood + Stripe maksed',
-        'Kasutajate autentimine',
-        'Supabase andmebaas',
-        'Kohandatud animatsioonid',
-        'Analüütika seadistus',
-        '3 kuud tugi',
-      ],
-      cta: 'Alustame',
-    },
+    tiers: [
+      {
+        name: 'Starter',
+        duration: 'Kuni 3 päeva',
+        price: '€1 490',
+        description: 'Põhi, mis töötab.',
+        features: [
+          '4 lehte (Avaleht · Teenused · Hinnakiri · Kontakt)',
+          'Mobile-first, PageSpeed 90+',
+          'SSL + Vercel hosting (1. aasta)',
+          'Google Business Profile audit',
+          'SEO alused (meta, OG, sitemap, robots)',
+          '1 kuu prioriteet-tugi (24h vastus)',
+        ],
+        cta: 'Alustame',
+      },
+      {
+        name: 'Growth',
+        badge: 'Populaarne',
+        featured: true,
+        duration: 'Kuni 7 päeva',
+        price: '€2 790',
+        oldPrice: '€3 490',
+        description: 'Sait, mis toob mõõdetava trafiku.',
+        featuresLabel: 'Kõik Starteri omadused, lisaks:',
+        features: [
+          'Kuni 10 lehte (sh 3 landing-page\u2019i)',
+          'Attribution dashboard \u2014 live kanaliallikad',
+          'Google Business Profile (täisoptimeerimine)',
+          '30-päevane content kit (15 postitust)',
+          'Search Console + Analytics setup',
+          'Brand kit (typography + värvipalett)',
+          '3 kuud tugi + 1 strateegia-call kuus',
+        ],
+        cta: 'Alustame',
+      },
+      {
+        name: 'Platform',
+        badge: 'Founder price',
+        duration: 'Kuni 14 päeva',
+        price: '€4 990',
+        priceSuffix: '+ €149/kuu',
+        oldPriceSuffix: '€249/kuu',
+        description: 'Täielik growth-operatsioonisüsteem.',
+        featuresLabel: 'Kõik Growthi omadused, lisaks:',
+        features: [
+          'Broneerimine (Calendly · Cal.com · Bookwhen)',
+          'Lead-vorm source-tagging\u2019iga',
+          'AI content engine (piiramatu sotsmeedia)',
+          'Igakuine attribution-aruanne + review-call',
+          'Google Business postitused (iganädalaselt)',
+          'A/B testing kahel võtmelehel',
+          '6 kuud tugi (2h reaktsiooniaeg)',
+        ],
+        cta: 'Alustame',
+      },
+    ],
     note: 'Hinnapakkumine 24 tunni jooksul. Hind sõltub projekti mahust.',
   },
   process: {

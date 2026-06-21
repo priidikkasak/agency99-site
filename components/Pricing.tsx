@@ -6,68 +6,89 @@ import styles from './Pricing.module.css';
 
 export function Pricing() {
   const { t } = useI18n();
-  const { starter, advanced } = t.pricing;
+  const { tiers, sectionLabel, headline, subtext, note } = t.pricing;
 
   return (
     <Section id="hinnad">
       <div className={styles.header}>
-        <span className={styles.eyebrow}>{t.pricing.sectionLabel}</span>
-        <h2 className={styles.headline}>{t.pricing.headline}</h2>
-        {t.pricing.subtext && (
-          <p className={styles.subtext}>{t.pricing.subtext}</p>
-        )}
+        <span className={styles.eyebrow}>{sectionLabel}</span>
+        <h2 className={styles.headline}>{headline}</h2>
+        {subtext && <p className={styles.subtext}>{subtext}</p>}
       </div>
 
       <div className={styles.grid}>
-        {/* Starter */}
-        <div className={styles.card}>
-          <div className={styles.cardHeader}>
-            <span className={styles.planName}>{starter.name}</span>
-            <span className={styles.duration}>{starter.duration}</span>
-          </div>
-          <div className={styles.priceBlock}>
-            <span className={styles.price}>{starter.price}</span>
-          </div>
-          <p className={styles.description}>{starter.description}</p>
-          <div className={styles.divider} />
-          <ul className={styles.features} role="list">
-            {starter.features.map((f, i) => (
-              <li key={i} className={styles.feature}>
-                <span className={styles.tick} aria-hidden="true">✓</span>
-                {f}
-              </li>
-            ))}
-          </ul>
-          <a href="#kontakt" className={styles.ctaPrimary}>{starter.cta}</a>
-        </div>
+        {tiers.map((tier) => {
+          const cardClass = [styles.card, tier.featured && styles.cardFeatured]
+            .filter(Boolean)
+            .join(' ');
+          const tickClass = [styles.tick, tier.featured && styles.tickAccent]
+            .filter(Boolean)
+            .join(' ');
+          return (
+            <div key={tier.name} className={cardClass}>
+              <div className={styles.cardHeader}>
+                <div className={styles.nameRow}>
+                  <span className={styles.planName}>{tier.name}</span>
+                  {tier.badge && (
+                    <span className={styles.badge}>{tier.badge}</span>
+                  )}
+                </div>
+                <span className={styles.duration}>{tier.duration}</span>
+              </div>
 
-        {/* Advanced — featured */}
-        <div className={[styles.card, styles.cardFeatured].join(' ')}>
-          <div className={styles.cardHeader}>
-            <div className={styles.nameRow}>
-              <span className={styles.planName}>{advanced.name}</span>
-              <span className={styles.badge}>{advanced.badge}</span>
+              <div className={styles.priceBlock}>
+                <div className={styles.priceRow}>
+                  {tier.oldPrice && (
+                    <span className={styles.oldPrice}>{tier.oldPrice}</span>
+                  )}
+                  <span className={styles.price}>{tier.price}</span>
+                </div>
+                {(tier.priceSuffix || tier.oldPriceSuffix) && (
+                  <div className={styles.priceSuffixRow}>
+                    {tier.oldPriceSuffix && (
+                      <span className={styles.oldPriceSuffix}>
+                        {tier.oldPriceSuffix}
+                      </span>
+                    )}
+                    {tier.priceSuffix && (
+                      <span className={styles.priceSuffix}>
+                        {tier.priceSuffix}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <p className={styles.description}>{tier.description}</p>
+
+              <div className={styles.divider} />
+
+              {tier.featuresLabel && (
+                <span className={styles.featuresLabel}>
+                  {tier.featuresLabel}
+                </span>
+              )}
+
+              <ul className={styles.features} role="list">
+                {tier.features.map((f, i) => (
+                  <li key={i} className={styles.feature}>
+                    <span className={tickClass} aria-hidden="true">
+                      ✓
+                    </span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <a href="#kontakt" className={styles.ctaPrimary}>
+                {tier.cta}
+              </a>
             </div>
-            <span className={styles.duration}>{advanced.duration}</span>
-          </div>
-          <div className={styles.priceBlock}>
-            <span className={styles.price}>{advanced.price}</span>
-          </div>
-          <p className={styles.description}>{advanced.description}</p>
-          <div className={styles.divider} />
-          <ul className={styles.features} role="list">
-            {advanced.features.map((f, i) => (
-              <li key={i} className={styles.feature}>
-                <span className={[styles.tick, styles.tickAccent].join(' ')} aria-hidden="true">✓</span>
-                {f}
-              </li>
-            ))}
-          </ul>
-          <a href="#kontakt" className={styles.ctaPrimary}>{advanced.cta}</a>
-        </div>
+          );
+        })}
       </div>
 
-      <p className={styles.note}>{t.pricing.note}</p>
+      <p className={styles.note}>{note}</p>
     </Section>
   );
 }
