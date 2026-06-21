@@ -37,26 +37,24 @@ export function Pricing() {
               </div>
 
               <div className={styles.priceBlock}>
-                <div className={styles.priceRow}>
+                <div className={styles.preRow}>
                   {tier.oldPrice && (
                     <span className={styles.oldPrice}>{tier.oldPrice}</span>
                   )}
-                  <span className={styles.price}>{tier.price}</span>
                 </div>
-                {(tier.priceSuffix || tier.oldPriceSuffix) && (
-                  <div className={styles.priceSuffixRow}>
-                    {tier.oldPriceSuffix && (
-                      <span className={styles.oldPriceSuffix}>
-                        {tier.oldPriceSuffix}
-                      </span>
-                    )}
-                    {tier.priceSuffix && (
-                      <span className={styles.priceSuffix}>
-                        {tier.priceSuffix}
-                      </span>
-                    )}
-                  </div>
-                )}
+                <span className={styles.price}>{tier.price}</span>
+                <div className={styles.postRow}>
+                  {tier.oldPriceSuffix && (
+                    <span className={styles.oldPriceSuffix}>
+                      {tier.oldPriceSuffix}
+                    </span>
+                  )}
+                  {tier.priceSuffix && (
+                    <span className={styles.priceSuffix}>
+                      {tier.priceSuffix}
+                    </span>
+                  )}
+                </div>
               </div>
 
               <p className={styles.description}>{tier.description}</p>
