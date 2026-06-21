@@ -21,9 +21,7 @@ export function Pricing() {
           const cardClass = [styles.card, tier.featured && styles.cardFeatured]
             .filter(Boolean)
             .join(' ');
-          const tickClass = [styles.tick, tier.featured && styles.tickAccent]
-            .filter(Boolean)
-            .join(' ');
+          const tickClass = [styles.tick, styles.tickAccent].join(' ');
           return (
             <div key={tier.name} className={cardClass}>
               <div className={styles.cardHeader}>
