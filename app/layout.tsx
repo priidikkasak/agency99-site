@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://agency99.io'),
   title: 'AGENCY99',
   description:
-    'Engineered for speed. Built with AI.',
+    'Custom websites built in 3 days. Next.js + Vercel, sub-second loads, conversion-focused design. AI speed, human craft. From €1,490.',
   keywords: 'website, e-commerce, platform, Next.js, Vercel, web studio, agency, conversion design',
   alternates: {
     canonical: 'https://agency99.io',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AGENCY99',
     description:
-      'Engineered for speed. Built with AI.',
+      'Custom websites built in 3 days. Next.js + Vercel, sub-second loads, conversion-focused design. AI speed, human craft. From €1,490.',
     url: 'https://agency99.io',
     siteName: 'AGENCY99',
     type: 'website',
