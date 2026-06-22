@@ -465,9 +465,12 @@
   .nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .links { display: none; }
   .right { display: none; }
-  .mobileRight { display: flex; }
+  .mobileRight { display: flex; align-items: center; }
+
+  .logoLink { transform: translateY(-3px); }
 }
