@@ -80,6 +80,7 @@ export interface Translations {
     sectionLabel: string;
     headline: string;
     items: ServiceItem[];
+    extra: string;
   };
   pricing: {
     sectionLabel: string;
@@ -199,6 +200,7 @@ export const et: Translations = {
         body: 'Logo, bränding, UI/UX disain. Disainifail kaasas - omad failid, omad õigused.',
       },
     ],
+    extra: 'Pakun ka erinevaid automatiseerimise, disaini ja turunduse teenuseid - küsi julgelt.',
   },
   pricing: {
     sectionLabel: 'Hinnad',
@@ -212,9 +214,9 @@ export const et: Translations = {
         description: 'Põhi, mis töötab.',
         features: [
           '4 lehte (Avaleht · Teenused · Hinnakiri · Kontakt)',
-          'Mobile-first, PageSpeed 90+',
-          'SSL + Vercel hosting (1. aasta)',
-          '100/100 Lighthouse skoor avaldamisel (perf · SEO · a11y)',
+          'Laeb mobiilis alla sekundi',
+          'Turvaline hosting kaasas (1. aasta)',
+          'Eritellimusel disain - ei mingeid templeid',
           'SEO alused',
           '1 kuu prioriteet-tugi (24h vastus)',
         ],
@@ -231,11 +233,11 @@ export const et: Translations = {
         featuresLabel: 'Kõik Starteri omadused, lisaks:',
         features: [
           'Kuni 10 lehte (sh 3 landing-page\u2019i)',
-          'Attribution dashboard \u2014 live kanaliallikad',
-          'Globaalne edge-cache (alla 100ms TTFB üle maailma)',
-          '30-päevane content kit (15 postitust)',
-          'Privaatsust säilitav analüütika (cookie-bännerit pole vaja)',
-          'Brand kit (typography + värvipalett)',
+          'Näed iga liidi allikat reaalajas',
+          'Laeb kiiresti igal pool - Tallinnast Tokyoni',
+          '30 päeva sisu (15 postitust, kirjutame sulle)',
+          'Küpsisteta analüütika (GDPR-bännerit pole vaja)',
+          'Brand kit (kirjatüübid + värvisüsteem)',
           '3 kuud tugi + 1 strateegia-call kuus',
         ],
         cta: 'Alustame',
@@ -251,9 +253,9 @@ export const et: Translations = {
         featuresLabel: 'Kõik Growthi omadused, lisaks:',
         features: [
           'Broneerimine (Calendly · Cal.com · Bookwhen)',
-          'Lead-vorm source-tagging\u2019iga',
-          'AI content engine (piiramatu sotsmeedia)',
-          'Igakuine attribution-aruanne + review-call',
+          'Lead-vorm märgib iga allika automaatselt',
+          'AI content engine (piiramatu sotsmeedia postitused)',
+          'Igakuine sooritus-aruanne + review-call',
           'Automaatne ristpostitus LinkedIn · X · IG (iganädalaselt)',
           'A/B testing kahel võtmelehel',
           '6 kuud tugi (2h reaktsiooniaeg)',

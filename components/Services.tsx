@@ -98,6 +98,9 @@ export function Services() {
           />
         ))}
       </ul>
+      <p className={styles.extra}>
+        <a href="#kontakt">{t.services.extra}</a>
+      </p>
     </Section>
   );
 }
