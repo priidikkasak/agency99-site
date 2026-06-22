@@ -45,7 +45,16 @@ export default function RootLayout({
     >
       <body>
         <Script id="scroll-restoration" strategy="beforeInteractive">
-          {`if ('scrollRestoration' in history) history.scrollRestoration = 'manual';`}
+          {`
+            if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+            try {
+              var nav = performance.getEntriesByType('navigation')[0];
+              if (nav && nav.type === 'reload' && location.hash) {
+                history.replaceState(null, '', location.pathname + location.search);
+                window.scrollTo(0, 0);
+              }
+            } catch (e) {}
+          `}
         </Script>
         <script
           type="application/ld+json"
