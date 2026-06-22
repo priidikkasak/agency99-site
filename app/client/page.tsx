@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Nav } from '@/components/Nav';
-import { Footer } from '@/components/Footer';
 import { ClientQuestionnaire } from '@/components/ClientQuestionnaire';
 
 export const metadata: Metadata = {
@@ -22,7 +21,6 @@ export default function ClientPage() {
     <>
       <Nav />
       <ClientQuestionnaire />
-      <Footer />
     </>
   );
 }
