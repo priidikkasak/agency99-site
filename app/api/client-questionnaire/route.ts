@@ -24,6 +24,7 @@ export async function POST(request: Request) {
       email,
       company,
       projectTypes,
+      otherDescription,
       goal,
       audience,
       contentReady,
@@ -39,11 +40,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
     }
 
+    const otherDesc = typesArr.includes('Something else') ? otherDescription : '';
+
     const safe = {
       name: clean(name, 200),
       email: clean(email, 200),
       company: clean(company, 300),
       projectTypes: typesArr.map((v) => clean(v, 100)).join(', '),
+      otherDescription: clean(otherDesc, 500),
       goal: clean(goal, 5000),
       audience: clean(audience, 500),
       contentReady: clean(contentReady, 200),
@@ -75,6 +79,7 @@ export async function POST(request: Request) {
             ${row('Email', safe.email)}
             ${row('Company / site', safe.company)}
             ${row('Project type(s)', safe.projectTypes)}
+            ${row('Something else', safe.otherDescription)}
             ${row('Content', safe.contentReady)}
             ${row('Timeline', safe.timeline)}
           </table>

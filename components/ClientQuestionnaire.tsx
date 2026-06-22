@@ -14,6 +14,8 @@ const PROJECT_TYPES = [
   'Something else',
 ];
 
+const OTHER = 'Something else';
+
 const CONTENT_READY = [
   'I have copy and images ready',
   'I have some — need help with the rest',
@@ -32,12 +34,30 @@ const initialForm = {
   email: '',
   company: '',
   projectTypes: [] as string[],
+  otherDescription: '',
   goal: '',
   audience: '',
   contentReady: '',
   inspiration: '',
   timeline: '',
 };
+
+const Star = () => (
+  <span className={styles.star} aria-hidden="true"> *</span>
+);
+
+const LabelText = ({
+  children,
+  required,
+}: {
+  children: React.ReactNode;
+  required?: boolean;
+}) => (
+  <span className={styles.labelText}>
+    {children}
+    {required && <Star />}
+  </span>
+);
 
 export function ClientQuestionnaire() {
   const [form, setForm] = useState(initialForm);
@@ -51,15 +71,20 @@ export function ClientQuestionnaire() {
   const toggleProjectType = (value: string) => {
     setForm((f) => {
       const has = f.projectTypes.includes(value);
+      const nextTypes = has
+        ? f.projectTypes.filter((v) => v !== value)
+        : [...f.projectTypes, value];
+      const stillHasOther = nextTypes.includes(OTHER);
       return {
         ...f,
-        projectTypes: has
-          ? f.projectTypes.filter((v) => v !== value)
-          : [...f.projectTypes, value],
+        projectTypes: nextTypes,
+        otherDescription: stillHasOther ? f.otherDescription : '',
       };
     });
     setShowProjectError(false);
   };
+
+  const otherSelected = form.projectTypes.includes(OTHER);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,8 +146,8 @@ export function ClientQuestionnaire() {
 
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
             <div className={styles.row}>
-              <label className={[styles.label, styles.required].join(' ')}>
-                Your name
+              <label className={styles.label}>
+                <LabelText required>Your name</LabelText>
                 <input
                   type="text"
                   className={styles.input}
@@ -133,8 +158,8 @@ export function ClientQuestionnaire() {
                   autoComplete="name"
                 />
               </label>
-              <label className={[styles.label, styles.required].join(' ')}>
-                Email
+              <label className={styles.label}>
+                <LabelText required>Email</LabelText>
                 <input
                   type="email"
                   className={styles.input}
@@ -148,7 +173,7 @@ export function ClientQuestionnaire() {
             </div>
 
             <label className={styles.label}>
-              Company or current website
+              <LabelText>Company or current website</LabelText>
               <input
                 type="text"
                 className={styles.input}
@@ -162,7 +187,7 @@ export function ClientQuestionnaire() {
             <fieldset className={[styles.label, styles.fieldset].join(' ')}>
               <legend className={styles.legend}>
                 What do you need? (pick any)
-                <span className={styles.legendStar} aria-hidden="true"> *</span>
+                <Star />
               </legend>
               <div className={styles.chipGroup} role="group">
                 {PROJECT_TYPES.map((opt) => {
@@ -183,13 +208,23 @@ export function ClientQuestionnaire() {
                   );
                 })}
               </div>
+              {otherSelected && (
+                <input
+                  type="text"
+                  className={[styles.input, styles.otherInput].join(' ')}
+                  value={form.otherDescription}
+                  onChange={updateField('otherDescription')}
+                  placeholder="Tell us what — one line is fine"
+                  aria-label="What is the something else?"
+                />
+              )}
               {showProjectError && (
                 <p className={styles.errorMsg}>Pick at least one.</p>
               )}
             </fieldset>
 
-            <label className={[styles.label, styles.required].join(' ')}>
-              What does success look like?
+            <label className={styles.label}>
+              <LabelText required>What does success look like?</LabelText>
               <textarea
                 className={styles.textarea}
                 value={form.goal}
@@ -200,8 +235,8 @@ export function ClientQuestionnaire() {
               />
             </label>
 
-            <label className={[styles.label, styles.required].join(' ')}>
-              Who is it for?
+            <label className={styles.label}>
+              <LabelText required>Who is it for?</LabelText>
               <input
                 type="text"
                 className={styles.input}
@@ -212,8 +247,8 @@ export function ClientQuestionnaire() {
               />
             </label>
 
-            <label className={[styles.label, styles.required].join(' ')}>
-              Content readiness
+            <label className={styles.label}>
+              <LabelText required>Content readiness</LabelText>
               <select
                 className={styles.select}
                 value={form.contentReady}
@@ -228,7 +263,7 @@ export function ClientQuestionnaire() {
             </label>
 
             <label className={styles.label}>
-              Sites or brands you like (inspiration)
+              <LabelText>Sites or brands you like (inspiration)</LabelText>
               <textarea
                 className={styles.textarea}
                 value={form.inspiration}
@@ -239,7 +274,7 @@ export function ClientQuestionnaire() {
             </label>
 
             <label className={styles.label}>
-              Timeline
+              <LabelText>Timeline</LabelText>
               <select
                 className={styles.select}
                 value={form.timeline}
