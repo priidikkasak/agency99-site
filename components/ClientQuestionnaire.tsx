@@ -14,12 +14,10 @@ const PROJECT_TYPES = [
   'Something else',
 ];
 
-const BUDGETS = [
-  'Under €2,000',
-  '€2,000 – €5,000',
-  '€5,000 – €10,000',
-  '€10,000+',
-  'Not sure yet',
+const CONTENT_READY = [
+  'I have copy and images ready',
+  'I have some — need help with the rest',
+  'I need help with everything',
 ];
 
 const TIMELINES = [
@@ -29,24 +27,46 @@ const TIMELINES = [
   'Flexible',
 ];
 
-export function ClientQuestionnaire() {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    company: '',
-    projectType: '',
-    goal: '',
-    budget: '',
-    timeline: '',
-  });
-  const [status, setStatus] = useState<Status>('idle');
+const initialForm = {
+  name: '',
+  email: '',
+  company: '',
+  projectTypes: [] as string[],
+  goal: '',
+  audience: '',
+  contentReady: '',
+  inspiration: '',
+  timeline: '',
+};
 
-  const update = (key: keyof typeof form) => (
+export function ClientQuestionnaire() {
+  const [form, setForm] = useState(initialForm);
+  const [status, setStatus] = useState<Status>('idle');
+  const [showProjectError, setShowProjectError] = useState(false);
+
+  const updateField = (key: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
+  const toggleProjectType = (value: string) => {
+    setForm((f) => {
+      const has = f.projectTypes.includes(value);
+      return {
+        ...f,
+        projectTypes: has
+          ? f.projectTypes.filter((v) => v !== value)
+          : [...f.projectTypes, value],
+      };
+    });
+    setShowProjectError(false);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (form.projectTypes.length === 0) {
+      setShowProjectError(true);
+      return;
+    }
     setStatus('loading');
     try {
       const res = await fetch('/api/client-questionnaire', {
@@ -56,15 +76,7 @@ export function ClientQuestionnaire() {
       });
       if (!res.ok) throw new Error();
       setStatus('success');
-      setForm({
-        name: '',
-        email: '',
-        company: '',
-        projectType: '',
-        goal: '',
-        budget: '',
-        timeline: '',
-      });
+      setForm(initialForm);
     } catch {
       setStatus('error');
     }
@@ -103,8 +115,8 @@ export function ClientQuestionnaire() {
           </div>
           <h1 className={styles.headline}>Tell us about your project.</h1>
           <p className={styles.subtext}>
-            Seven quick questions. Takes about two minutes. You&rsquo;ll get a personal reply
-            within 24 hours.
+            A few quick questions. Takes about three minutes. You&rsquo;ll get a personal
+            reply within 24 hours.
           </p>
 
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -115,7 +127,7 @@ export function ClientQuestionnaire() {
                   type="text"
                   className={styles.input}
                   value={form.name}
-                  onChange={update('name')}
+                  onChange={updateField('name')}
                   placeholder="Jane Smith"
                   required
                   autoComplete="name"
@@ -127,7 +139,7 @@ export function ClientQuestionnaire() {
                   type="email"
                   className={styles.input}
                   value={form.email}
-                  onChange={update('email')}
+                  onChange={updateField('email')}
                   placeholder="you@company.com"
                   required
                   autoComplete="email"
@@ -141,67 +153,104 @@ export function ClientQuestionnaire() {
                 type="text"
                 className={styles.input}
                 value={form.company}
-                onChange={update('company')}
+                onChange={updateField('company')}
                 placeholder="acme.com (optional)"
                 autoComplete="organization"
               />
             </label>
 
-            <label className={[styles.label, styles.required].join(' ')}>
-              What do you need?
-              <select
-                className={styles.select}
-                value={form.projectType}
-                onChange={update('projectType')}
-                required
-              >
-                <option value="" disabled>Pick one</option>
-                {PROJECT_TYPES.map((opt) => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
-            </label>
+            <fieldset className={[styles.label, styles.fieldset].join(' ')}>
+              <legend className={styles.legend}>
+                What do you need? (pick any)
+                <span className={styles.legendStar} aria-hidden="true"> *</span>
+              </legend>
+              <div className={styles.chipGroup} role="group">
+                {PROJECT_TYPES.map((opt) => {
+                  const checked = form.projectTypes.includes(opt);
+                  return (
+                    <button
+                      type="button"
+                      key={opt}
+                      className={[styles.chip, checked ? styles.chipChecked : ''].join(' ')}
+                      aria-pressed={checked}
+                      onClick={() => toggleProjectType(opt)}
+                    >
+                      <span className={styles.chipCheck} aria-hidden="true">
+                        {checked ? '✓' : ''}
+                      </span>
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+              {showProjectError && (
+                <p className={styles.errorMsg}>Pick at least one.</p>
+              )}
+            </fieldset>
 
             <label className={[styles.label, styles.required].join(' ')}>
               What does success look like?
               <textarea
                 className={styles.textarea}
                 value={form.goal}
-                onChange={update('goal')}
+                onChange={updateField('goal')}
                 placeholder="A few sentences on the goal — more leads, online sales, a faster site, replacing a vendor, etc."
                 required
                 rows={5}
               />
             </label>
 
-            <div className={styles.row}>
-              <label className={styles.label}>
-                Budget
-                <select
-                  className={styles.select}
-                  value={form.budget}
-                  onChange={update('budget')}
-                >
-                  <option value="">Optional</option>
-                  {BUDGETS.map((opt) => (
-                    <option key={opt} value={opt}>{opt}</option>
-                  ))}
-                </select>
-              </label>
-              <label className={styles.label}>
-                Timeline
-                <select
-                  className={styles.select}
-                  value={form.timeline}
-                  onChange={update('timeline')}
-                >
-                  <option value="">Optional</option>
-                  {TIMELINES.map((opt) => (
-                    <option key={opt} value={opt}>{opt}</option>
-                  ))}
-                </select>
-              </label>
-            </div>
+            <label className={[styles.label, styles.required].join(' ')}>
+              Who is it for?
+              <input
+                type="text"
+                className={styles.input}
+                value={form.audience}
+                onChange={updateField('audience')}
+                placeholder="e.g. B2B SaaS founders, local restaurants, designers in Tallinn"
+                required
+              />
+            </label>
+
+            <label className={[styles.label, styles.required].join(' ')}>
+              Content readiness
+              <select
+                className={styles.select}
+                value={form.contentReady}
+                onChange={updateField('contentReady')}
+                required
+              >
+                <option value="" disabled>Pick one</option>
+                {CONTENT_READY.map((opt) => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className={styles.label}>
+              Sites or brands you like (inspiration)
+              <textarea
+                className={styles.textarea}
+                value={form.inspiration}
+                onChange={updateField('inspiration')}
+                placeholder="Drop 2–3 URLs or names + a line on what you like about each (layout, vibe, copy, animation, etc.)"
+                rows={4}
+              />
+            </label>
+
+            <label className={styles.label}>
+              Timeline
+              <select
+                className={styles.select}
+                value={form.timeline}
+                onChange={updateField('timeline')}
+              >
+                <option value="">Optional</option>
+                {TIMELINES.map((opt) => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
+            </label>
 
             <div className={styles.submitRow}>
               <button

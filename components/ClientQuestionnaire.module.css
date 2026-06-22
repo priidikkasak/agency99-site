@@ -86,6 +86,84 @@
   color: var(--accent);
 }
 
+.fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.legend {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  padding: 0;
+}
+
+.legendStar {
+  color: var(--accent);
+}
+
+.chipGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.chip:hover {
+  border-color: var(--border-bright);
+  color: var(--text-primary);
+}
+
+.chipChecked {
+  background: rgba(var(--accent-rgb), 0.08);
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.chipCheck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--border-bright);
+  font-size: 10px;
+  line-height: 1;
+  color: var(--bg-primary);
+  background: transparent;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.chipChecked .chipCheck {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
