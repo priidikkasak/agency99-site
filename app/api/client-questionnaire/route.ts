@@ -70,7 +70,7 @@ export async function POST(request: Request) {
       from: 'AGENCY99 <noreply@mail.agency99.io>',
       to: 'priidik@agency99.io',
       replyTo: safe.email,
-      subject: `Client questionnaire – ${safe.name} (${safe.projectTypes})`,
+      subject: `Client questionnaire - ${safe.name} (${safe.projectTypes})`,
       html: `
         <div style="font-family: sans-serif; max-width: 640px; color: #111;">
           <h2 style="margin-bottom: 16px;">New client questionnaire</h2>

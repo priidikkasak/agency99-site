@@ -4,7 +4,7 @@ import { Footer } from '@/components/Footer';
 import { ClientQuestionnaire } from '@/components/ClientQuestionnaire';
 
 export const metadata: Metadata = {
-  title: 'Client questionnaire — AGENCY99',
+  title: 'Client questionnaire - AGENCY99',
   description: 'Tell us about your project. We reply within 24 hours.',
   robots: {
     index: false,

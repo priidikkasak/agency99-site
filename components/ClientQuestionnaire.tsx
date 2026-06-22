@@ -18,7 +18,7 @@ const OTHER = 'Something else';
 
 const CONTENT_READY = [
   'I have copy and images ready',
-  'I have some — need help with the rest',
+  'I have some - need help with the rest',
   'I need help with everything',
 ];
 
@@ -129,7 +129,7 @@ export function ClientQuestionnaire() {
               <span className={styles.eyebrowDot} />
               Received
             </div>
-            <h1 className={styles.headline}>Thanks — we&rsquo;ve got it.</h1>
+            <h1 className={styles.headline}>Thanks - we&rsquo;ve got it.</h1>
             <p className={styles.subtext}>
               Priidik will read this personally and reply within 24 hours from{' '}
               <strong style={{ color: 'var(--text-primary)' }}>priidik@agency99.io</strong>.
@@ -226,7 +226,7 @@ export function ClientQuestionnaire() {
                   className={[styles.input, styles.otherInput].join(' ')}
                   value={form.otherDescription}
                   onChange={updateField('otherDescription')}
-                  placeholder="Tell us what — one line is fine"
+                  placeholder="Tell us what - one line is fine"
                   aria-label="What is the something else?"
                 />
               )}
@@ -241,7 +241,7 @@ export function ClientQuestionnaire() {
                 className={styles.textarea}
                 value={form.goal}
                 onChange={updateField('goal')}
-                placeholder="A few sentences on the goal — more leads, online sales, a faster site, replacing a vendor, etc."
+                placeholder="A few sentences on the goal - more leads, online sales, a faster site, replacing a vendor, etc."
                 required
                 rows={5}
               />
@@ -294,7 +294,7 @@ export function ClientQuestionnaire() {
                 className={styles.textarea}
                 value={form.inspiration}
                 onChange={updateField('inspiration')}
-                placeholder="Drop 2–3 URLs or names + a line on what you like about each (layout, vibe, copy, animation, etc.)"
+                placeholder="Drop 2-3 URLs or names + a line on what you like about each (layout, vibe, copy, animation, etc.)"
                 rows={4}
               />
             </label>
