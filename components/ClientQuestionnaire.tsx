@@ -63,6 +63,7 @@ export function ClientQuestionnaire() {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<Status>('idle');
   const [showProjectError, setShowProjectError] = useState(false);
+  const [showContentError, setShowContentError] = useState(false);
 
   const updateField = (key: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -84,14 +85,25 @@ export function ClientQuestionnaire() {
     setShowProjectError(false);
   };
 
+  const selectSingle = (key: 'contentReady' | 'timeline', value: string) => {
+    setForm((f) => ({ ...f, [key]: f[key] === value ? '' : value }));
+    if (key === 'contentReady') setShowContentError(false);
+  };
+
   const otherSelected = form.projectTypes.includes(OTHER);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    let invalid = false;
     if (form.projectTypes.length === 0) {
       setShowProjectError(true);
-      return;
+      invalid = true;
     }
+    if (!form.contentReady) {
+      setShowContentError(true);
+      invalid = true;
+    }
+    if (invalid) return;
     setStatus('loading');
     try {
       const res = await fetch('/api/client-questionnaire', {
@@ -247,20 +259,34 @@ export function ClientQuestionnaire() {
               />
             </label>
 
-            <label className={styles.label}>
-              <LabelText required>Content readiness</LabelText>
-              <select
-                className={styles.select}
-                value={form.contentReady}
-                onChange={updateField('contentReady')}
-                required
-              >
-                <option value="" disabled>Pick one</option>
-                {CONTENT_READY.map((opt) => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
-            </label>
+            <fieldset className={[styles.label, styles.fieldset].join(' ')}>
+              <legend className={styles.legend}>
+                Content readiness
+                <Star />
+              </legend>
+              <div className={styles.chipGroup} role="radiogroup">
+                {CONTENT_READY.map((opt) => {
+                  const checked = form.contentReady === opt;
+                  return (
+                    <button
+                      type="button"
+                      key={opt}
+                      className={[styles.chip, checked ? styles.chipChecked : ''].join(' ')}
+                      aria-pressed={checked}
+                      onClick={() => selectSingle('contentReady', opt)}
+                    >
+                      <span className={styles.chipCheck} aria-hidden="true">
+                        {checked ? '✓' : ''}
+                      </span>
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+              {showContentError && (
+                <p className={styles.errorMsg}>Pick one.</p>
+              )}
+            </fieldset>
 
             <label className={styles.label}>
               <LabelText>Sites or brands you like (inspiration)</LabelText>
@@ -273,19 +299,28 @@ export function ClientQuestionnaire() {
               />
             </label>
 
-            <label className={styles.label}>
-              <LabelText>Timeline</LabelText>
-              <select
-                className={styles.select}
-                value={form.timeline}
-                onChange={updateField('timeline')}
-              >
-                <option value="">Optional</option>
-                {TIMELINES.map((opt) => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
-            </label>
+            <fieldset className={[styles.label, styles.fieldset].join(' ')}>
+              <legend className={styles.legend}>Timeline</legend>
+              <div className={styles.chipGroup} role="radiogroup">
+                {TIMELINES.map((opt) => {
+                  const checked = form.timeline === opt;
+                  return (
+                    <button
+                      type="button"
+                      key={opt}
+                      className={[styles.chip, checked ? styles.chipChecked : ''].join(' ')}
+                      aria-pressed={checked}
+                      onClick={() => selectSingle('timeline', opt)}
+                    >
+                      <span className={styles.chipCheck} aria-hidden="true">
+                        {checked ? '✓' : ''}
+                      </span>
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+            </fieldset>
 
             <div className={styles.submitRow}>
               <button
