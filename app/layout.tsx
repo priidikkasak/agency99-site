@@ -44,6 +44,9 @@ export default function RootLayout({
       className={`${cabinetGrotesk.variable} ${dmSans.variable} ${geistMono.variable}`}
     >
       <body>
+        <Script id="scroll-restoration" strategy="beforeInteractive">
+          {`if ('scrollRestoration' in history) history.scrollRestoration = 'manual';`}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
