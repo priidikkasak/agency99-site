@@ -472,5 +472,5 @@
   .right { display: none; }
   .mobileRight { display: flex; align-items: center; }
 
-  .logoLink { transform: translateY(-3px); }
+  .logoLink { transform: translateY(4px); }
 }
