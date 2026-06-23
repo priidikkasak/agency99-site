@@ -4,8 +4,6 @@
 
 .extra {
   margin-top: var(--sp-6);
-  padding-top: var(--sp-5);
-  border-top: 1px solid var(--border-subtle);
 }
 
 .extraLabel {
@@ -69,7 +67,6 @@
   }
   .extra {
     margin-top: var(--sp-5);
-    padding-top: var(--sp-4);
   }
 }
 
