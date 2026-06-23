@@ -294,20 +294,25 @@
   .select,
   .textarea {
     font-size: 16px;
-    border-color: var(--border-bright);
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.22);
     color: var(--text-primary);
   }
   .input::placeholder,
   .textarea::placeholder {
-    color: var(--text-secondary);
+    color: rgba(240, 237, 230, 0.55);
   }
   .chip {
-    background: var(--bg-tertiary);
-    border-color: var(--border-bright);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.22);
     color: var(--text-primary);
   }
   .chipCheck {
-    border-color: var(--text-secondary);
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+  .legend,
+  .label {
+    color: var(--text-primary);
   }
   .submitRow {
     flex-direction: column;
