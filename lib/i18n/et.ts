@@ -205,7 +205,7 @@ export const et: Translations = {
       },
     ],
     extra: {
-      label: 'Lisateenused tellimise korral',
+      label: 'Lisateenused',
       items: [
         'Töövoogude automatiseerimine',
         'AI agendid ja sisemised chatbot\u2019id',
