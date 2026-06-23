@@ -290,6 +290,11 @@
   .row {
     grid-template-columns: 1fr;
   }
+  .input,
+  .select,
+  .textarea {
+    font-size: 16px;
+  }
   .submitRow {
     flex-direction: column;
     align-items: stretch;

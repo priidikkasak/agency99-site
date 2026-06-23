@@ -208,6 +208,11 @@
     grid-template-columns: 1fr;
   }
 
+  .input,
+  .textarea {
+    font-size: 16px;
+  }
+
   .submit {
     width: 100%;
   }
