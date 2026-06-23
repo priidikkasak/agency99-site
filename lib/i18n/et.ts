@@ -207,7 +207,7 @@ export const et: Translations = {
     extra: {
       label: 'Lisateenused tellimise korral',
       items: [
-        'Töövoogude automatiseerimine (Zapier · Make · n8n · custom)',
+        'Töövoogude automatiseerimine',
         'AI agendid ja sisemised chatbot\u2019id',
         'Admin-dashboardid ja sisemised tööriistad',
         'Lepingu- ja juriidilised mallid (NDA · MSA · SOW)',

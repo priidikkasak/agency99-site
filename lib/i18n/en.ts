@@ -68,7 +68,7 @@ export const en: Translations = {
     extra: {
       label: 'Also available on request',
       items: [
-        'Workflow automation (Zapier · Make · n8n · custom)',
+        'Workflow automation',
         'AI agents and internal chatbots',
         'Admin dashboards and internal tools',
         'Legal templates (NDA · MSA · SOW)',
