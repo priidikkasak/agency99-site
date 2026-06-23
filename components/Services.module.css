@@ -3,25 +3,74 @@
    ============================================================ */
 
 .extra {
-  margin-top: var(--sp-5);
-  text-align: left;
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.extraLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--sp-3);
+}
+
+.extraList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: var(--sp-5);
+  row-gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.extraItem {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 300;
   color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 56ch;
+  line-height: 1.5;
 }
 
-.extra a {
-  color: var(--text-secondary);
+.extraBullet {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  opacity: 0.85;
+  line-height: 1;
+}
+
+.extraCta {
+  display: inline-block;
+  margin-top: var(--sp-4);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-primary);
   border-bottom: 1px solid var(--border-bright);
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.extra a:hover {
-  color: var(--text-primary);
+.extraCta:hover {
+  color: var(--accent);
   border-color: var(--accent);
+}
+
+@media (max-width: 767px) {
+  .extraList {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+  }
+  .extra {
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+  }
 }
 
 .header {

@@ -98,9 +98,20 @@ export function Services() {
           />
         ))}
       </ul>
-      <p className={styles.extra}>
-        <a href="#kontakt">{t.services.extra}</a>
-      </p>
+      <div className={styles.extra}>
+        <div className={styles.extraLabel}>{t.services.extra.label}</div>
+        <ul className={styles.extraList} role="list">
+          {t.services.extra.items.map((item) => (
+            <li key={item} className={styles.extraItem}>
+              <span className={styles.extraBullet} aria-hidden="true">+</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <a href="#kontakt" className={styles.extraCta}>
+          {t.services.extra.cta}
+        </a>
+      </div>
     </Section>
   );
 }

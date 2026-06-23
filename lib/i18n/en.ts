@@ -65,7 +65,20 @@ export const en: Translations = {
         body: 'Logo, branding, UI/UX design. Design file included - your files, your rights.',
       },
     ],
-    extra: "Much more automation, design, and marketing services available. Let's talk.",
+    extra: {
+      label: 'Also available on request',
+      items: [
+        'Workflow automation (Zapier · Make · n8n · custom)',
+        'AI agents and internal chatbots',
+        'Admin dashboards and internal tools',
+        'Legal templates (NDA · MSA · SOW)',
+        'Proposal and invoice automation',
+        'Logo and brand identity systems',
+        'Pitch decks that actually pitch',
+        'SEO content + outbound funnels',
+      ],
+      cta: "Need something else? Let's talk.",
+    },
   },
   pricing: {
     sectionLabel: 'Pricing',

@@ -80,7 +80,11 @@ export interface Translations {
     sectionLabel: string;
     headline: string;
     items: ServiceItem[];
-    extra: string;
+    extra: {
+      label: string;
+      items: string[];
+      cta: string;
+    };
   };
   pricing: {
     sectionLabel: string;
@@ -200,7 +204,20 @@ export const et: Translations = {
         body: 'Logo, bränding, UI/UX disain. Disainifail kaasas - omad failid, omad õigused.',
       },
     ],
-    extra: 'Veel palju automatiseerimise, disaini ja turunduse teenuseid. Räägime.',
+    extra: {
+      label: 'Lisateenused tellimise korral',
+      items: [
+        'Töövoogude automatiseerimine (Zapier · Make · n8n · custom)',
+        'AI agendid ja sisemised chatbot\u2019id',
+        'Admin-dashboardid ja sisemised tööriistad',
+        'Lepingu- ja juriidilised mallid (NDA · MSA · SOW)',
+        'Pakkumiste ja arvete automatiseerimine',
+        'Logo ja brändiidentiteedi süsteemid',
+        'Pitch-deckid, mis päriselt pitchivad',
+        'SEO sisuloome + outbound-funnelid',
+      ],
+      cta: 'Vajad midagi muud? Räägime.',
+    },
   },
   pricing: {
     sectionLabel: 'Hinnad',
