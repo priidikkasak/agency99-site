@@ -6,7 +6,7 @@ import { MOCK_VISITORS } from '@/lib/map/visitors';
 import { parseRange } from '@/lib/map/ranges';
 
 export const metadata: Metadata = {
-  title: 'World map — AGENCY99',
+  title: 'Map',
   description: 'Where the world finds agency99.io.',
   robots: {
     index: false,
