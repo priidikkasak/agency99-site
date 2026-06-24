@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
-import { cabinetGrotesk, dmSans, geistMono } from '@/lib/fonts';
+import { cabinetGrotesk, dmSans, geistMono, instrumentSerif, cormorantGaramond } from '@/lib/fonts';
 import { I18nProvider } from '@/lib/i18n/context';
 import { CleanAnchorScroll } from '@/components/CleanAnchorScroll';
 import './globals.css';
@@ -42,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cabinetGrotesk.variable} ${dmSans.variable} ${geistMono.variable}`}
+      className={`${cabinetGrotesk.variable} ${dmSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${cormorantGaramond.variable}`}
     >
       <body>
         <Script id="scroll-restoration" strategy="beforeInteractive">

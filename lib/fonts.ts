@@ -1,5 +1,20 @@
 import localFont from 'next/font/local';
-import { DM_Sans } from 'next/font/google';
+import { DM_Sans, Instrument_Serif, Cormorant_Garamond } from 'next/font/google';
+
+export const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
+  display: 'swap',
+});
+
+export const cormorantGaramond = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-cormorant',
+  display: 'swap',
+});
 
 export const cabinetGrotesk = localFont({
   src: [
