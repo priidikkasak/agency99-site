@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import { Nav } from '@/components/Nav';
 import { WorldMap } from '@/components/WorldMap';
-import { fetchVisitorsByCountry } from '@/lib/map/ga4';
-import { MOCK_VISITORS } from '@/lib/map/visitors';
-import { parseRange } from '@/lib/map/ranges';
+import { loadMapData } from '@/lib/map/data';
+import { DEFAULT_RANGE } from '@/lib/map/ranges';
 
 export const metadata: Metadata = {
   title: 'Map',
@@ -21,36 +20,12 @@ export const metadata: Metadata = {
 
 export const revalidate = 900;
 
-export default async function MapPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ range?: string | string[] }>;
-}) {
-  const { range: rangeParam } = await searchParams;
-  const range = parseRange(rangeParam);
-
-  let visitors = MOCK_VISITORS;
-  let source: 'ga4' | 'mock' = 'mock';
-
-  if (process.env.GA4_PROPERTY_ID && process.env.GA4_SERVICE_ACCOUNT_KEY) {
-    try {
-      const result = await fetchVisitorsByCountry(range);
-      if (Object.keys(result.visitors).length > 0) {
-        visitors = result.visitors;
-        source = 'ga4';
-      } else {
-        visitors = {};
-        source = 'ga4';
-      }
-    } catch (err) {
-      console.error('[map] GA4 fetch failed, falling back to mock:', err);
-    }
-  }
-
+export default async function MapPage() {
+  const { visitors, source } = await loadMapData(DEFAULT_RANGE);
   return (
     <>
       <Nav />
-      <WorldMap visitors={visitors} source={source} rangeKey={range} />
+      <WorldMap visitors={visitors} source={source} rangeKey={DEFAULT_RANGE} />
     </>
   );
 }

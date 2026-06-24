@@ -125,7 +125,7 @@ export function WorldMap({ visitors, source, rangeKey }: WorldMapProps) {
         <nav className={styles.pills} aria-label={t.map.rangeAriaLabel}>
           {RANGES.map((r) => {
             const isActive = r.key === activeRange;
-            const href = r.key === '30d' ? '/map' : `/map?range=${r.key}`;
+            const href = r.key === '30d' ? '/map' : `/map/${r.key}`;
             return (
               <Link
                 key={r.key}
