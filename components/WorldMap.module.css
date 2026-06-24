@@ -354,41 +354,133 @@
 
 @media (max-width: 767px) {
   .wrap {
-    padding: calc(var(--nav-height) + var(--sp-6)) 0 var(--sp-8);
+    padding: calc(var(--nav-height) + var(--sp-4)) 0 var(--sp-8);
   }
   .inner {
     padding: 0 var(--sp-3);
   }
+  .glow {
+    width: 100vw;
+    height: 280px;
+    top: 0;
+    right: -30%;
+    filter: blur(12px);
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+  .headline {
+    font-size: clamp(28px, 9vw, 40px);
+    line-height: 1.04;
+    margin-bottom: 12px;
+  }
+  .sub {
+    font-size: 14px;
+    line-height: 1.55;
+    margin-bottom: var(--sp-3);
+  }
+
+  .pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-left: calc(var(--sp-3) * -1);
+    margin-right: calc(var(--sp-3) * -1);
+    padding: 4px var(--sp-3);
+    margin-bottom: var(--sp-3);
+  }
+  .pills::-webkit-scrollbar { display: none; }
+  .pill {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    padding: 8px 14px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+
   .stats {
     flex-direction: column;
-    gap: var(--sp-2);
-    padding: var(--sp-3);
+    gap: 0;
+    padding: 14px var(--sp-3);
+    border-radius: 12px;
+    margin-bottom: var(--sp-3);
   }
-  .statSep {
-    display: none;
-  }
+  .statSep { display: none; }
   .stat {
     flex-direction: row;
     align-items: baseline;
     justify-content: space-between;
     min-width: 0;
+    padding: 10px 0;
+  }
+  .stat + .stat {
+    border-top: 1px solid var(--border-subtle);
+  }
+  .statLabel {
+    font-size: 10px;
+    letter-spacing: 0.16em;
   }
   .statValue {
-    font-size: 22px;
+    font-size: 18px;
   }
+
   .mapShell {
-    padding: var(--sp-2);
+    padding: 10px;
     border-radius: 12px;
+  }
+  .mapShell::before {
+    background-size: 16px 16px;
+    background-position: 8px 8px;
+  }
+
+  .rankedWrap {
+    margin-top: var(--sp-4);
+    padding: var(--sp-3);
+    border-radius: 12px;
+  }
+  .rankedHeader {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    margin-bottom: var(--sp-2);
   }
   .rankedList {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 0;
   }
   .rankedRow {
-    grid-template-columns: 28px 1fr 64px;
-    gap: 10px;
+    grid-template-columns: 24px 1fr 56px;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 14px;
   }
   .rankedBarOuter {
     display: none;
+  }
+  .rankedIndex {
+    font-size: 10px;
+    letter-spacing: 0.10em;
+  }
+  .rankedCount {
+    font-size: 12px;
+    min-width: 40px;
+  }
+  .rankedEmpty {
+    font-size: 12px;
+    padding: var(--sp-2) 0;
+  }
+
+  .footnote {
+    font-size: 9px;
+    letter-spacing: 0.10em;
+    margin-top: var(--sp-3);
+    padding: 0 var(--sp-2);
+    line-height: 1.5;
   }
 }

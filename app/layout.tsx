@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { cabinetGrotesk, dmSans, geistMono } from '@/lib/fonts';
 import { I18nProvider } from '@/lib/i18n/context';
+import { CleanAnchorScroll } from '@/components/CleanAnchorScroll';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -79,7 +80,10 @@ export default function RootLayout({
             gtag('config', 'G-C6E3CYETET');
           `}
         </Script>
-        <I18nProvider>{children}</I18nProvider>
+        <I18nProvider>
+          <CleanAnchorScroll />
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );
