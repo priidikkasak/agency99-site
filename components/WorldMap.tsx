@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import { geoNaturalEarth1, geoPath, geoCentroid } from 'd3-geo';
 import { feature } from 'topojson-client';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
@@ -15,6 +16,7 @@ import {
   rankedCountries,
   type VisitorEntry,
 } from '@/lib/map/visitors';
+import { RANGES, type RangeKey } from '@/lib/map/ranges';
 import styles from './WorldMap.module.css';
 
 type CountryFeature = Feature<Geometry, { name?: string }> & { id: string | number };
@@ -26,6 +28,7 @@ const ORIGIN_ALPHA2 = 'EE';
 type WorldMapProps = {
   visitors: Record<string, VisitorEntry>;
   source: 'ga4' | 'mock';
+  rangeKey: RangeKey;
   rangeLabel?: string;
 };
 
@@ -48,7 +51,7 @@ function formatNumber(n: number): string {
   return n.toLocaleString('en-US');
 }
 
-export function WorldMap({ visitors, source, rangeLabel }: WorldMapProps) {
+export function WorldMap({ visitors, source, rangeKey, rangeLabel }: WorldMapProps) {
   const totalCountriesCount = Object.keys(visitors).length;
   const total = totalVisits(visitors);
   const ranked = rankedCountries(visitors);
@@ -111,6 +114,23 @@ export function WorldMap({ visitors, source, rangeLabel }: WorldMapProps) {
         <p className={styles.sub}>
           Visitors to agency99.io — across continents, in real time.
         </p>
+
+        <nav className={styles.pills} aria-label="Time range">
+          {RANGES.map((r) => {
+            const isActive = r.key === rangeKey;
+            const href = r.key === '30d' ? '/map' : `/map?range=${r.key}`;
+            return (
+              <Link
+                key={r.key}
+                href={href}
+                className={`${styles.pill} ${isActive ? styles.pillActive : ''}`}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {r.label}
+              </Link>
+            );
+          })}
+        </nav>
 
         <div className={styles.stats}>
           <div className={styles.stat}>
@@ -211,34 +231,31 @@ export function WorldMap({ visitors, source, rangeLabel }: WorldMapProps) {
           </svg>
         </div>
 
-        <div className={styles.legend}>
-          <span className={styles.legendLabel}>Visits</span>
-          <div className={styles.legendBar} />
-          <span className={styles.legendRange}>1</span>
-          <span className={styles.legendRange}>{formatNumber(maxCount)}</span>
-        </div>
-
         <div className={styles.rankedWrap}>
           <div className={styles.rankedHeader}>
             <span>Top countries</span>
             <span className={styles.rankedHeaderMuted}>{rangeLabel ?? 'last 30 days'}</span>
           </div>
-          <ol className={styles.rankedList}>
-            {ranked.slice(0, 12).map((row, i) => {
-              const name = ALPHA2_TO_NAME[row.alpha2] ?? row.alpha2;
-              const width = (row.count / maxCount) * 100;
-              return (
-                <li key={row.alpha2} className={styles.rankedRow}>
-                  <span className={styles.rankedIndex}>{String(i + 1).padStart(2, '0')}</span>
-                  <span className={styles.rankedName}>{name}</span>
-                  <span className={styles.rankedBarOuter}>
-                    <span className={styles.rankedBar} style={{ width: `${width}%` }} />
-                  </span>
-                  <span className={styles.rankedCount}>{formatNumber(row.count)}</span>
-                </li>
-              );
-            })}
-          </ol>
+          {ranked.length === 0 ? (
+            <div className={styles.rankedEmpty}>No visits in this range yet.</div>
+          ) : (
+            <ol className={styles.rankedList}>
+              {ranked.slice(0, 12).map((row, i) => {
+                const name = ALPHA2_TO_NAME[row.alpha2] ?? row.alpha2;
+                const width = (row.count / maxCount) * 100;
+                return (
+                  <li key={row.alpha2} className={styles.rankedRow}>
+                    <span className={styles.rankedIndex}>{String(i + 1).padStart(2, '0')}</span>
+                    <span className={styles.rankedName}>{name}</span>
+                    <span className={styles.rankedBarOuter}>
+                      <span className={styles.rankedBar} style={{ width: `${width}%` }} />
+                    </span>
+                    <span className={styles.rankedCount}>{formatNumber(row.count)}</span>
+                  </li>
+                );
+              })}
+            </ol>
+          )}
         </div>
 
         <div className={styles.footnote}>

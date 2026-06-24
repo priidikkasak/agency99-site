@@ -214,39 +214,41 @@
   letter-spacing: 0.04em;
 }
 
-.legend {
+.pills {
   display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-5);
+}
+
+.pill {
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  margin-top: var(--sp-3);
+  justify-content: center;
+  padding: 8px 16px;
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-secondary);
-}
-
-.legendLabel {
-  color: var(--text-secondary);
-}
-
-.legendBar {
-  flex: 1;
-  max-width: 280px;
-  height: 6px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border);
   border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    rgba(139, 123, 255, 0.18) 0%,
-    #8B7BFF 60%,
-    #B8B0FF 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  white-space: nowrap;
 }
 
-.legendRange {
-  color: var(--text-secondary);
-  font-variant-numeric: tabular-nums;
+.pill:hover {
+  border-color: var(--border-bright);
+  color: var(--text-primary);
+}
+
+.pillActive {
+  color: var(--text-primary);
+  background: rgba(var(--accent-rgb), 0.12);
+  border-color: var(--accent);
+  box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.18);
 }
 
 .rankedWrap {
@@ -271,6 +273,15 @@
 
 .rankedHeaderMuted {
   color: var(--text-secondary);
+}
+
+.rankedEmpty {
+  padding: var(--sp-3) 0;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .rankedList {

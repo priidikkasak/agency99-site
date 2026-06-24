@@ -1,5 +1,6 @@
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 import type { VisitorEntry } from './visitors';
+import { rangeToDates, type RangeKey } from './ranges';
 
 let client: BetaAnalyticsDataClient | null = null;
 
@@ -28,17 +29,18 @@ function getClient(): BetaAnalyticsDataClient {
 export type VisitorMap = Record<string, VisitorEntry>;
 
 export async function fetchVisitorsByCountry(
-  daysBack = 30,
+  rangeKey: RangeKey,
 ): Promise<{ visitors: VisitorMap; total: number; source: 'ga4' }> {
   const propertyId = process.env.GA4_PROPERTY_ID;
   if (!propertyId) {
     throw new Error('GA4_PROPERTY_ID is not set');
   }
 
+  const { startDate, endDate } = rangeToDates(rangeKey);
   const analytics = getClient();
   const [response] = await analytics.runReport({
     property: `properties/${propertyId}`,
-    dateRanges: [{ startDate: `${daysBack}daysAgo`, endDate: 'today' }],
+    dateRanges: [{ startDate, endDate }],
     dimensions: [{ name: 'countryId' }],
     metrics: [{ name: 'sessions' }],
     limit: 250,
