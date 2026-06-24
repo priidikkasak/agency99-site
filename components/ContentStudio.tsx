@@ -49,16 +49,16 @@ const BG = '#000000';
 const BRAND = 'agency99';
 const BRAND_INITIALS = 'A99';
 
-const SPEED_MIN = 0.25;
-const SPEED_MAX = 4;
+const SPEED_MIN = 0.1;
+const SPEED_MAX = 10;
 const SPEED_DEFAULT = 1;
 
-// Log scale: speed = 2^(t * 4 - 2)
+// Log scale (decade): 0.1× at t=0, 1× at t=0.5, 10× at t=1.
 function tToSpeed(t: number): number {
-  return Math.pow(2, t * 4 - 2);
+  return Math.pow(10, t * 2 - 1);
 }
 function speedToT(s: number): number {
-  return (Math.log2(s) + 2) / 4;
+  return (Math.log10(s) + 1) / 2;
 }
 function clamp01(n: number): number {
   return Math.max(0, Math.min(1, n));
@@ -85,6 +85,7 @@ export function ContentStudio() {
   const [speed, setSpeed] = useState<number>(SPEED_DEFAULT);
 
   const [playKey, setPlayKey] = useState(0);
+  const [elapsedMs, setElapsedMs] = useState(0);
   const [exporting, setExporting] = useState<'png' | 'mp4' | null>(null);
   const [exportProgress, setExportProgress] = useState<string>('');
 
@@ -189,6 +190,26 @@ export function ContentStudio() {
   useEffect(() => {
     previewPlay();
   }, [motion, texture, align, format, typeface, item, previewPlay]);
+
+  // Tick elapsed time during preview playback so the meta line shows progress.
+  useEffect(() => {
+    if (selectedIdx === null) return;
+    const durationMs = length * 1000;
+    const startTs = performance.now();
+    let raf = 0;
+    setElapsedMs(0);
+    const tick = () => {
+      const t = performance.now() - startTs;
+      if (t >= durationMs) {
+        setElapsedMs(durationMs);
+        return;
+      }
+      setElapsedMs(t);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [playKey, length, selectedIdx]);
 
   // ============================================
   // Keyboard
@@ -899,6 +920,9 @@ export function ContentStudio() {
 
           <div className={styles.frameMeta}>
             {fmt.w} × {fmt.h} · {fmt.label}
+            <span className={styles.frameMetaTimer}>
+              {(elapsedMs / 1000).toFixed(1)}s / {length}s
+            </span>
           </div>
 
           <div className={styles.previewWrap} ref={wrapRef}>
