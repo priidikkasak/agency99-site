@@ -73,6 +73,224 @@ function lenClass(len: ItemLen, prefix: 'card' | 'q'): string {
   return styles[`${prefix}Long`];
 }
 
+type DrawOpts = {
+  fmt: { w: number; h: number };
+  lines: string[];
+  fontSize: number;
+  lineHeight: number;
+  fontFamily: string;
+  letterSpacing: string;
+  align: Align;
+  motion: Motion;
+  texture: Texture;
+  speed: number;
+  logo: HTMLImageElement;
+};
+
+function drawCompositeFrame(
+  ctx: CanvasRenderingContext2D,
+  t: number,
+  opts: DrawOpts,
+): void {
+  const {
+    fmt, lines, fontSize, lineHeight, fontFamily, letterSpacing,
+    align, motion, texture, speed, logo,
+  } = opts;
+
+  const setLetterSpacing = (v: string) => {
+    try {
+      (ctx as unknown as { letterSpacing: string }).letterSpacing = v;
+    } catch {
+      // older browsers — ignore
+    }
+  };
+
+  // Background
+  ctx.fillStyle = BG;
+  ctx.fillRect(0, 0, fmt.w, fmt.h);
+
+  // Padding matches CSS .qWrap (8% horizontal × 9% vertical)
+  const padX = fmt.w * 0.08;
+  const padY = fmt.h * 0.09;
+  const blockW = fmt.w - padX * 2;
+  const blockH = fmt.h - padY * 2;
+
+  ctx.font = `${fontSize}px ${fontFamily}`;
+  ctx.fillStyle = INK;
+  ctx.textBaseline = 'middle';
+  setLetterSpacing(letterSpacing);
+
+  const totalH = lines.length * lineHeight;
+  let blockTop = padY + (blockH - totalH) / 2;
+  blockTop = Math.max(padY, blockTop);
+
+  // Block centering for left-align — shrink-wrap to widest line
+  let maxLineW = 0;
+  for (const ln of lines) {
+    const w = ctx.measureText(ln).width;
+    if (w > maxLineW) maxLineW = w;
+  }
+  const blockLeft = padX + (blockW - maxLineW) / 2;
+
+  const cumChars: number[] = [];
+  {
+    let c = 0;
+    for (const ln of lines) {
+      cumChars.push(c);
+      c += ln.length;
+    }
+  }
+
+  // Halo glow (warm cream + accent passes) drawn before main text
+  if (texture === 'halo') {
+    const haloPasses: Array<{ color: string; blur: number }> = [
+      { color: 'rgba(255, 235, 200, 0.55)', blur: 60 },
+      { color: `rgba(${ACCENT_RGB}, 0.65)`, blur: 36 },
+    ];
+    for (const pass of haloPasses) {
+      ctx.save();
+      ctx.shadowColor = pass.color;
+      ctx.shadowBlur = pass.blur;
+      ctx.fillStyle = INK;
+      for (let i = 0; i < lines.length; i++) {
+        const ln = lines[i];
+        const yMid = blockTop + i * lineHeight + lineHeight / 2;
+        const xStart = align === 'left'
+          ? blockLeft
+          : (fmt.w - ctx.measureText(ln).width) / 2;
+        ctx.fillText(ln, xStart, yMid);
+      }
+      ctx.restore();
+    }
+  }
+
+  const drawLine = (
+    i: number,
+    ln: string,
+    opacity: number,
+    dx = 0,
+    dy = 0,
+    color: string = INK,
+  ) => {
+    ctx.save();
+    ctx.globalAlpha = opacity;
+    ctx.fillStyle = color;
+    const lineW = ctx.measureText(ln).width;
+    const xStart = align === 'left'
+      ? blockLeft
+      : (fmt.w - lineW) / 2;
+    const yMid = blockTop + i * lineHeight + lineHeight / 2 + dy;
+    ctx.fillText(ln, xStart + dx, yMid);
+    ctx.restore();
+  };
+
+  if (motion === 'none' || motion === 'broken') {
+    if (motion === 'broken') {
+      const stepMs = 50 / speed;
+      const stepIdx = Math.floor(t / stepMs) % 8;
+      const jitterTable: Array<[number, number]> = [
+        [0, 0], [-0.6, 0.4], [0.8, -0.3], [-0.4, -0.5],
+        [0.5, 0.6], [-0.7, 0], [0.4, -0.6], [-0.3, 0.4],
+      ];
+      const [jx, jy] = jitterTable[stepIdx];
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+      for (let i = 0; i < lines.length; i++) {
+        drawLine(i, lines[i], 1, -2.5 + jx, jy, 'rgba(0, 255, 255, 0.55)');
+      }
+      for (let i = 0; i < lines.length; i++) {
+        drawLine(i, lines[i], 1, 2.5 + jx, jy, 'rgba(255, 0, 255, 0.55)');
+      }
+      ctx.restore();
+      for (let i = 0; i < lines.length; i++) {
+        drawLine(i, lines[i], 1, jx, jy);
+      }
+    } else {
+      for (let i = 0; i < lines.length; i++) drawLine(i, lines[i], 1);
+    }
+  } else if (motion === 'stagger') {
+    const lineDurMs = 620 / speed;
+    const staggerMs = 130 / speed;
+    for (let i = 0; i < lines.length; i++) {
+      const localT = (t - i * staggerMs) / lineDurMs;
+      const tt = clamp01(localT);
+      const eased = 1 - Math.pow(1 - tt, 3);
+      const rise = (1 - eased) * 14;
+      drawLine(i, lines[i], eased, 0, rise);
+    }
+  } else if (motion === 'bloom') {
+    const dur = 880 / speed;
+    const tt = clamp01(t / dur);
+    const eased = 1 - Math.pow(1 - tt, 3);
+    const blurAmount = (1 - eased) * 14;
+    ctx.save();
+    ctx.filter = blurAmount > 0.1 ? `blur(${blurAmount}px)` : 'none';
+    for (let i = 0; i < lines.length; i++) drawLine(i, lines[i], eased);
+    ctx.restore();
+  } else if (motion === 'type') {
+    const charsPerMs = 25 / 1000;
+    for (let i = 0; i < lines.length; i++) {
+      const ln = lines[i];
+      const startMs = cumChars[i] * (16 / speed);
+      const visMs = Math.max(0, t - startMs);
+      const charsVisible = Math.min(ln.length, Math.floor(visMs * charsPerMs * speed));
+      if (charsVisible <= 0) continue;
+      const visText = ln.slice(0, charsVisible);
+      drawLine(i, visText, 1);
+    }
+  }
+
+  // Frame texture
+  if (texture === 'frame') {
+    ctx.save();
+    ctx.strokeStyle = `rgba(${ACCENT_RGB}, 0.7)`;
+    ctx.lineWidth = Math.max(1.5, fmt.w * 0.0015);
+    const inset = Math.min(fmt.w, fmt.h) * 0.05;
+    ctx.strokeRect(inset, inset, fmt.w - inset * 2, fmt.h - inset * 2);
+    ctx.restore();
+  }
+
+  // Sigil texture
+  if (texture === 'sigil') {
+    ctx.save();
+    const sigilFs = Math.floor(fmt.w * 0.020);
+    ctx.font = `${sigilFs}px ui-monospace, 'Fira Code', monospace`;
+    ctx.fillStyle = INK;
+    ctx.textBaseline = 'middle';
+    const sx = fmt.w * 0.95;
+    const sy = fmt.h * 0.06;
+    ctx.textAlign = 'right';
+    setLetterSpacing('4px');
+    ctx.fillText(BRAND_INITIALS, sx, sy);
+    const tickX = sx - ctx.measureText(BRAND_INITIALS).width - sigilFs * 0.7;
+    const tickH = fmt.w * 0.030;
+    ctx.fillStyle = ACCENT;
+    ctx.fillRect(tickX, sy - tickH / 2, Math.max(1.6, fmt.w * 0.0014), tickH);
+    ctx.restore();
+    setLetterSpacing(letterSpacing);
+  }
+
+  // Logo bottom-center
+  ctx.save();
+  ctx.globalAlpha = 0.92;
+  const logoW = fmt.w * 0.14;
+  const logoH = logoW * (logo.naturalHeight / logo.naturalWidth);
+  const logoX = (fmt.w - logoW) / 2;
+  const logoY = fmt.h - fmt.h * 0.05 - logoH;
+  ctx.drawImage(logo, logoX, logoY, logoW, logoH);
+  ctx.restore();
+}
+
+async function loadLogo(): Promise<HTMLImageElement> {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const img = new window.Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = '/logo.png';
+  });
+}
+
 export function ContentStudio() {
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
@@ -249,97 +467,131 @@ export function ContentStudio() {
   // ============================================
   // PNG export — via html-to-image (lazy load)
   // ============================================
-  const exportPng = useCallback(async () => {
-    if (!frameRef.current || !item) return;
-    setExporting('png');
-    setExportProgress('Rendering…');
+  // Measure the live preview DOM at scale(1) so we can render the same
+  // line wrapping + font metrics onto an offscreen canvas.
+  const collectDrawOpts = useCallback(async (): Promise<DrawOpts | null> => {
+    if (!frameRef.current || !innerRef.current || !item) return null;
+    if (document.fonts && typeof document.fonts.ready?.then === 'function') {
+      await document.fonts.ready;
+    }
+    const logo = await loadLogo();
+
     const node = frameRef.current;
     const prevTransform = node.style.transform;
-    try {
-      // Make sure custom fonts are ready before the snapshot.
-      if (document.fonts && typeof document.fonts.ready?.then === 'function') {
-        await document.fonts.ready;
-      }
-      const { toPng } = await import('html-to-image');
-      node.style.transform = 'scale(1)';
-      const dataUrl = await toPng(node, {
-        cacheBust: true,
-        width: fmt.w,
-        height: fmt.h,
-        pixelRatio: 1,
-        backgroundColor: BG,
-      });
+    node.style.transform = 'scale(1)';
+    void node.offsetWidth; // force layout
 
+    const lineEls = Array.from(innerRef.current.children) as HTMLElement[];
+    const lines = lineEls.map((el) => el.textContent ?? '');
+    const cs = window.getComputedStyle(lineEls[0] ?? innerRef.current);
+    const fontSize = parseFloat(cs.fontSize);
+    let lineHeight = parseFloat(cs.lineHeight);
+    if (!Number.isFinite(lineHeight) || lineHeight < fontSize * 0.5) {
+      const multiplier = item.len === 'long' ? 1.22 : 1.16;
+      lineHeight = fontSize * multiplier;
+    }
+    const fontFamily = cs.fontFamily;
+    const letterSpacing = cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing;
+
+    node.style.transform = prevTransform;
+
+    return {
+      fmt,
+      lines,
+      fontSize,
+      lineHeight,
+      fontFamily,
+      letterSpacing,
+      align,
+      motion,
+      texture,
+      speed,
+      logo,
+    };
+  }, [item, fmt, align, motion, texture, speed]);
+
+  const exportPng = useCallback(async () => {
+    if (!item) return;
+    setExporting('png');
+    setExportProgress('Rendering…');
+    try {
+      const opts = await collectDrawOpts();
+      if (!opts) throw new Error('Could not collect draw opts');
+
+      // Supersample 2× internally for crisper anti-aliasing, then downscale
+      // to native 1080×W. IG can't store more than 1080 anyway, but the
+      // downsample step gives sharper text + cleaner curves.
+      const SS = 2;
+      const hi = document.createElement('canvas');
+      hi.width = opts.fmt.w * SS;
+      hi.height = opts.fmt.h * SS;
+      const hiCtx = hi.getContext('2d');
+      if (!hiCtx) throw new Error('No 2D context');
+      hiCtx.imageSmoothingEnabled = true;
+      hiCtx.imageSmoothingQuality = 'high';
+      hiCtx.scale(SS, SS);
+      // For broken motion, sample the jitter at t=0 (steady frame for PNG)
+      drawCompositeFrame(hiCtx, opts.motion === 'broken' ? 0 : 100000, opts);
+
+      const out = document.createElement('canvas');
+      out.width = opts.fmt.w;
+      out.height = opts.fmt.h;
+      const outCtx = out.getContext('2d');
+      if (!outCtx) throw new Error('No 2D context');
+      outCtx.imageSmoothingEnabled = true;
+      outCtx.imageSmoothingQuality = 'high';
+      outCtx.drawImage(hi, 0, 0, opts.fmt.w, opts.fmt.h);
+
+      const blob: Blob | null = await new Promise((resolve) =>
+        out.toBlob((b) => resolve(b), 'image/png'),
+      );
+      if (!blob) throw new Error('toBlob returned null');
+
+      const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = dataUrl;
-      a.download = `${BRAND}-${String((selectedIdx ?? 0) + 1).padStart(2, '0')}-${typeface}-${format.replace(':', 'x')}.png`;
+      a.href = url;
+      a.download = `${BRAND}-${String((selectedIdx ?? 0) + 1).padStart(2, '0')}-${typeface}-${format.replace(':', 'x')}-${motion}-${texture}.png`;
       a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
     } catch (err) {
       console.error('[ContentStudio] PNG export failed', err);
-      setExportProgress('Failed');
+      setExportProgress('Export failed');
       setTimeout(() => setExportProgress(''), 2000);
     } finally {
-      node.style.transform = prevTransform;
       setExporting(null);
-      if (!exportProgress.startsWith('Failed')) setExportProgress('');
+      setExportProgress('');
     }
-  }, [item, fmt.w, fmt.h, selectedIdx, typeface, format, exportProgress]);
+  }, [item, collectDrawOpts, selectedIdx, typeface, format, motion, texture]);
 
   // ============================================
   // MP4 export — canvas + MediaRecorder
   // ============================================
   const exportMp4 = useCallback(async () => {
-    if (!innerRef.current || !item) return;
+    if (!item) return;
     setExporting('mp4');
     setExportProgress('Preparing…');
 
-    const node = frameRef.current!;
-    const prevTransform = node.style.transform;
     try {
-      if (document.fonts && typeof document.fonts.ready?.then === 'function') {
-        await document.fonts.ready;
-      }
-
-      // Preload logo for canvas drawing
-      const logo = await new Promise<HTMLImageElement>((resolve, reject) => {
-        const img = new window.Image();
-        img.onload = () => resolve(img);
-        img.onerror = reject;
-        img.src = '/logo.png';
-      });
-
-      // Use the live DOM to extract lines + measurements at scale(1).
-      node.style.transform = 'scale(1)';
-
-      const lineEls = Array.from(innerRef.current.children) as HTMLElement[];
-      const lines = lineEls.map((el) => el.textContent ?? '');
-
-      // Capture font sizes from the current preview computation.
-      const cs = window.getComputedStyle(lineEls[0] ?? innerRef.current);
-      const fontSize = parseFloat(cs.fontSize);
-      // line-height: 1.16 (unitless) computes to "18.56px" or "1.16" depending on browser.
-      // If we get a value smaller than fontSize / 2, treat it as a unitless multiplier.
-      let lineHeight = parseFloat(cs.lineHeight);
-      if (!Number.isFinite(lineHeight) || lineHeight < fontSize * 0.5) {
-        const multiplier = item.len === 'long' ? 1.22 : 1.16;
-        lineHeight = fontSize * multiplier;
-      }
-      const fontFamily = cs.fontFamily;
-      const letterSpacing = cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing;
-
-      node.style.transform = prevTransform;
+      const opts = await collectDrawOpts();
+      if (!opts) throw new Error('Could not collect draw opts');
 
       // Offscreen canvas
       const canvas = document.createElement('canvas');
-      canvas.width = fmt.w;
-      canvas.height = fmt.h;
+      canvas.width = opts.fmt.w;
+      canvas.height = opts.fmt.h;
       const ctx = canvas.getContext('2d');
       if (!ctx) throw new Error('No 2D context');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
 
-      // Stream from canvas → MediaRecorder
+      // Stream from canvas → MediaRecorder.
+      // Higher profile H.264 first (better compression at same bitrate).
       const stream = canvas.captureStream(60);
       const mimeCandidates = [
-        'video/mp4;codecs=avc1.42E01E',
+        'video/mp4;codecs=avc1.640028', // High profile, level 4.0
+        'video/mp4;codecs=avc1.4D0028', // Main profile, level 4.0
+        'video/mp4;codecs=avc1.42E01F', // Baseline, level 3.1
+        'video/mp4;codecs=avc1.42E01E', // Baseline, level 3.0
         'video/mp4;codecs=avc1',
         'video/mp4',
         'video/webm;codecs=vp9',
@@ -352,7 +604,7 @@ export function ContentStudio() {
       if (!mime) throw new Error('No supported codec');
       const isMp4Native = mime.startsWith('video/mp4');
 
-      const recorder = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 12_000_000 });
+      const recorder = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 20_000_000 });
       const chunks: Blob[] = [];
       recorder.ondataavailable = (e) => {
         if (e.data && e.data.size > 0) chunks.push(e.data);
@@ -367,221 +619,17 @@ export function ContentStudio() {
 
       recorder.start(100);
 
-      // Animation timing
       const durationMs = length * 1000;
       const start = performance.now();
 
-      const drawText = (t: number) => {
-        ctx.fillStyle = BG;
-        ctx.fillRect(0, 0, fmt.w, fmt.h);
-
-        // Padding (matches CSS .qWrap padding 9% x / 8% y)
-        const padX = fmt.w * 0.08;
-        const padY = fmt.h * 0.09;
-        const blockW = fmt.w - padX * 2;
-        const blockH = fmt.h - padY * 2;
-
-        ctx.font = `${fontSize}px ${fontFamily}`;
-        ctx.fillStyle = INK;
-        ctx.textBaseline = 'middle';
-        // letterSpacing if supported
-        try {
-          (ctx as unknown as { letterSpacing: string }).letterSpacing = letterSpacing;
-        } catch {
-          // not supported in older browsers, ignore
-        }
-
-        const totalH = lines.length * lineHeight;
-        let blockTop = padY + (blockH - totalH) / 2;
-        blockTop = Math.max(padY, blockTop);
-
-        // For LEFT alignment we still center the block visually (shrink-wrap)
-        // Compute widest line width
-        let maxLineW = 0;
-        for (const ln of lines) {
-          const w = ctx.measureText(ln).width;
-          if (w > maxLineW) maxLineW = w;
-        }
-        const blockLeft = padX + (blockW - maxLineW) / 2;
-
-        const cumChars: number[] = [];
-        {
-          let c = 0;
-          for (const ln of lines) {
-            cumChars.push(c);
-            c += ln.length;
-          }
-        }
-
-        // Halo glow under text (warm cream + accent passes)
-        if (texture === 'halo') {
-          const haloPasses: Array<{ color: string; blur: number }> = [
-            { color: 'rgba(255, 235, 200, 0.55)', blur: 60 },
-            { color: `rgba(${ACCENT_RGB}, 0.65)`, blur: 36 },
-          ];
-          for (const pass of haloPasses) {
-            ctx.save();
-            ctx.shadowColor = pass.color;
-            ctx.shadowBlur = pass.blur;
-            ctx.fillStyle = INK;
-            for (let i = 0; i < lines.length; i++) {
-              const ln = lines[i];
-              const yMid = blockTop + i * lineHeight + lineHeight / 2;
-              let xStart: number;
-              if (align === 'left') xStart = blockLeft;
-              else xStart = (fmt.w - ctx.measureText(ln).width) / 2;
-              ctx.fillText(ln, xStart, yMid);
-            }
-            ctx.restore();
-          }
-        }
-
-        const drawLine = (
-          i: number,
-          ln: string,
-          opacity: number,
-          dx = 0,
-          dy = 0,
-          color: string = INK,
-        ) => {
-          ctx.save();
-          ctx.globalAlpha = opacity;
-          ctx.fillStyle = color;
-          const lineW = ctx.measureText(ln).width;
-          let xStart: number;
-          if (align === 'left') xStart = blockLeft;
-          else xStart = (fmt.w - lineW) / 2;
-          const yMid = blockTop + i * lineHeight + lineHeight / 2 + dy;
-          ctx.fillText(ln, xStart + dx, yMid);
-          ctx.restore();
-        };
-
-        if (motion === 'none' || motion === 'broken') {
-          // For broken, render the chromatic aberration trio + jitter
-          if (motion === 'broken') {
-            // Jitter pattern 8-step ~ every 50ms / speed
-            const stepMs = 50 / speed;
-            const stepIdx = Math.floor(t / stepMs) % 8;
-            const jitterTable: Array<[number, number]> = [
-              [0, 0], [-0.6, 0.4], [0.8, -0.3], [-0.4, -0.5],
-              [0.5, 0.6], [-0.7, 0], [0.4, -0.6], [-0.3, 0.4],
-            ];
-            const [jx, jy] = jitterTable[stepIdx];
-
-            // Cyan + magenta passes in screen blend; white on top.
-            ctx.save();
-            ctx.globalCompositeOperation = 'screen';
-            for (let i = 0; i < lines.length; i++) {
-              drawLine(i, lines[i], 1, -2.5 + jx, jy, 'rgba(0, 255, 255, 0.55)');
-            }
-            for (let i = 0; i < lines.length; i++) {
-              drawLine(i, lines[i], 1, 2.5 + jx, jy, 'rgba(255, 0, 255, 0.55)');
-            }
-            ctx.restore();
-            for (let i = 0; i < lines.length; i++) {
-              drawLine(i, lines[i], 1, jx, jy);
-            }
-          } else {
-            for (let i = 0; i < lines.length; i++) drawLine(i, lines[i], 1);
-          }
-        } else if (motion === 'stagger') {
-          const lineDurMs = 620 / speed;
-          const staggerMs = 130 / speed;
-          for (let i = 0; i < lines.length; i++) {
-            const localT = (t - i * staggerMs) / lineDurMs;
-            const tt = clamp01(localT);
-            const eased = 1 - Math.pow(1 - tt, 3);
-            const rise = (1 - eased) * 14;
-            drawLine(i, lines[i], eased, 0, rise);
-          }
-        } else if (motion === 'bloom') {
-          const dur = 880 / speed;
-          const tt = clamp01(t / dur);
-          const eased = 1 - Math.pow(1 - tt, 3);
-          const blurAmount = (1 - eased) * 14;
-          ctx.save();
-          ctx.filter = blurAmount > 0.1 ? `blur(${blurAmount}px)` : 'none';
-          for (let i = 0; i < lines.length; i++) drawLine(i, lines[i], eased);
-          ctx.restore();
-        } else if (motion === 'type') {
-          // ~25 cps per line, scaled by speed
-          const charsPerMs = 25 / 1000;
-          for (let i = 0; i < lines.length; i++) {
-            const ln = lines[i];
-            const startMs = cumChars[i] * (16 / speed);
-            const visMs = Math.max(0, t - startMs);
-            const charsVisible = Math.min(ln.length, Math.floor(visMs * charsPerMs * speed));
-            if (charsVisible <= 0) continue;
-            const visText = ln.slice(0, charsVisible);
-            drawLine(i, visText, 1);
-          }
-        }
-
-        // Frame texture
-        if (texture === 'frame') {
-          ctx.save();
-          ctx.strokeStyle = `rgba(${ACCENT_RGB}, 0.7)`;
-          ctx.lineWidth = 1.5;
-          const inset = Math.min(fmt.w, fmt.h) * 0.05;
-          ctx.strokeRect(inset, inset, fmt.w - inset * 2, fmt.h - inset * 2);
-          ctx.restore();
-        }
-
-        // Sigil texture (matches DOM: 22px in a 1080w frame ≈ fmt.w * 0.020)
-        if (texture === 'sigil') {
-          ctx.save();
-          const sigilFs = Math.floor(fmt.w * 0.020);
-          ctx.font = `${sigilFs}px ui-monospace, 'Fira Code', monospace`;
-          ctx.fillStyle = INK;
-          ctx.textBaseline = 'middle';
-          const sx = fmt.w * 0.95;
-          const sy = fmt.h * 0.06;
-          ctx.textAlign = 'right';
-          // letter spacing approximation via canvas letterSpacing
-          try {
-            (ctx as unknown as { letterSpacing: string }).letterSpacing = '4px';
-          } catch {
-            // ignore
-          }
-          ctx.fillText(BRAND_INITIALS, sx, sy);
-          // Tick (32px tall in DOM at 1080w → ~3% of frame width worth)
-          const tickX = sx - ctx.measureText(BRAND_INITIALS).width - sigilFs * 0.7;
-          const tickH = fmt.w * 0.030;
-          ctx.fillStyle = ACCENT;
-          ctx.fillRect(tickX, sy - tickH / 2, 1.6, tickH);
-          ctx.restore();
-          try {
-            (ctx as unknown as { letterSpacing: string }).letterSpacing = letterSpacing;
-          } catch {
-            // ignore
-          }
-        }
-
-        // Logo bottom-center
-        ctx.save();
-        ctx.globalAlpha = 0.92;
-        const logoW = fmt.w * 0.14;
-        const logoH = logoW * (logo.naturalHeight / logo.naturalWidth);
-        const logoX = (fmt.w - logoW) / 2;
-        const logoY = fmt.h - fmt.h * 0.05 - logoH;
-        ctx.drawImage(logo, logoX, logoY, logoW, logoH);
-        ctx.restore();
-        try {
-          (ctx as unknown as { letterSpacing: string }).letterSpacing = letterSpacing;
-        } catch {
-          // ignore
-        }
-      };
-
       const tick = () => {
         const t = performance.now() - start;
-        drawText(t);
+        drawCompositeFrame(ctx, t, opts);
         setExportProgress(`${(t / 1000).toFixed(1)}s / ${(durationMs / 1000).toFixed(1)}s`);
         if (t < durationMs) {
           requestAnimationFrame(tick);
         } else {
-          // Final frame
-          drawText(durationMs);
+          drawCompositeFrame(ctx, durationMs, opts);
           setTimeout(() => recorder.stop(), 80);
         }
       };
@@ -606,10 +654,9 @@ export function ContentStudio() {
       setExportProgress('Export failed');
       setTimeout(() => setExportProgress(''), 2000);
     } finally {
-      node.style.transform = prevTransform;
       setExporting(null);
     }
-  }, [item, fmt, length, speed, motion, texture, align, selectedIdx, typeface, format]);
+  }, [item, collectDrawOpts, length, speed, motion, texture, selectedIdx, typeface, format]);
 
   // ============================================
   // Speed slider interactions
