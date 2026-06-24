@@ -159,13 +159,12 @@
 
 .cardWordmark {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: auto;
+  opacity: 0.85;
   pointer-events: none;
 }
 
@@ -176,8 +175,8 @@
 .modal {
   position: fixed;
   inset: 0;
-  z-index: 200;
-  background: rgba(8, 8, 7, 0.78);
+  z-index: 1500;
+  background: rgba(8, 8, 7, 0.96);
   backdrop-filter: blur(14px);
   display: flex;
   align-items: stretch;
@@ -504,8 +503,15 @@
   overflow: hidden;
 }
 
-.frame {
+.frameOuter {
   position: relative;
+  flex-shrink: 0;
+}
+
+.frame {
+  position: absolute;
+  top: 0;
+  left: 0;
   background: #000;
   outline: 1px solid rgba(var(--accent-rgb), 0.22);
   outline-offset: -1px;
@@ -514,7 +520,6 @@
     0 30px 80px rgba(0, 0, 0, 0.55),
     0 8px 24px rgba(0, 0, 0, 0.4);
   transform-origin: top left;
-  flex-shrink: 0;
 }
 
 .qWrap {
@@ -649,19 +654,15 @@
   background: var(--accent);
 }
 
-/* Wordmark (bottom-right of every frame) */
+/* Wordmark logo (bottom center of every frame) */
 .wordmark {
   position: absolute;
   bottom: 5%;
-  right: 5%;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.30em;
-  text-transform: uppercase;
-  background: linear-gradient(180deg, #f4efe6 0%, #b5ae9e 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14%;
+  height: auto;
+  opacity: 0.92;
   pointer-events: none;
 }
 

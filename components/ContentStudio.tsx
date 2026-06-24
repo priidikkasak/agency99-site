@@ -268,6 +268,13 @@ export function ContentStudio() {
     setExportProgress('Preparing…');
 
     try {
+      // Preload logo for canvas drawing
+      const logo = await new Promise<HTMLImageElement>((resolve, reject) => {
+        const img = new window.Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = '/logo.png';
+      });
       // Use the live DOM to extract lines + measurements at scale(1).
       const node = frameRef.current!;
       const prevTransform = node.style.transform;
@@ -504,22 +511,14 @@ export function ContentStudio() {
           }
         }
 
-        // Wordmark bottom-right
+        // Logo bottom-center
         ctx.save();
-        const wmFs = Math.floor(fmt.w * 0.014);
-        ctx.font = `${wmFs}px ui-monospace, 'Fira Code', monospace`;
-        const grad = ctx.createLinearGradient(0, fmt.h - 80, 0, fmt.h);
-        grad.addColorStop(0, '#f4efe6');
-        grad.addColorStop(1, '#b5ae9e');
-        ctx.fillStyle = grad;
-        ctx.textBaseline = 'alphabetic';
-        ctx.textAlign = 'right';
-        try {
-          (ctx as unknown as { letterSpacing: string }).letterSpacing = '6px';
-        } catch {
-          // ignore
-        }
-        ctx.fillText(BRAND, fmt.w * 0.95, fmt.h * 0.96);
+        ctx.globalAlpha = 0.92;
+        const logoW = fmt.w * 0.14;
+        const logoH = logoW * (logo.naturalHeight / logo.naturalWidth);
+        const logoX = (fmt.w - logoW) / 2;
+        const logoY = fmt.h - fmt.h * 0.05 - logoH;
+        ctx.drawImage(logo, logoX, logoY, logoW, logoH);
         ctx.restore();
         try {
           (ctx as unknown as { letterSpacing: string }).letterSpacing = letterSpacing;
@@ -668,7 +667,8 @@ export function ContentStudio() {
                 <div className={styles.cardCanvas}>
                   <div className={`${styles.cardText} ${lenClass(it.len, 'card')}`}>{it.text}</div>
                 </div>
-                <div className={styles.cardWordmark}>{BRAND}</div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo.png" alt={BRAND} className={styles.cardWordmark} />
               </button>
             ))}
           </div>
@@ -877,6 +877,10 @@ export function ContentStudio() {
 
           <div className={styles.previewWrap} ref={wrapRef}>
             <div
+              className={styles.frameOuter}
+              style={{ width: fmt.w * scale, height: fmt.h * scale }}
+            >
+            <div
               ref={frameRef}
               className={`${styles.frame} ${textureClass}`}
               style={{
@@ -908,7 +912,9 @@ export function ContentStudio() {
                   />
                 </div>
               </div>
-              <div className={styles.wordmark}>{BRAND}</div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt={BRAND} className={styles.wordmark} />
+            </div>
             </div>
           </div>
         </main>
