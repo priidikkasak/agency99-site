@@ -10,20 +10,24 @@ import {
   lookupCountry,
   type CountryInfo,
 } from '@/lib/map/countries';
-import { MOCK_VISITORS, totalVisits, rankedCountries } from '@/lib/map/visitors';
+import {
+  totalVisits,
+  rankedCountries,
+  type VisitorEntry,
+} from '@/lib/map/visitors';
 import styles from './WorldMap.module.css';
 
 type CountryFeature = Feature<Geometry, { name?: string }> & { id: string | number };
 
 const VIEW_W = 1000;
 const VIEW_H = 500;
-
-const visitors = MOCK_VISITORS;
-const totalCountriesCount = Object.keys(visitors).length;
-const total = totalVisits(visitors);
-const ranked = rankedCountries(visitors);
-const maxCount = ranked[0]?.count ?? 1;
 const ORIGIN_ALPHA2 = 'EE';
+
+type WorldMapProps = {
+  visitors: Record<string, VisitorEntry>;
+  source: 'ga4' | 'mock';
+  rangeLabel?: string;
+};
 
 const ALPHA2_TO_NAME: Record<string, string> = (() => {
   const m: Record<string, string> = {};
@@ -34,7 +38,7 @@ const ALPHA2_TO_NAME: Record<string, string> = (() => {
   return m;
 })();
 
-function fillOpacity(count: number): number {
+function fillOpacity(count: number, maxCount: number): number {
   if (count <= 0) return 0;
   const t = Math.log1p(count) / Math.log1p(maxCount);
   return Math.max(0.18, Math.min(1, t));
@@ -44,7 +48,12 @@ function formatNumber(n: number): string {
   return n.toLocaleString('en-US');
 }
 
-export function WorldMap() {
+export function WorldMap({ visitors, source, rangeLabel }: WorldMapProps) {
+  const totalCountriesCount = Object.keys(visitors).length;
+  const total = totalVisits(visitors);
+  const ranked = rankedCountries(visitors);
+  const maxCount = ranked[0]?.count ?? 1;
+
   const { paths, originCoords } = useMemo(() => {
     const topo = worldAtlas as unknown as Parameters<typeof feature>[0];
     const fc = feature(topo, 'countries') as unknown as FeatureCollection<
@@ -79,7 +88,7 @@ export function WorldMap() {
     }
 
     return { paths: pathStrings, originCoords: origin };
-  }, []);
+  }, [visitors]);
 
   const [hovered, setHovered] = useState<{
     name: string;
@@ -144,7 +153,7 @@ export function WorldMap() {
                     key={c.id}
                     d={c.d}
                     className={`${styles.country} ${isHit ? styles.countryHit : ''}`}
-                    style={isHit ? { fillOpacity: fillOpacity(c.count) } : undefined}
+                    style={isHit ? { fillOpacity: fillOpacity(c.count, maxCount) } : undefined}
                     onMouseMove={(e) => {
                       const svg = (e.target as SVGPathElement).ownerSVGElement;
                       if (!svg) return;
@@ -212,7 +221,7 @@ export function WorldMap() {
         <div className={styles.rankedWrap}>
           <div className={styles.rankedHeader}>
             <span>Top countries</span>
-            <span className={styles.rankedHeaderMuted}>last 30 days</span>
+            <span className={styles.rankedHeaderMuted}>{rangeLabel ?? 'last 30 days'}</span>
           </div>
           <ol className={styles.rankedList}>
             {ranked.slice(0, 12).map((row, i) => {
@@ -233,7 +242,9 @@ export function WorldMap() {
         </div>
 
         <div className={styles.footnote}>
-          Snapshot — aggregated, country-level only. No personal data.
+          {source === 'ga4'
+            ? 'Live · Google Analytics 4 · aggregated, country-level only. No personal data.'
+            : 'Sample data — not live. Aggregated, country-level only.'}
         </div>
       </div>
     </section>
