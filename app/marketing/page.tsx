@@ -4,7 +4,7 @@ import { MarketingDashboard } from '@/components/MarketingDashboard';
 
 export const metadata: Metadata = {
   title: 'Marketing',
-  description: 'Ad spend admin — agency99.io.',
+  description: 'Ad spend admin - agency99.io.',
   robots: {
     index: false,
     follow: false,

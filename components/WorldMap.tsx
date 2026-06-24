@@ -193,7 +193,7 @@ export function WorldMap({ visitors, source, rangeKey }: WorldMapProps) {
                       if (!svg) return;
                       const rect = svg.getBoundingClientRect();
                       setHovered({
-                        name: c.info?.name ?? '—',
+                        name: c.info?.name ?? '-',
                         count: c.count,
                         x: ((e.clientX - rect.left) / rect.width) * VIEW_W,
                         y: ((e.clientY - rect.top) / rect.height) * VIEW_H,
@@ -237,7 +237,7 @@ export function WorldMap({ visitors, source, rangeKey }: WorldMapProps) {
                     textAnchor="end"
                     className={styles.tooltipCount}
                   >
-                    {hovered.count > 0 ? formatNumber(hovered.count) : '—'}
+                    {hovered.count > 0 ? formatNumber(hovered.count) : '-'}
                   </text>
                 </g>
               );

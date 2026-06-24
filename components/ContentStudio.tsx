@@ -101,7 +101,7 @@ function drawCompositeFrame(
     try {
       (ctx as unknown as { letterSpacing: string }).letterSpacing = v;
     } catch {
-      // older browsers — ignore
+      // older browsers - ignore
     }
   };
 
@@ -124,7 +124,7 @@ function drawCompositeFrame(
   let blockTop = padY + (blockH - totalH) / 2;
   blockTop = Math.max(padY, blockTop);
 
-  // Block centering for left-align — shrink-wrap to widest line
+  // Block centering for left-align - shrink-wrap to widest line
   let maxLineW = 0;
   for (const ln of lines) {
     const w = ctx.measureText(ln).width;
@@ -465,7 +465,7 @@ export function ContentStudio() {
   }, [selectedIdx]);
 
   // ============================================
-  // PNG export — via html-to-image (lazy load)
+  // PNG export - via html-to-image (lazy load)
   // ============================================
   // Measure the live preview DOM at scale(1) so we can render the same
   // line wrapping + font metrics onto an offscreen canvas.
@@ -564,7 +564,7 @@ export function ContentStudio() {
   }, [item, collectDrawOpts, selectedIdx, typeface, format, motion, texture]);
 
   // ============================================
-  // MP4 export — canvas + MediaRecorder
+  // MP4 export - canvas + MediaRecorder
   // ============================================
   const exportMp4 = useCallback(async () => {
     if (!item) return;

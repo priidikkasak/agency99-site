@@ -33,11 +33,11 @@ type SetupBlock = {
 const SETUP_BLOCKS: SetupBlock[] = [
   {
     title: 'Google Ads API',
-    eta: '~1–3 päeva',
+    eta: '~1-3 päeva',
     items: [
       {
         title: 'Developer token',
-        note: 'taotle developers.google.com/google-ads/api kaudu — Google vaatab läbi 1–3 tööpäeva.',
+        note: 'taotle developers.google.com/google-ads/api kaudu - Google vaatab läbi 1-3 tööpäeva.',
       },
       {
         title: 'Manager (MCC) account',
@@ -56,7 +56,7 @@ const SETUP_BLOCKS: SetupBlock[] = [
   },
   {
     title: 'Meta Marketing API',
-    eta: '~30–60 min',
+    eta: '~30-60 min',
     items: [
       {
         title: 'Business Manager ligipääs',
@@ -64,7 +64,7 @@ const SETUP_BLOCKS: SetupBlock[] = [
       },
       {
         title: 'System User access token',
-        note: 'long-lived token (mitte tavakasutaja oma) — never expires kui õigesti tehtud.',
+        note: 'long-lived token (mitte tavakasutaja oma) - never expires kui õigesti tehtud.',
       },
       {
         title: 'Ad Account ID',
@@ -75,7 +75,7 @@ const SETUP_BLOCKS: SetupBlock[] = [
         note: 'Facebook Developer App-st (võib uue luua minutiga).',
       },
     ],
-    closing: 'Lihtsam stack — kõik töötab ühe tokeniga, kui Business Manager on seadistatud.',
+    closing: 'Lihtsam stack - kõik töötab ühe tokeniga, kui Business Manager on seadistatud.',
   },
 ];
 
@@ -111,7 +111,7 @@ export function MarketingDashboard() {
         </h1>
         <p className={styles.sub}>
           Google Ads + Meta Ads ülevaade ja kiired lingid platvormidele.
-          V0 — ainult lingid. Live metrikad ja inline eelarvete muutmine V1-s
+          V0 - ainult lingid. Live metrikad ja inline eelarvete muutmine V1-s
           kui API tokenid on .env.local-i sees.
         </p>
 
@@ -126,7 +126,7 @@ export function MarketingDashboard() {
                 {METRIC_LABELS.map((label) => (
                   <div key={label} className={styles.metric}>
                     <div className={styles.metricLabel}>{label}</div>
-                    <div className={`${styles.metricValue} ${styles.metricValueMuted}`}>—</div>
+                    <div className={`${styles.metricValue} ${styles.metricValueMuted}`}>-</div>
                   </div>
                 ))}
               </div>
@@ -177,7 +177,7 @@ export function MarketingDashboard() {
           </div>
 
           <div className={styles.envHint}>
-            <span className={styles.envHintLabel}>.env.local — mida lisada:</span>
+            <span className={styles.envHintLabel}>.env.local - mida lisada:</span>
             {ENV_KEYS.map((row, i) => (
               <span key={i} className={styles.envLine}>
                 {row.line}

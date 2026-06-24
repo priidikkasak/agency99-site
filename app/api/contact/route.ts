@@ -28,7 +28,7 @@ export async function POST(request: Request) {
       from: 'AGENCY99 <noreply@mail.agency99.io>',
       to: 'priidik@agency99.io',
       replyTo: email,
-      subject: `Uus päring – ${safeName}`,
+      subject: `Uus päring - ${safeName}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px;">
           <h2 style="margin-bottom: 24px;">Uus kontaktipäring</h2>
