@@ -232,10 +232,14 @@ export function ContentStudio() {
     if (!frameRef.current || !item) return;
     setExporting('png');
     setExportProgress('Rendering…');
+    const node = frameRef.current;
+    const prevTransform = node.style.transform;
     try {
+      // Make sure custom fonts are ready before the snapshot.
+      if (document.fonts && typeof document.fonts.ready?.then === 'function') {
+        await document.fonts.ready;
+      }
       const { toPng } = await import('html-to-image');
-      const node = frameRef.current;
-      const prev = node.style.transform;
       node.style.transform = 'scale(1)';
       const dataUrl = await toPng(node, {
         cacheBust: true,
@@ -244,7 +248,6 @@ export function ContentStudio() {
         pixelRatio: 1,
         backgroundColor: BG,
       });
-      node.style.transform = prev;
 
       const a = document.createElement('a');
       a.href = dataUrl;
@@ -253,11 +256,13 @@ export function ContentStudio() {
     } catch (err) {
       console.error('[ContentStudio] PNG export failed', err);
       setExportProgress('Failed');
+      setTimeout(() => setExportProgress(''), 2000);
     } finally {
+      node.style.transform = prevTransform;
       setExporting(null);
-      setExportProgress('');
+      if (!exportProgress.startsWith('Failed')) setExportProgress('');
     }
-  }, [item, fmt.w, fmt.h, selectedIdx, typeface, format]);
+  }, [item, fmt.w, fmt.h, selectedIdx, typeface, format, exportProgress]);
 
   // ============================================
   // MP4 export — canvas + MediaRecorder
@@ -267,7 +272,13 @@ export function ContentStudio() {
     setExporting('mp4');
     setExportProgress('Preparing…');
 
+    const node = frameRef.current!;
+    const prevTransform = node.style.transform;
     try {
+      if (document.fonts && typeof document.fonts.ready?.then === 'function') {
+        await document.fonts.ready;
+      }
+
       // Preload logo for canvas drawing
       const logo = await new Promise<HTMLImageElement>((resolve, reject) => {
         const img = new window.Image();
@@ -275,9 +286,8 @@ export function ContentStudio() {
         img.onerror = reject;
         img.src = '/logo.png';
       });
+
       // Use the live DOM to extract lines + measurements at scale(1).
-      const node = frameRef.current!;
-      const prevTransform = node.style.transform;
       node.style.transform = 'scale(1)';
 
       const lineEls = Array.from(innerRef.current.children) as HTMLElement[];
@@ -286,9 +296,15 @@ export function ContentStudio() {
       // Capture font sizes from the current preview computation.
       const cs = window.getComputedStyle(lineEls[0] ?? innerRef.current);
       const fontSize = parseFloat(cs.fontSize);
-      const lineHeight = parseFloat(cs.lineHeight) || fontSize * 1.16;
+      // line-height: 1.16 (unitless) computes to "18.56px" or "1.16" depending on browser.
+      // If we get a value smaller than fontSize / 2, treat it as a unitless multiplier.
+      let lineHeight = parseFloat(cs.lineHeight);
+      if (!Number.isFinite(lineHeight) || lineHeight < fontSize * 0.5) {
+        const multiplier = item.len === 'long' ? 1.22 : 1.16;
+        lineHeight = fontSize * multiplier;
+      }
       const fontFamily = cs.fontFamily;
-      const letterSpacing = cs.letterSpacing;
+      const letterSpacing = cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing;
 
       node.style.transform = prevTransform;
 
@@ -376,28 +392,40 @@ export function ContentStudio() {
           }
         }
 
-        // Halo glow under text
+        // Halo glow under text (warm cream + accent passes)
         if (texture === 'halo') {
-          ctx.save();
-          ctx.shadowColor = `rgba(${ACCENT_RGB}, 0.45)`;
-          ctx.shadowBlur = 36;
-          ctx.fillStyle = INK;
-          // Drawn below regular pass to seed glow
-          for (let i = 0; i < lines.length; i++) {
-            const ln = lines[i];
-            const yMid = blockTop + i * lineHeight + lineHeight / 2;
-            let xStart: number;
-            if (align === 'left') xStart = blockLeft;
-            else xStart = (fmt.w - ctx.measureText(ln).width) / 2;
-            ctx.fillText(ln, xStart, yMid);
+          const haloPasses: Array<{ color: string; blur: number }> = [
+            { color: 'rgba(255, 235, 200, 0.55)', blur: 60 },
+            { color: `rgba(${ACCENT_RGB}, 0.65)`, blur: 36 },
+          ];
+          for (const pass of haloPasses) {
+            ctx.save();
+            ctx.shadowColor = pass.color;
+            ctx.shadowBlur = pass.blur;
+            ctx.fillStyle = INK;
+            for (let i = 0; i < lines.length; i++) {
+              const ln = lines[i];
+              const yMid = blockTop + i * lineHeight + lineHeight / 2;
+              let xStart: number;
+              if (align === 'left') xStart = blockLeft;
+              else xStart = (fmt.w - ctx.measureText(ln).width) / 2;
+              ctx.fillText(ln, xStart, yMid);
+            }
+            ctx.restore();
           }
-          ctx.restore();
         }
 
-        const drawLine = (i: number, ln: string, opacity: number, dx = 0, dy = 0) => {
+        const drawLine = (
+          i: number,
+          ln: string,
+          opacity: number,
+          dx = 0,
+          dy = 0,
+          color: string = INK,
+        ) => {
           ctx.save();
           ctx.globalAlpha = opacity;
-          ctx.fillStyle = INK;
+          ctx.fillStyle = color;
           const lineW = ctx.measureText(ln).width;
           let xStart: number;
           if (align === 'left') xStart = blockLeft;
@@ -419,21 +447,16 @@ export function ContentStudio() {
             ];
             const [jx, jy] = jitterTable[stepIdx];
 
-            // Cyan offset -2.5 in screen blend
+            // Cyan + magenta passes in screen blend; white on top.
             ctx.save();
             ctx.globalCompositeOperation = 'screen';
-            ctx.fillStyle = 'rgba(0, 255, 255, 0.55)';
             for (let i = 0; i < lines.length; i++) {
-              drawLine(i, lines[i], 1, -2.5 + jx, jy);
+              drawLine(i, lines[i], 1, -2.5 + jx, jy, 'rgba(0, 255, 255, 0.55)');
             }
-            // Magenta offset +2.5
-            ctx.fillStyle = 'rgba(255, 0, 255, 0.55)';
             for (let i = 0; i < lines.length; i++) {
-              drawLine(i, lines[i], 1, 2.5 + jx, jy);
+              drawLine(i, lines[i], 1, 2.5 + jx, jy, 'rgba(255, 0, 255, 0.55)');
             }
             ctx.restore();
-
-            // White on top
             for (let i = 0; i < lines.length; i++) {
               drawLine(i, lines[i], 1, jx, jy);
             }
@@ -483,10 +506,11 @@ export function ContentStudio() {
           ctx.restore();
         }
 
-        // Sigil texture
+        // Sigil texture (matches DOM: 22px in a 1080w frame ≈ fmt.w * 0.020)
         if (texture === 'sigil') {
           ctx.save();
-          ctx.font = `${Math.floor(fmt.w * 0.018)}px ui-monospace, 'Fira Code', monospace`;
+          const sigilFs = Math.floor(fmt.w * 0.020);
+          ctx.font = `${sigilFs}px ui-monospace, 'Fira Code', monospace`;
           ctx.fillStyle = INK;
           ctx.textBaseline = 'middle';
           const sx = fmt.w * 0.95;
@@ -499,10 +523,11 @@ export function ContentStudio() {
             // ignore
           }
           ctx.fillText(BRAND_INITIALS, sx, sy);
-          // Tick
-          const tickX = sx - ctx.measureText(BRAND_INITIALS).width - 14;
+          // Tick (32px tall in DOM at 1080w → ~3% of frame width worth)
+          const tickX = sx - ctx.measureText(BRAND_INITIALS).width - sigilFs * 0.7;
+          const tickH = fmt.w * 0.030;
           ctx.fillStyle = ACCENT;
-          ctx.fillRect(tickX, sy - 12, 1.5, 24);
+          ctx.fillRect(tickX, sy - tickH / 2, 1.6, tickH);
           ctx.restore();
           try {
             (ctx as unknown as { letterSpacing: string }).letterSpacing = letterSpacing;
@@ -560,6 +585,7 @@ export function ContentStudio() {
       setExportProgress('Export failed');
       setTimeout(() => setExportProgress(''), 2000);
     } finally {
+      node.style.transform = prevTransform;
       setExporting(null);
     }
   }, [item, fmt, length, speed, motion, texture, align, selectedIdx, typeface, format]);

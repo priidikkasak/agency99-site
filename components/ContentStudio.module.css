@@ -583,17 +583,15 @@
   to { opacity: 1; filter: blur(0); }
 }
 
-/* MOTION: type (left-edge wipe) */
+/* MOTION: type (clip-based left-to-right reveal, duration scales with line length) */
 .motionType .line {
-  overflow: hidden;
-  white-space: pre;
-  width: 0;
-  animation: typeReveal calc(600ms / var(--vspeed, 1)) steps(40) forwards;
-  animation-delay: calc(var(--cum, 0) * (16ms / var(--vspeed, 1)));
+  clip-path: inset(0 100% 0 0);
+  animation: typeClip calc(var(--len, 12) * (32ms / var(--vspeed, 1))) steps(40) forwards;
+  animation-delay: calc(var(--cum, 0) * (32ms / var(--vspeed, 1)));
 }
 
-@keyframes typeReveal {
-  to { width: 100%; }
+@keyframes typeClip {
+  to { clip-path: inset(0 0 0 0); }
 }
 
 /* MOTION: broken — chromatic aberration via filter, plus jitter */
@@ -625,11 +623,11 @@
   pointer-events: none;
 }
 
-/* TEXTURE: halo */
+/* TEXTURE: halo (warm cream + accent glow behind the text) */
 .textureHalo .qInner {
   filter:
-    drop-shadow(0 0 28px rgba(var(--accent-rgb), 0.35))
-    drop-shadow(0 0 60px rgba(255, 235, 200, 0.10));
+    drop-shadow(0 0 32px rgba(255, 235, 200, 0.18))
+    drop-shadow(0 0 72px rgba(var(--accent-rgb), 0.45));
 }
 
 /* TEXTURE: sigil */
@@ -639,9 +637,9 @@
   right: 5%;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 22px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--text-primary);
@@ -649,8 +647,8 @@
 }
 
 .sigilTick {
-  width: 1px;
-  height: 22px;
+  width: 1.5px;
+  height: 32px;
   background: var(--accent);
 }
 
