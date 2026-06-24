@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { geoNaturalEarth1, geoPath, geoCentroid } from 'd3-geo';
 import { feature } from 'topojson-client';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
@@ -53,6 +54,7 @@ function formatNumber(n: number): string {
 
 export function WorldMap({ visitors, source, rangeKey }: WorldMapProps) {
   const { t } = useI18n();
+  const router = useRouter();
   const totalCountriesCount = Object.keys(visitors).length;
   const total = totalVisits(visitors);
   const ranked = rankedCountries(visitors);
@@ -129,7 +131,12 @@ export function WorldMap({ visitors, source, rangeKey }: WorldMapProps) {
                 key={r.key}
                 href={href}
                 scroll={false}
-                onClick={() => setOptimisticRange(r.key)}
+                prefetch
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOptimisticRange(r.key);
+                  router.push(href, { scroll: false });
+                }}
                 className={`${styles.pill} ${isActive ? styles.pillActive : ''}`}
                 aria-current={isActive ? 'page' : undefined}
               >
