@@ -3,7 +3,7 @@ import { Nav } from '@/components/Nav';
 import { WorldMap } from '@/components/WorldMap';
 import { fetchVisitorsByCountry } from '@/lib/map/ga4';
 import { MOCK_VISITORS } from '@/lib/map/visitors';
-import { parseRange, rangeLabelHuman } from '@/lib/map/ranges';
+import { parseRange } from '@/lib/map/ranges';
 
 export const metadata: Metadata = {
   title: 'World map — AGENCY99',
@@ -50,12 +50,7 @@ export default async function MapPage({
   return (
     <>
       <Nav />
-      <WorldMap
-        visitors={visitors}
-        source={source}
-        rangeKey={range}
-        rangeLabel={rangeLabelHuman(range)}
-      />
+      <WorldMap visitors={visitors} source={source} rangeKey={range} />
     </>
   );
 }

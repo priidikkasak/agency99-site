@@ -137,6 +137,39 @@ export interface Translations {
     cta: string;
     note: string;
   };
+  map: {
+    eyebrow: string;
+    headlinePrefix: string;
+    headlineAccent: string;
+    sub: string;
+    stats: {
+      totalVisits: string;
+      countries: string;
+      origin: string;
+      originValue: string;
+    };
+    ranges: {
+      today: string;
+      yesterday: string;
+      '7d': string;
+      '30d': string;
+      '90d': string;
+      ytd: string;
+    };
+    rangeLabels: {
+      today: string;
+      yesterday: string;
+      '7d': string;
+      '30d': string;
+      '90d': string;
+      ytd: string;
+    };
+    rangeAriaLabel: string;
+    topCountries: string;
+    emptyRange: string;
+    footnoteLive: string;
+    footnoteMock: string;
+  };
 }
 
 export const et: Translations = {
@@ -421,5 +454,38 @@ export const et: Translations = {
       process: 'Protsess',
       contact: 'Kontakt',
     },
+  },
+  map: {
+    eyebrow: 'REAALAJA LIIKLUS · MAAILMAVAADE',
+    headlinePrefix: 'Kus maailm',
+    headlineAccent: 'meid leiab.',
+    sub: 'agency99.io külastajad — üle kontinentide, reaalajas.',
+    stats: {
+      totalVisits: 'Külastusi kokku',
+      countries: 'Riike',
+      origin: 'Päritolu',
+      originValue: 'Tallinn, EE',
+    },
+    ranges: {
+      today: 'Täna',
+      yesterday: 'Eile',
+      '7d': '7p',
+      '30d': '30p',
+      '90d': '90p',
+      ytd: 'See aasta',
+    },
+    rangeLabels: {
+      today: 'täna',
+      yesterday: 'eile',
+      '7d': 'viimased 7 päeva',
+      '30d': 'viimased 30 päeva',
+      '90d': 'viimased 90 päeva',
+      ytd: 'sel aastal',
+    },
+    rangeAriaLabel: 'Ajavahemik',
+    topCountries: 'Top riigid',
+    emptyRange: 'Selles ajavahemikus pole veel külastusi.',
+    footnoteLive: 'Reaalajas · Google Analytics 4 · koondatud, ainult riigi tasemel. Isikuandmeid pole.',
+    footnoteMock: 'Näidisandmed — pole reaalajas. Koondatud, ainult riigi tasemel.',
   },
 };

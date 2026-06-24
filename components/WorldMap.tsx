@@ -17,6 +17,7 @@ import {
   type VisitorEntry,
 } from '@/lib/map/visitors';
 import { RANGES, type RangeKey } from '@/lib/map/ranges';
+import { useI18n } from '@/lib/i18n/context';
 import styles from './WorldMap.module.css';
 
 type CountryFeature = Feature<Geometry, { name?: string }> & { id: string | number };
@@ -29,7 +30,6 @@ type WorldMapProps = {
   visitors: Record<string, VisitorEntry>;
   source: 'ga4' | 'mock';
   rangeKey: RangeKey;
-  rangeLabel?: string;
 };
 
 const ALPHA2_TO_NAME: Record<string, string> = (() => {
@@ -51,7 +51,8 @@ function formatNumber(n: number): string {
   return n.toLocaleString('en-US');
 }
 
-export function WorldMap({ visitors, source, rangeKey, rangeLabel }: WorldMapProps) {
+export function WorldMap({ visitors, source, rangeKey }: WorldMapProps) {
+  const { t } = useI18n();
   const totalCountriesCount = Object.keys(visitors).length;
   const total = totalVisits(visitors);
   const ranked = rankedCountries(visitors);
@@ -106,16 +107,14 @@ export function WorldMap({ visitors, source, rangeKey, rangeLabel }: WorldMapPro
       <div className={styles.inner}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} />
-          LIVE TRAFFIC · WORLD VIEW
+          {t.map.eyebrow}
         </div>
         <h1 className={styles.headline}>
-          Where the world <span className={styles.grad}>finds us.</span>
+          {t.map.headlinePrefix} <span className={styles.grad}>{t.map.headlineAccent}</span>
         </h1>
-        <p className={styles.sub}>
-          Visitors to agency99.io — across continents, in real time.
-        </p>
+        <p className={styles.sub}>{t.map.sub}</p>
 
-        <nav className={styles.pills} aria-label="Time range">
+        <nav className={styles.pills} aria-label={t.map.rangeAriaLabel}>
           {RANGES.map((r) => {
             const isActive = r.key === rangeKey;
             const href = r.key === '30d' ? '/map' : `/map?range=${r.key}`;
@@ -123,10 +122,11 @@ export function WorldMap({ visitors, source, rangeKey, rangeLabel }: WorldMapPro
               <Link
                 key={r.key}
                 href={href}
+                scroll={false}
                 className={`${styles.pill} ${isActive ? styles.pillActive : ''}`}
                 aria-current={isActive ? 'page' : undefined}
               >
-                {r.label}
+                {t.map.ranges[r.key]}
               </Link>
             );
           })}
@@ -134,18 +134,18 @@ export function WorldMap({ visitors, source, rangeKey, rangeLabel }: WorldMapPro
 
         <div className={styles.stats}>
           <div className={styles.stat}>
-            <div className={styles.statLabel}>Total visits</div>
+            <div className={styles.statLabel}>{t.map.stats.totalVisits}</div>
             <div className={styles.statValue}>{formatNumber(total)}</div>
           </div>
           <div className={styles.statSep} />
           <div className={styles.stat}>
-            <div className={styles.statLabel}>Countries</div>
+            <div className={styles.statLabel}>{t.map.stats.countries}</div>
             <div className={styles.statValue}>{totalCountriesCount}</div>
           </div>
           <div className={styles.statSep} />
           <div className={styles.stat}>
-            <div className={styles.statLabel}>Origin</div>
-            <div className={styles.statValue}>Tallinn, EE</div>
+            <div className={styles.statLabel}>{t.map.stats.origin}</div>
+            <div className={styles.statValue}>{t.map.stats.originValue}</div>
           </div>
         </div>
 
@@ -233,11 +233,11 @@ export function WorldMap({ visitors, source, rangeKey, rangeLabel }: WorldMapPro
 
         <div className={styles.rankedWrap}>
           <div className={styles.rankedHeader}>
-            <span>Top countries</span>
-            <span className={styles.rankedHeaderMuted}>{rangeLabel ?? 'last 30 days'}</span>
+            <span>{t.map.topCountries}</span>
+            <span className={styles.rankedHeaderMuted}>{t.map.rangeLabels[rangeKey]}</span>
           </div>
           {ranked.length === 0 ? (
-            <div className={styles.rankedEmpty}>No visits in this range yet.</div>
+            <div className={styles.rankedEmpty}>{t.map.emptyRange}</div>
           ) : (
             <ol className={styles.rankedList}>
               {ranked.slice(0, 12).map((row, i) => {
@@ -259,9 +259,7 @@ export function WorldMap({ visitors, source, rangeKey, rangeLabel }: WorldMapPro
         </div>
 
         <div className={styles.footnote}>
-          {source === 'ga4'
-            ? 'Live · Google Analytics 4 · aggregated, country-level only. No personal data.'
-            : 'Sample data — not live. Aggregated, country-level only.'}
+          {source === 'ga4' ? t.map.footnoteLive : t.map.footnoteMock}
         </div>
       </div>
     </section>
