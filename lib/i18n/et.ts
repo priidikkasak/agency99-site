@@ -461,7 +461,7 @@ export const et: Translations = {
     headlineAccent: 'meid leiab.',
     sub: 'agency99.io külastajad — üle kontinentide, reaalajas.',
     stats: {
-      totalVisits: 'Külastusi kokku',
+      totalVisits: 'Külastajaid kokku',
       countries: 'Riike',
       origin: 'Päritolu',
       originValue: 'Tallinn, EE',
@@ -484,7 +484,7 @@ export const et: Translations = {
     },
     rangeAriaLabel: 'Ajavahemik',
     topCountries: 'Top riigid',
-    emptyRange: 'Selles ajavahemikus pole veel külastusi.',
+    emptyRange: 'Selles ajavahemikus pole veel külastajaid.',
     footnoteLive: 'Reaalajas · Google Analytics 4 · koondatud, ainult riigi tasemel. Isikuandmeid pole.',
     footnoteMock: 'Näidisandmed — pole reaalajas. Koondatud, ainult riigi tasemel.',
   },

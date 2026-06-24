@@ -42,7 +42,7 @@ export async function fetchVisitorsByCountry(
     property: `properties/${propertyId}`,
     dateRanges: [{ startDate, endDate }],
     dimensions: [{ name: 'countryId' }],
-    metrics: [{ name: 'sessions' }],
+    metrics: [{ name: 'totalUsers' }],
     limit: 250,
   });
 

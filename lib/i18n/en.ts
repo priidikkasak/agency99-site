@@ -289,7 +289,7 @@ export const en: Translations = {
     headlineAccent: 'finds us.',
     sub: 'Visitors to agency99.io — across continents, in real time.',
     stats: {
-      totalVisits: 'Total visits',
+      totalVisits: 'Total visitors',
       countries: 'Countries',
       origin: 'Origin',
       originValue: 'Tallinn, EE',
@@ -312,7 +312,7 @@ export const en: Translations = {
     },
     rangeAriaLabel: 'Time range',
     topCountries: 'Top countries',
-    emptyRange: 'No visits in this range yet.',
+    emptyRange: 'No visitors in this range yet.',
     footnoteLive: 'Live · Google Analytics 4 · aggregated, country-level only. No personal data.',
     footnoteMock: 'Sample data — not live. Aggregated, country-level only.',
   },
