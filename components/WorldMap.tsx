@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { geoNaturalEarth1, geoPath, geoCentroid } from 'd3-geo';
 import { feature } from 'topojson-client';
@@ -57,6 +57,12 @@ export function WorldMap({ visitors, source, rangeKey }: WorldMapProps) {
   const total = totalVisits(visitors);
   const ranked = rankedCountries(visitors);
   const maxCount = ranked[0]?.count ?? 1;
+
+  const [optimisticRange, setOptimisticRange] = useState<RangeKey | null>(null);
+  useEffect(() => {
+    setOptimisticRange(null);
+  }, [rangeKey]);
+  const activeRange = optimisticRange ?? rangeKey;
 
   const { paths, originCoords } = useMemo(() => {
     const topo = worldAtlas as unknown as Parameters<typeof feature>[0];
@@ -116,13 +122,14 @@ export function WorldMap({ visitors, source, rangeKey }: WorldMapProps) {
 
         <nav className={styles.pills} aria-label={t.map.rangeAriaLabel}>
           {RANGES.map((r) => {
-            const isActive = r.key === rangeKey;
+            const isActive = r.key === activeRange;
             const href = r.key === '30d' ? '/map' : `/map?range=${r.key}`;
             return (
               <Link
                 key={r.key}
                 href={href}
                 scroll={false}
+                onClick={() => setOptimisticRange(r.key)}
                 className={`${styles.pill} ${isActive ? styles.pillActive : ''}`}
                 aria-current={isActive ? 'page' : undefined}
               >
