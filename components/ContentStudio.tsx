@@ -111,6 +111,7 @@ type DrawOpts = {
   texture: Texture;
   speed: number;
   logo: HTMLImageElement;
+  logoPct: number;
 };
 
 function drawCompositeFrame(
@@ -300,7 +301,7 @@ function drawCompositeFrame(
   // Logo bottom-center
   ctx.save();
   ctx.globalAlpha = 0.92;
-  const logoW = fmt.w * 0.14;
+  const logoW = fmt.w * (opts.logoPct / 100);
   const logoH = logoW * (logo.naturalHeight / logo.naturalWidth);
   const logoX = (fmt.w - logoW) / 2;
   const logoY = fmt.h - fmt.h * 0.05 - logoH;
@@ -537,6 +538,7 @@ export function ContentStudio() {
       texture,
       speed,
       logo,
+      logoPct: item.logoPct ?? 14,
     };
   }, [item, fmt, align, motion, texture, speed]);
 
@@ -930,8 +932,38 @@ export function ContentStudio() {
                       ×
                     </button>
                   </div>
+                  <div className={styles.cardLogoControls}>
+                    <span className={styles.cardLogoLabel}>LOGO</span>
+                    <input
+                      className={styles.cardLogoInput}
+                      type="number"
+                      inputMode="numeric"
+                      min={5}
+                      max={40}
+                      step={1}
+                      value={it.logoPct ?? ''}
+                      placeholder="14"
+                      onChange={(e) => {
+                        const v = e.target.value.trim();
+                        if (v === '') {
+                          update(i, { logoPct: undefined });
+                        } else {
+                          const n = Number(v);
+                          if (Number.isFinite(n) && n > 0) update(i, { logoPct: n });
+                        }
+                      }}
+                      aria-label="Logo width as % of frame width"
+                      title="Logo width as % of frame width. Empty = 14%."
+                    />
+                    <span className={styles.cardFontSizeUnit}>%</span>
+                  </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/logo.png" alt={BRAND} className={styles.cardWordmark} />
+                  <img
+                    src="/logo.png"
+                    alt={BRAND}
+                    className={styles.cardWordmark}
+                    style={it.logoPct ? { width: `${it.logoPct}%` } : undefined}
+                  />
                 </div>
               ) : (
                 <button
@@ -961,7 +993,12 @@ export function ContentStudio() {
                     </div>
                   </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/logo.png" alt={BRAND} className={styles.cardWordmark} />
+                  <img
+                    src="/logo.png"
+                    alt={BRAND}
+                    className={styles.cardWordmark}
+                    style={it.logoPct ? { width: `${it.logoPct}%` } : undefined}
+                  />
                 </button>
               ),
             )}
@@ -1221,7 +1258,12 @@ export function ContentStudio() {
                 </div>
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt={BRAND} className={styles.wordmark} />
+              <img
+                src="/logo.png"
+                alt={BRAND}
+                className={styles.wordmark}
+                style={item?.logoPct ? { width: `${item.logoPct}%` } : undefined}
+              />
             </div>
             </div>
           </div>

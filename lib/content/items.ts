@@ -5,6 +5,8 @@ export type ContentItem = {
   len: ItemLen;
   /** Optional override of the modal/export font-size in px (1080-wide frame). */
   fontSize?: number;
+  /** Optional override of the logo width as a percentage of the frame width (default 14). */
+  logoPct?: number;
 };
 
 export const CONTENT_ITEMS: ContentItem[] = [

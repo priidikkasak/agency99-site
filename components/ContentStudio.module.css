@@ -289,7 +289,55 @@
   right: 12px;
   display: flex;
   gap: 4px;
-  z-index: 2;
+  z-index: 3;
+}
+
+.cardLogoControls {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.cardLogoLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--text-tertiary);
+}
+
+.cardLogoInput {
+  width: 40px;
+  background: rgba(var(--accent-rgb), 0.04);
+  border: 1px solid rgba(var(--accent-rgb), 0.30);
+  border-radius: 4px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 4px 6px;
+  pointer-events: auto;
+  -moz-appearance: textfield;
+}
+
+.cardLogoInput::-webkit-outer-spin-button,
+.cardLogoInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cardLogoInput:focus {
+  outline: none;
+  background: rgba(var(--accent-rgb), 0.10);
+}
+
+.cardLogoInput::placeholder {
+  color: rgba(var(--accent-rgb), 0.45);
 }
 
 .cardEditBtn {

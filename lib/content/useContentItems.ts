@@ -12,6 +12,7 @@ function isItem(x: unknown): x is ContentItem {
   if (typeof obj.text !== 'string') return false;
   if (typeof obj.len !== 'string' || !LENS.includes(obj.len as ItemLen)) return false;
   if (obj.fontSize !== undefined && (typeof obj.fontSize !== 'number' || !Number.isFinite(obj.fontSize))) return false;
+  if (obj.logoPct !== undefined && (typeof obj.logoPct !== 'number' || !Number.isFinite(obj.logoPct))) return false;
   return true;
 }
 
