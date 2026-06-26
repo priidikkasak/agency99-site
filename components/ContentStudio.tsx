@@ -52,8 +52,19 @@ const MODAL_FONT_PRESET: Record<ItemLen, number> = {
 // Approximate card-preview to modal scale (card ≈ 240–280px wide, modal frame is 1080px wide).
 const CARD_SCALE = 0.27;
 
-function modalFontSize(it: { len: ItemLen; fontSize?: number }): number {
-  return it.fontSize ?? MODAL_FONT_PRESET[it.len];
+// Card-preview font-size presets per len (matches .cardShort/.cardMed/.cardLong CSS).
+const CARD_FONT_PRESET: Record<ItemLen, number> = {
+  short: 24,
+  med: 18,
+  long: 14,
+};
+
+// User types card-scale px in the editor; convert to modal-scale for storage/export.
+function cardPxToModal(cardPx: number): number {
+  return cardPx / CARD_SCALE;
+}
+function modalPxToCard(modalPx: number): number {
+  return modalPx * CARD_SCALE;
 }
 
 const ACCENT = '#9B8BFF';
@@ -848,22 +859,28 @@ export function ContentStudio() {
                         className={styles.cardFontSizeInput}
                         type="number"
                         inputMode="numeric"
-                        min={12}
-                        max={240}
+                        min={8}
+                        max={120}
                         step={1}
-                        value={it.fontSize ?? ''}
-                        placeholder={String(MODAL_FONT_PRESET[it.len])}
+                        value={
+                          it.fontSize !== undefined
+                            ? Math.round(modalPxToCard(it.fontSize))
+                            : ''
+                        }
+                        placeholder={String(CARD_FONT_PRESET[it.len])}
                         onChange={(e) => {
                           const v = e.target.value.trim();
                           if (v === '') {
                             update(i, { fontSize: undefined });
                           } else {
-                            const n = Number(v);
-                            if (Number.isFinite(n) && n > 0) update(i, { fontSize: n });
+                            const cardPx = Number(v);
+                            if (Number.isFinite(cardPx) && cardPx > 0) {
+                              update(i, { fontSize: cardPxToModal(cardPx) });
+                            }
                           }
                         }}
-                        aria-label="Font size in px (modal scale)"
-                        title="Font size in px (modal/export scale). Empty = preset."
+                        aria-label="Font size in px (as shown on this card)"
+                        title="Font size in px as shown on this card. Empty = preset."
                       />
                       <span className={styles.cardFontSizeUnit}>px</span>
                     </div>
@@ -925,7 +942,11 @@ export function ContentStudio() {
                 >
                   <div className={styles.cardMeta}>
                     <span>{String(i + 1).padStart(2, '0')}</span>
-                    <span>{it.fontSize ? `${it.fontSize}px` : it.len.toUpperCase()}</span>
+                    <span>
+                      {it.fontSize
+                        ? `${Math.round(modalPxToCard(it.fontSize))}px`
+                        : it.len.toUpperCase()}
+                    </span>
                   </div>
                   <div className={styles.cardCanvas}>
                     <div

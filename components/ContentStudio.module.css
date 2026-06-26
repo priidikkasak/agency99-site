@@ -208,16 +208,17 @@
 }
 
 .cardFontSizeInput {
-  width: 46px;
+  width: 52px;
   background: rgba(var(--accent-rgb), 0.04);
-  border: 1px solid rgba(var(--accent-rgb), 0.22);
+  border: 1px solid rgba(var(--accent-rgb), 0.30);
   border-radius: 4px;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   text-align: center;
-  padding: 3px 4px;
+  padding: 4px 6px;
+  pointer-events: auto;
   -moz-appearance: textfield;
 }
 
