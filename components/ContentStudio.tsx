@@ -99,6 +99,42 @@ function lenClass(len: ItemLen, prefix: 'card' | 'q'): string {
   return styles[`${prefix}Long`];
 }
 
+// Word-wrap text against a max pixel width using the supplied 2D context as
+// metrics. Honors explicit \n as forced breaks. Never breaks mid-word: an
+// over-long single word is returned as its own line and accepted as-is.
+function wrapTextForCanvas(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  maxWidth: number,
+): string[] {
+  const out: string[] = [];
+  for (const paragraph of text.split('\n')) {
+    if (paragraph.length === 0) {
+      out.push('');
+      continue;
+    }
+    const tokens = paragraph.match(/\s+|\S+/g) ?? [];
+    let current = '';
+    for (const token of tokens) {
+      const isWs = /^\s/.test(token);
+      const candidate = current + token;
+      if (
+        !isWs &&
+        current.trim().length > 0 &&
+        ctx.measureText(candidate).width > maxWidth
+      ) {
+        out.push(current.trim());
+        current = token;
+      } else {
+        current = candidate;
+      }
+    }
+    const last = current.trim();
+    if (last.length > 0) out.push(last);
+  }
+  return out.length > 0 ? out : [''];
+}
+
 type DrawOpts = {
   fmt: { w: number; h: number };
   lines: string[];
@@ -378,75 +414,54 @@ export function ContentStudio() {
   // ============================================
   const splitIntoLines = useCallback(
     (el: HTMLElement, text: string) => {
-      el.textContent = text;
-      const range = document.createRange();
-      const textNode = el.firstChild;
-      if (!textNode || textNode.nodeType !== Node.TEXT_NODE) return;
-
-      // Use the browser's own line count as the source of truth, then binary
-      // search each line's starting char index. Per-char top sampling alone is
-      // prone to subpixel drift that can flag mid-word "breaks".
-      range.selectNodeContents(textNode);
-      const lineRects = Array.from(range.getClientRects());
-
-      const ranges: Array<{ start: number; end: number }> = [];
-      if (lineRects.length <= 1) {
-        ranges.push({ start: 0, end: text.length });
-      } else {
-        const breakIdx: number[] = [];
-        let lastBoundary = 0;
-        for (let li = 1; li < lineRects.length; li++) {
-          const targetTop = lineRects[li].top;
-          let lo = lastBoundary + 1;
-          let hi = text.length;
-          while (lo < hi) {
-            const mid = (lo + hi) >> 1;
-            range.setStart(textNode, mid);
-            range.setEnd(textNode, mid + 1);
-            if (range.getBoundingClientRect().top >= targetTop - 4) {
-              hi = mid;
-            } else {
-              lo = mid + 1;
-            }
-          }
-          breakIdx.push(lo);
-          lastBoundary = lo;
-        }
-        let cursor = 0;
-        for (const b of breakIdx) {
-          ranges.push({ start: cursor, end: b });
-          cursor = b;
-        }
-        ranges.push({ start: cursor, end: text.length });
-      }
-
-      // Defensive merge in the ORIGINAL text: browsers don't break mid-word
-      // with default word-break, so a boundary with non-whitespace on both
-      // sides of the source text is a subpixel/font-swap artifact — fold it
-      // back into the previous range.
-      const merged: Array<{ start: number; end: number }> = [];
-      for (const cur of ranges) {
-        if (merged.length === 0) {
-          merged.push(cur);
-          continue;
-        }
-        const prev = merged[merged.length - 1];
-        const prevChar = text[prev.end - 1];
-        const currChar = text[cur.start];
-        const atBoundary =
-          !prevChar || !currChar || /\s/.test(prevChar) || /\s/.test(currChar);
-        if (atBoundary) {
-          merged.push(cur);
-        } else {
-          merged[merged.length - 1] = { start: prev.start, end: cur.end };
-        }
-      }
-
-      const lines = merged
-        .map((r) => text.slice(r.start, r.end).replace(/^\s+|\s+$/g, ''))
-        .filter((l) => l.length > 0);
-
       el.innerHTML = '';
+      if (!text) return;
+
+      const cs = window.getComputedStyle(el);
+      const fontSize = parseFloat(cs.fontSize);
+      const fontFamily = cs.fontFamily;
+      const fontWeight = cs.fontWeight || 'normal';
+      const fontStyle = cs.fontStyle || 'normal';
+      const letterSpacing =
+        cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing;
+
+      // Available width = qWrap (flex container, grandparent) content box.
+      // The frame's CSS scale transform doesn't affect clientWidth so this
+      // tracks the un-scaled layout width.
+      let maxWidth = 0;
+      const wrap = el.parentElement?.parentElement;
+      if (wrap) {
+        const wcs = window.getComputedStyle(wrap);
+        const padL = parseFloat(wcs.paddingLeft) || 0;
+        const padR = parseFloat(wcs.paddingRight) || 0;
+        maxWidth = wrap.clientWidth - padL - padR;
+      }
+      if (!Number.isFinite(maxWidth) || maxWidth <= 0) {
+        maxWidth = el.clientWidth || 0;
+      }
+
+      let lines: string[];
+      if (maxWidth <= 0) {
+        // No layout available yet — fall back to a single line; a later
+        // re-split (font-ready / resize) will produce correct wrapping.
+        lines = text.split('\n').map((l) => l.replace(/^\s+|\s+$/g, ''));
+      } else {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          lines = [text];
+        } else {
+          ctx.font = `${fontStyle} ${fontWeight} ${fontSize}px ${fontFamily}`;
+          try {
+            (ctx as unknown as { letterSpacing: string }).letterSpacing =
+              letterSpacing;
+          } catch {
+            // older browsers - ignore
+          }
+          lines = wrapTextForCanvas(ctx, text, maxWidth);
+        }
+      }
+
       let cumChars = 0;
       lines.forEach((lineText, i) => {
         const span = document.createElement('span');
@@ -566,7 +581,7 @@ export function ContentStudio() {
     void node.offsetWidth; // force layout
 
     const lineEls = Array.from(innerRef.current.children) as HTMLElement[];
-    const lines = lineEls.map((el) => el.textContent ?? '');
+    let lines = lineEls.map((el) => el.textContent ?? '');
     const cs = window.getComputedStyle(lineEls[0] ?? innerRef.current);
     const fontSize = parseFloat(cs.fontSize);
     let lineHeight = parseFloat(cs.lineHeight);
@@ -575,9 +590,33 @@ export function ContentStudio() {
       lineHeight = fontSize * multiplier;
     }
     const fontFamily = cs.fontFamily;
+    const fontWeight = cs.fontWeight || 'normal';
+    const fontStyle = cs.fontStyle || 'normal';
     const letterSpacing = cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing;
 
     node.style.transform = prevTransform;
+
+    // Safety net: regardless of what the DOM splitter produced, never let the
+    // export ship a line wider than the export's safe width (qWrap padding
+    // accounts for 16% horizontal). Re-wrap from item.text if needed.
+    const exportMaxWidth = fmt.w * (1 - 0.08 * 2);
+    const measureCanvas = document.createElement('canvas');
+    const measureCtx = measureCanvas.getContext('2d');
+    if (measureCtx) {
+      measureCtx.font = `${fontStyle} ${fontWeight} ${fontSize}px ${fontFamily}`;
+      try {
+        (measureCtx as unknown as { letterSpacing: string }).letterSpacing =
+          letterSpacing;
+      } catch {
+        // older browsers - ignore
+      }
+      const anyOverflow =
+        lines.length === 0 ||
+        lines.some((line) => measureCtx.measureText(line).width > exportMaxWidth);
+      if (anyOverflow) {
+        lines = wrapTextForCanvas(measureCtx, item.text, exportMaxWidth);
+      }
+    }
 
     return {
       fmt,
