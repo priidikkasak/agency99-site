@@ -383,7 +383,6 @@ export function ContentStudio() {
       const textNode = el.firstChild;
       if (!textNode || textNode.nodeType !== Node.TEXT_NODE) return;
 
-      const rects: DOMRectList[] = [];
       const breaks: number[] = [];
       let lastTop = -Infinity;
       for (let i = 0; i < text.length; i++) {
@@ -394,13 +393,23 @@ export function ContentStudio() {
           if (i !== 0) breaks.push(i);
           lastTop = r.top;
         }
-        rects.push(rects[rects.length - 1]);
       }
       breaks.push(text.length);
 
+      // Browsers don't wrap mid-word with default word-break, so a detected
+      // break with non-whitespace on both sides is a subpixel/measurement
+      // artifact (the symptom is a single letter rendering on its own line).
+      // Drop those — keep the trailing sentinel.
+      const filteredBreaks = breaks.filter((b, idx) => {
+        if (idx === breaks.length - 1) return true;
+        const prev = text[b - 1];
+        const curr = text[b];
+        return /\s/.test(prev) || /\s/.test(curr);
+      });
+
       const lines: string[] = [];
       let cursor = 0;
-      for (const b of breaks) {
+      for (const b of filteredBreaks) {
         lines.push(text.slice(cursor, b).replace(/^\s+|\s+$/g, ''));
         cursor = b;
       }
