@@ -390,6 +390,7 @@
   text-align: center;
   line-height: 1.18;
   letter-spacing: -0.01em;
+  white-space: pre-wrap;
 }
 
 .cardShort  { font-size: 24px; }
@@ -812,6 +813,7 @@
   color: var(--text-primary);
   letter-spacing: -0.015em;
   line-height: 1.16;
+  white-space: pre-wrap;
 }
 
 .qShort { font-size: 92px; }
