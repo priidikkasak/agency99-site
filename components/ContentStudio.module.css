@@ -101,165 +101,35 @@
 }
 
 /* ============================================
-   EDITOR PANEL (grid view)
+   EDITOR BAR + INLINE CARD EDITING
    ============================================ */
 
-.editor {
-  margin-bottom: var(--sp-5);
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-}
-
-.editorHeader {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 14px;
-  gap: 12px;
-}
-
-.editorHeaderText {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.20em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-
-.editorStatus {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  color: var(--accent);
-}
-
-.editorList {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.editorRow {
-  display: grid;
-  grid-template-columns: 28px 80px 1fr auto;
-  align-items: stretch;
-  gap: 10px;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  transition: border-color 180ms ease;
-}
-
-.editorRow:hover {
-  border-color: var(--border-bright);
-}
-
-.editorRow:focus-within {
-  border-color: var(--accent);
-}
-
-.editorIdx {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  color: var(--text-tertiary);
-}
-
-.editorLen {
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  color: var(--text-primary);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 6px 6px;
-  cursor: pointer;
-}
-
-.editorLen:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-
-.editorText {
-  resize: vertical;
-  min-height: 44px;
-  padding: 8px 10px;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  color: var(--text-primary);
-  font-family: var(--font-display, inherit);
-  font-size: 14px;
-  line-height: 1.4;
-  width: 100%;
-  letter-spacing: -0.005em;
-}
-
-.editorText:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-
-.editorRowActions {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.editorIconBtn {
-  width: 28px;
-  height: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  color: var(--text-secondary);
-  font-size: 14px;
-  line-height: 1;
-  cursor: pointer;
-  transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
-}
-
-.editorIconBtn:hover:not(:disabled) {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.editorIconBtn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.editorIconBtnDanger:hover:not(:disabled) {
-  border-color: #c66;
-  color: #c66;
-}
-
-.editorActions {
+.editorBar {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
+  margin-bottom: var(--sp-4);
+  padding: 12px 16px;
+  background: rgba(var(--accent-rgb), 0.04);
+  border: 1px solid rgba(var(--accent-rgb), 0.22);
+  border-radius: 8px;
 }
 
-.editorActionsSpacer {
+.editorBarHint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.editorBarSpacer {
   flex: 1 1 auto;
 }
 
 .editorActionBtn {
-  padding: 9px 14px;
+  padding: 8px 14px;
   background: transparent;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -283,7 +153,7 @@
 }
 
 .editorError {
-  margin-top: 10px;
+  margin-bottom: var(--sp-4);
   padding: 8px 12px;
   background: rgba(204, 102, 102, 0.08);
   border: 1px solid rgba(204, 102, 102, 0.35);
@@ -294,18 +164,162 @@
   letter-spacing: 0.04em;
 }
 
-@media (max-width: 600px) {
-  .editorRow {
-    grid-template-columns: 24px 1fr;
-    grid-template-areas:
-      'idx len'
-      'text text'
-      'actions actions';
+/* Card in edit mode - inline editable on the canvas */
+
+.cardEditing {
+  cursor: default;
+  border-color: rgba(var(--accent-rgb), 0.45);
+}
+
+.cardEditing:hover {
+  transform: none;
+  border-color: var(--accent);
+}
+
+.cardLenSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.30);
+  border-radius: 4px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 3px 18px 3px 8px;
+  cursor: pointer;
+  pointer-events: auto;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path d='M1 2.5l3 3 3-3' fill='none' stroke='%239B8BFF' stroke-width='1.2' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+}
+
+.cardLenSelect:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.cardTextEditable {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  color: var(--text-primary);
+  font-family: var(--card-font, var(--font-instrument-serif));
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+  caret-color: var(--accent);
+  overflow: hidden;
+}
+
+@supports (field-sizing: content) {
+  .cardTextEditable {
+    height: auto;
+    max-height: 100%;
+    min-height: 1.4em;
+    field-sizing: content;
   }
-  .editorIdx { grid-area: idx; justify-content: flex-start; }
-  .editorLen { grid-area: len; }
-  .editorText { grid-area: text; }
-  .editorRowActions { grid-area: actions; justify-content: flex-end; }
+}
+
+.cardTextEditable::placeholder {
+  color: var(--text-tertiary);
+  opacity: 0.5;
+}
+
+.cardTextEditable:focus {
+  background: rgba(var(--accent-rgb), 0.04);
+  outline: none;
+}
+
+.cardEditActions {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+}
+
+.cardEditBtn {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+}
+
+.cardEditBtn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.cardEditBtn:disabled {
+  opacity: 0.30;
+  cursor: not-allowed;
+}
+
+.cardEditBtnDanger:hover:not(:disabled) {
+  border-color: #c66;
+  color: #c66;
+}
+
+/* "+" Add card at the end of the grid */
+.cardAdd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px dashed rgba(var(--accent-rgb), 0.35);
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.cardAdd:hover {
+  border-color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.04);
+  transform: translateY(-2px);
+}
+
+.cardAddPlus {
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.cardAddLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .editorBar {
+    padding: 10px 12px;
+  }
+  .editorActionBtn {
+    padding: 7px 10px;
+    font-size: 9px;
+  }
 }
 
 .title {

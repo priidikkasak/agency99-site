@@ -774,116 +774,134 @@ export function ContentStudio() {
           </p>
 
           {editMode && (
-            <div className={styles.editor}>
-              <div className={styles.editorHeader}>
-                <span className={styles.editorHeaderText}>
-                  Editor · saves to this browser (localStorage)
-                </span>
-                <span className={styles.editorStatus}>{ready ? 'Saved ✓' : ''}</span>
-              </div>
-
-              <div className={styles.editorList}>
-                {items.map((it, i) => (
-                  <div key={i} className={styles.editorRow}>
-                    <span className={styles.editorIdx}>{String(i + 1).padStart(2, '0')}</span>
-                    <select
-                      className={styles.editorLen}
-                      value={it.len}
-                      onChange={(e) => update(i, { len: e.target.value as ItemLen })}
-                    >
-                      <option value="short">short</option>
-                      <option value="med">med</option>
-                      <option value="long">long</option>
-                    </select>
-                    <textarea
-                      className={styles.editorText}
-                      value={it.text}
-                      rows={2}
-                      onChange={(e) => update(i, { text: e.target.value })}
-                    />
-                    <div className={styles.editorRowActions}>
-                      <button
-                        className={styles.editorIconBtn}
-                        onClick={() => move(i, -1)}
-                        disabled={i === 0}
-                        aria-label="Move up"
-                      >
-                        ↑
-                      </button>
-                      <button
-                        className={styles.editorIconBtn}
-                        onClick={() => move(i, 1)}
-                        disabled={i === items.length - 1}
-                        aria-label="Move down"
-                      >
-                        ↓
-                      </button>
-                      <button
-                        className={`${styles.editorIconBtn} ${styles.editorIconBtnDanger}`}
-                        onClick={() => remove(i)}
-                        aria-label="Delete"
-                      >
-                        ×
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className={styles.editorActions}>
-                <button className={styles.editorActionBtn} onClick={add}>
-                  + Add item
-                </button>
-                <div className={styles.editorActionsSpacer} />
-                <button className={styles.editorActionBtn} onClick={exportJson}>
-                  Export JSON
-                </button>
-                <button className={styles.editorActionBtn} onClick={onImportClick}>
-                  Import JSON
-                </button>
-                <button
-                  className={`${styles.editorActionBtn} ${styles.editorActionBtnDanger}`}
-                  onClick={() => {
-                    if (window.confirm('Reset to default 10 items? Your current edits will be lost.')) {
-                      reset();
-                    }
-                  }}
-                >
-                  Reset
-                </button>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="application/json,.json"
-                  style={{ display: 'none' }}
-                  onChange={onImportChange}
-                />
-              </div>
-              {importError && (
-                <div className={styles.editorError}>Import failed: {importError}</div>
-              )}
+            <div className={styles.editorBar}>
+              <span className={styles.editorBarHint}>
+                Edit cards inline · saves to this browser
+              </span>
+              <div className={styles.editorBarSpacer} />
+              <button className={styles.editorActionBtn} onClick={exportJson}>
+                Export JSON
+              </button>
+              <button className={styles.editorActionBtn} onClick={onImportClick}>
+                Import JSON
+              </button>
+              <button
+                className={`${styles.editorActionBtn} ${styles.editorActionBtnDanger}`}
+                onClick={() => {
+                  if (window.confirm('Reset to default items? Your current edits will be lost.')) {
+                    reset();
+                  }
+                }}
+              >
+                Reset
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="application/json,.json"
+                style={{ display: 'none' }}
+                onChange={onImportChange}
+              />
             </div>
+          )}
+          {editMode && importError && (
+            <div className={styles.editorError}>Import failed: {importError}</div>
           )}
 
           <div className={styles.cardGrid}>
-            {items.map((it, i) => (
+            {items.map((it, i) =>
+              editMode ? (
+                <div
+                  key={i}
+                  className={`${styles.card} ${styles.cardEditing}`}
+                  style={{ ['--card-font' as string]: typefaceCss }}
+                >
+                  <div className={styles.cardMeta}>
+                    <span>{String(i + 1).padStart(2, '0')}</span>
+                    <select
+                      className={styles.cardLenSelect}
+                      value={it.len}
+                      onChange={(e) => update(i, { len: e.target.value as ItemLen })}
+                      aria-label="Text size"
+                      title="Text size"
+                    >
+                      <option value="short">SIZE · L</option>
+                      <option value="med">SIZE · M</option>
+                      <option value="long">SIZE · S</option>
+                    </select>
+                  </div>
+                  <div className={styles.cardCanvas}>
+                    <textarea
+                      className={`${styles.cardText} ${styles.cardTextEditable} ${lenClass(it.len, 'card')}`}
+                      value={it.text}
+                      onChange={(e) => update(i, { text: e.target.value })}
+                      rows={4}
+                      spellCheck={false}
+                      placeholder="Type your line…"
+                    />
+                  </div>
+                  <div className={styles.cardEditActions}>
+                    <button
+                      className={styles.cardEditBtn}
+                      onClick={() => move(i, -1)}
+                      disabled={i === 0}
+                      aria-label="Move left"
+                      title="Move left"
+                    >
+                      ←
+                    </button>
+                    <button
+                      className={styles.cardEditBtn}
+                      onClick={() => move(i, 1)}
+                      disabled={i === items.length - 1}
+                      aria-label="Move right"
+                      title="Move right"
+                    >
+                      →
+                    </button>
+                    <button
+                      className={`${styles.cardEditBtn} ${styles.cardEditBtnDanger}`}
+                      onClick={() => {
+                        if (window.confirm('Delete this item?')) remove(i);
+                      }}
+                      aria-label="Delete"
+                      title="Delete"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/logo.png" alt={BRAND} className={styles.cardWordmark} />
+                </div>
+              ) : (
+                <button
+                  key={i}
+                  className={styles.card}
+                  style={{ ['--card-font' as string]: typefaceCss }}
+                  onClick={() => setSelectedIdx(i)}
+                >
+                  <div className={styles.cardMeta}>
+                    <span>{String(i + 1).padStart(2, '0')}</span>
+                    <span>{it.len.toUpperCase()}</span>
+                  </div>
+                  <div className={styles.cardCanvas}>
+                    <div className={`${styles.cardText} ${lenClass(it.len, 'card')}`}>{it.text}</div>
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/logo.png" alt={BRAND} className={styles.cardWordmark} />
+                </button>
+              ),
+            )}
+            {editMode && (
               <button
-                key={i}
-                className={styles.card}
-                style={{ ['--card-font' as string]: typefaceCss }}
-                onClick={() => setSelectedIdx(i)}
+                className={`${styles.card} ${styles.cardAdd}`}
+                onClick={add}
+                aria-label="Add new item"
               >
-                <div className={styles.cardMeta}>
-                  <span>{String(i + 1).padStart(2, '0')}</span>
-                  <span>{it.len.toUpperCase()}</span>
-                </div>
-                <div className={styles.cardCanvas}>
-                  <div className={`${styles.cardText} ${lenClass(it.len, 'card')}`}>{it.text}</div>
-                </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo.png" alt={BRAND} className={styles.cardWordmark} />
+                <span className={styles.cardAddPlus}>+</span>
+                <span className={styles.cardAddLabel}>Add item</span>
               </button>
-            ))}
+            )}
           </div>
         </div>
       </div>
