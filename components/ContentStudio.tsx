@@ -383,36 +383,68 @@ export function ContentStudio() {
       const textNode = el.firstChild;
       if (!textNode || textNode.nodeType !== Node.TEXT_NODE) return;
 
-      const breaks: number[] = [];
-      let lastTop = -Infinity;
-      for (let i = 0; i < text.length; i++) {
-        range.setStart(textNode, i);
-        range.setEnd(textNode, i + 1);
-        const r = range.getBoundingClientRect();
-        if (r.top - lastTop > 4) {
-          if (i !== 0) breaks.push(i);
-          lastTop = r.top;
+      // Use the browser's own line count as the source of truth, then binary
+      // search each line's starting char index. Per-char top sampling alone is
+      // prone to subpixel drift that can flag mid-word "breaks".
+      range.selectNodeContents(textNode);
+      const lineRects = Array.from(range.getClientRects());
+
+      const ranges: Array<{ start: number; end: number }> = [];
+      if (lineRects.length <= 1) {
+        ranges.push({ start: 0, end: text.length });
+      } else {
+        const breakIdx: number[] = [];
+        let lastBoundary = 0;
+        for (let li = 1; li < lineRects.length; li++) {
+          const targetTop = lineRects[li].top;
+          let lo = lastBoundary + 1;
+          let hi = text.length;
+          while (lo < hi) {
+            const mid = (lo + hi) >> 1;
+            range.setStart(textNode, mid);
+            range.setEnd(textNode, mid + 1);
+            if (range.getBoundingClientRect().top >= targetTop - 4) {
+              hi = mid;
+            } else {
+              lo = mid + 1;
+            }
+          }
+          breakIdx.push(lo);
+          lastBoundary = lo;
+        }
+        let cursor = 0;
+        for (const b of breakIdx) {
+          ranges.push({ start: cursor, end: b });
+          cursor = b;
+        }
+        ranges.push({ start: cursor, end: text.length });
+      }
+
+      // Defensive merge in the ORIGINAL text: browsers don't break mid-word
+      // with default word-break, so a boundary with non-whitespace on both
+      // sides of the source text is a subpixel/font-swap artifact — fold it
+      // back into the previous range.
+      const merged: Array<{ start: number; end: number }> = [];
+      for (const cur of ranges) {
+        if (merged.length === 0) {
+          merged.push(cur);
+          continue;
+        }
+        const prev = merged[merged.length - 1];
+        const prevChar = text[prev.end - 1];
+        const currChar = text[cur.start];
+        const atBoundary =
+          !prevChar || !currChar || /\s/.test(prevChar) || /\s/.test(currChar);
+        if (atBoundary) {
+          merged.push(cur);
+        } else {
+          merged[merged.length - 1] = { start: prev.start, end: cur.end };
         }
       }
-      breaks.push(text.length);
 
-      // Browsers don't wrap mid-word with default word-break, so a detected
-      // break with non-whitespace on both sides is a subpixel/measurement
-      // artifact (the symptom is a single letter rendering on its own line).
-      // Drop those — keep the trailing sentinel.
-      const filteredBreaks = breaks.filter((b, idx) => {
-        if (idx === breaks.length - 1) return true;
-        const prev = text[b - 1];
-        const curr = text[b];
-        return /\s/.test(prev) || /\s/.test(curr);
-      });
-
-      const lines: string[] = [];
-      let cursor = 0;
-      for (const b of filteredBreaks) {
-        lines.push(text.slice(cursor, b).replace(/^\s+|\s+$/g, ''));
-        cursor = b;
-      }
+      const lines = merged
+        .map((r) => text.slice(r.start, r.end).replace(/^\s+|\s+$/g, ''))
+        .filter((l) => l.length > 0);
 
       el.innerHTML = '';
       let cumChars = 0;
@@ -433,7 +465,19 @@ export function ContentStudio() {
   // Re-split whenever item / typeface / format / align changes
   useEffect(() => {
     if (!innerRef.current || !item) return;
-    splitIntoLines(innerRef.current, item.text);
+    const text = item.text;
+    splitIntoLines(innerRef.current, text);
+    // First paint may use a fallback font; once the webfont is ready the
+    // metrics change and the wrap can shift, so re-split.
+    if (typeof document !== 'undefined' && document.fonts?.ready) {
+      let cancelled = false;
+      document.fonts.ready.then(() => {
+        if (!cancelled && innerRef.current) splitIntoLines(innerRef.current, text);
+      });
+      return () => {
+        cancelled = true;
+      };
+    }
   }, [item, typeface, format, align, splitIntoLines, playKey]);
 
   // ============================================
