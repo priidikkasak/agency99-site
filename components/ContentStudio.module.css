@@ -504,6 +504,7 @@
   text-transform: uppercase;
   color: var(--text-tertiary);
   pointer-events: none;
+  z-index: 3;
 }
 
 .cardWordmark {
