@@ -42,6 +42,20 @@ const LENGTHS: number[] = [4, 6, 8];
 const ALIGNS: Align[] = ['center', 'left'];
 const FORMAT_KEYS: Format[] = ['4:5', '1:1', '9:16'];
 
+// Modal font-size presets per `len` (matches .qShort/.qMed/.qLong CSS).
+const MODAL_FONT_PRESET: Record<ItemLen, number> = {
+  short: 92,
+  med: 64,
+  long: 44,
+};
+
+// Approximate card-preview to modal scale (card ≈ 240–280px wide, modal frame is 1080px wide).
+const CARD_SCALE = 0.27;
+
+function modalFontSize(it: { len: ItemLen; fontSize?: number }): number {
+  return it.fontSize ?? MODAL_FONT_PRESET[it.len];
+}
+
 const ACCENT = '#9B8BFF';
 const ACCENT_RGB = '155, 139, 255';
 const INK = '#F0EDE6';
@@ -818,17 +832,41 @@ export function ContentStudio() {
                 >
                   <div className={styles.cardMeta}>
                     <span>{String(i + 1).padStart(2, '0')}</span>
-                    <select
-                      className={styles.cardLenSelect}
-                      value={it.len}
-                      onChange={(e) => update(i, { len: e.target.value as ItemLen })}
-                      aria-label="Text size"
-                      title="Text size"
-                    >
-                      <option value="short">SIZE · L</option>
-                      <option value="med">SIZE · M</option>
-                      <option value="long">SIZE · S</option>
-                    </select>
+                    <div className={styles.cardSizeControls}>
+                      <select
+                        className={styles.cardLenSelect}
+                        value={it.len}
+                        onChange={(e) => update(i, { len: e.target.value as ItemLen })}
+                        aria-label="Size preset"
+                        title="Size preset (also controls line-height)"
+                      >
+                        <option value="short">L</option>
+                        <option value="med">M</option>
+                        <option value="long">S</option>
+                      </select>
+                      <input
+                        className={styles.cardFontSizeInput}
+                        type="number"
+                        inputMode="numeric"
+                        min={12}
+                        max={240}
+                        step={1}
+                        value={it.fontSize ?? ''}
+                        placeholder={String(MODAL_FONT_PRESET[it.len])}
+                        onChange={(e) => {
+                          const v = e.target.value.trim();
+                          if (v === '') {
+                            update(i, { fontSize: undefined });
+                          } else {
+                            const n = Number(v);
+                            if (Number.isFinite(n) && n > 0) update(i, { fontSize: n });
+                          }
+                        }}
+                        aria-label="Font size in px (modal scale)"
+                        title="Font size in px (modal/export scale). Empty = preset."
+                      />
+                      <span className={styles.cardFontSizeUnit}>px</span>
+                    </div>
                   </div>
                   <div className={styles.cardCanvas}>
                     <textarea
@@ -838,6 +876,11 @@ export function ContentStudio() {
                       rows={4}
                       spellCheck={false}
                       placeholder="Type your line…"
+                      style={
+                        it.fontSize
+                          ? { fontSize: `${it.fontSize * CARD_SCALE}px` }
+                          : undefined
+                      }
                     />
                   </div>
                   <div className={styles.cardEditActions}>
@@ -882,10 +925,19 @@ export function ContentStudio() {
                 >
                   <div className={styles.cardMeta}>
                     <span>{String(i + 1).padStart(2, '0')}</span>
-                    <span>{it.len.toUpperCase()}</span>
+                    <span>{it.fontSize ? `${it.fontSize}px` : it.len.toUpperCase()}</span>
                   </div>
                   <div className={styles.cardCanvas}>
-                    <div className={`${styles.cardText} ${lenClass(it.len, 'card')}`}>{it.text}</div>
+                    <div
+                      className={`${styles.cardText} ${lenClass(it.len, 'card')}`}
+                      style={
+                        it.fontSize
+                          ? { fontSize: `${it.fontSize * CARD_SCALE}px` }
+                          : undefined
+                      }
+                    >
+                      {it.text}
+                    </div>
                   </div>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/logo.png" alt={BRAND} className={styles.cardWordmark} />
@@ -1142,6 +1194,7 @@ export function ContentStudio() {
                     className={`${styles.qText} ${item ? lenClass(item.len, 'q') : ''}`}
                     style={{
                       fontFamily: typefaceCss,
+                      ...(item?.fontSize ? { fontSize: `${item.fontSize}px` } : {}),
                     }}
                   />
                 </div>

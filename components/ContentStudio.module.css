@@ -176,6 +176,13 @@
   border-color: var(--accent);
 }
 
+.cardSizeControls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: auto;
+}
+
 .cardLenSelect {
   appearance: none;
   -webkit-appearance: none;
@@ -185,19 +192,57 @@
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: 9px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 3px 18px 3px 8px;
+  padding: 3px 16px 3px 7px;
   cursor: pointer;
   pointer-events: auto;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path d='M1 2.5l3 3 3-3' fill='none' stroke='%239B8BFF' stroke-width='1.2' stroke-linecap='round'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 5px center;
+  background-position: right 4px center;
 }
 
 .cardLenSelect:focus {
   outline: none;
   border-color: var(--accent);
+}
+
+.cardFontSizeInput {
+  width: 46px;
+  background: rgba(var(--accent-rgb), 0.04);
+  border: 1px solid rgba(var(--accent-rgb), 0.22);
+  border-radius: 4px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 3px 4px;
+  -moz-appearance: textfield;
+}
+
+.cardFontSizeInput::-webkit-outer-spin-button,
+.cardFontSizeInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cardFontSizeInput:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.10);
+}
+
+.cardFontSizeInput::placeholder {
+  color: rgba(var(--accent-rgb), 0.45);
+}
+
+.cardFontSizeUnit {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
 }
 
 .cardTextEditable {

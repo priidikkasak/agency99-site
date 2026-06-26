@@ -3,6 +3,8 @@ export type ItemLen = 'short' | 'med' | 'long';
 export type ContentItem = {
   text: string;
   len: ItemLen;
+  /** Optional override of the modal/export font-size in px (1080-wide frame). */
+  fontSize?: number;
 };
 
 export const CONTENT_ITEMS: ContentItem[] = [

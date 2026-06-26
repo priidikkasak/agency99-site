@@ -9,9 +9,10 @@ const LENS: ReadonlyArray<ItemLen> = ['short', 'med', 'long'];
 function isItem(x: unknown): x is ContentItem {
   if (!x || typeof x !== 'object') return false;
   const obj = x as Record<string, unknown>;
-  return typeof obj.text === 'string'
-    && typeof obj.len === 'string'
-    && LENS.includes(obj.len as ItemLen);
+  if (typeof obj.text !== 'string') return false;
+  if (typeof obj.len !== 'string' || !LENS.includes(obj.len as ItemLen)) return false;
+  if (obj.fontSize !== undefined && (typeof obj.fontSize !== 'number' || !Number.isFinite(obj.fontSize))) return false;
+  return true;
 }
 
 function readStorage(): ContentItem[] | null {
