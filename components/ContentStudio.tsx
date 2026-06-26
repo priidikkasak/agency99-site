@@ -1,7 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { CONTENT_ITEMS, type ContentItem, type ItemLen } from '@/lib/content/items';
+import { type ItemLen } from '@/lib/content/items';
+import { useContentItems } from '@/lib/content/useContentItems';
 import styles from './ContentStudio.module.css';
 
 type Typeface = 'serif-a' | 'serif-b' | 'sans';
@@ -292,7 +293,11 @@ async function loadLogo(): Promise<HTMLImageElement> {
 }
 
 export function ContentStudio() {
+  const { items, ready, add, update, remove, move, reset, exportJson, importJson } = useContentItems();
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+  const [editMode, setEditMode] = useState(false);
+  const [importError, setImportError] = useState<string>('');
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [typeface, setTypeface] = useState<Typeface>('serif-a');
   const [align, setAlign] = useState<Align>('center');
@@ -311,7 +316,7 @@ export function ContentStudio() {
   const innerRef = useRef<HTMLDivElement | null>(null);
   const wrapRef = useRef<HTMLDivElement | null>(null);
 
-  const item = selectedIdx !== null ? CONTENT_ITEMS[selectedIdx] : null;
+  const item = selectedIdx !== null ? items[selectedIdx] : null;
   const fmt = FORMATS[format];
   const typefaceCss = TYPEFACES.find((t) => t.key === typeface)?.cssVar ?? TYPEFACES[0].cssVar;
 
@@ -441,7 +446,7 @@ export function ContentStudio() {
         setSelectedIdx((idx) => (idx === null ? null : Math.max(0, idx - 1)));
       } else if (e.key === 'ArrowRight') {
         setSelectedIdx((idx) =>
-          idx === null ? null : Math.min(CONTENT_ITEMS.length - 1, idx + 1),
+          idx === null ? null : Math.min(items.length - 1, idx + 1),
         );
       } else if (e.key === ' ' || e.code === 'Space') {
         e.preventDefault();
@@ -726,6 +731,19 @@ export function ContentStudio() {
   // Card grid view
   // ============================================
   if (selectedIdx === null) {
+    const onImportClick = () => fileInputRef.current?.click();
+    const onImportChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      setImportError('');
+      try {
+        await importJson(file);
+      } catch (err) {
+        setImportError(err instanceof Error ? err.message : 'Import failed');
+      }
+      e.target.value = '';
+    };
+
     return (
       <div className={styles.root}>
         <div className={styles.glow} aria-hidden="true" />
@@ -735,8 +753,17 @@ export function ContentStudio() {
               <span className={styles.eyebrowDot} />
               CONTENT STUDIO · agency99
             </div>
-            <div className={styles.topMeta}>
-              {CONTENT_ITEMS.length} ITEMS · CLICK TO OPEN
+            <div className={styles.topBarRight}>
+              <div className={styles.topMeta}>
+                {items.length} ITEMS · {editMode ? 'EDITING' : 'CLICK TO OPEN'}
+              </div>
+              <button
+                className={`${styles.editToggle} ${editMode ? styles.editToggleActive : ''}`}
+                onClick={() => setEditMode((v) => !v)}
+                aria-pressed={editMode}
+              >
+                {editMode ? 'Done' : 'Edit'}
+              </button>
             </div>
           </div>
           <h1 className={styles.title}>
@@ -746,8 +773,100 @@ export function ContentStudio() {
             Pick a line, dial in typeface, motion, texture. Export as PNG or MP4 for IG. All in-browser, no upload.
           </p>
 
+          {editMode && (
+            <div className={styles.editor}>
+              <div className={styles.editorHeader}>
+                <span className={styles.editorHeaderText}>
+                  Editor · saves to this browser (localStorage)
+                </span>
+                <span className={styles.editorStatus}>{ready ? 'Saved ✓' : ''}</span>
+              </div>
+
+              <div className={styles.editorList}>
+                {items.map((it, i) => (
+                  <div key={i} className={styles.editorRow}>
+                    <span className={styles.editorIdx}>{String(i + 1).padStart(2, '0')}</span>
+                    <select
+                      className={styles.editorLen}
+                      value={it.len}
+                      onChange={(e) => update(i, { len: e.target.value as ItemLen })}
+                    >
+                      <option value="short">short</option>
+                      <option value="med">med</option>
+                      <option value="long">long</option>
+                    </select>
+                    <textarea
+                      className={styles.editorText}
+                      value={it.text}
+                      rows={2}
+                      onChange={(e) => update(i, { text: e.target.value })}
+                    />
+                    <div className={styles.editorRowActions}>
+                      <button
+                        className={styles.editorIconBtn}
+                        onClick={() => move(i, -1)}
+                        disabled={i === 0}
+                        aria-label="Move up"
+                      >
+                        ↑
+                      </button>
+                      <button
+                        className={styles.editorIconBtn}
+                        onClick={() => move(i, 1)}
+                        disabled={i === items.length - 1}
+                        aria-label="Move down"
+                      >
+                        ↓
+                      </button>
+                      <button
+                        className={`${styles.editorIconBtn} ${styles.editorIconBtnDanger}`}
+                        onClick={() => remove(i)}
+                        aria-label="Delete"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.editorActions}>
+                <button className={styles.editorActionBtn} onClick={add}>
+                  + Add item
+                </button>
+                <div className={styles.editorActionsSpacer} />
+                <button className={styles.editorActionBtn} onClick={exportJson}>
+                  Export JSON
+                </button>
+                <button className={styles.editorActionBtn} onClick={onImportClick}>
+                  Import JSON
+                </button>
+                <button
+                  className={`${styles.editorActionBtn} ${styles.editorActionBtnDanger}`}
+                  onClick={() => {
+                    if (window.confirm('Reset to default 10 items? Your current edits will be lost.')) {
+                      reset();
+                    }
+                  }}
+                >
+                  Reset
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="application/json,.json"
+                  style={{ display: 'none' }}
+                  onChange={onImportChange}
+                />
+              </div>
+              {importError && (
+                <div className={styles.editorError}>Import failed: {importError}</div>
+              )}
+            </div>
+          )}
+
           <div className={styles.cardGrid}>
-            {CONTENT_ITEMS.map((it, i) => (
+            {items.map((it, i) => (
               <button
                 key={i}
                 className={styles.card}
@@ -786,7 +905,7 @@ export function ContentStudio() {
           <div className={styles.section}>
             <div className={styles.sectionHeader}>Items</div>
             <div className={styles.itemList}>
-              {CONTENT_ITEMS.map((it, i) => {
+              {items.map((it, i) => {
                 const active = i === selectedIdx;
                 return (
                   <button
@@ -944,8 +1063,8 @@ export function ContentStudio() {
             </button>
             <button
               className={styles.actionBtn}
-              onClick={() => setSelectedIdx((i) => (i !== null && i < CONTENT_ITEMS.length - 1 ? i + 1 : i))}
-              disabled={selectedIdx === CONTENT_ITEMS.length - 1}
+              onClick={() => setSelectedIdx((i) => (i !== null && i < items.length - 1 ? i + 1 : i))}
+              disabled={selectedIdx === items.length - 1}
             >
               Next
             </button>
