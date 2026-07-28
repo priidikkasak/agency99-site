@@ -269,7 +269,7 @@ export const et: Translations = {
         duration: 'Kuni 7 päeva',
         price: '€2 790',
         oldPrice: '€3 490',
-        description: 'Uued liidid iga nädal.',
+        description: 'Uued päringud iga nädal.',
         cta: 'Alustame',
       },
       {
