@@ -89,7 +89,7 @@ export const en: Translations = {
         name: 'Starter',
         duration: 'Up to 3 days',
         price: '€1,490',
-        description: 'The basics, done right.',
+        description: 'Live in 3 days, not 3 months.',
         cta: "Let's start",
       },
       {
@@ -99,7 +99,7 @@ export const en: Translations = {
         duration: 'Up to 7 days',
         price: '€2,790',
         oldPrice: '€3,490',
-        description: 'A site that drives measurable traffic.',
+        description: 'Every lead counts. See where the money comes from — live.',
         cta: "Let's start",
       },
       {
@@ -109,7 +109,7 @@ export const en: Translations = {
         price: '€4,990',
         priceSuffix: '+ €149/mo',
         oldPriceSuffix: '€249/mo',
-        description: 'A complete growth operating system.',
+        description: 'A growth machine that runs 24/7 without you.',
         cta: "Let's start",
       },
     ],
