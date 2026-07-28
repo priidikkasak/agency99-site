@@ -177,49 +177,8 @@
   max-width: none;
 }
 
-.divider {
-  height: 1px;
-  background: var(--border-subtle);
-}
-
-.featuresLabel {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-tertiary);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-top: -4px;
-}
-
-.features {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex: 1;
-}
-
-.feature {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  font-size: 13px;
-  font-weight: 300;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.tick {
-  color: var(--text-tertiary);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  flex-shrink: 0;
-}
-
-.tickAccent {
-  color: var(--available);
-}
-
 .ctaPrimary {
+  margin-top: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;

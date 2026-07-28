@@ -21,7 +21,6 @@ export function Pricing() {
           const cardClass = [styles.card, tier.featured && styles.cardFeatured]
             .filter(Boolean)
             .join(' ');
-          const tickClass = [styles.tick, styles.tickAccent].join(' ');
           return (
             <div key={tier.name} className={cardClass}>
               <div className={styles.cardHeader}>
@@ -56,25 +55,6 @@ export function Pricing() {
               </div>
 
               <p className={styles.description}>{tier.description}</p>
-
-              <div className={styles.divider} />
-
-              {tier.featuresLabel && (
-                <span className={styles.featuresLabel}>
-                  {tier.featuresLabel}
-                </span>
-              )}
-
-              <ul className={styles.features} role="list">
-                {tier.features.map((f, i) => (
-                  <li key={i} className={styles.feature}>
-                    <span className={tickClass} aria-hidden="true">
-                      ✓
-                    </span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
 
               <a href="#kontakt" className={styles.ctaPrimary}>
                 {tier.cta}

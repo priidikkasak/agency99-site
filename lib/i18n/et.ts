@@ -36,8 +36,6 @@ export interface PricingTier {
   priceSuffix?: string;
   oldPriceSuffix?: string;
   description: string;
-  featuresLabel?: string;
-  features: string[];
   cta: string;
 }
 
@@ -262,14 +260,6 @@ export const et: Translations = {
         duration: 'Kuni 3 päeva',
         price: '€1 490',
         description: 'Põhi, mis töötab.',
-        featuresLabel: 'Mis sisaldub:',
-        features: [
-          'Täielik turundussait (avaleht, teenused, hinnakiri, kontakt)',
-          'Laeb kiiresti igal pool - Tallinnast Tokyoni',
-          'Turvaline hosting kaasas (1. aasta)',
-          'Eritellimusel disain - ei mingeid templeid',
-          'SEO alused',
-        ],
         cta: 'Alustame',
       },
       {
@@ -280,15 +270,6 @@ export const et: Translations = {
         price: '€2 790',
         oldPrice: '€3 490',
         description: 'Sait, mis toob mõõdetavat liiklust.',
-        featuresLabel: 'Kõik Starteri omadused, lisaks:',
-        features: [
-          '3 kõrge konversiooniga landing-page\u2019i',
-          'Näed iga liidi allikat reaalajas',
-          '30 päeva sisu (15 postitust, kirjutame sulle)',
-          'E-maili turundussüsteem',
-          'Brand kit (kirjatüübid + värvisüsteem)',
-          '1 kuu tugi + 1 strateegia-call',
-        ],
         cta: 'Alustame',
       },
       {
@@ -299,16 +280,6 @@ export const et: Translations = {
         priceSuffix: '+ €149/kuu',
         oldPriceSuffix: '€249/kuu',
         description: 'Täielik growth-operatsioonisüsteem.',
-        featuresLabel: 'Kõik Growthi omadused, lisaks:',
-        features: [
-          'Integreeritud broneerimissüsteem',
-          'Lead-vorm märgib iga allika automaatselt',
-          'AI content engine (piiramatu sotsmeedia postitused)',
-          'Igakuine sooritus-aruanne + review-call',
-          'Automaatne mitme-kanali avaldamine (iganädalaselt)',
-          'A/B testing kahel võtmelehel',
-          '3 kuud tugi (2h reaktsiooniaeg)',
-        ],
         cta: 'Alustame',
       },
     ],
