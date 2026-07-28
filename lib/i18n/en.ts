@@ -114,7 +114,6 @@ export const en: Translations = {
           'See where every lead comes from, live',
           '30 days of content (15 posts, written for you)',
           'Email marketing system',
-          'Cookie-free analytics (no GDPR banner)',
           'Brand kit (fonts + color system)',
           '1 month support + 1 strategy call',
         ],
