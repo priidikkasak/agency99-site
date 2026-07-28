@@ -259,7 +259,7 @@ export const et: Translations = {
         name: 'Starter',
         duration: 'Kuni 3 päeva',
         price: '€1 490',
-        description: 'Live 3 päevaga — mitte 3 kuuga.',
+        description: 'Live 3 päevaga.',
         cta: 'Alustame',
       },
       {
@@ -269,7 +269,7 @@ export const et: Translations = {
         duration: 'Kuni 7 päeva',
         price: '€2 790',
         oldPrice: '€3 490',
-        description: 'Iga liide loeb. Näed reaalajas, kust raha tuleb.',
+        description: 'Uued liidid iga nädal.',
         cta: 'Alustame',
       },
       {
@@ -279,7 +279,7 @@ export const et: Translations = {
         price: '€4 990',
         priceSuffix: '+ €149/kuu',
         oldPriceSuffix: '€249/kuu',
-        description: 'Growth-masin, mis töötab 24/7 ilma sinuta.',
+        description: 'Kasv käib ka magades.',
         cta: 'Alustame',
       },
     ],
