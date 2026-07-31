@@ -7,9 +7,8 @@
   z-index: 1;
   display: grid;
   grid-template-columns: 5fr 7fr;
-  gap: var(--sp-12);
+  gap: var(--sp-8);
   align-items: start;
-  padding: var(--sp-12) 0;
 }
 
 /* Left */
@@ -169,8 +168,7 @@
 @media (max-width: 1023px) {
   .split {
     grid-template-columns: 1fr;
-    gap: var(--sp-8);
-    padding: var(--sp-8) 0;
+    gap: var(--sp-6);
   }
 }
 
@@ -182,7 +180,6 @@
 
 @media (max-width: 767px) {
   .split {
-    padding: var(--sp-6) 0;
     gap: var(--sp-5);
   }
 
