@@ -278,6 +278,7 @@
   line-height: 1.65;
   max-width: none;
   margin: 0;
+  min-height: calc(1.65em * 3);
 }
 
 /* Tech chips */
@@ -352,5 +353,9 @@
   .cardContent {
     margin-top: var(--sp-4);
     gap: 8px;
+  }
+
+  .body {
+    min-height: 0;
   }
 }
