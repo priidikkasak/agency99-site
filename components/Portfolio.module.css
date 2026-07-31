@@ -60,33 +60,47 @@
   }
 }
 
-/* ── Meta row (tag + category) ── */
+/* ── Meta row (tag + category pill) ── */
 
 .meta {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
 }
 
 .tag {
-  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 12px;
   font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  line-height: 1;
 }
 
 .category {
-  color: var(--text-tertiary);
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
-.category::before {
-  content: '/';
-  margin-right: 10px;
-  color: var(--text-tertiary);
-  opacity: 0.4;
+@media (hover: hover) {
+  .row:hover .category {
+    border-color: rgba(var(--accent-rgb), 0.35);
+    background: rgba(var(--accent-rgb), 0.08);
+    color: var(--text-primary);
+  }
 }
 
 /* ── Title + body ── */
@@ -111,15 +125,31 @@
   margin: 0;
 }
 
-/* ── Outcome (subtle inline metric) ── */
+/* ── Outcome pill ── */
 
 .outcome {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 5px 12px;
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  background: rgba(var(--accent-rgb), 0.09);
+  border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   color: var(--accent);
-  margin-top: 4px;
+  margin-top: 6px;
+  white-space: nowrap;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+@media (hover: hover) {
+  .row:hover .outcome {
+    border-color: rgba(var(--accent-rgb), 0.6);
+    background: rgba(var(--accent-rgb), 0.16);
+  }
 }
 
 /* ── Mobile ── */
@@ -133,11 +163,9 @@
     gap: var(--sp-2);
   }
 
-  .meta {
-    font-size: 10px;
-  }
-
+  .tag { font-size: 11px; }
+  .category { font-size: 9px; padding: 4px 10px; }
   .title { font-size: 22px; }
   .body { font-size: 14px; }
-  .outcome { font-size: 11px; }
+  .outcome { font-size: 10px; padding: 4px 11px; }
 }
