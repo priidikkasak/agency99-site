@@ -23,14 +23,19 @@ export function ValuePillars() {
           const meta = PILLAR_META[i] ?? PILLAR_META[0];
           return (
             <li key={i} className={styles.card}>
+              <span className={styles.ghostNum} aria-hidden="true">{`0${i + 1}`}</span>
               <div className={styles.cardHead}>
                 <span className={styles.num} aria-hidden="true">{`0${i + 1}`}</span>
                 <span className={styles.pill}>
                   <span className={styles.pillIcon} aria-hidden="true">{meta.icon}</span>
-                  {meta.pill}
+                  <span className={styles.pillDivider} aria-hidden="true" />
+                  <span className={styles.pillLabel}>{meta.pill}</span>
                 </span>
               </div>
-              <h3 className={styles.title}>{item.title}</h3>
+              <h3 className={styles.title}>
+                {item.title}
+                <span className={styles.titleAccent} aria-hidden="true" />
+              </h3>
               <p className={styles.body}>{item.body}</p>
             </li>
           );
