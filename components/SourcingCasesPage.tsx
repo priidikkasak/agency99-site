@@ -1,18 +1,20 @@
 'use client';
 
+import Link from 'next/link';
 import { useI18n } from '@/lib/i18n/context';
 import { Section } from './Section';
-import styles from './Portfolio.module.css';
+import styles from './SourcingCasesPage.module.css';
 
-export function Portfolio() {
+export function SourcingCasesPage() {
   const { t } = useI18n();
-  const { sectionLabel, headline, items } = t.sourcingCases;
+  const { sectionLabel, headline, items, webPortfolioLabel, webPortfolioLink } =
+    t.sourcingCases;
 
   return (
-    <Section id="portfoolio">
+    <Section id="portfoolio-page">
       <div className={styles.header}>
         <span className={styles.eyebrow}>{sectionLabel}</span>
-        <h2 className={styles.headline}>{headline}</h2>
+        <h1 className={styles.headline}>{headline}</h1>
       </div>
 
       <ul className={styles.list} role="list">
@@ -23,7 +25,7 @@ export function Portfolio() {
               <span className={styles.category}>{item.category}</span>
             </div>
             <div className={styles.rowMain}>
-              <h3 className={styles.title}>{item.title}</h3>
+              <h2 className={styles.title}>{item.title}</h2>
               <p className={styles.body}>{item.body}</p>
             </div>
             <div className={styles.rowRight}>
@@ -32,6 +34,13 @@ export function Portfolio() {
           </li>
         ))}
       </ul>
+
+      <div className={styles.footer}>
+        <span className={styles.footerLabel}>{webPortfolioLabel}</span>
+        <Link href="/webportfolio" className={styles.footerLink}>
+          {webPortfolioLink} →
+        </Link>
+      </div>
     </Section>
   );
 }

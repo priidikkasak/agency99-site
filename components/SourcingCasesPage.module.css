@@ -1,5 +1,5 @@
 /* ============================================================
-   PORTFOLIO — sourcing case list (vertically stacked)
+   SOURCING CASES — full page (list, vertically stacked)
    ============================================================ */
 
 .header {
@@ -19,11 +19,12 @@
 
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(30px, 4vw, 52px);
+  font-size: clamp(34px, 5vw, 64px);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.0;
   color: var(--text-primary);
+  margin: 0;
 }
 
 /* ── List ── */
@@ -37,9 +38,9 @@
 
 .row {
   display: grid;
-  grid-template-columns: 140px 1fr 140px;
+  grid-template-columns: 160px 1fr 160px;
   gap: var(--sp-6);
-  padding: var(--sp-6) 0;
+  padding: var(--sp-7) 0;
   border-bottom: 1px solid var(--border);
   align-items: start;
   cursor: default;
@@ -83,7 +84,7 @@
 
 .tag {
   font-family: var(--font-display);
-  font-size: clamp(40px, 4.5vw, 56px);
+  font-size: clamp(48px, 5.5vw, 72px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -107,33 +108,33 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
-  padding-top: 8px;
+  padding-top: 12px;
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(20px, 2.5vw, 30px);
+  font-size: clamp(22px, 3vw, 34px);
   font-weight: 700;
   letter-spacing: -0.025em;
-  line-height: 1.15;
+  line-height: 1.1;
   color: var(--text-primary);
   transition: color 0.2s ease;
   margin: 0;
 }
 
 .body {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
   color: var(--text-secondary);
   line-height: 1.65;
-  max-width: 60ch;
+  max-width: 62ch;
   margin: 0;
 }
 
 .rowRight {
   display: flex;
   justify-content: flex-end;
-  padding-top: 12px;
+  padding-top: 16px;
 }
 
 .outcome {
@@ -148,10 +149,44 @@
   white-space: nowrap;
 }
 
+/* ── Footer link to webportfolio ── */
+
+.footer {
+  margin-top: var(--sp-8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--border);
+}
+
+.footerLabel {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.footerLink {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  border-radius: 6px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.footerLink:hover {
+  background: rgba(var(--accent-rgb), 0.08);
+  border-color: rgba(var(--accent-rgb), 0.6);
+}
+
 /* ── Tablet ── */
 @media (max-width: 1023px) {
   .row {
-    grid-template-columns: 100px 1fr 120px;
+    grid-template-columns: 110px 1fr 130px;
     gap: var(--sp-4);
   }
 }
@@ -176,14 +211,14 @@
   }
 
   .tag {
-    font-size: clamp(32px, 9vw, 44px);
+    font-size: clamp(32px, 9vw, 48px);
   }
 
   .rowMain {
     padding-top: 0;
   }
 
-  .title { font-size: 20px; }
+  .title { font-size: 22px; }
   .body { font-size: 14px; }
 
   .rowRight {
@@ -194,5 +229,11 @@
   .outcome {
     font-size: 11px;
     padding: 5px 10px;
+  }
+
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--sp-2);
   }
 }

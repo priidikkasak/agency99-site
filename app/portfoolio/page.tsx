@@ -1,18 +1,19 @@
 import type { Metadata } from 'next';
 import { Nav } from '@/components/Nav';
-import { PortfolioPage } from '@/components/PortfolioPage';
+import { SourcingCasesPage } from '@/components/SourcingCasesPage';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Portfoolio - AGENCY99',
   description:
-    'agency99 tehtud tööd: veebilehed, e-poed ja platvormid. Vaata meie projekte.',
+    'agency99 sourcing tulemused: tootjad, tarnijad, investorid ja kinnisvara üle maailma. Iga kontakt käsitsi verifitseeritud.',
   alternates: {
     canonical: 'https://agency99.io/portfoolio',
   },
   openGraph: {
     title: 'Portfoolio - AGENCY99',
-    description: 'Veebilehed, e-pood ja platvormid. Vaata meie tehtud töid.',
+    description:
+      'Sourcing case study: tootjad, investorid, kinnisvara. Reaalsed tulemused.',
     url: 'https://agency99.io/portfoolio',
     type: 'website',
   },
@@ -22,7 +23,7 @@ export default function Portfolio() {
   return (
     <>
       <Nav />
-      <PortfolioPage />
+      <SourcingCasesPage />
       <Footer />
     </>
   );

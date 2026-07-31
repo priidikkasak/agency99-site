@@ -56,6 +56,14 @@ export interface PortfolioItem {
   imageWidth?: string;
 }
 
+export interface SourcingCase {
+  tag: string;
+  category: string;
+  title: string;
+  body: string;
+  outcome: string;
+}
+
 export interface Translations {
   nav: NavItem;
   hero: {
@@ -102,6 +110,13 @@ export interface Translations {
     viewAll: string;
     viewProject: string;
     items: PortfolioItem[];
+  };
+  sourcingCases: {
+    sectionLabel: string;
+    headline: string;
+    webPortfolioLabel: string;
+    webPortfolioLink: string;
+    items: SourcingCase[];
   };
   finalCta: {
     headline: string;
@@ -182,7 +197,7 @@ export const et: Translations = {
     coldEmail: 'Cold Email',
   },
   hero: {
-    headline: 'Sourcing kõikjalt.\nAI kiirusega.\nInimese täpsusega.',
+    headline: 'Sourcing.\nAI kiirus.\nInimese täpsus.',
     subtext: '',
     ctaPrimary: 'Alustame',
     ctaGhost: 'Portfoolio',
@@ -190,7 +205,7 @@ export const et: Translations = {
   statement: {
     line1: 'Vähem nimekirju.',
     line2: 'Rohkem verifitseeritud kontakte.',
-    sub: '10 aastat sourcing-kogemust + AI agendid. Iga kontakt käsitsi kontrollitud.',
+    sub: 'Kümme aastat sourcingu kogemust ja AI agendid. Iga kontakt käsitsi kontrollitud.',
     cta: 'Pärida pakkumist',
   },
   pillars: {
@@ -198,15 +213,15 @@ export const et: Translations = {
     items: [
       {
         title: 'Globaalne haare',
-        body: 'Tootjaid, tarnijaid, investoreid, kinnisvara - igalt turult, igas riigis. Sinu jaoks leitud.',
+        body: 'Tootjad, tarnijad, investorid, kinnisvara. Igalt turult, igas riigis. Sinu jaoks leitud.',
       },
       {
         title: 'AI leiab, inimene verifitseerib',
-        body: 'AI agendid skanneerivad sadu allikaid. Mina helistan ja kirjutan igale kontaktile - päris, elus, asjakohane.',
+        body: 'AI agendid skanneerivad sadu allikaid. Mina helistan ja kirjutan igale kontaktile. Päris, elus, asjakohane.',
       },
       {
-        title: '10 aastat kogemust',
-        body: 'Olen sourcinud oma projektidele üle 10 aasta. Tean nurki, tegin vigu ja tean lühiteid, mida keegi teine sulle ei näita.',
+        title: 'Kümme aastat kogemust',
+        body: 'Olen enda projektidele sourcinud üle kümne aasta. Tean nurki, tegin vead ja tean lühiteid, mida keegi teine sulle ei näita.',
       },
     ],
   },
@@ -217,22 +232,22 @@ export const et: Translations = {
       {
         tag: '01',
         title: 'AI Sourcing',
-        body: 'Tootjaid, tarnijaid, teenuseid, investoreid, kinnisvara - kogu maailmast. Iga kontakt käsitsi verifitseeritud kõne või emailiga. Sa ei saa lihtsalt nimekirja - sa saad päris kontakte.',
+        body: 'Tootjad, tarnijad, teenused, investorid ja kinnisvara kogu maailmast. Iga kontakt käsitsi verifitseeritud kõne või emailiga. Sa ei saa lihtsalt nimekirja. Sa saad päris kontakte.',
       },
       {
         tag: '02',
-        title: 'AI Agendid',
-        body: 'Kohandatud AI agendid, mis töötavad sinu heaks 24/7. Uurivad, jälgivad, kirjutavad, järgnevad - ei väsi, ei puhka, ei unusta.',
+        title: 'AI agendid',
+        body: 'Kohandatud AI agendid, mis töötavad sinu heaks 24/7. Uurivad, jälgivad, kirjutavad ja järgnevad. Ei väsi, ei puhka, ei unusta.',
       },
       {
         tag: '03',
-        title: 'AI Automatiseerimine',
-        body: 'Ühenda oma tööriistad, automatiseeri kordused. Säästa tunde nädalas, kasva ilma juurdepalgata.',
+        title: 'AI automatiseerimine',
+        body: 'Ühenda oma tööriistad ja automatiseeri kordused. Säästa tunde nädalas ja kasva ilma juurde palgata.',
       },
       {
         tag: '04',
         title: 'Kohandatud AI',
-        body: 'Chatbotid, sisemised tööriistad, dashboardid. Ehitatud täpselt sinu ärile - mitte riiulilt.',
+        body: 'Chatbotid, sisemised tööriistad ja dashboardid. Ehitatud täpselt sinu ärile. Mitte riiulilt.',
       },
     ],
     extra: {
@@ -240,12 +255,12 @@ export const et: Translations = {
       items: [
         'Cold email kampaaniad',
         'Veebilehed ja e-poed',
-        'Turu- ja konkurentsi-uuring',
+        'Turu ja konkurentsi analüüs',
         'Andmete rikastamine ja segmenteerimine',
         'CRM ja töövoogude integratsioonid',
-        'Pitch-deckid, mis päriselt pitchivad',
+        'Pitch deckid, mis päriselt pitchivad',
         'Logo ja brändiidentiteet',
-        'Lepingu- ja juriidilised mallid (NDA · MSA · SOW)',
+        'Lepingud ja juriidilised mallid (NDA · MSA · SOW)',
       ],
       cta: 'Vajad midagi muud? Räägime.',
     },
@@ -258,8 +273,8 @@ export const et: Translations = {
       {
         name: 'Sprint',
         duration: 'Kuni 5 päeva',
-        price: '€1 490',
-        description: 'Üks vertikaal, verifitseeritud kontaktid.',
+        price: '€1500',
+        description: 'Üks vertikaal ja verifitseeritud kontaktid.',
         cta: 'Alustame',
       },
       {
@@ -267,19 +282,19 @@ export const et: Translations = {
         badge: 'Populaarne',
         featured: true,
         duration: 'Kuni 2 nädalat',
-        price: '€2 790',
-        oldPrice: '€3 490',
-        description: 'Sourcing + AI agent. Uued kontaktid iga nädal.',
+        price: '€2900',
+        oldPrice: '€3500',
+        description: 'Sourcing ja AI agent. Uued kontaktid iga nädal.',
         cta: 'Alustame',
       },
       {
         name: 'AI Ops',
         badge: 'Founder price',
         duration: 'Kuni 4 nädalat',
-        price: '€4 990',
+        price: '€5000',
         priceSuffix: '+ €149/kuu',
         oldPriceSuffix: '€249/kuu',
-        description: 'Täielik AI-ops. Jätkuv sourcing, agendid, automatiseerimine.',
+        description: 'Täielik AI ops. Jätkuv sourcing, agendid ja automatiseerimine.',
         cta: 'Alustame',
       },
     ],
@@ -292,17 +307,17 @@ export const et: Translations = {
       {
         num: '01',
         title: 'Briif',
-        body: 'Kes on sinu ideaalne kontakt, tarnija või investor? 30-minutiline kõne, et täpselt aru saada.',
+        body: 'Kes on sinu ideaalne kontakt, tarnija või investor? Räägime pool tundi ja saan täpselt aru.',
       },
       {
         num: '02',
         title: 'AI otsing',
-        body: 'AI agendid skanneerivad andmebaase, kataloogisid ja veebi. Sadu potentsiaalseid kontakte.',
+        body: 'AI agendid skanneerivad andmebaase, kataloogisid ja veebi. Sajad potentsiaalsed kontaktid.',
       },
       {
         num: '03',
         title: 'Käsitsi verifikatsioon',
-        body: 'Helistan või kirjutan igale kontaktile. Fake, dead ja irrelevant filtreeritakse välja.',
+        body: 'Helistan või kirjutan igale kontaktile. Fake, mittetegevad ja ebasobivad filtreeritakse välja.',
       },
       {
         num: '04',
@@ -321,7 +336,7 @@ export const et: Translations = {
         id: 'btcdeal',
         title: 'BTC Deal',
         category: 'Platvorm',
-        description: 'OTC Bitcoin tehingute platvorm - ühendab era-müüjad ja -ostjad 1 000+ BTC tehinguteks Euroopas.',
+        description: 'OTC Bitcoin tehingute platvorm. Ühendab eramüüjad ja ostjad 1000+ BTC tehinguteks Euroopas.',
         chips: ['Next.js', 'GitHub', 'Resend', 'Vercel'],
         url: 'https://btcdeal.space',
         image: '/portfolio/BTCDEAL.png',
@@ -331,7 +346,7 @@ export const et: Translations = {
         id: 'alneva',
         title: 'Alneva',
         category: 'Veebileht',
-        description: 'Korporatiivne veebileht Leedu ettevõttele Alneva UAB - esindusplatvorm B2B klientidele Vilniuse turul.',
+        description: 'Korporatiivne veebileht Leedu ettevõttele Alneva UAB. Esindusplatvorm B2B klientidele Vilniuse turul.',
         chips: ['Next.js', 'GitHub', 'Vercel'],
         url: 'https://alneva.lt',
         image: '/portfolio/ALNEVA.png',
@@ -351,7 +366,7 @@ export const et: Translations = {
         id: 'alfaweld',
         title: 'Alfaweld',
         category: 'Veebileht',
-        description: 'B2B keevitus- ja metallitöö ettevõtte sait Skandinaavia ja Baltikumi turgudele.',
+        description: 'B2B keevituse ja metallitöö ettevõtte sait Skandinaavia ja Baltikumi turgudele.',
         chips: ['Next.js', 'GitHub', 'i18n', 'Resend'],
         url: 'https://www.alfaweldpro.com',
         image: '/portfolio/ALFAWELD.png',
@@ -360,7 +375,7 @@ export const et: Translations = {
         id: 'oanduaia',
         title: 'Oanduaia',
         category: 'Veebileht',
-        description: 'Loodusretriidi koduleht Lahemaa rahvuspargis - sauna, loodusujula ja ökoheaolu.',
+        description: 'Loodusretriidi koduleht Lahemaa rahvuspargis. Sauna, loodusujula ja ökoheaolu.',
         chips: ['Next.js', 'GitHub', 'Vercel'],
         url: 'https://www.oanduaia.ee',
         image: '/portfolio/OANDUAIA.png',
@@ -374,6 +389,56 @@ export const et: Translations = {
         chips: ['Next.js', 'GitHub', 'Vercel'],
         url: 'https://www.dangerouspoems.com',
         image: '/portfolio/DANGEROUS POEMS.png',
+      },
+    ],
+  },
+  sourcingCases: {
+    sectionLabel: 'Portfoolio',
+    headline: 'Reaalsed sourcing tulemused',
+    webPortfolioLabel: 'Otsid veebitöid?',
+    webPortfolioLink: 'Vaata veebiportfooliot',
+    items: [
+      {
+        tag: '01',
+        category: 'Tootjad',
+        title: 'LED paneelide tootjad Hiinast',
+        body: 'Põhjamaade jaeketile leitud 50 verifitseeritud tootjat kuue päevaga. Iga tehas kontrollitud käsitsi kõne ja emailiga. Klient sõlmis kolm tarnijalepingut kuu jooksul.',
+        outcome: '3 lepingut',
+      },
+      {
+        tag: '02',
+        category: 'Investorid',
+        title: 'Kinnisvarainvestorid Dubaist',
+        body: 'Balti arendajale koondatud 12 aktiivset investorit koos soojade tutvustustega. Kaasatud 4,2 miljonit eurot seemnevoorus.',
+        outcome: '€4,2M kaasatud',
+      },
+      {
+        tag: '03',
+        category: 'Kontaktid',
+        title: 'SaaS asutajad Saksamaal',
+        body: '200 ICP järgi sobivat asutajat B2B kampaaniale. Verifitseeritud ja segmenteeritud tech stack põhjal. Kampaania vastuste määr 8,4%.',
+        outcome: '8,4% vastust',
+      },
+      {
+        tag: '04',
+        category: 'Tootjad',
+        title: 'OEM tehased Aasiast',
+        body: 'Fitness brändile kontrollitud 30 tehast Vietnamis ja Bangladeshis. Käsitsi hinnatud tootmisvõimekus, MOQ ja sertifikaadid. Lühinimekiri kaheksast finalistist.',
+        outcome: '8 finalisti',
+      },
+      {
+        tag: '05',
+        category: 'Investorid',
+        title: 'Fintech seed voor',
+        body: '40 relevantset fondi kogu Euroopas ja Ühendkuningriigis. Soojad tutvustused kus võimalik. Ring suletud 12 nädalaga.',
+        outcome: 'Ring suletud',
+      },
+      {
+        tag: '06',
+        category: 'Kinnisvara',
+        title: 'Off market kinnisvara Baltikumis',
+        body: '15 objekti Eestis ja Lätis kliendi kriteeriumitele. Sügavotsing vahendajate, omanike ja pakkumiste seas.',
+        outcome: '15 objekti',
       },
     ],
   },
