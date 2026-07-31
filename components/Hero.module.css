@@ -43,7 +43,8 @@
 .headline {
   font-size: clamp(54px, 8vw, 106px);
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
+  word-spacing: 0.06em;
   line-height: 0.91;
   color: var(--text-primary);
   font-family: var(--font-display);

@@ -18,8 +18,8 @@ export const en: Translations = {
     ctaGhost: 'Portfolio',
   },
   statement: {
-    line1: 'Fewer lists.',
-    line2: 'More verified contacts.',
+    line1: 'Your next deal already exists.',
+    line2: 'I find it before your competitors.',
     sub: 'Ten years of sourcing experience and AI agents. Every contact double checked by hand.',
     cta: 'Get a quote',
   },
@@ -28,15 +28,15 @@ export const en: Translations = {
     items: [
       {
         title: 'Global reach',
-        body: 'Manufacturers, suppliers, investors, real estate. From any market, in any country. Found for you.',
+        body: 'Manufacturers, suppliers, investors, real estate and so on. From any market, in any country. Found for you.',
       },
       {
         title: 'AI finds, human verifies',
-        body: 'AI agents scan hundreds of sources. I call and email each contact myself. Real, alive, relevant.',
+        body: 'AI agents scan hundreds of sources. I call and email each contact myself to validate the most relevant.',
       },
       {
         title: 'Ten years of experience',
-        body: "I have been sourcing for my own projects for over ten years. I know the corners, made the mistakes and know the shortcuts nobody else will show you.",
+        body: "I have been sourcing for my own projects for over ten years. I know the tricks, hacks and shortcuts nobody else will show you.",
       },
     ],
   },
@@ -52,17 +52,17 @@ export const en: Translations = {
       {
         tag: '02',
         title: 'AI agents',
-        body: "Custom AI agents working for you 24/7. Research, monitor, write and follow up. Never tired, never on break, never forgetting.",
+        body: "Custom AI agents that work 24/7, research, monitor, write and follow up. Never tired, never on break, never forgetting.",
       },
       {
         tag: '03',
         title: 'AI automation',
-        body: 'Connect your tools and automate the repetitive. Save hours a week and scale without hiring.',
+        body: 'Connect your tools and automate the repetitive. Save hours a week and scale without payroll.',
       },
       {
         tag: '04',
         title: 'Custom AI',
-        body: 'Chatbots, internal tools and dashboards. Built to your business. Not off the shelf.',
+        body: 'Chatbots, internal tools and dashboards. Built to your business.',
       },
     ],
     extra: {
@@ -209,7 +209,7 @@ export const en: Translations = {
   },
   sourcingCases: {
     sectionLabel: 'Portfolio',
-    headline: 'Real sourcing results',
+    headline: 'Recent work',
     webPortfolioLabel: 'Looking for web work?',
     webPortfolioLink: 'See web portfolio',
     items: [

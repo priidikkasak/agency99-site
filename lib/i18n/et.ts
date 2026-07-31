@@ -203,8 +203,8 @@ export const et: Translations = {
     ctaGhost: 'Portfoolio',
   },
   statement: {
-    line1: 'Vähem nimekirju.',
-    line2: 'Rohkem verifitseeritud kontakte.',
+    line1: 'Sinu järgmine tehing on olemas.',
+    line2: 'Leian selle enne konkurente.',
     sub: 'Kümme aastat sourcingu kogemust ja AI agendid. Iga kontakt käsitsi kontrollitud.',
     cta: 'Pärida pakkumist',
   },
@@ -213,15 +213,15 @@ export const et: Translations = {
     items: [
       {
         title: 'Globaalne haare',
-        body: 'Tootjad, tarnijad, investorid, kinnisvara. Igalt turult, igas riigis. Sinu jaoks leitud.',
+        body: 'Tootjad, tarnijad, investorid, kinnisvara jms. Igalt turult, igas riigis. Sinu jaoks leitud.',
       },
       {
         title: 'AI leiab, inimene verifitseerib',
-        body: 'AI agendid skanneerivad sadu allikaid. Mina helistan ja kirjutan igale kontaktile. Päris, elus, asjakohane.',
+        body: 'AI agendid skanneerivad sadu allikaid. Mina helistan ja kirjutan igale kontaktile, et valideerida kõige asjakohasemad.',
       },
       {
         title: 'Kümme aastat kogemust',
-        body: 'Olen enda projektidele sourcinud üle kümne aasta. Tean nurki, tegin vead ja tean lühiteid, mida keegi teine sulle ei näita.',
+        body: 'Olen enda projektidele sourcinud üle kümne aasta. Tean trikke, nippe ja otseteid, mida keegi teine sulle ei näita.',
       },
     ],
   },
@@ -237,17 +237,17 @@ export const et: Translations = {
       {
         tag: '02',
         title: 'AI agendid',
-        body: 'Kohandatud AI agendid, mis töötavad sinu heaks 24/7. Uurivad, jälgivad, kirjutavad ja järgnevad. Ei väsi, ei puhka, ei unusta.',
+        body: 'Kohandatud AI agendid, mis töötavad 24/7, uurivad, jälgivad, kirjutavad ja järgnevad. Ei väsi, ei puhka, ei unusta.',
       },
       {
         tag: '03',
         title: 'AI automatiseerimine',
-        body: 'Ühenda oma tööriistad ja automatiseeri kordused. Säästa tunde nädalas ja kasva ilma juurde palgata.',
+        body: 'Ühenda oma tööriistad ja automatiseeri kordused. Säästa tunde nädalas ja kasva ilma palgakuluta.',
       },
       {
         tag: '04',
         title: 'Kohandatud AI',
-        body: 'Chatbotid, sisemised tööriistad ja dashboardid. Ehitatud täpselt sinu ärile. Mitte riiulilt.',
+        body: 'Chatbotid, sisemised tööriistad ja dashboardid. Ehitatud täpselt sinu ärile.',
       },
     ],
     extra: {
@@ -394,7 +394,7 @@ export const et: Translations = {
   },
   sourcingCases: {
     sectionLabel: 'Portfoolio',
-    headline: 'Reaalsed sourcing tulemused',
+    headline: 'Viimased tööd',
     webPortfolioLabel: 'Otsid veebitöid?',
     webPortfolioLink: 'Vaata veebiportfooliot',
     items: [

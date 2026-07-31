@@ -46,22 +46,24 @@ export function Hero() {
                 className={`${styles.headlineLine}${lineIdx === 1 ? ' ' + styles.headlineLineAccent : ''}`}
               >
                 {line.words.map(({ word, delay }, wordIdx) => (
-                  <span
-                    key={wordIdx}
-                    className={styles.word}
-                    style={
-                      !reduced && started
-                        ? {
-                            animationName: 'wordReveal',
-                            animationDuration: '0.55s',
-                            animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-                            animationFillMode: 'both',
-                            animationDelay: `${delay}ms`,
-                          }
-                        : { opacity: 1 }
-                    }
-                  >
-                    {word}{wordIdx < line.words.length - 1 ? ' ' : ''}
+                  <span key={wordIdx}>
+                    <span
+                      className={styles.word}
+                      style={
+                        !reduced && started
+                          ? {
+                              animationName: 'wordReveal',
+                              animationDuration: '0.55s',
+                              animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                              animationFillMode: 'both',
+                              animationDelay: `${delay}ms`,
+                            }
+                          : { opacity: 1 }
+                      }
+                    >
+                      {word}
+                    </span>
+                    {wordIdx < line.words.length - 1 ? '\u00A0' : ''}
                   </span>
                 ))}
               </span>

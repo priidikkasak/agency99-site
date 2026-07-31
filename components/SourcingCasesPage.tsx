@@ -20,17 +20,16 @@ export function SourcingCasesPage() {
       <ul className={styles.list} role="list">
         {items.map((item) => (
           <li key={item.tag} className={styles.row}>
-            <div className={styles.rowLeft}>
-              <span className={styles.tag} aria-hidden="true">{item.tag}</span>
-              <span className={styles.category}>{item.category}</span>
-            </div>
-            <div className={styles.rowMain}>
-              <h2 className={styles.title}>{item.title}</h2>
-              <p className={styles.body}>{item.body}</p>
-            </div>
-            <div className={styles.rowRight}>
+            <div className={styles.meta}>
+              <div className={styles.metaLeft}>
+                <span className={styles.tag} aria-hidden="true">{item.tag}</span>
+                <span className={styles.dot} aria-hidden="true">/</span>
+                <span className={styles.category}>{item.category}</span>
+              </div>
               <span className={styles.outcome}>{item.outcome}</span>
             </div>
+            <h2 className={styles.title}>{item.title}</h2>
+            <p className={styles.body}>{item.body}</p>
           </li>
         ))}
       </ul>
