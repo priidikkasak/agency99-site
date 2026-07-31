@@ -18,8 +18,8 @@ export const en: Translations = {
     ctaGhost: 'Portfolio',
   },
   statement: {
-    line1: 'Your next opportunity already exists.',
-    line2: 'I find it before your competitors.',
+    line1: "You don't search.",
+    line2: 'I deliver results.',
     sub: 'Ten years of sourcing experience and AI agents. Every contact double checked by hand.',
     cta: 'Get a quote',
   },
@@ -87,10 +87,18 @@ export const en: Translations = {
     tiers: [
       {
         name: 'Sourcing sprint',
-        duration: 'Up to 5 days',
+        duration: 'Up to 5 days · one vertical',
         price: '€1500',
-        description: 'One vertical, verified contacts and AI agents.',
+        description: 'Verified contacts, ready to use from day one.',
         cta: "Let's start",
+        features: [
+          'Up to 50 hand verified contacts',
+          'Custom AI agent for your vertical',
+          'Every contact checked by call or email',
+          'Segmented data with full context',
+          'Delivered within 5 days',
+          'Free 30 day follow up consultation',
+        ],
       },
     ],
     note: 'Quote within 24 hours. Custom package available for larger scope.',

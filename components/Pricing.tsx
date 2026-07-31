@@ -56,6 +56,17 @@ export function Pricing() {
 
               <p className={styles.description}>{tier.description}</p>
 
+              {tier.features && tier.features.length > 0 && (
+                <ul className={styles.features} role="list">
+                  {tier.features.map((feature) => (
+                    <li key={feature} className={styles.feature}>
+                      <span className={styles.check} aria-hidden="true">✓</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
               <a href="#kontakt" className={styles.ctaPrimary}>
                 {tier.cta}
               </a>

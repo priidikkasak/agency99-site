@@ -37,6 +37,7 @@ export interface PricingTier {
   oldPriceSuffix?: string;
   description: string;
   cta: string;
+  features?: string[];
 }
 
 export interface ProcessStep {
@@ -203,8 +204,8 @@ export const et: Translations = {
     ctaGhost: 'Portfoolio',
   },
   statement: {
-    line1: 'Sinu järgmine võimalus on olemas.',
-    line2: 'Leian selle enne konkurente.',
+    line1: 'Sina ei pea otsima.',
+    line2: 'Mina toon tulemused.',
     sub: 'Kümme aastat sourcingu kogemust ja AI agendid. Iga kontakt käsitsi kontrollitud.',
     cta: 'Pärida pakkumist',
   },
@@ -272,10 +273,18 @@ export const et: Translations = {
     tiers: [
       {
         name: 'Sourcing sprint',
-        duration: 'Kuni 5 päeva',
+        duration: 'Kuni 5 päeva · üks vertikaal',
         price: '€1500',
-        description: 'Üks vertikaal, verifitseeritud kontaktid ja AI agendid.',
+        description: 'Verifitseeritud kontaktid, mis on kohe kasutamiseks valmis.',
         cta: 'Alustame',
+        features: [
+          'Kuni 50 käsitsi verifitseeritud kontakti',
+          'Kohandatud AI agent sinu vertikaali jaoks',
+          'Iga kontakt kontrollitud kõne või emailiga',
+          'Segmenteeritud andmed koos kontekstiga',
+          'Kohaletoimetus 5 päeva jooksul',
+          'Tasuta järelkonsultatsioon 30 päeva',
+        ],
       },
     ],
     note: 'Hinnapakkumine 24 tunni jooksul. Suurema mahu korral tellitav pakett.',
