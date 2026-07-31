@@ -65,7 +65,7 @@ export function Hero() {
                     >
                       {word}
                     </span>
-                    {wordIdx < line.words.length - 1 ? '\u00A0' : ''}
+                    {wordIdx < line.words.length - 1 ? ' ' : ''}
                   </span>
                 ))}
               </span>

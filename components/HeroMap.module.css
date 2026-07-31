@@ -79,16 +79,20 @@
   }
 }
 
-/* Mobile: dim it more, disable hover */
+/* Mobile: reposition to show Europe/Asia (origin region), disable hover */
 @media (max-width: 767px) {
   .wrap {
-    -webkit-mask-image: radial-gradient(ellipse at 60% 55%, black 25%, transparent 72%);
-            mask-image: radial-gradient(ellipse at 60% 55%, black 25%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%);
+            mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%);
   }
 
   .map {
-    opacity: 0.35;
+    opacity: 0.42;
+    width: 200%;
+    height: auto;
     min-width: 900px;
+    top: 45%;
+    left: 30%;
     pointer-events: none;
   }
 }
