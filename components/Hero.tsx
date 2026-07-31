@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useI18n } from '@/lib/i18n/context';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { HeroMap } from './HeroMap';
 import styles from './Hero.module.css';
 
 export function Hero() {
@@ -36,6 +37,7 @@ export function Hero() {
   return (
     <section className={styles.hero} aria-label="Hero">
       <div className={styles.glow} aria-hidden="true" />
+      <HeroMap />
 
       <div className={`container ${styles.inner}`}>
         <div className={styles.content}>

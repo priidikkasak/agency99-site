@@ -1,0 +1,94 @@
+.wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(ellipse at 65% 55%, black 30%, transparent 78%);
+          mask-image: radial-gradient(ellipse at 65% 55%, black 30%, transparent 78%);
+}
+
+.map {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130%;
+  height: 130%;
+  min-width: 1200px;
+  pointer-events: auto;
+  opacity: 0.55;
+}
+
+.country {
+  fill: rgba(var(--accent-rgb), 0.02);
+  stroke: rgba(var(--accent-rgb), 0.18);
+  stroke-width: 0.4;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+@media (hover: hover) {
+  .country:hover,
+  .countryHovered {
+    fill: rgba(var(--accent-rgb), 0.14);
+    stroke: rgba(var(--accent-rgb), 0.55);
+    cursor: crosshair;
+  }
+}
+
+/* Origin (Estonia) */
+.originDot {
+  fill: #B8B0FF;
+  filter: drop-shadow(0 0 8px rgba(184, 176, 255, 0.9));
+}
+
+.originPulse {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: heroPulse 3.2s ease-out infinite;
+}
+
+/* Destination hotspots */
+.hotspotDot {
+  fill: rgba(184, 176, 255, 0.75);
+  filter: drop-shadow(0 0 4px rgba(139, 123, 255, 0.7));
+}
+
+.hotspotPulse {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: heroPulseSlow 4.5s ease-out infinite;
+}
+
+@keyframes heroPulse {
+  0% { transform: scale(0.4); opacity: 0.9; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes heroPulseSlow {
+  0% { transform: scale(0.3); opacity: 0.7; }
+  75% { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .originPulse,
+  .hotspotPulse {
+    animation: none;
+  }
+}
+
+/* Mobile: dim it more, disable hover */
+@media (max-width: 767px) {
+  .wrap {
+    -webkit-mask-image: radial-gradient(ellipse at 60% 55%, black 25%, transparent 72%);
+            mask-image: radial-gradient(ellipse at 60% 55%, black 25%, transparent 72%);
+  }
+
+  .map {
+    opacity: 0.35;
+    min-width: 900px;
+    pointer-events: none;
+  }
+}
