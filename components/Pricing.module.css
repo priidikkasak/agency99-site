@@ -248,12 +248,23 @@
 }
 
 .note {
-  margin-top: var(--sp-4);
+  margin: var(--sp-4) auto 0;
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-tertiary);
   text-align: center;
   letter-spacing: 0.04em;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 767px) {
+  .note {
+    white-space: normal;
+    font-size: 10.5px;
+  }
 }
 
 /* ── Tablet ── */
