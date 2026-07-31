@@ -18,13 +18,26 @@ export function Portfolio() {
       <ul className={styles.list} role="list">
         {items.map((item) => (
           <li key={item.tag} className={styles.row}>
-            <div className={styles.meta}>
-              <span className={styles.tag} aria-hidden="true">{item.tag}</span>
-              <span className={styles.category}>{item.category}</span>
+            <span className={styles.ghostNum} aria-hidden="true">{item.tag}</span>
+
+            <div className={styles.metaPill}>
+              <span className={styles.metaNum} aria-hidden="true">{item.tag}</span>
+              <span className={styles.metaDivider} aria-hidden="true" />
+              <span className={styles.metaCategory}>{item.category}</span>
             </div>
-            <h3 className={styles.title}>{item.title}</h3>
+
+            <h3 className={styles.title}>
+              {item.title}
+              <span className={styles.titleAccent} aria-hidden="true" />
+            </h3>
+
             <p className={styles.body}>{item.body}</p>
-            <span className={styles.outcome}>{item.outcome}</span>
+
+            <span className={styles.outcome}>
+              <span className={styles.outcomeIcon} aria-hidden="true">→</span>
+              <span className={styles.outcomeDivider} aria-hidden="true" />
+              <span className={styles.outcomeText}>{item.outcome}</span>
+            </span>
           </li>
         ))}
       </ul>
