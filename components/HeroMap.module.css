@@ -17,13 +17,13 @@
   height: 130%;
   min-width: 1200px;
   pointer-events: auto;
-  opacity: 0.75;
+  opacity: 0.95;
 }
 
 .country {
-  fill: rgba(var(--accent-rgb), 0.035);
-  stroke: rgba(var(--accent-rgb), 0.42);
-  stroke-width: 0.6;
+  fill: rgba(var(--accent-rgb), 0.06);
+  stroke: rgba(var(--accent-rgb), 0.75);
+  stroke-width: 1;
   stroke-linejoin: round;
   transition: fill 0.3s ease, stroke 0.3s ease;
   vector-effect: non-scaling-stroke;
@@ -89,7 +89,7 @@
   }
 
   .map {
-    opacity: 0.6;
+    opacity: 0.8;
     width: 200%;
     height: auto;
     min-width: 900px;
