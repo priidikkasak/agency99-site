@@ -198,4 +198,15 @@
   .submit {
     width: 100%;
   }
+
+  .socialBtns {
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .socialBtn {
+    width: 100%;
+    justify-content: center;
+    height: 48px;
+  }
 }
