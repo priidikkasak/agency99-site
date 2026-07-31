@@ -1,23 +1,5 @@
 .ctaSection {
   position: relative;
-  overflow: hidden;
-}
-
-.glow {
-  position: absolute;
-  bottom: -20%;
-  left: 30%;
-  transform: translateX(-50%);
-  width: min(700px, 110vw);
-  height: min(500px, 80vw);
-  border-radius: 50%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(var(--accent-rgb), 0.06) 0%,
-    transparent 65%
-  );
-  pointer-events: none;
-  z-index: 0;
 }
 
 .split {

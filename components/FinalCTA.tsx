@@ -38,7 +38,6 @@ export function FinalCTA() {
 
   return (
     <Section id="kontakt" className={styles.ctaSection}>
-      <div className={styles.glow} aria-hidden="true" />
       <div className={styles.split}>
 
         {/* Left */}

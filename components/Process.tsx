@@ -19,7 +19,7 @@ export function Process() {
           <li key={i} className={styles.step}>
             <div className={styles.marker} aria-hidden="true">
               <span className={styles.dot} />
-              {i < steps.length - 1 && <span className={styles.line} />}
+              <span className={styles.line} />
             </div>
             <span className={styles.num} aria-hidden="true">{step.num}</span>
             <h3 className={styles.title}>{step.title}</h3>

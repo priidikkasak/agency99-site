@@ -6,7 +6,7 @@ import styles from './Pricing.module.css';
 
 export function Pricing() {
   const { t } = useI18n();
-  const { tiers, sectionLabel, headline, subtext, note } = t.pricing;
+  const { tiers, sectionLabel, headline, subtext } = t.pricing;
 
   return (
     <Section id="hinnad">
@@ -78,8 +78,6 @@ export function Pricing() {
           );
         })}
       </div>
-
-      <p className={styles.note}>{note}</p>
     </Section>
   );
 }

@@ -21,15 +21,12 @@ export function SourcingCasesPage() {
         {items.map((item) => (
           <li key={item.tag} className={styles.row}>
             <div className={styles.meta}>
-              <div className={styles.metaLeft}>
-                <span className={styles.tag} aria-hidden="true">{item.tag}</span>
-                <span className={styles.dot} aria-hidden="true">/</span>
-                <span className={styles.category}>{item.category}</span>
-              </div>
-              <span className={styles.outcome}>{item.outcome}</span>
+              <span className={styles.tag} aria-hidden="true">{item.tag}</span>
+              <span className={styles.category}>{item.category}</span>
             </div>
             <h2 className={styles.title}>{item.title}</h2>
             <p className={styles.body}>{item.body}</p>
+            <span className={styles.outcome}>{item.outcome}</span>
           </li>
         ))}
       </ul>

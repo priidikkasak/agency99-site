@@ -14,11 +14,12 @@
 
 .line {
   font-family: var(--font-display);
-  font-size: clamp(64px, 9vw, 128px);
+  font-size: clamp(48px, 7vw, 96px);
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 0.92;
+  line-height: 0.95;
   color: var(--bg-primary);
+  white-space: nowrap;
 }
 
 @media (max-width: 767px) {
@@ -27,6 +28,7 @@
   }
 
   .line {
-    font-size: clamp(36px, 10.5vw, 52px);
+    font-size: clamp(32px, 9vw, 48px);
+    white-space: nowrap;
   }
 }
