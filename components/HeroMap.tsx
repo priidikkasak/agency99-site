@@ -14,8 +14,22 @@ const VIEW_W = 1000;
 const VIEW_H = 500;
 const ORIGIN_ALPHA2 = 'EE';
 
-// Strategic sourcing destinations
-const HIGHLIGHT_ALPHA2 = new Set(['CN', 'AE', 'US', 'DE', 'GB', 'VN', 'SG', 'IN']);
+// Strategic sourcing destinations — global coverage for a professional feel
+const HIGHLIGHT_ALPHA2 = new Set([
+  // Europe
+  'GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'PT', 'IE', 'AT', 'CH',
+  'PL', 'CZ', 'SE', 'NO', 'FI', 'DK', 'LT', 'LV', 'GR', 'HU', 'RO',
+  // Asia
+  'CN', 'JP', 'KR', 'IN', 'VN', 'TH', 'MY', 'ID', 'PH', 'SG', 'TW', 'HK', 'BD', 'PK',
+  // Middle East
+  'AE', 'SA', 'IL', 'TR', 'QA',
+  // Americas
+  'US', 'CA', 'MX', 'BR', 'AR', 'CL', 'CO', 'PE',
+  // Africa
+  'ZA', 'EG', 'MA', 'NG', 'KE',
+  // Oceania
+  'AU', 'NZ',
+]);
 
 export function HeroMap() {
   const { paths, originCoords, hotspots } = useMemo(() => {
@@ -91,17 +105,25 @@ export function HeroMap() {
         </g>
 
         {/* Destination hotspots — subtle pulsing dots */}
-        {hotspots.map((h, i) => (
-          <g key={h.alpha2} transform={`translate(${h.x} ${h.y})`}>
-            <circle
-              r={18}
-              fill="url(#heroHotspot)"
-              className={styles.hotspotPulse}
-              style={{ animationDelay: `${i * 0.4}s` }}
-            />
-            <circle r={2.5} className={styles.hotspotDot} />
-          </g>
-        ))}
+        {hotspots.map((h, i) => {
+          // Staggered pulse with varied duration for organic wave feel
+          const delay = (i * 0.18) % 5;
+          const duration = 4.2 + ((i * 0.31) % 2.4);
+          return (
+            <g key={h.alpha2} transform={`translate(${h.x} ${h.y})`}>
+              <circle
+                r={14}
+                fill="url(#heroHotspot)"
+                className={styles.hotspotPulse}
+                style={{
+                  animationDelay: `${delay}s`,
+                  animationDuration: `${duration}s`,
+                }}
+              />
+              <circle r={2} className={styles.hotspotDot} />
+            </g>
+          );
+        })}
 
         {/* Origin — Estonia — brighter pulse */}
         {originCoords && (
