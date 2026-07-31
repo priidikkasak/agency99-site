@@ -4,26 +4,9 @@ import { useI18n } from '@/lib/i18n/context';
 import { Section } from './Section';
 import styles from './Process.module.css';
 
-function ProcessStep({
-  num,
-  title,
-  body,
-}: {
-  num: string;
-  title: string;
-  body: string;
-}) {
-  return (
-    <li className={styles.step}>
-      <span className={styles.num} aria-hidden="true">{num}</span>
-      <h3 className={styles.title}>{title}</h3>
-      <p className={styles.body}>{body}</p>
-    </li>
-  );
-}
-
 export function Process() {
   const { t } = useI18n();
+  const steps = t.process.steps;
 
   return (
     <Section id="protsess">
@@ -32,13 +15,16 @@ export function Process() {
         <h2 className={styles.headline}>{t.process.headline}</h2>
       </div>
       <ol className={styles.steps} role="list">
-        {t.process.steps.map((step, i) => (
-          <ProcessStep
-            key={i}
-            num={step.num}
-            title={step.title}
-            body={step.body}
-          />
+        {steps.map((step, i) => (
+          <li key={i} className={styles.step}>
+            <div className={styles.marker} aria-hidden="true">
+              <span className={styles.dot} />
+              {i < steps.length - 1 && <span className={styles.line} />}
+            </div>
+            <span className={styles.num} aria-hidden="true">{step.num}</span>
+            <h3 className={styles.title}>{step.title}</h3>
+            <p className={styles.body}>{step.body}</p>
+          </li>
         ))}
       </ol>
     </Section>

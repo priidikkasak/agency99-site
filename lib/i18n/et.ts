@@ -296,21 +296,21 @@ export const et: Translations = {
       {
         num: '01',
         title: 'Briif',
-        body: 'Kes on sinu ideaalne kontakt, tarnija või investor? Räägime pool tundi ja saan täpselt aru.',
+        body: 'Kes on sinu ideaalne kontakt, tarnija või investor? Pool tundi kõnet ja mul on täpne pilt.',
       },
       {
         num: '02',
         title: 'AI otsing',
-        body: 'AI agendid skanneerivad andmebaase, kataloogisid ja veebi. Sajad potentsiaalsed kontaktid.',
+        body: 'AI agendid skanneerivad andmebaase, katalooge ja avatud veebi. Sajad potentsiaalsed kontaktid ühes kohas.',
       },
       {
         num: '03',
-        title: 'Käsitsi verifikatsioon',
-        body: 'Helistan või kirjutan igale kontaktile. Fake, mittetegevad ja ebasobivad filtreeritakse välja.',
+        title: 'Käsitsi kontroll',
+        body: 'Helistan või kirjutan igale kontaktile. Võltsid, mitteaktiivsed ja ebasobivad filtreeritakse välja.',
       },
       {
         num: '04',
-        title: 'Deliver',
+        title: 'Tulemus',
         body: 'Verifitseeritud nimekiri, iga kontakt kontekstiga. Kohe kasutamiseks valmis.',
       },
     ],

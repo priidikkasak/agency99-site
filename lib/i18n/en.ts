@@ -110,17 +110,17 @@ export const en: Translations = {
       {
         num: '01',
         title: 'Brief',
-        body: "Who's your ideal contact, supplier or investor? A half hour call to get it exactly right.",
+        body: "Who's your ideal contact, supplier or investor? A half hour call and I have the full picture.",
       },
       {
         num: '02',
         title: 'AI search',
-        body: 'AI agents scan databases, catalogs and the open web. Hundreds of potential leads.',
+        body: 'AI agents scan databases, catalogs and the open web. Hundreds of potential leads in one place.',
       },
       {
         num: '03',
-        title: 'Manual verification',
-        body: 'I call or email each contact myself. Fake, dead and irrelevant are filtered out.',
+        title: 'Manual check',
+        body: 'I call or email each contact myself. Fake, inactive and irrelevant are filtered out.',
       },
       {
         num: '04',

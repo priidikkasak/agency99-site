@@ -20,74 +20,95 @@
   letter-spacing: -0.03em;
   line-height: 1.0;
   color: var(--text-primary);
+  margin: 0;
 }
 
 .steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0;
+  gap: var(--sp-5);
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .step {
+  position: relative;
+  padding-top: var(--sp-6);
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
-  padding: var(--sp-4) var(--sp-4) var(--sp-4) 0;
-  border-top: 2px solid var(--border);
-  position: relative;
-  transition: border-color 0.25s ease;
 }
 
-.step::before {
-  content: '';
+/* ── Timeline marker ── */
+
+.marker {
   position: absolute;
-  top: -2px;
+  top: 0;
   left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--accent-gradient);
-  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: 12px;
 }
 
-.step + .step {
-  border-left: 1px solid var(--border);
-  padding-left: var(--sp-4);
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.14);
+  flex-shrink: 0;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .step:hover::before {
-    width: 100%;
+.line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--accent-rgb), 0.55),
+    rgba(var(--accent-rgb), 0.1)
+  );
+  margin-left: 6px;
+}
+
+@media (hover: hover) {
+  .step:hover .dot {
+    box-shadow: 0 0 0 6px rgba(var(--accent-rgb), 0.22);
+    transform: scale(1.1);
   }
-
+  .step:hover .num {
+    color: rgba(var(--accent-rgb), 0.55);
+  }
   .step:hover .title {
     color: var(--accent);
   }
 }
 
+/* ── Content ── */
+
 .num {
   font-family: var(--font-display);
-  font-size: clamp(52px, 6vw, 80px);
+  font-size: clamp(44px, 5vw, 64px);
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 1;
   color: rgba(var(--accent-rgb), 0.22);
-  margin-bottom: var(--sp-2);
-  display: block;
-  transition: color 0.25s ease;
-}
-
-.step:hover .num {
-  color: rgba(var(--accent-rgb), 0.5);
+  line-height: 1;
+  margin-top: var(--sp-3);
+  transition: color 0.3s ease;
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: clamp(18px, 2vw, 22px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--text-primary);
-  transition: color 0.2s ease;
+  margin: 0;
+  margin-top: var(--sp-2);
+  transition: color 0.25s ease;
 }
 
 .body {
@@ -95,26 +116,24 @@
   font-weight: 300;
   color: var(--text-secondary);
   line-height: 1.65;
-  max-width: none;
   margin: 0;
+  max-width: 28ch;
 }
 
+/* ── Tablet: 2 columns ── */
 @media (max-width: 1023px) {
   .steps {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-6);
   }
 
-  .step:nth-child(2n+1) {
-    border-left: none;
-    padding-left: 0;
-  }
-
-  .step:nth-child(n+3) {
-    border-top: 2px solid var(--border);
-    margin-top: var(--sp-2);
+  /* Hide the connector on last of each row */
+  .step:nth-child(2n) .line {
+    display: none;
   }
 }
 
+/* ── Mobile: vertical stack with left-side timeline ── */
 @media (max-width: 767px) {
   .header {
     margin-bottom: var(--sp-5);
@@ -122,19 +141,57 @@
 
   .steps {
     grid-template-columns: 1fr;
+    gap: 0;
   }
 
   .step {
-    padding: var(--sp-3) 0;
+    padding-top: var(--sp-4);
+    padding-bottom: var(--sp-4);
+    padding-left: var(--sp-5);
+    gap: 4px;
   }
 
-  .step + .step {
-    border-left: none;
-    padding-left: 0;
+  .marker {
+    top: var(--sp-4);
+    left: 0;
+    right: auto;
+    bottom: 0;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    width: 12px;
+  }
+
+  .line {
+    display: block !important;
+    flex: 1;
+    width: 1px;
+    height: auto;
+    min-height: 40px;
+    margin-left: 0;
+    margin-top: 6px;
+    background: linear-gradient(
+      180deg,
+      rgba(var(--accent-rgb), 0.55),
+      rgba(var(--accent-rgb), 0.1)
+    );
+  }
+
+  .step:last-child .line {
+    display: none !important;
   }
 
   .num {
-    font-size: 44px;
-    margin-bottom: var(--sp-1);
+    font-size: 40px;
+    margin-top: 0;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-top: 4px;
+  }
+
+  .body {
+    max-width: none;
   }
 }

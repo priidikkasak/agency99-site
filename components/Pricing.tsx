@@ -21,55 +21,59 @@ export function Pricing() {
           const cardClass = [styles.card, tier.featured && styles.cardFeatured]
             .filter(Boolean)
             .join(' ');
+          const hasPostRow = tier.priceSuffix || tier.oldPriceSuffix;
           return (
             <div key={tier.name} className={cardClass}>
-              <div className={styles.cardHeader}>
-                <div className={styles.nameRow}>
-                  <span className={styles.planName}>{tier.name}</span>
-                  {tier.badge && (
-                    <span className={styles.badge}>{tier.badge}</span>
-                  )}
+              <div className={styles.cardLeft}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.nameRow}>
+                    <span className={styles.planName}>{tier.name}</span>
+                    {tier.badge && (
+                      <span className={styles.badge}>{tier.badge}</span>
+                    )}
+                  </div>
+                  <span className={styles.duration}>{tier.duration}</span>
                 </div>
-                <span className={styles.duration}>{tier.duration}</span>
-              </div>
 
-              <div className={styles.priceBlock}>
-                <div className={styles.preRow}>
+                <div className={styles.priceBlock}>
                   {tier.oldPrice && (
                     <span className={styles.oldPrice}>{tier.oldPrice}</span>
                   )}
-                </div>
-                <span className={styles.price}>{tier.price}</span>
-                <div className={styles.postRow}>
-                  {tier.oldPriceSuffix && (
-                    <span className={styles.oldPriceSuffix}>
-                      {tier.oldPriceSuffix}
-                    </span>
+                  <span className={styles.price}>{tier.price}</span>
+                  {hasPostRow && (
+                    <div className={styles.postRow}>
+                      {tier.oldPriceSuffix && (
+                        <span className={styles.oldPriceSuffix}>
+                          {tier.oldPriceSuffix}
+                        </span>
+                      )}
+                      {tier.priceSuffix && (
+                        <span className={styles.priceSuffix}>
+                          {tier.priceSuffix}
+                        </span>
+                      )}
+                    </div>
                   )}
-                  {tier.priceSuffix && (
-                    <span className={styles.priceSuffix}>
-                      {tier.priceSuffix}
-                    </span>
-                  )}
                 </div>
+
+                <p className={styles.description}>{tier.description}</p>
               </div>
 
-              <p className={styles.description}>{tier.description}</p>
-
-              {tier.features && tier.features.length > 0 && (
-                <ul className={styles.features} role="list">
-                  {tier.features.map((feature) => (
-                    <li key={feature} className={styles.feature}>
-                      <span className={styles.check} aria-hidden="true">✓</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              <a href="#kontakt" className={styles.ctaPrimary}>
-                {tier.cta}
-              </a>
+              <div className={styles.cardRight}>
+                {tier.features && tier.features.length > 0 && (
+                  <ul className={styles.features} role="list">
+                    {tier.features.map((feature) => (
+                      <li key={feature} className={styles.feature}>
+                        <span className={styles.check} aria-hidden="true">✓</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <a href="#kontakt" className={styles.ctaPrimary}>
+                  {tier.cta}
+                </a>
+              </div>
             </div>
           );
         })}
