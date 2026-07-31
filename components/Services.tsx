@@ -6,10 +6,10 @@ import { Section } from './Section';
 import styles from './Services.module.css';
 
 const SERVICE_META = [
-  { icon: '○', chips: ['Next.js', 'Vercel', 'SEO'] },
-  { icon: '□', chips: ['Stripe', 'Ostukorv'] },
-  { icon: '△', chips: ['Supabase', 'API', 'Auth'] },
-  { icon: '◇', chips: ['Logo', 'Bränding', 'UI/UX'] },
+  { icon: '⊙', chips: ['Global', 'Verified', '10y+'] },
+  { icon: '⬢', chips: ['24/7', 'Autonomous', 'GPT · Claude'] },
+  { icon: '↻', chips: ['n8n', 'Zapier', 'Custom API'] },
+  { icon: '✦', chips: ['RAG', 'Chatbots', 'Dashboards'] },
 ] as const;
 
 function ServiceCard({
