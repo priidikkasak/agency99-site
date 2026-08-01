@@ -52,8 +52,4 @@
     font-size: clamp(32px, 9vw, 48px);
     white-space: nowrap;
   }
-
-  .network {
-    display: none;
-  }
 }
