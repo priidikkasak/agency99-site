@@ -16,15 +16,9 @@
   fill: rgba(15, 15, 13, 0.75);
 }
 
-.trail {
-  stroke: rgba(15, 15, 13, 0.95);
-  stroke-width: 1.8;
-  stroke-linecap: round;
-}
-
-.head {
+.arrow {
   fill: rgba(15, 15, 13, 1);
-  filter: drop-shadow(0 0 5px rgba(15, 15, 13, 0.55));
+  filter: drop-shadow(0 0 6px rgba(15, 15, 13, 0.55));
 }
 
 .inner {
