@@ -84,17 +84,17 @@
 /* Mobile: reposition to show Europe/Asia (origin region), disable hover */
 @media (max-width: 767px) {
   .wrap {
-    -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 32%, black 10%, transparent 75%);
-            mask-image: radial-gradient(ellipse 70% 50% at 50% 32%, black 10%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 55% at 50% 30%, black 20%, transparent 80%);
+            mask-image: radial-gradient(ellipse 85% 55% at 50% 30%, black 20%, transparent 80%);
   }
 
   .map {
-    opacity: 0.55;
-    width: 200%;
+    opacity: 0.5;
+    width: 180%;
     height: auto;
-    min-width: 900px;
-    top: 38%;
-    left: 30%;
+    min-width: 780px;
+    top: 30%;
+    left: 50%;
     pointer-events: none;
   }
 }
