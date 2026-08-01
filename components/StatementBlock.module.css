@@ -52,4 +52,8 @@
     font-size: clamp(32px, 9vw, 48px);
     white-space: nowrap;
   }
+
+  .dot {
+    fill: rgba(15, 15, 13, 0.6);
+  }
 }
