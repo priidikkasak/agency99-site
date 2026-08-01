@@ -84,16 +84,16 @@
 /* Mobile: reposition to show Europe/Asia (origin region), disable hover */
 @media (max-width: 767px) {
   .wrap {
-    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%);
-            mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 32%, black 10%, transparent 75%);
+            mask-image: radial-gradient(ellipse 70% 50% at 50% 32%, black 10%, transparent 75%);
   }
 
   .map {
-    opacity: 0.8;
+    opacity: 0.55;
     width: 200%;
     height: auto;
     min-width: 900px;
-    top: 45%;
+    top: 38%;
     left: 30%;
     pointer-events: none;
   }

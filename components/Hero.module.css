@@ -272,6 +272,7 @@
     font-size: 15px;
     border-radius: 10px;
     justify-content: center;
+    background: var(--bg-primary);
   }
 
   .stats {
