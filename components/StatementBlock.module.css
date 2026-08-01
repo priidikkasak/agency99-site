@@ -3,45 +3,34 @@
   background: linear-gradient(135deg, #7060EF 0%, #B8ACFF 100%);
   overflow: hidden;
   isolation: isolate;
+  cursor: crosshair;
 }
 
-.spotlight {
+.network {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle 340px at var(--mx, 50%) var(--my, 50%),
-    rgba(255, 255, 255, 0.35) 0%,
-    rgba(255, 255, 255, 0.08) 35%,
-    transparent 70%
-  );
-  opacity: var(--spot-opacity, 0);
-  transition: opacity 0.35s ease;
-  pointer-events: none;
   z-index: 1;
-  mix-blend-mode: soft-light;
+  pointer-events: none;
 }
 
-.grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 56px 56px;
-  -webkit-mask-image: radial-gradient(
-    circle 300px at var(--mx, 50%) var(--my, 50%),
-    black 0%,
-    transparent 70%
-  );
-          mask-image: radial-gradient(
-    circle 300px at var(--mx, 50%) var(--my, 50%),
-    black 0%,
-    transparent 70%
-  );
-  opacity: var(--spot-opacity, 0);
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 1;
+.dot {
+  fill: rgba(15, 15, 13, 0.85);
+  transition: r 0.12s ease-out;
+}
+
+.link {
+  stroke: rgba(15, 15, 13, 0.7);
+  stroke-linecap: round;
+}
+
+.cursorRing {
+  fill: none;
+  stroke: rgba(15, 15, 13, 0.85);
+  stroke-width: 1.2;
+}
+
+.cursorDot {
+  fill: rgba(15, 15, 13, 0.95);
 }
 
 .inner {
@@ -53,6 +42,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-5);
+  pointer-events: none;
 }
 
 .line {
@@ -66,6 +56,10 @@
 }
 
 @media (max-width: 767px) {
+  .block {
+    cursor: default;
+  }
+
   .inner {
     padding: var(--sp-6) var(--sp-4);
   }
@@ -75,8 +69,13 @@
     white-space: nowrap;
   }
 
-  .spotlight,
-  .grid {
+  .network {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    transition: none;
   }
 }
