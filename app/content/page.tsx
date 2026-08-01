@@ -4,7 +4,13 @@ import { ContentStudio } from '@/components/ContentStudio';
 
 export const metadata: Metadata = {
   title: 'Content',
-  description: 'Single-page studio for IG stills + reels from agency99 short copy.',
+  description: 'Content — Single-page studio for IG stills + reels from agency99 short copy.',
+  openGraph: {
+    title: 'AGENCY99',
+    description: 'Content',
+    siteName: 'AGENCY99',
+    type: 'website',
+  },
   robots: {
     index: false,
     follow: false,

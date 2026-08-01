@@ -4,17 +4,17 @@ import { SourcingCasesPage } from '@/components/SourcingCasesPage';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Portfoolio - AGENCY99',
+  title: 'Portfoolio',
   description:
-    'agency99 sourcing tulemused: tootjad, tarnijad, investorid ja kinnisvara üle maailma. Iga kontakt käsitsi verifitseeritud.',
+    'Portfoolio — agency99 sourcing tulemused: tootjad, tarnijad, investorid ja kinnisvara üle maailma. Iga kontakt käsitsi verifitseeritud.',
   alternates: {
     canonical: 'https://agency99.io/portfoolio',
   },
   openGraph: {
-    title: 'Portfoolio - AGENCY99',
-    description:
-      'Sourcing case study: tootjad, investorid, kinnisvara. Reaalsed tulemused.',
+    title: 'AGENCY99',
+    description: 'Portfoolio',
     url: 'https://agency99.io/portfoolio',
+    siteName: 'AGENCY99',
     type: 'website',
   },
 };

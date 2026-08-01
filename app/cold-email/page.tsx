@@ -4,16 +4,17 @@ import { ColdEmailPage } from '@/components/ColdEmail';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Cold Email - AGENCY99',
+  title: 'Cold Email',
   description:
-    'B2B cold email süsteemid: lead list building, copywriting ja kampaaniate haldus. Müügilead võtmed kätte.',
+    'Cold Email — B2B cold email süsteemid: lead list building, copywriting ja kampaaniate haldus. Müügilead võtmed kätte.',
   alternates: {
     canonical: 'https://agency99.io/cold-email',
   },
   openGraph: {
-    title: 'Cold Email - AGENCY99',
-    description: 'Lead list, copywriting, saatmine. B2B müügilead võtmed kätte.',
+    title: 'AGENCY99',
+    description: 'Cold Email',
     url: 'https://agency99.io/cold-email',
+    siteName: 'AGENCY99',
     type: 'website',
   },
 };

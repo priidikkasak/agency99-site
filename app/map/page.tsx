@@ -6,7 +6,13 @@ import { DEFAULT_RANGE } from '@/lib/map/ranges';
 
 export const metadata: Metadata = {
   title: 'Map',
-  description: 'Where the world finds agency99.io.',
+  description: 'Map — Where the world finds agency99.io.',
+  openGraph: {
+    title: 'AGENCY99',
+    description: 'Map',
+    siteName: 'AGENCY99',
+    type: 'website',
+  },
   robots: {
     index: false,
     follow: false,

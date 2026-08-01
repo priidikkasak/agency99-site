@@ -15,7 +15,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://agency99.io'),
-  title: 'AGENCY99',
+  title: {
+    default: 'AGENCY99',
+    template: '%s · AGENCY99',
+  },
   description:
     'AI-powered sourcing, agents and automation. Manufacturers, suppliers, investors, real estate - globally. Every contact human-verified. 10+ years of sourcing experience. From €1,490.',
   keywords: 'AI sourcing, AI agents, AI automation, lead generation, manufacturer sourcing, supplier sourcing, custom AI, chatbots',
