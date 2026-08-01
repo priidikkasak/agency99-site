@@ -4,8 +4,7 @@ import { useI18n } from '@/lib/i18n/context';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import styles from './StatementBlock.module.css';
 
-const COLS = 22;
-const ROWS = 7;
+const CELL_TARGET = 68;
 const STEP_MIN = 650;
 const STEP_MAX = 1050;
 
@@ -35,12 +34,16 @@ export function StatementBlock() {
 
   const dots = useMemo(() => {
     if (size.w === 0 || size.h === 0) return [];
+    const cols = Math.max(6, Math.round(size.w / CELL_TARGET));
+    const rows = Math.max(3, Math.round(size.h / CELL_TARGET));
+    const stepX = size.w / cols;
+    const stepY = size.h / rows;
     const arr: { x: number; y: number }[] = [];
-    for (let c = 0; c < COLS; c++) {
-      for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < cols; c++) {
+      for (let r = 0; r < rows; r++) {
         arr.push({
-          x: ((c + 0.5) / COLS) * size.w,
-          y: ((r + 0.5) / ROWS) * size.h,
+          x: stepX * (c + 0.5),
+          y: stepY * (r + 0.5),
         });
       }
     }
@@ -105,7 +108,7 @@ export function StatementBlock() {
               key={`d${i}`}
               cx={d.x}
               cy={d.y}
-              r={1.5}
+              r={1.2}
               className={styles.dot}
             />
           ))}
