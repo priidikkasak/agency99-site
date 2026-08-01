@@ -221,7 +221,7 @@
     padding-top: var(--sp-8);
     padding-bottom: var(--sp-6);
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .content {
@@ -229,8 +229,8 @@
     max-width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .headline {
@@ -239,7 +239,7 @@
     line-height: 0.92;
     max-width: 100%;
     word-spacing: 0.02em;
-    text-align: center;
+    text-align: left;
   }
 
   .headlineLine {
@@ -257,7 +257,6 @@
     gap: 10px;
     margin-top: var(--sp-5);
     width: 100%;
-    max-width: 360px;
   }
 
   .ctaPrimary {
@@ -279,7 +278,7 @@
     gap: 0;
     flex-wrap: nowrap;
     margin-top: var(--sp-5);
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .stat {
