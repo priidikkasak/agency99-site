@@ -109,6 +109,8 @@ export function HeroMap() {
           // Staggered pulse with varied duration for organic wave feel
           const delay = (i * 0.18) % 5;
           const duration = 4.2 + ((i * 0.31) % 2.4);
+          const twinkleDelay = (i * 0.27) % 3.2;
+          const twinkleDuration = 1.9 + ((i * 0.43) % 1.6);
           return (
             <g key={h.alpha2} transform={`translate(${h.x} ${h.y})`}>
               <circle
@@ -120,7 +122,14 @@ export function HeroMap() {
                   animationDuration: `${duration}s`,
                 }}
               />
-              <circle r={2} className={styles.hotspotDot} />
+              <circle
+                r={2}
+                className={styles.hotspotDot}
+                style={{
+                  animationDelay: `${twinkleDelay}s`,
+                  animationDuration: `${twinkleDuration}s`,
+                }}
+              />
             </g>
           );
         })}

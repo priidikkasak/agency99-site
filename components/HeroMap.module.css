@@ -42,6 +42,9 @@
 .originDot {
   fill: #B8B0FF;
   filter: drop-shadow(0 0 8px rgba(184, 176, 255, 0.9));
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: originTwinkle 1.7s ease-in-out infinite;
 }
 
 .originPulse {
@@ -52,14 +55,27 @@
 
 /* Destination hotspots */
 .hotspotDot {
-  fill: rgba(184, 176, 255, 0.75);
-  filter: drop-shadow(0 0 4px rgba(139, 123, 255, 0.7));
+  fill: rgba(184, 176, 255, 0.9);
+  filter: drop-shadow(0 0 5px rgba(184, 176, 255, 0.85));
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: hotspotTwinkle 2.4s ease-in-out infinite;
 }
 
 .hotspotPulse {
   transform-origin: center;
   transform-box: fill-box;
   animation: heroPulseSlow 4.5s ease-out infinite;
+}
+
+@keyframes hotspotTwinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes originTwinkle {
+  0%, 100% { opacity: 0.7; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.1); }
 }
 
 @keyframes heroPulse {
@@ -76,7 +92,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .originPulse,
-  .hotspotPulse {
+  .hotspotPulse,
+  .hotspotDot,
+  .originDot {
     animation: none;
   }
 }
