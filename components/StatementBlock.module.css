@@ -1,46 +1,58 @@
 .block {
   position: relative;
-  background: var(--bg-primary);
+  background: linear-gradient(135deg, #7060EF 0%, #B8ACFF 100%);
   overflow: hidden;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  isolation: isolate;
 }
 
-.block::before {
-  content: '';
+.spotlight {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 60% 90% at 15% 50%, rgba(var(--accent-rgb), 0.14) 0%, transparent 60%),
-    radial-gradient(ellipse 55% 80% at 85% 50%, rgba(var(--accent-rgb), 0.10) 0%, transparent 65%);
+  background: radial-gradient(
+    circle 340px at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    transparent 70%
+  );
+  opacity: var(--spot-opacity, 0);
+  transition: opacity 0.35s ease;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
+  mix-blend-mode: soft-light;
 }
 
-.block::after {
-  content: '';
+.grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(var(--accent-rgb), 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--accent-rgb), 0.05) 1px, transparent 1px);
-  background-size: 64px 64px;
-  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-          mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-  opacity: 0.35;
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(
+    circle 300px at var(--mx, 50%) var(--my, 50%),
+    black 0%,
+    transparent 70%
+  );
+          mask-image: radial-gradient(
+    circle 300px at var(--mx, 50%) var(--my, 50%),
+    black 0%,
+    transparent 70%
+  );
+  opacity: var(--spot-opacity, 0);
+  transition: opacity 0.5s ease;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: var(--sp-10) var(--sp-4);
+  padding: var(--sp-8) var(--sp-4);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-4);
+  gap: var(--sp-5);
 }
 
 .line {
@@ -49,23 +61,13 @@
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.95;
-  color: var(--text-primary);
+  color: var(--bg-primary);
   white-space: nowrap;
-  text-transform: uppercase;
-}
-
-.line:last-child {
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
 }
 
 @media (max-width: 767px) {
   .inner {
-    padding: var(--sp-8) var(--sp-4);
-    gap: var(--sp-3);
+    padding: var(--sp-6) var(--sp-4);
   }
 
   .line {
@@ -73,8 +75,8 @@
     white-space: nowrap;
   }
 
-  .block::after {
-    background-size: 40px 40px;
-    opacity: 0.28;
+  .spotlight,
+  .grid {
+    display: none;
   }
 }
