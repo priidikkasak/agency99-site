@@ -140,7 +140,7 @@
   align-items: stretch;
   border: 1px solid rgba(var(--accent-rgb), 0.32);
   background: rgba(var(--accent-rgb), 0.08);
-  border-radius: 999px;
+  border-radius: 8px;
   overflow: hidden;
   transition: background 0.25s ease, border-color 0.25s ease;
 }
@@ -226,7 +226,7 @@
   align-items: stretch;
   border: 1px solid rgba(var(--accent-rgb), 0.32);
   background: rgba(var(--accent-rgb), 0.08);
-  border-radius: 999px;
+  border-radius: 8px;
   overflow: hidden;
   margin-top: 4px;
   transition: background 0.25s ease, border-color 0.25s ease;
