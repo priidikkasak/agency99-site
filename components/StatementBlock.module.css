@@ -3,7 +3,6 @@
   background: linear-gradient(135deg, #7060EF 0%, #B8ACFF 100%);
   overflow: hidden;
   isolation: isolate;
-  cursor: crosshair;
 }
 
 .network {
@@ -14,23 +13,18 @@
 }
 
 .dot {
-  fill: rgba(15, 15, 13, 0.85);
-  transition: r 0.12s ease-out;
+  fill: rgba(15, 15, 13, 0.75);
 }
 
-.link {
-  stroke: rgba(15, 15, 13, 0.7);
+.trail {
+  stroke: rgba(15, 15, 13, 0.95);
+  stroke-width: 1.8;
   stroke-linecap: round;
 }
 
-.cursorRing {
-  fill: none;
-  stroke: rgba(15, 15, 13, 0.85);
-  stroke-width: 1.2;
-}
-
-.cursorDot {
-  fill: rgba(15, 15, 13, 0.95);
+.head {
+  fill: rgba(15, 15, 13, 1);
+  filter: drop-shadow(0 0 5px rgba(15, 15, 13, 0.55));
 }
 
 .inner {
@@ -56,10 +50,6 @@
 }
 
 @media (max-width: 767px) {
-  .block {
-    cursor: default;
-  }
-
   .inner {
     padding: var(--sp-6) var(--sp-4);
   }
@@ -71,11 +61,5 @@
 
   .network {
     display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dot {
-    transition: none;
   }
 }
