@@ -1,12 +1,14 @@
 'use client';
 
+import Link from 'next/link';
 import { useI18n } from '@/lib/i18n/context';
 import { Section } from './Section';
 import styles from './Portfolio.module.css';
 
 export function Portfolio() {
   const { t } = useI18n();
-  const { sectionLabel, headline, items } = t.sourcingCases;
+  const { sectionLabel, headline, viewAll, items } = t.sourcingCases;
+  const featured = items.slice(0, 5);
 
   return (
     <Section id="portfoolio">
@@ -16,7 +18,7 @@ export function Portfolio() {
       </div>
 
       <ul className={styles.list} role="list">
-        {items.map((item) => (
+        {featured.map((item) => (
           <li key={item.tag} className={styles.row}>
             <span className={styles.ghostNum} aria-hidden="true">{item.tag}</span>
 
@@ -41,6 +43,12 @@ export function Portfolio() {
           </li>
         ))}
       </ul>
+
+      <div className={styles.footer}>
+        <Link href="/portfoolio" className={styles.footerLink}>
+          {viewAll} →
+        </Link>
+      </div>
     </Section>
   );
 }

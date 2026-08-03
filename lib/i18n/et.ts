@@ -115,6 +115,7 @@ export interface Translations {
   sourcingCases: {
     sectionLabel: string;
     headline: string;
+    viewAll: string;
     webPortfolioLabel: string;
     webPortfolioLink: string;
     items: SourcingCase[];
@@ -384,50 +385,79 @@ export const et: Translations = {
   sourcingCases: {
     sectionLabel: 'Portfoolio',
     headline: 'Viimased tööd',
+    viewAll: 'Vaata kõiki',
     webPortfolioLabel: 'Otsid veebitöid?',
     webPortfolioLink: 'Vaata veebiportfooliot',
     items: [
       {
         tag: '01',
         category: 'Tootjad',
-        title: 'LED paneelide tootjad Hiinast',
-        body: 'Põhjamaade jaeketile leitud 50 verifitseeritud tootjat kuue päevaga. Iga tehas kontrollitud käsitsi kõne ja emailiga. Klient sõlmis kolm tarnijalepingut kuu jooksul.',
-        outcome: '3 lepingut',
+        title: 'Pelletitootjad, Baltikum + Poola',
+        body: 'Saksa jaeketile leitud ENplus A1 sertifitseeritud tootjad kaheksa päevaga. Iga sertifikaat kontrollitud ENplus registrist, iga müügikontakt kinnitatud otsese kõnega. Filtrid: hind alla 350€/t, kuu tootmisvõimsus üle 500 tonni, bulk-veok Saksamaale. Lühinimekiri koos FCA-hinna, sert-numbri, sample-tellimuse staatuse ja tarneajaga iga tehase kohta.',
+        outcome: '3 tarnelepingut',
       },
       {
         tag: '02',
         category: 'Investorid',
-        title: 'Kinnisvarainvestorid Dubaist',
-        body: 'Balti arendajale koondatud 12 aktiivset investorit koos soojade tutvustustega. Kaasatud 4,2 miljonit eurot seemnevoorus.',
+        title: 'Kinnisvarainvestorid, Dubai',
+        body: 'Balti arendaja seed-vooru jaoks leitud aktiivsed investorid. Screening ticket-size, varaklassi-sobivuse ja varasema tehinguajaloo järgi. Soojad tutvustused ühiste kontaktide kaudu kus võimalik, personaalne outreach kus mitte. Iga kontakt kinnitatud telefoniga enne üleandmist, koos fondi teesi ja varasemate investeeringute märkmetega.',
         outcome: '€4,2M kaasatud',
       },
       {
         tag: '03',
-        category: 'Kontaktid',
-        title: 'SaaS asutajad Saksamaal',
-        body: '200 ICP järgi sobivat asutajat B2B kampaaniale. Verifitseeritud ja segmenteeritud tech stack põhjal. Kampaania vastuste määr 8,4%.',
-        outcome: '8,4% vastust',
+        category: 'Tootjad',
+        title: '3D metallprint bureau’d, EU',
+        body: 'Juveelibränd vajas direct-to-metal väärismetalli print-partnereid — nišš, kus enamik listinguid osutuvad vaigu-printeriks, mitte päris SLM/DMLS masinaks hõbedas või kullas. Iga kvalifitseeritud Euroopa bureau kaardistatud ja filtreeritud MOQ (alla 20 tk), viimistluse kvaliteedi-referentside ja tarneaja järgi. Iga tehniline väide kinnitatud proovitellimuse ja hinnavõrdlusega.',
+        outcome: '2 partnerit',
       },
       {
         tag: '04',
-        category: 'Tootjad',
-        title: 'OEM tehased Aasiast',
-        body: 'Fitness brändile kontrollitud 30 tehast Vietnamis ja Bangladeshis. Käsitsi hinnatud tootmisvõimekus, MOQ ja sertifikaadid. Lühinimekiri kaheksast finalistist.',
-        outcome: '8 finalisti',
+        category: 'Kontaktid',
+        title: 'Ecom COO’d, UK',
+        body: 'Ecom SaaS’ile leitud otsustajad: COO’d, Head of Ops’id ja Head of Fulfilment’id kes juhivad £5–50M turnover’iga UK ecom brände. Emailid verifitseeritud kolme-provider waterfall’iga, LinkedIn’i tegevus kontrollitud päris engagement’ile (mitte tolmused profiilid). Kampaania järjestatud sooja tutvustustega, viidates iga kontakti värsketele töölevõtu- või press-signaalidele.',
+        outcome: '12% vastust',
       },
       {
         tag: '05',
-        category: 'Investorid',
-        title: 'Fintech seed voor',
-        body: '40 relevantset fondi kogu Euroopas ja Ühendkuningriigis. Soojad tutvustused kus võimalik. Ring suletud 12 nädalaga.',
-        outcome: 'Ring suletud',
+        category: 'Kinnisvara',
+        title: 'Off-market objektid, Baltikum',
+        body: 'Investeerimisküpsed objektid Eestis ja Lätis erakliendi profiilile. Sügavotsing vahendajate, otseomanike ja vaikselt pakutavate objektide seas — pluss follow-up kohalike kinnisvara-juristidega, kes tihti kuulevad varadest enne nende listimist. Iga objekt üle vaadatud enne lühinimekirja, koos omandiajaloo ja title-kontrolliga.',
+        outcome: '15 objekti leitud',
       },
       {
         tag: '06',
+        category: 'Tootjad',
+        title: 'OEM tehased, Vietnam + Bangladesh',
+        body: 'Fitness rõivaste brändile käsitsi kontrollitud tehased. Võimsus, MOQ ja sertifikaadid tõestatud otsese näidise-tellimusega, mitte tehase enda spec’iga. Cross-check SGS + Bureau Veritas auditi-raportid kus olemas. Finalistid koos kõrvutise hinnavõrdluse, tarneaja ja nimelise tootmisliini-kontaktiga.',
+        outcome: '8 finalisti',
+      },
+      {
+        tag: '07',
+        category: 'Investorid',
+        title: 'Fintech seed voor',
+        body: 'Makseteenuste startup’ile leitud relevantsed fondid kogu Euroopas ja Ühendkuningriigis. Screening teesi-sobivuse, faasi-fookuse ja tsekki-suuruse järgi — mitte spray-and-pray outreach. Soojad tutvustused kus võimalik; personaalne cold outreach kus mitte, viidates iga fondi kõige värskemale relevantsele investeeringule. Ring suletud 12 nädalaga.',
+        outcome: 'Ring suletud',
+      },
+      {
+        tag: '08',
+        category: 'Tootjad',
+        title: 'Private-label kosmeetika, Lõuna-Euroopa',
+        body: 'Nišš skincare bränd vajas laboreid Itaalias, Hispaanias ja Portugalis. Iga tootja sertifikaadid (GMP, ISO 22716, ECOCERT kus relevantne) kontrollitud ja MOQ läbi räägitud. Sample formulatsioonid tellitud top kandidaatidelt enne shortlist’i, koos formulatsiooni-raportite kõrvutise võrdlusega.',
+        outcome: '5 sample-etapis',
+      },
+      {
+        tag: '09',
+        category: 'Tarnijad',
+        title: 'Elektroonika-komponendid, Shenzhen',
+        body: 'Hardware startup vajas sensor-mooduli tarnijat — kategooria, mis on täis edasimüüjaid, kes teesklevad tehaseid olevat. Tarnijad valideeritud kümne päevaga: müügiesindaja LinkedIn’i taust, Alibaba trust score, sample’i kvaliteet spec’i vastu ja tehase-külastuse video kohaliku agendi kaudu. Finalistid koos kõrvutise hinnavõrdluse ja MOQ-ga.',
+        outcome: '3 finalisti',
+      },
+      {
+        tag: '10',
         category: 'Kinnisvara',
-        title: 'Off market kinnisvara Baltikumis',
-        body: '15 objekti Eestis ja Lätis kliendi kriteeriumitele. Sügavotsing vahendajate, omanike ja pakkumiste seas.',
-        outcome: '15 objekti',
+        title: 'Ärikinnisvara off-market, Berliin',
+        body: 'Balti investoril budget €5–15M mixed-use’ile. Objektid tuvastatud broker’ite listide, otseomanike ja pankade non-performing loan portfellide seast — viimane neist toob esile varasid, mis ei jõua avaliku listinguni. Iga võimalus screenitud yield’i, tenant-mixi ja renoveerimis-kulu järgi enne edasi liikumist.',
+        outcome: '3 DD faasis',
       },
     ],
   },
