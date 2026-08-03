@@ -1,14 +1,26 @@
 'use client';
 
+import { useCallback, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useI18n } from '@/lib/i18n/context';
 import { Section } from './Section';
+import { SourcingCaseItem } from './SourcingCaseItem';
 import styles from './SourcingCasesPage.module.css';
 
 export function SourcingCasesPage() {
   const { t } = useI18n();
   const { sectionLabel, headline, items, webPortfolioLabel, webPortfolioLink } =
     t.sourcingCases;
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const focusItem = useCallback((index: number) => {
+    const buttons =
+      listRef.current?.querySelectorAll<HTMLButtonElement>('button[aria-expanded]');
+    if (!buttons?.length) return;
+    const wrapped = ((index % buttons.length) + buttons.length) % buttons.length;
+    buttons[wrapped]?.focus();
+  }, []);
 
   return (
     <Section id="portfoolio-page">
@@ -17,24 +29,20 @@ export function SourcingCasesPage() {
         <h1 className={styles.headline}>{headline}</h1>
       </div>
 
-      <ul className={styles.list} role="list">
-        {items.map((item) => (
-          <li key={item.tag} className={styles.row}>
-            <span className={styles.ghostNum} aria-hidden="true">{item.tag}</span>
-
-            <div className={styles.metaPill}>
-              <span className={styles.metaNum} aria-hidden="true">{item.tag}</span>
-              <span className={styles.metaDivider} aria-hidden="true" />
-              <span className={styles.metaCategory}>{item.category}</span>
-            </div>
-
-            <h2 className={styles.title}>
-              {item.title}
-              <span className={styles.titleAccent} aria-hidden="true" />
-            </h2>
-
-            <p className={styles.body}>{item.body}</p>
-          </li>
+      <ul ref={listRef} className={styles.list} role="list">
+        {items.map((item, i) => (
+          <SourcingCaseItem
+            key={item.tag}
+            item={item}
+            isOpen={openIndex === i}
+            onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+            onArrowNav={(dir) => {
+              if (dir === 'first') focusItem(0);
+              else if (dir === 'last') focusItem(items.length - 1);
+              else focusItem(i + dir);
+            }}
+            titleTag="h2"
+          />
         ))}
       </ul>
 
