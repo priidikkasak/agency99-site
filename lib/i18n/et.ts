@@ -400,7 +400,7 @@ export const et: Translations = {
         tag: '02',
         category: 'Investorid',
         title: 'Kinnisvarainvestorid, Dubai',
-        body: 'Aktiivsed investorid Balti arendaja seemnevoorusse. Sõelutud investeeringu suuruse, varaklassi ja varasemate tehingute põhjal. Kus olid ühised tutvused, tegime sooja tutvustuse; kus mitte, pöördusime otse ja isikupärastatult. Iga kontakt kinnitatud telefonikõnega enne kliendile üleandmist.',
+        body: 'Aktiivsed investorid Balti arendaja seed roundi. Sõelutud investeeringu suuruse, varaklassi ja varasemate tehingute põhjal. Kus olid ühised tutvused, tegime sooja tutvustuse; kus mitte, pöördusime otse ja isikupärastatult. Iga kontakt kinnitatud telefonikõnega enne kliendile üleandmist.',
         outcome: '€4,2M kaasatud',
       },
       {
@@ -434,7 +434,7 @@ export const et: Translations = {
       {
         tag: '07',
         category: 'Investorid',
-        title: 'Fintech seemnevoor, Euroopa + UK',
+        title: 'Fintech seed round, Euroopa + UK',
         body: 'Makseteenuste startup-ile leitud sobivad fondid Euroopast ja Suurbritanniast. Sõelutud investeerimisteesi, kasvufaasi ja tšeki suuruse järgi - mitte massisaatmine. Iga sõnum viitas fondi kõige värskemale sarnasele investeeringule. Ring suletud 12 nädalaga.',
         outcome: 'Ring suletud',
       },
