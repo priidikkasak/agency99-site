@@ -34,12 +34,6 @@ export function SourcingCasesPage() {
             </h2>
 
             <p className={styles.body}>{item.body}</p>
-
-            <span className={styles.outcome}>
-              <span className={styles.outcomeIcon} aria-hidden="true">→</span>
-              <span className={styles.outcomeDivider} aria-hidden="true" />
-              <span className={styles.outcomeText}>{item.outcome}</span>
-            </span>
           </li>
         ))}
       </ul>
