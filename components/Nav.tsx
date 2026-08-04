@@ -74,7 +74,7 @@ export function Nav() {
         <nav className={styles.nav} aria-label="Main navigation">
           {/* Logo */}
           <Link href="/" className={styles.logoLink} aria-label="agency99 - home">
-            <Image src="/logo.png" alt="agency99" className={styles.logoImg} width={1000} height={200} priority style={{ height: '26px', width: 'auto' }} />
+            <Image src="/logo.png" alt="agency99" className={styles.logoImg} width={1000} height={200} priority style={{ height: '32px', width: 'auto' }} />
           </Link>
 
           {/* Center links */}
