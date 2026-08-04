@@ -9,8 +9,7 @@ import styles from './SourcingCasesPage.module.css';
 
 export function SourcingCasesPage() {
   const { t } = useI18n();
-  const { sectionLabel, headline, items, webPortfolioLabel, webPortfolioLink } =
-    t.sourcingCases;
+  const { items, webPortfolioLabel, webPortfolioLink } = t.sourcingCases;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -25,8 +24,7 @@ export function SourcingCasesPage() {
   return (
     <Section id="portfoolio-page">
       <div className={styles.header}>
-        <span className={styles.eyebrow}>{sectionLabel}</span>
-        <h1 className={styles.headline}>{headline}</h1>
+        <h1 className={styles.headline}>Portfolio</h1>
       </div>
 
       <ul ref={listRef} className={styles.list} role="list">

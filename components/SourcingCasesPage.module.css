@@ -3,26 +3,17 @@
    ============================================================ */
 
 .header {
-  margin-bottom: var(--sp-12);
+  margin-bottom: var(--sp-16);
   display: flex;
   flex-direction: column;
-  gap: var(--sp-2);
-}
-
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
 }
 
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(34px, 5vw, 64px);
+  font-size: clamp(52px, 8vw, 112px);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.0;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
   color: var(--text-primary);
   margin: 0;
 }
@@ -71,7 +62,7 @@
 
 /* ── Mobile ── */
 @media (max-width: 767px) {
-  .header { margin-bottom: var(--sp-8); }
+  .header { margin-bottom: var(--sp-12); }
   .list { gap: var(--sp-2); }
 
   .footer {
