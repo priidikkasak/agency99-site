@@ -739,8 +739,8 @@ export const et: Translations = {
   },
   sourcingClient: {
     eyebrow: 'Sourcing ankeet',
-    headline: 'Mida vajad leida?',
-    subtext: '3 minutit. Vastan 24h jooksul mahu, ajakava ja hinnaga.',
+    headline: 'Mida vajad?',
+    subtext: 'Vastan 24h jooksul.',
     labels: {
       name: 'Sinu nimi',
       email: 'Email',

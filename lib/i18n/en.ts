@@ -454,8 +454,8 @@ export const en: Translations = {
   },
   sourcingClient: {
     eyebrow: 'Sourcing intake',
-    headline: 'What do you need to find?',
-    subtext: '3 minutes. Personal reply in 24h with scope, timeline and price.',
+    headline: 'What do you need?',
+    subtext: 'Personal reply in 24h.',
     labels: {
       name: 'Your name',
       email: 'Email',
