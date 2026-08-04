@@ -8,7 +8,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-top: var(--sp-16);
+  padding-top: calc(var(--sp-12) + var(--sp-16));
   padding-bottom: var(--sp-16);
   overflow: hidden;
 }
@@ -298,7 +298,7 @@
 
 @media (max-width: 767px) {
   .hero {
-    padding-top: calc(var(--nav-height) + var(--nav-gap-top) + env(safe-area-inset-top));
+    padding-top: calc(var(--nav-height) + var(--nav-gap-top) + env(safe-area-inset-top) + var(--sp-6));
     padding-bottom: var(--sp-10);
   }
 
