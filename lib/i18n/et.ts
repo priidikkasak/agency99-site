@@ -695,9 +695,9 @@ export const et: Translations = {
       email: 'sina@ettevote.com',
       company: 'ettevote.ee (valikuline)',
       otherDescription: 'Ütle täpsemalt - üks lause piisab',
-      goal: 'e.g. rohkem leade, e-müük, kiirem sait',
-      audience: 'e.g. B2B asutajad, restoranid, disainerid',
-      inspiration: 'e.g. stripe.com, linear.app - mis meeldib',
+      goal: 'nt rohkem leade, e-müük, kiirem sait',
+      audience: 'nt B2B asutajad, restoranid, disainerid',
+      inspiration: 'nt stripe.com, linear.app - mis meeldib',
     },
     chips: {
       types: [
@@ -758,11 +758,11 @@ export const et: Translations = {
       email: 'sina@ettevote.com',
       company: 'ettevote.ee (valikuline)',
       otherDescription: 'Ütle täpsemalt - üks lause piisab',
-      targetMarkets: 'e.g. Saksamaa, Baltikum, EL',
-      goal: 'e.g. 3 tarnelepingut, €500K kaasatud, 8 tehase finalisti',
-      idealContact: 'e.g. Head of Procurement, GP, müügidirektor',
-      criteria: 'e.g. ENplus A1, MOQ alla 500, käive €5-50M',
-      tried: 'e.g. Alibaba, Apollo, eelmine agentuur - mis töötas, mis mitte',
+      targetMarkets: 'nt Saksamaa, Baltikum, EL',
+      goal: 'nt 3 tarnelepingut, €500K kaasatud, 8 tehase finalisti',
+      idealContact: 'nt hankejuht, fondi partner, müügidirektor',
+      criteria: 'nt ENplus A1, MOQ alla 500, käive €5-50M',
+      tried: 'nt Alibaba, Apollo, eelmine agentuur - mis töötas, mis mitte',
     },
     chips: {
       types: [
