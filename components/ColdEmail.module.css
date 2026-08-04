@@ -6,11 +6,9 @@
 
 .hero {
   position: relative;
-  min-height: 80svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-top: calc(var(--nav-height) + var(--nav-gap-top) + env(safe-area-inset-top) + var(--sp-10));
+  padding-top: var(--sp-16);
   padding-bottom: var(--sp-16);
   overflow: hidden;
 }
@@ -300,8 +298,7 @@
 
 @media (max-width: 767px) {
   .hero {
-    min-height: auto;
-    padding-top: calc(var(--nav-height) + var(--nav-gap-top) + var(--sp-8));
+    padding-top: calc(var(--nav-height) + var(--nav-gap-top) + env(safe-area-inset-top));
     padding-bottom: var(--sp-10);
   }
 
