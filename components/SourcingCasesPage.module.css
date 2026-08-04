@@ -3,7 +3,7 @@
    ============================================================ */
 
 .header {
-  margin-bottom: var(--sp-5);
+  margin-bottom: var(--sp-10);
   display: flex;
   flex-direction: column;
 }
@@ -62,7 +62,10 @@
 
 /* ── Mobile ── */
 @media (max-width: 767px) {
-  .header { margin-bottom: var(--sp-4); }
+  .header {
+    padding-top: calc(var(--nav-height) + var(--nav-gap-top) + env(safe-area-inset-top));
+    margin-bottom: var(--sp-4);
+  }
   .list { gap: var(--sp-2); }
 
   .footer {
