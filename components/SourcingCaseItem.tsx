@@ -75,7 +75,6 @@ export function SourcingCaseItem({
             titleTag,
             { className: styles.title },
             item.title,
-            <span key="accent" className={styles.titleAccent} aria-hidden="true" />,
           )}
         </span>
 
