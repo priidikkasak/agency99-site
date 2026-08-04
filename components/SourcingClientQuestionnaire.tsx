@@ -245,7 +245,7 @@ export function SourcingClientQuestionnaire() {
                 className={styles.input}
                 value={form.targetMarkets}
                 onChange={updateField('targetMarkets')}
-                placeholder="e.g. Germany + Austria, Baltics, Southeast Asia, EU-wide"
+                placeholder="e.g. Germany, Baltics, EU"
                 required
               />
             </label>
@@ -256,7 +256,7 @@ export function SourcingClientQuestionnaire() {
                 className={styles.textarea}
                 value={form.goal}
                 onChange={updateField('goal')}
-                placeholder="A few sentences on the outcome - closing X supply contracts, raising €Y, buying a property, finding OEM for a new SKU, etc."
+                placeholder="e.g. 3 signed contracts, €500K raised, 8 factory finalists"
                 required
                 rows={5}
               />
@@ -269,7 +269,7 @@ export function SourcingClientQuestionnaire() {
                 className={styles.input}
                 value={form.idealContact}
                 onChange={updateField('idealContact')}
-                placeholder="e.g. Head of Procurement, GP at Series-A fund, Sales Director"
+                placeholder="e.g. Head of Procurement, GP, Sales Director"
               />
             </label>
 
@@ -279,7 +279,7 @@ export function SourcingClientQuestionnaire() {
                 className={styles.textarea}
                 value={form.criteria}
                 onChange={updateField('criteria')}
-                placeholder="e.g. ENplus A1 cert, MOQ under 500 units, cheque size €200-500k, GMP certified, revenue €5-50M"
+                placeholder="e.g. ENplus A1, MOQ under 500, revenue €5-50M"
                 rows={4}
               />
             </label>
@@ -319,7 +319,7 @@ export function SourcingClientQuestionnaire() {
                 className={styles.textarea}
                 value={form.tried}
                 onChange={updateField('tried')}
-                placeholder="LinkedIn Sales Nav, Alibaba, Apollo, a previous agency - and what did or didn't work. Helps us skip the dead ends."
+                placeholder="e.g. Alibaba, Apollo, past agency - what worked, what didn't"
                 rows={4}
               />
             </label>
