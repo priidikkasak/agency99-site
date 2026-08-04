@@ -307,6 +307,13 @@ export const en: Translations = {
         body: "Wine producers in the Douro and Alentejo regions for a Scandinavian retail chain. Every vineyard's organic certifications and annual output verified, sample bottles sent to a sommelier for scoring. Label design and export logistics agreed before handoff.",
         outcome: '3 partners',
       },
+      {
+        tag: '16',
+        category: 'AI Agents',
+        title: 'Auction monitor agent, EU + UK dealer',
+        body: "Built a monitoring agent for a car dealer that watches Copart, Manheim and mobile.de every 10 minutes. Logged-in account catches dealer-only lots too. Each new matching car (make, year, damage level, margin estimate) triggers a Telegram alert within seconds. The client never opens a platform manually anymore.",
+        outcome: '24/7 monitoring',
+      },
     ],
   },
   finalCta: {

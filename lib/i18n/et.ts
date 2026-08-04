@@ -592,6 +592,13 @@ export const et: Translations = {
         body: 'Skandinaavia jaeketile leidsime veinitootjad Douro ja Alentejo piirkondadest. Iga viinamarjaistanduse mahetoodangu sertifikaadid ja aastase toodangu kontrollisime, proovipudelid saatsime sommelierile hindamiseks. Etiketikujunduse ja ekspordi-logistika leppisime kokku enne kliendile üleandmist.',
         outcome: '3 partnerit',
       },
+      {
+        tag: '16',
+        category: 'AI agendid',
+        title: 'Auto-oksjoni monitor, EL + UK dealer',
+        body: 'Autodealerile ehitasime agendi, mis jälgib Copart, Manheim ja mobile.de oksjoneid iga 10 minuti tagant. Sisselogitud kontoga näeb ka dealer-only lot\'e. Iga uus sobiv auto (mark, aasta, kahjustuse aste, marže-hinnang) käivitab Telegrami alerti sekundite jooksul. Klient ei ava enam ise ühtki platvormi.',
+        outcome: '24/7 monitoring',
+      },
     ],
   },
   finalCta: {
