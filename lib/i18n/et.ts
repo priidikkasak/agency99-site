@@ -303,8 +303,8 @@ export const et: Translations = {
     ctaGhost: 'Portfoolio',
   },
   statement: {
-    line1: 'Leia, mida',
-    line2: 'Google ei näita.',
+    line1: 'Leia, mida Google ei näita.',
+    line2: '',
     sub: 'Kümme aastat sourcingu kogemust ja AI agendid. Iga kontakt käsitsi kontrollitud.',
     cta: 'Pärida pakkumist',
   },

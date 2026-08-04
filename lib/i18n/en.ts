@@ -18,8 +18,8 @@ export const en: Translations = {
     ctaGhost: 'Portfolio',
   },
   statement: {
-    line1: "Find what's not",
-    line2: 'on Google.',
+    line1: "Find what's not on Google.",
+    line2: '',
     sub: 'Ten years of sourcing experience and AI agents. Every contact double checked by hand.',
     cta: 'Get a quote',
   },

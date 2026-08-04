@@ -126,7 +126,7 @@ export function StatementBlock() {
       )}
       <div className={styles.inner}>
         <p className={styles.line}>{t.statement.line1}</p>
-        <p className={styles.line}>{t.statement.line2}</p>
+        {t.statement.line2 && <p className={styles.line}>{t.statement.line2}</p>}
       </div>
     </section>
   );
