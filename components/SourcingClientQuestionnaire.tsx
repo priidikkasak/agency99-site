@@ -16,7 +16,6 @@ const initialForm = {
   goal: '',
   idealContact: '',
   criteria: '',
-  scope: '',
   tried: '',
   timeline: '',
 };
@@ -46,7 +45,6 @@ export function SourcingClientQuestionnaire() {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<Status>('idle');
   const [showTypeError, setShowTypeError] = useState(false);
-  const [showScopeError, setShowScopeError] = useState(false);
 
   const updateField = (key: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -68,25 +66,18 @@ export function SourcingClientQuestionnaire() {
     setShowTypeError(false);
   };
 
-  const selectSingle = (key: 'scope' | 'timeline', value: string) => {
-    setForm((f) => ({ ...f, [key]: f[key] === value ? '' : value }));
-    if (key === 'scope') setShowScopeError(false);
+  const selectTimeline = (value: string) => {
+    setForm((f) => ({ ...f, timeline: f.timeline === value ? '' : value }));
   };
 
   const otherSelected = form.sourcingTypes.includes(OTHER);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    let invalid = false;
     if (form.sourcingTypes.length === 0) {
       setShowTypeError(true);
-      invalid = true;
+      return;
     }
-    if (!form.scope) {
-      setShowScopeError(true);
-      invalid = true;
-    }
-    if (invalid) return;
     setStatus('loading');
     try {
       const res = await fetch('/api/sourcing-questionnaire', {
@@ -261,35 +252,6 @@ export function SourcingClientQuestionnaire() {
               />
             </label>
 
-            <fieldset className={[styles.label, styles.fieldset].join(' ')}>
-              <legend className={styles.legend}>
-                {c.labels.scope}
-                <Star />
-              </legend>
-              <div className={styles.chipGroup} role="radiogroup">
-                {c.chips.scopes.map((opt) => {
-                  const checked = form.scope === opt;
-                  return (
-                    <button
-                      type="button"
-                      key={opt}
-                      className={[styles.chip, checked ? styles.chipChecked : ''].join(' ')}
-                      aria-pressed={checked}
-                      onClick={() => selectSingle('scope', opt)}
-                    >
-                      <span className={styles.chipCheck} aria-hidden="true">
-                        {checked ? '✓' : ''}
-                      </span>
-                      {opt}
-                    </button>
-                  );
-                })}
-              </div>
-              {showScopeError && (
-                <p className={styles.errorMsg}>{c.errors.pickOne}</p>
-              )}
-            </fieldset>
-
             <label className={styles.label}>
               <LabelText>{c.labels.tried}</LabelText>
               <textarea
@@ -312,7 +274,7 @@ export function SourcingClientQuestionnaire() {
                       key={opt}
                       className={[styles.chip, checked ? styles.chipChecked : ''].join(' ')}
                       aria-pressed={checked}
-                      onClick={() => selectSingle('timeline', opt)}
+                      onClick={() => selectTimeline(opt)}
                     >
                       <span className={styles.chipCheck} aria-hidden="true">
                         {checked ? '✓' : ''}

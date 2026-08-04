@@ -29,7 +29,6 @@ export async function POST(request: Request) {
       goal,
       idealContact,
       criteria,
-      scope,
       tried,
       timeline,
     } = body ?? {};
@@ -38,11 +37,13 @@ export async function POST(request: Request) {
       ? sourcingTypes.filter((v) => typeof v === 'string').slice(0, 20)
       : [];
 
-    if (!name || !email || !goal || !targetMarkets || !scope || typesArr.length === 0) {
+    if (!name || !email || !goal || !targetMarkets || typesArr.length === 0) {
       return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
     }
 
-    const otherDesc = typesArr.includes('Something else') ? otherDescription : '';
+    const otherDesc = typesArr.includes('Something else') || typesArr.includes('Muu')
+      ? otherDescription
+      : '';
 
     const safe = {
       name: clean(name, 200),
@@ -54,7 +55,6 @@ export async function POST(request: Request) {
       goal: clean(goal, 5000),
       idealContact: clean(idealContact, 500),
       criteria: clean(criteria, 3000),
-      scope: clean(scope, 200),
       tried: clean(tried, 3000),
       timeline: clean(timeline, 100),
     };
@@ -86,7 +86,6 @@ export async function POST(request: Request) {
             ${row('Something else', safe.otherDescription)}
             ${row('Target market', safe.targetMarkets)}
             ${row('Ideal contact', safe.idealContact)}
-            ${row('Scope', safe.scope)}
             ${row('Timeline', safe.timeline)}
           </table>
           <hr style="margin: 24px 0; border: none; border-top: 1px solid #eee;" />

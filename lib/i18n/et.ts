@@ -125,7 +125,6 @@ export interface SourcingClientForm {
     goal: string;
     idealContact: string;
     criteria: string;
-    scope: string;
     tried: string;
     timeline: string;
   };
@@ -142,7 +141,6 @@ export interface SourcingClientForm {
   };
   chips: {
     types: string[];
-    scopes: string[];
     timelines: string[];
   };
   otherOption: string;
@@ -752,7 +750,6 @@ export const et: Translations = {
       goal: 'Mis on edu pilt?',
       idealContact: 'Ideaalne kontakt / roll sihtettevõttes',
       criteria: 'Kohustuslikud kriteeriumid (sertid, maht, hinnavahemik)',
-      scope: 'Maht',
       tried: 'Mida oled juba proovinud?',
       timeline: 'Ajakava',
     },
@@ -776,11 +773,6 @@ export const et: Translations = {
         'Otsustajad (inimesed)',
         'Private-label / OEM tootmine',
         'Muu',
-      ],
-      scopes: [
-        'Üks tihe lühinimekiri (5-15 kontakti)',
-        'Keskmine läbi käik (30-100 kontakti)',
-        'Lai kaardistus (100+ kontakti)',
       ],
       timelines: [
         'ASAP',

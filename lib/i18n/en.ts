@@ -465,7 +465,6 @@ export const en: Translations = {
       goal: 'What does success look like?',
       idealContact: 'Ideal contact / role at the target company',
       criteria: 'Must-have criteria (certs, size, price band)',
-      scope: 'Scope',
       tried: 'What have you already tried?',
       timeline: 'Timeline',
     },
@@ -489,11 +488,6 @@ export const en: Translations = {
         'Decision-makers (people)',
         'Private-label / OEM production',
         'Something else',
-      ],
-      scopes: [
-        'One tight shortlist (5-15 contacts)',
-        'Medium sweep (30-100 contacts)',
-        'Broad map (100+ contacts)',
       ],
       timelines: [
         'ASAP',
