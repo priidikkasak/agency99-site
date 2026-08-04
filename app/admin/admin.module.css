@@ -124,26 +124,31 @@
 /* ── Dashboard grid ── */
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
   padding: 0;
   margin: 0;
   list-style: none;
+  max-width: 640px;
+  width: 100%;
+  align-self: center;
 }
 
 .card {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-2);
-  padding: var(--sp-5);
-  min-height: 220px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 2px var(--sp-3);
+  align-items: center;
+  padding: var(--sp-4);
+  min-height: 84px;
   background:
     radial-gradient(circle at 100% 0%, rgba(var(--accent-rgb), 0.05), transparent 45%),
     linear-gradient(160deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 16px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   transition:
     border-color 0.3s ease,
@@ -162,6 +167,7 @@
 }
 
 .icon {
+  grid-row: 1 / span 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -174,31 +180,34 @@
   font-family: var(--font-mono);
   font-size: 18px;
   line-height: 1;
-  margin-bottom: var(--sp-2);
 }
 
 .cardTitle {
+  grid-column: 2;
+  grid-row: 1;
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text-primary);
 }
 
 .cardDesc {
+  grid-column: 2;
+  grid-row: 2;
   font-size: 14px;
   font-weight: 300;
   color: var(--text-secondary);
-  line-height: 1.55;
-  margin-top: 2px;
+  line-height: 1.5;
 }
 
 .cardArrow {
-  margin-top: auto;
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  align-self: center;
   font-family: var(--font-mono);
   font-size: 18px;
   color: var(--accent);
-  align-self: flex-end;
   transition: transform 0.25s ease;
 }
 
@@ -238,47 +247,12 @@
     gap: var(--sp-5);
   }
 
-  .grid {
-    grid-template-columns: 1fr;
-    gap: var(--sp-2);
-  }
-
-  .card {
-    padding: var(--sp-4);
-    min-height: auto;
-    border-radius: 16px;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
-    gap: 2px var(--sp-3);
-    align-items: center;
-  }
-
   .icon {
-    grid-row: 1 / span 2;
-    margin-bottom: 0;
     width: 40px;
     height: 40px;
     font-size: 16px;
   }
 
-  .cardTitle {
-    grid-column: 2;
-    grid-row: 1;
-    font-size: 17px;
-  }
-
-  .cardDesc {
-    grid-column: 2;
-    grid-row: 2;
-    font-size: 13px;
-    margin-top: 0;
-  }
-
-  .cardArrow {
-    grid-column: 3;
-    grid-row: 1 / span 2;
-    margin-top: 0;
-    align-self: center;
-  }
+  .cardTitle { font-size: 17px; }
+  .cardDesc { font-size: 13px; }
 }
