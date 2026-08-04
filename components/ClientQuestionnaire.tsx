@@ -1,33 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { useI18n } from '@/lib/i18n/context';
 import styles from './ClientQuestionnaire.module.css';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
-
-const PROJECT_TYPES = [
-  'Website',
-  'E-commerce',
-  'Platform / web app',
-  'Cold email system',
-  'Design / branding',
-  'Something else',
-];
-
-const OTHER = 'Something else';
-
-const CONTENT_READY = [
-  'I have copy and images ready',
-  'I have some - need help with the rest',
-  'I need help with everything',
-];
-
-const TIMELINES = [
-  'ASAP',
-  'Within 2 weeks',
-  'Within a month',
-  'Flexible',
-];
 
 const initialForm = {
   name: '',
@@ -60,6 +37,10 @@ const LabelText = ({
 );
 
 export function ClientQuestionnaire() {
+  const { t } = useI18n();
+  const c = t.webClient;
+  const OTHER = c.otherOption;
+
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<Status>('idle');
   const [showProjectError, setShowProjectError] = useState(false);
@@ -127,13 +108,13 @@ export function ClientQuestionnaire() {
           <div className={styles.inner}>
             <div className={styles.eyebrow}>
               <span className={styles.eyebrowDot} />
-              Received
+              {c.success.eyebrow}
             </div>
-            <h1 className={styles.headline}>Thanks - we&rsquo;ve got it.</h1>
+            <h1 className={styles.headline}>{c.success.headline}</h1>
             <p className={styles.subtext}>
-              Priidik will read this personally and reply within 24 hours from{' '}
-              <strong style={{ color: 'var(--text-primary)' }}>priidik@agency99.io</strong>.
-              If it&rsquo;s urgent, ping us on WhatsApp.
+              {c.success.subtextBefore}
+              <strong style={{ color: 'var(--text-primary)' }}>{c.success.subtextEmail}</strong>
+              {c.success.subtextAfter}
             </p>
           </div>
         </div>
@@ -148,36 +129,33 @@ export function ClientQuestionnaire() {
         <div className={styles.inner}>
           <div className={styles.eyebrow}>
             <span className={styles.eyebrowDot} />
-            Client intake
+            {c.eyebrow}
           </div>
-          <h1 className={styles.headline}>Tell us about your project.</h1>
-          <p className={styles.subtext}>
-            A few quick questions. Takes about three minutes. You&rsquo;ll get a personal
-            reply within 24 hours.
-          </p>
+          <h1 className={styles.headline}>{c.headline}</h1>
+          <p className={styles.subtext}>{c.subtext}</p>
 
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
             <div className={styles.row}>
               <label className={styles.label}>
-                <LabelText required>Your name</LabelText>
+                <LabelText required>{c.labels.name}</LabelText>
                 <input
                   type="text"
                   className={styles.input}
                   value={form.name}
                   onChange={updateField('name')}
-                  placeholder="Jane Smith"
+                  placeholder={c.placeholders.name}
                   required
                   autoComplete="name"
                 />
               </label>
               <label className={styles.label}>
-                <LabelText required>Email</LabelText>
+                <LabelText required>{c.labels.email}</LabelText>
                 <input
                   type="email"
                   className={styles.input}
                   value={form.email}
                   onChange={updateField('email')}
-                  placeholder="you@company.com"
+                  placeholder={c.placeholders.email}
                   required
                   autoComplete="email"
                 />
@@ -185,24 +163,24 @@ export function ClientQuestionnaire() {
             </div>
 
             <label className={styles.label}>
-              <LabelText>Company or current website</LabelText>
+              <LabelText>{c.labels.company}</LabelText>
               <input
                 type="text"
                 className={styles.input}
                 value={form.company}
                 onChange={updateField('company')}
-                placeholder="acme.com (optional)"
+                placeholder={c.placeholders.company}
                 autoComplete="organization"
               />
             </label>
 
             <fieldset className={[styles.label, styles.fieldset].join(' ')}>
               <legend className={styles.legend}>
-                What do you need? (pick any)
+                {c.labels.projectTypes}
                 <Star />
               </legend>
               <div className={styles.chipGroup} role="group">
-                {PROJECT_TYPES.map((opt) => {
+                {c.chips.types.map((opt) => {
                   const checked = form.projectTypes.includes(opt);
                   return (
                     <button
@@ -226,46 +204,46 @@ export function ClientQuestionnaire() {
                   className={[styles.input, styles.otherInput].join(' ')}
                   value={form.otherDescription}
                   onChange={updateField('otherDescription')}
-                  placeholder="Tell us what - one line is fine"
-                  aria-label="What is the something else?"
+                  placeholder={c.placeholders.otherDescription}
+                  aria-label={c.labels.projectTypes}
                 />
               )}
               {showProjectError && (
-                <p className={styles.errorMsg}>Pick at least one.</p>
+                <p className={styles.errorMsg}>{c.errors.pickAtLeastOne}</p>
               )}
             </fieldset>
 
             <label className={styles.label}>
-              <LabelText required>What does success look like?</LabelText>
+              <LabelText required>{c.labels.goal}</LabelText>
               <textarea
                 className={styles.textarea}
                 value={form.goal}
                 onChange={updateField('goal')}
-                placeholder="A few sentences on the goal - more leads, online sales, a faster site, replacing a vendor, etc."
+                placeholder={c.placeholders.goal}
                 required
                 rows={5}
               />
             </label>
 
             <label className={styles.label}>
-              <LabelText required>Who is it for?</LabelText>
+              <LabelText required>{c.labels.audience}</LabelText>
               <input
                 type="text"
                 className={styles.input}
                 value={form.audience}
                 onChange={updateField('audience')}
-                placeholder="e.g. B2B SaaS founders, local restaurants, designers in Tallinn"
+                placeholder={c.placeholders.audience}
                 required
               />
             </label>
 
             <fieldset className={[styles.label, styles.fieldset].join(' ')}>
               <legend className={styles.legend}>
-                Content readiness
+                {c.labels.contentReady}
                 <Star />
               </legend>
               <div className={styles.chipGroup} role="radiogroup">
-                {CONTENT_READY.map((opt) => {
+                {c.chips.contentReady.map((opt) => {
                   const checked = form.contentReady === opt;
                   return (
                     <button
@@ -284,25 +262,25 @@ export function ClientQuestionnaire() {
                 })}
               </div>
               {showContentError && (
-                <p className={styles.errorMsg}>Pick one.</p>
+                <p className={styles.errorMsg}>{c.errors.pickOne}</p>
               )}
             </fieldset>
 
             <label className={styles.label}>
-              <LabelText>Sites or brands you like (inspiration)</LabelText>
+              <LabelText>{c.labels.inspiration}</LabelText>
               <textarea
                 className={styles.textarea}
                 value={form.inspiration}
                 onChange={updateField('inspiration')}
-                placeholder="Drop 2-3 URLs or names + a line on what you like about each (layout, vibe, copy, animation, etc.)"
+                placeholder={c.placeholders.inspiration}
                 rows={4}
               />
             </label>
 
             <fieldset className={[styles.label, styles.fieldset].join(' ')}>
-              <legend className={styles.legend}>Timeline</legend>
+              <legend className={styles.legend}>{c.labels.timeline}</legend>
               <div className={styles.chipGroup} role="radiogroup">
-                {TIMELINES.map((opt) => {
+                {c.chips.timelines.map((opt) => {
                   const checked = form.timeline === opt;
                   return (
                     <button
@@ -328,16 +306,12 @@ export function ClientQuestionnaire() {
                 className={styles.submit}
                 disabled={status === 'loading'}
               >
-                {status === 'loading' ? 'Sending…' : 'Send to Priidik'}
+                {status === 'loading' ? c.submitting : c.submit}
               </button>
-              <span className={styles.hint}>
-                Goes straight to priidik@agency99.io
-              </span>
+              <span className={styles.hint}>{c.hint}</span>
             </div>
             {status === 'error' && (
-              <p className={styles.errorMsg}>
-                Something went wrong. Email priidik@agency99.io directly and we&rsquo;ll sort it.
-              </p>
+              <p className={styles.errorMsg}>{c.errors.generic}</p>
             )}
           </form>
         </div>

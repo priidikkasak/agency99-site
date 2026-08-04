@@ -1,34 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { useI18n } from '@/lib/i18n/context';
 import styles from './ClientQuestionnaire.module.css';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
-
-const SOURCING_TYPES = [
-  'Manufacturers / factories',
-  'Suppliers / wholesalers',
-  'Investors / funds',
-  'Off-market real estate',
-  'Decision-makers (people)',
-  'Private-label / OEM production',
-  'Something else',
-];
-
-const OTHER = 'Something else';
-
-const SCOPES = [
-  'One tight shortlist (5-15 contacts)',
-  'Medium sweep (30-100 contacts)',
-  'Broad map (100+ contacts)',
-];
-
-const TIMELINES = [
-  'ASAP',
-  'Within 2 weeks',
-  'Within a month',
-  'Flexible',
-];
 
 const initialForm = {
   name: '',
@@ -63,6 +39,10 @@ const LabelText = ({
 );
 
 export function SourcingClientQuestionnaire() {
+  const { t } = useI18n();
+  const c = t.sourcingClient;
+  const OTHER = c.otherOption;
+
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState<Status>('idle');
   const [showTypeError, setShowTypeError] = useState(false);
@@ -130,13 +110,13 @@ export function SourcingClientQuestionnaire() {
           <div className={styles.inner}>
             <div className={styles.eyebrow}>
               <span className={styles.eyebrowDot} />
-              Received
+              {c.success.eyebrow}
             </div>
-            <h1 className={styles.headline}>Thanks - we&rsquo;ve got it.</h1>
+            <h1 className={styles.headline}>{c.success.headline}</h1>
             <p className={styles.subtext}>
-              Priidik will read this personally and reply within 24 hours from{' '}
-              <strong style={{ color: 'var(--text-primary)' }}>priidik@agency99.io</strong>.
-              If it&rsquo;s urgent, ping us on WhatsApp.
+              {c.success.subtextBefore}
+              <strong style={{ color: 'var(--text-primary)' }}>{c.success.subtextEmail}</strong>
+              {c.success.subtextAfter}
             </p>
           </div>
         </div>
@@ -151,36 +131,33 @@ export function SourcingClientQuestionnaire() {
         <div className={styles.inner}>
           <div className={styles.eyebrow}>
             <span className={styles.eyebrowDot} />
-            Sourcing intake
+            {c.eyebrow}
           </div>
-          <h1 className={styles.headline}>Tell us what you&rsquo;re sourcing.</h1>
-          <p className={styles.subtext}>
-            A few quick questions. Takes about three minutes. You&rsquo;ll get a personal
-            reply within 24 hours with a rough scope, timeline and price.
-          </p>
+          <h1 className={styles.headline}>{c.headline}</h1>
+          <p className={styles.subtext}>{c.subtext}</p>
 
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
             <div className={styles.row}>
               <label className={styles.label}>
-                <LabelText required>Your name</LabelText>
+                <LabelText required>{c.labels.name}</LabelText>
                 <input
                   type="text"
                   className={styles.input}
                   value={form.name}
                   onChange={updateField('name')}
-                  placeholder="Jane Smith"
+                  placeholder={c.placeholders.name}
                   required
                   autoComplete="name"
                 />
               </label>
               <label className={styles.label}>
-                <LabelText required>Email</LabelText>
+                <LabelText required>{c.labels.email}</LabelText>
                 <input
                   type="email"
                   className={styles.input}
                   value={form.email}
                   onChange={updateField('email')}
-                  placeholder="you@company.com"
+                  placeholder={c.placeholders.email}
                   required
                   autoComplete="email"
                 />
@@ -188,24 +165,24 @@ export function SourcingClientQuestionnaire() {
             </div>
 
             <label className={styles.label}>
-              <LabelText>Company or website</LabelText>
+              <LabelText>{c.labels.company}</LabelText>
               <input
                 type="text"
                 className={styles.input}
                 value={form.company}
                 onChange={updateField('company')}
-                placeholder="acme.com (optional)"
+                placeholder={c.placeholders.company}
                 autoComplete="organization"
               />
             </label>
 
             <fieldset className={[styles.label, styles.fieldset].join(' ')}>
               <legend className={styles.legend}>
-                What are you sourcing? (pick any)
+                {c.labels.sourcingTypes}
                 <Star />
               </legend>
               <div className={styles.chipGroup} role="group">
-                {SOURCING_TYPES.map((opt) => {
+                {c.chips.types.map((opt) => {
                   const checked = form.sourcingTypes.includes(opt);
                   return (
                     <button
@@ -229,68 +206,68 @@ export function SourcingClientQuestionnaire() {
                   className={[styles.input, styles.otherInput].join(' ')}
                   value={form.otherDescription}
                   onChange={updateField('otherDescription')}
-                  placeholder="Tell us what - one line is fine"
-                  aria-label="What is the something else?"
+                  placeholder={c.placeholders.otherDescription}
+                  aria-label={c.labels.sourcingTypes}
                 />
               )}
               {showTypeError && (
-                <p className={styles.errorMsg}>Pick at least one.</p>
+                <p className={styles.errorMsg}>{c.errors.pickAtLeastOne}</p>
               )}
             </fieldset>
 
             <label className={styles.label}>
-              <LabelText required>Target market or geography</LabelText>
+              <LabelText required>{c.labels.targetMarkets}</LabelText>
               <input
                 type="text"
                 className={styles.input}
                 value={form.targetMarkets}
                 onChange={updateField('targetMarkets')}
-                placeholder="e.g. Germany, Baltics, EU"
+                placeholder={c.placeholders.targetMarkets}
                 required
               />
             </label>
 
             <label className={styles.label}>
-              <LabelText required>What does success look like?</LabelText>
+              <LabelText required>{c.labels.goal}</LabelText>
               <textarea
                 className={styles.textarea}
                 value={form.goal}
                 onChange={updateField('goal')}
-                placeholder="e.g. 3 signed contracts, €500K raised, 8 factory finalists"
+                placeholder={c.placeholders.goal}
                 required
                 rows={5}
               />
             </label>
 
             <label className={styles.label}>
-              <LabelText>Ideal contact / role at the target company</LabelText>
+              <LabelText>{c.labels.idealContact}</LabelText>
               <input
                 type="text"
                 className={styles.input}
                 value={form.idealContact}
                 onChange={updateField('idealContact')}
-                placeholder="e.g. Head of Procurement, GP, Sales Director"
+                placeholder={c.placeholders.idealContact}
               />
             </label>
 
             <label className={styles.label}>
-              <LabelText>Must-have criteria (certs, size, price band)</LabelText>
+              <LabelText>{c.labels.criteria}</LabelText>
               <textarea
                 className={styles.textarea}
                 value={form.criteria}
                 onChange={updateField('criteria')}
-                placeholder="e.g. ENplus A1, MOQ under 500, revenue €5-50M"
+                placeholder={c.placeholders.criteria}
                 rows={4}
               />
             </label>
 
             <fieldset className={[styles.label, styles.fieldset].join(' ')}>
               <legend className={styles.legend}>
-                Scope
+                {c.labels.scope}
                 <Star />
               </legend>
               <div className={styles.chipGroup} role="radiogroup">
-                {SCOPES.map((opt) => {
+                {c.chips.scopes.map((opt) => {
                   const checked = form.scope === opt;
                   return (
                     <button
@@ -309,25 +286,25 @@ export function SourcingClientQuestionnaire() {
                 })}
               </div>
               {showScopeError && (
-                <p className={styles.errorMsg}>Pick one.</p>
+                <p className={styles.errorMsg}>{c.errors.pickOne}</p>
               )}
             </fieldset>
 
             <label className={styles.label}>
-              <LabelText>What have you already tried?</LabelText>
+              <LabelText>{c.labels.tried}</LabelText>
               <textarea
                 className={styles.textarea}
                 value={form.tried}
                 onChange={updateField('tried')}
-                placeholder="e.g. Alibaba, Apollo, past agency - what worked, what didn't"
+                placeholder={c.placeholders.tried}
                 rows={4}
               />
             </label>
 
             <fieldset className={[styles.label, styles.fieldset].join(' ')}>
-              <legend className={styles.legend}>Timeline</legend>
+              <legend className={styles.legend}>{c.labels.timeline}</legend>
               <div className={styles.chipGroup} role="radiogroup">
-                {TIMELINES.map((opt) => {
+                {c.chips.timelines.map((opt) => {
                   const checked = form.timeline === opt;
                   return (
                     <button
@@ -353,16 +330,12 @@ export function SourcingClientQuestionnaire() {
                 className={styles.submit}
                 disabled={status === 'loading'}
               >
-                {status === 'loading' ? 'Sending…' : 'Send to Priidik'}
+                {status === 'loading' ? c.submitting : c.submit}
               </button>
-              <span className={styles.hint}>
-                Goes straight to priidik@agency99.io
-              </span>
+              <span className={styles.hint}>{c.hint}</span>
             </div>
             {status === 'error' && (
-              <p className={styles.errorMsg}>
-                Something went wrong. Email priidik@agency99.io directly and we&rsquo;ll sort it.
-              </p>
+              <p className={styles.errorMsg}>{c.errors.generic}</p>
             )}
           </form>
         </div>

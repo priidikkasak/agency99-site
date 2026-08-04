@@ -65,6 +65,104 @@ export interface SourcingCase {
   outcome: string;
 }
 
+export interface WebClientForm {
+  eyebrow: string;
+  headline: string;
+  subtext: string;
+  labels: {
+    name: string;
+    email: string;
+    company: string;
+    projectTypes: string;
+    goal: string;
+    audience: string;
+    contentReady: string;
+    inspiration: string;
+    timeline: string;
+  };
+  placeholders: {
+    name: string;
+    email: string;
+    company: string;
+    otherDescription: string;
+    goal: string;
+    audience: string;
+    inspiration: string;
+  };
+  chips: {
+    types: string[];
+    contentReady: string[];
+    timelines: string[];
+  };
+  otherOption: string;
+  errors: {
+    pickAtLeastOne: string;
+    pickOne: string;
+    generic: string;
+  };
+  submit: string;
+  submitting: string;
+  hint: string;
+  success: {
+    eyebrow: string;
+    headline: string;
+    subtextBefore: string;
+    subtextEmail: string;
+    subtextAfter: string;
+  };
+}
+
+export interface SourcingClientForm {
+  eyebrow: string;
+  headline: string;
+  subtext: string;
+  labels: {
+    name: string;
+    email: string;
+    company: string;
+    sourcingTypes: string;
+    targetMarkets: string;
+    goal: string;
+    idealContact: string;
+    criteria: string;
+    scope: string;
+    tried: string;
+    timeline: string;
+  };
+  placeholders: {
+    name: string;
+    email: string;
+    company: string;
+    otherDescription: string;
+    targetMarkets: string;
+    goal: string;
+    idealContact: string;
+    criteria: string;
+    tried: string;
+  };
+  chips: {
+    types: string[];
+    scopes: string[];
+    timelines: string[];
+  };
+  otherOption: string;
+  errors: {
+    pickAtLeastOne: string;
+    pickOne: string;
+    generic: string;
+  };
+  submit: string;
+  submitting: string;
+  hint: string;
+  success: {
+    eyebrow: string;
+    headline: string;
+    subtextBefore: string;
+    subtextEmail: string;
+    subtextAfter: string;
+  };
+}
+
 export interface Translations {
   nav: NavItem;
   hero: {
@@ -185,6 +283,8 @@ export interface Translations {
     footnoteLive: string;
     footnoteMock: string;
   };
+  webClient: WebClientForm;
+  sourcingClient: SourcingClientForm;
 }
 
 export const et: Translations = {
@@ -576,5 +676,134 @@ export const et: Translations = {
     emptyRange: 'Selles ajavahemikus pole veel külastajaid.',
     footnoteLive: 'Reaalajas · Google Analytics 4 · koondatud, ainult riigi tasemel. Isikuandmeid pole.',
     footnoteMock: 'Näidisandmed - pole reaalajas. Koondatud, ainult riigi tasemel.',
+  },
+  webClient: {
+    eyebrow: 'Kliendi ankeet',
+    headline: 'Räägi oma projektist.',
+    subtext: 'Paar kiiret küsimust. Umbes kolm minutit. Vastan isiklikult 24 tunni jooksul.',
+    labels: {
+      name: 'Sinu nimi',
+      email: 'Email',
+      company: 'Ettevõte või olemasolev veebileht',
+      projectTypes: 'Mida vajad? (vali suvaline arv)',
+      goal: 'Mis on edu pilt?',
+      audience: 'Kellele see on mõeldud?',
+      contentReady: 'Kas sisu on valmis?',
+      inspiration: 'Saidid või brändid, mis meeldivad (inspiratsioon)',
+      timeline: 'Ajakava',
+    },
+    placeholders: {
+      name: 'Jaan Tamm',
+      email: 'sina@ettevote.com',
+      company: 'ettevote.ee (valikuline)',
+      otherDescription: 'Ütle täpsemalt - üks lause piisab',
+      goal: 'e.g. rohkem leade, e-müük, kiirem sait',
+      audience: 'e.g. B2B asutajad, restoranid, disainerid',
+      inspiration: 'e.g. stripe.com, linear.app - mis meeldib',
+    },
+    chips: {
+      types: [
+        'Veebileht',
+        'E-pood',
+        'Platvorm / veebirakendus',
+        'Cold email süsteem',
+        'Disain / brändiidentiteet',
+        'Muu',
+      ],
+      contentReady: [
+        'Tekstid ja pildid on valmis',
+        'Osa on olemas - vaja abi ülejäänuga',
+        'Vaja abi kõigega',
+      ],
+      timelines: [
+        'ASAP',
+        '2 nädala jooksul',
+        'Kuu aja jooksul',
+        'Paindlik',
+      ],
+    },
+    otherOption: 'Muu',
+    errors: {
+      pickAtLeastOne: 'Vali vähemalt üks.',
+      pickOne: 'Vali üks.',
+      generic: 'Midagi läks valesti. Kirjuta otse priidik@agency99.io ja lahendame.',
+    },
+    submit: 'Saada Priidikule',
+    submitting: 'Saadan…',
+    hint: 'Läheb otse priidik@agency99.io',
+    success: {
+      eyebrow: 'Kätte saadud',
+      headline: 'Aitäh - kätte saime.',
+      subtextBefore: 'Priidik loeb selle isiklikult läbi ja vastab 24 tunni jooksul aadressilt ',
+      subtextEmail: 'priidik@agency99.io',
+      subtextAfter: '. Kui asi on kiire, kirjuta WhatsAppi.',
+    },
+  },
+  sourcingClient: {
+    eyebrow: 'Sourcing ankeet',
+    headline: 'Räägi, mida vajad sourcida.',
+    subtext: 'Paar kiiret küsimust. Umbes kolm minutit. Vastan isiklikult 24 tunni jooksul koos esialgse mahu, ajakava ja hinnaga.',
+    labels: {
+      name: 'Sinu nimi',
+      email: 'Email',
+      company: 'Ettevõte või veebileht',
+      sourcingTypes: 'Mida sa sourcid? (vali suvaline arv)',
+      targetMarkets: 'Sihtturg või geograafia',
+      goal: 'Mis on edu pilt?',
+      idealContact: 'Ideaalne kontakt / roll sihtettevõttes',
+      criteria: 'Kohustuslikud kriteeriumid (sertid, maht, hinnavahemik)',
+      scope: 'Maht',
+      tried: 'Mida oled juba proovinud?',
+      timeline: 'Ajakava',
+    },
+    placeholders: {
+      name: 'Jaan Tamm',
+      email: 'sina@ettevote.com',
+      company: 'ettevote.ee (valikuline)',
+      otherDescription: 'Ütle täpsemalt - üks lause piisab',
+      targetMarkets: 'e.g. Saksamaa, Baltikum, EL',
+      goal: 'e.g. 3 tarnelepingut, €500K kaasatud, 8 tehase finalisti',
+      idealContact: 'e.g. Head of Procurement, GP, müügidirektor',
+      criteria: 'e.g. ENplus A1, MOQ alla 500, käive €5-50M',
+      tried: 'e.g. Alibaba, Apollo, eelmine agentuur - mis töötas, mis mitte',
+    },
+    chips: {
+      types: [
+        'Tootjad / tehased',
+        'Tarnijad / hulgimüüjad',
+        'Investorid / fondid',
+        'Avalikustamata kinnisvara',
+        'Otsustajad (inimesed)',
+        'Private-label / OEM tootmine',
+        'Muu',
+      ],
+      scopes: [
+        'Üks tihe lühinimekiri (5-15 kontakti)',
+        'Keskmine läbi käik (30-100 kontakti)',
+        'Lai kaardistus (100+ kontakti)',
+      ],
+      timelines: [
+        'ASAP',
+        '2 nädala jooksul',
+        'Kuu aja jooksul',
+        'Paindlik',
+      ],
+    },
+    otherOption: 'Muu',
+    errors: {
+      pickAtLeastOne: 'Vali vähemalt üks.',
+      pickOne: 'Vali üks.',
+      generic: 'Midagi läks valesti. Kirjuta otse priidik@agency99.io ja lahendame.',
+    },
+    submit: 'Saada Priidikule',
+    submitting: 'Saadan…',
+    hint: 'Läheb otse priidik@agency99.io',
+    success: {
+      eyebrow: 'Kätte saadud',
+      headline: 'Aitäh - kätte saime.',
+      subtextBefore: 'Priidik loeb selle isiklikult läbi ja vastab 24 tunni jooksul aadressilt ',
+      subtextEmail: 'priidik@agency99.io',
+      subtextAfter: '. Kui asi on kiire, kirjuta WhatsAppi.',
+    },
   },
 };
