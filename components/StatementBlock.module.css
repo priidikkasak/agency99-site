@@ -5,32 +5,14 @@
   isolation: isolate;
 }
 
-.network {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.dot {
-  fill: rgba(15, 15, 13, 0.35);
-}
-
-.arrow {
-  fill: rgba(15, 15, 13, 1);
-  filter: drop-shadow(0 0 6px rgba(15, 15, 13, 0.55));
-}
-
 .inner {
   position: relative;
-  z-index: 2;
   max-width: var(--container-max);
   margin: 0 auto;
   padding: var(--sp-8) var(--sp-4);
   display: flex;
   flex-direction: column;
   gap: var(--sp-5);
-  pointer-events: none;
 }
 
 .line {
@@ -52,9 +34,5 @@
   .line {
     font-size: clamp(18px, 6.4vw, 32px);
     letter-spacing: -0.025em;
-  }
-
-  .dot {
-    fill: rgba(15, 15, 13, 0.6);
   }
 }
