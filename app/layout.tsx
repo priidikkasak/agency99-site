@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: '%s · AGENCY99',
   },
   description:
-    'AI-powered sourcing, agents and automation. Manufacturers, suppliers, investors, real estate - globally. Every contact human-verified. 10+ years of sourcing experience. From €1,490.',
+    'AI-powered sourcing, agents and automation.',
   keywords: 'AI sourcing, AI agents, AI automation, lead generation, manufacturer sourcing, supplier sourcing, custom AI, chatbots',
   alternates: {
     canonical: 'https://agency99.io',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AGENCY99',
     description:
-      'AI-powered sourcing, agents and automation. Manufacturers, suppliers, investors, real estate - globally. Every contact human-verified. 10+ years of sourcing experience. From €1,490.',
+      'AI-powered sourcing, agents and automation.',
     url: 'https://agency99.io',
     siteName: 'AGENCY99',
     type: 'website',
