@@ -10,7 +10,8 @@ const STORAGE_KEY = 'a99_admin';
 const LINKS = [
   { href: '/content', title: 'Content', description: 'Content editor and page copy management.', icon: '✎' },
   { href: '/map', title: 'Map', description: 'Live traffic map with country-level visitor data.', icon: '◉' },
-  { href: '/client', title: 'Client', description: 'Client dashboard and delivery status.', icon: '⌘' },
+  { href: '/webclient', title: 'Web client', description: 'Web / product project intake form.', icon: '⌘' },
+  { href: '/sourcingclient', title: 'Sourcing client', description: 'Sourcing project intake form.', icon: '⟶' },
 ] as const;
 
 export default function AdminPage() {

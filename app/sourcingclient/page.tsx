@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { Nav } from '@/components/Nav';
-import { ClientQuestionnaire } from '@/components/ClientQuestionnaire';
+import { SourcingClientQuestionnaire } from '@/components/SourcingClientQuestionnaire';
 
 export const metadata: Metadata = {
-  title: 'Web client',
-  description: 'Web client — Tell us about your web / product project. We reply within 24 hours.',
+  title: 'Sourcing client',
+  description: 'Sourcing client — Tell us what you need sourced. We reply within 24 hours.',
   openGraph: {
     title: 'AGENCY99',
-    description: 'Web client',
+    description: 'Sourcing client',
     siteName: 'AGENCY99',
     type: 'website',
   },
@@ -22,11 +22,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WebClientPage() {
+export default function SourcingClientPage() {
   return (
     <>
       <Nav />
-      <ClientQuestionnaire />
+      <SourcingClientQuestionnaire />
     </>
   );
 }
