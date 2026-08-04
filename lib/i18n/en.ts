@@ -47,7 +47,7 @@ export const en: Translations = {
       {
         tag: '01',
         title: 'AI Sourcing',
-        body: 'Manufacturers, suppliers, products, services, investors and real estate from anywhere in the world. Every contact human verified by call or email. Not a raw list. Real contacts.',
+        body: 'Manufacturers, suppliers, products, services, investors and real estate from anywhere in the world. Not a raw list. Real contacts that actually respond.',
       },
       {
         tag: '02',
@@ -206,35 +206,35 @@ export const en: Translations = {
         tag: '01',
         category: 'Manufacturers',
         title: 'Pellet producers, Baltics + Poland',
-        body: 'ENplus A1 certified producers found for a German retail chain in eight days. Every certificate checked directly against the ENplus registry, every sales rep reached by phone. Only mills under €350 per ton with capacity above 500 tons per month made the list. The client received a full comparison of prices, lead times and a named contact for each mill.',
+        body: 'ENplus A1 certified producers found for a German retail chain in days. Certificates checked directly against the ENplus registry, prices and lead times included. Only mills under €350 per ton with capacity above 500 tons per month made the list.',
         outcome: '3 supply contracts',
       },
       {
         tag: '02',
         category: 'Investors',
         title: 'Real estate investors, Dubai',
-        body: "Active investors sourced for a Baltic developer's seed round. Filtered by ticket size, asset class and past deals. Warm introductions arranged where mutual connections existed; personalised direct outreach where they did not. Every contact confirmed by phone call before handoff.",
+        body: "Active investors sourced for a Baltic developer's seed round. Filtered by ticket size, asset class and past deals. Warm introductions arranged where mutual connections existed; personalised direct outreach where they did not.",
         outcome: '€4.2M raised',
       },
       {
         tag: '03',
         category: 'Manufacturers',
         title: '3D metal print producers, EU',
-        body: 'Direct-to-metal print partners for a jewelry brand. Most search results turned out to be resin printers - real silver and gold printing services are a handful across Europe. Every qualifier mapped, every technical claim confirmed by sample order and side-by-side pricing.',
+        body: '3D metal printing production partners for a jewelry brand. Most vendors turned out to be resin printers, not real SLM machines — real silver and gold printing services are a handful across Europe. Every qualifier mapped, every technical claim confirmed by sample order and side-by-side pricing.',
         outcome: '2 partners onboarded',
       },
       {
         tag: '04',
         category: 'Contacts',
         title: 'Ecom decision-makers, UK',
-        body: 'Heads of Operations and Fulfilment at UK ecom brands with £5-50M turnover. Emails verified through three independent services, LinkedIn profiles checked for real activity (not dormant accounts). Every message referenced a specific recent hire or press story from that company.',
+        body: 'Heads of Operations and Fulfilment at UK ecom brands with £5-50M turnover. Emails verified through three independent services, LinkedIn profiles checked for real activity. Every message referenced a specific recent hire or press story from that company.',
         outcome: '12% reply rate',
       },
       {
         tag: '05',
         category: 'Real estate',
         title: 'Off-market properties, Baltics',
-        body: 'Investment-grade properties in Estonia and Latvia for a private buyer. Sourced through brokers, direct owners, undisclosed listings and local property lawyers - the last group often hears of assets before they publicly list. Every property visited in person before shortlisting.',
+        body: 'Investment-grade properties in Estonia and Latvia for a private buyer. Sourced through brokers, owners, undisclosed listings and local property lawyers - the last group often hears of assets before they publicly list. Every property visited in person before shortlisting.',
         outcome: '15 properties',
       },
       {
@@ -248,7 +248,7 @@ export const en: Translations = {
         tag: '07',
         category: 'Investors',
         title: 'Fintech seed round, EU + UK',
-        body: "Suitable funds sourced across Europe and the UK for a payments startup. Filtered by investment thesis, stage focus and cheque size - no spray-and-pray. Every message referenced the fund's most recent similar investment. Round closed in 12 weeks.",
+        body: "Suitable funds sourced across Europe and the UK for a payments startup. Filtered by investment thesis, stage focus and cheque size - no spray-and-pray. Every message referenced the fund's most recent similar investment.",
         outcome: 'Round closed',
       },
       {
@@ -269,7 +269,7 @@ export const en: Translations = {
         tag: '10',
         category: 'Real estate',
         title: 'Off-market commercial, Berlin',
-        body: 'Mixed-use assets for a Baltic investor with a €5-15M budget. Sourced through brokers, direct owners and bank non-performing loan portfolios - the last surfaces properties that never publicly list. Every opportunity assessed for yield, tenant mix and refurbishment cost.',
+        body: 'Mixed-use assets for a Baltic investor with a €5-15M budget. Sourced through brokers, owners and bank non-performing loan portfolios - the last surfaces properties that never publicly list. Every opportunity assessed for yield, tenant mix and refurbishment cost.',
         outcome: '3 in due diligence',
       },
       {
@@ -327,7 +327,7 @@ export const en: Translations = {
   coldEmailPage: {
     eyebrow: 'B2B lead generation',
     headline: 'Cold email system.\nTurnkey.',
-    sub: 'We build a precise lead list of your ideal customer, write copy that gets replies, and run the campaign. You just take the calls.',
+    sub: 'We build a precise lead list of your ideal customer, write copy that gets replies, and run the campaign.',
     features: [
       {
         num: '01',

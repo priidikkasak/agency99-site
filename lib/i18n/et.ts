@@ -332,12 +332,12 @@ export const et: Translations = {
       {
         tag: '01',
         title: 'AI Sourcing',
-        body: 'Tootjad, tarnijad, teenused, investorid ja kinnisvara kogu maailmast. Iga kontakt käsitsi verifitseeritud kõne või emailiga. Sa ei saa lihtsalt nimekirja. Sa saad päris kontakte.',
+        body: 'Tootjad, tarnijad, teenused, investorid ja kinnisvara kogu maailmast. Sa ei saa lihtsalt nimekirja. Sa saad päris kontakte, kes reaalselt vastavad.',
       },
       {
         tag: '02',
         title: 'AI agendid',
-        body: 'Kohandatud AI agendid, mis töötavad 24/7, uurivad, jälgivad, kirjutavad ja järgnevad. Ei väsi, ei puhka, ei unusta.',
+        body: 'Kohandatud AI agendid, mis töötavad 24/7 — uurivad, jälgivad, kirjutavad ja hoiavad kontakti. Ei väsi, ei puhka, ei unusta.',
       },
       {
         tag: '03',
@@ -491,35 +491,35 @@ export const et: Translations = {
         tag: '01',
         category: 'Tootjad',
         title: 'Pelletitootjad, Baltikum + Poola',
-        body: 'Saksa jaeketile leidsime ENplus A1 sertifikaadiga tootjad kaheksa päevaga. Iga sertifikaat kontrollisime otse ENplus registrist ja iga müügiesindajaga võtsime telefoni teel ühendust. Nimekirja jõudsid ainult tehased, kelle hind jäi alla 350€ tonn ja kuutoodang üle 500 tonni. Klient sai valmis võrdluse hindadest, tarneaegadest ja nimelistest kontaktidest.',
+        body: 'Saksa jaeketile leidsime ENplus A1 sertifikaadiga tootjad päevadega. Sertifikaadid otse ENplus registrist, hinnad ja tarneajad lisaks. Nimekirja jõudsid ainult tehased alla 350€ tonn ja üle 500 tonni kuus.',
         outcome: '3 tarnelepingut',
       },
       {
         tag: '02',
         category: 'Investorid',
         title: 'Kinnisvarainvestorid, Dubai',
-        body: 'Leidsime aktiivsed investorid Balti arendaja seed roundi. Sõelusime kandidaate investeeringu suuruse, varaklassi ja varasemate tehingute põhjal. Kus meil olid ühised tutvused, tegime sooja tutvustuse; kus ei olnud, pöördusime otse ja isikupärastatult. Iga kontakt kinnitasime telefonikõnega enne kliendile üleandmist.',
+        body: 'Leidsime aktiivsed investorid Balti arendaja seed roundi. Sõelusime kandidaate investeeringu suuruse, varaklassi ja varasemate tehingute põhjal. Kus meil olid ühised tutvused, tegime sooja tutvustuse; kus ei olnud, pöördusime otse ja isikupärastatult.',
         outcome: '€4,2M kaasatud',
       },
       {
         tag: '03',
         category: 'Tootjad',
         title: '3D metallprint tootjad, Euroopa',
-        body: 'Juveelibränd otsis tootmispartnereid, kes prindivad otse metallis. Enamik otsingu tulemustest osutus tegelikult vaigu-printeriteks, mitte päris SLM-masinateks - hõbedas või kullas printivaid ettevõtteid on Euroopas käputäis. Kaardistasime iga sobiva tootja ja kontrollisime iga tehnilise väite proovitellimuse ning hinnavõrdlusega.',
+        body: 'Juveelibränd otsis 3D-metallprintimise tootmispartnereid. Enamik pakkujaid osutus tegelikult resin printeriteks, mitte päris SLM-masinateks — hõbedas või kullas printivaid ettevõtteid on Euroopas käputäis. Kaardistasime iga sobiva tootja ja kontrollisime iga tehnilise väite proovitellimuse ning hinnavõrdlusega.',
         outcome: '2 partnerit',
       },
       {
         tag: '04',
         category: 'Kontaktid',
         title: 'E-kaubanduse otsustajad, UK',
-        body: 'Sihikul olid Suurbritannia e-kaubanduse brändide COO-d, Head of Ops-id ja Head of Fulfilment-id, kelle firma käive on £5-50M. Emailid kontrollisime kolme sõltumatu teenusega ja LinkedIn-i profiilid vaatasime üle päris aktiivsuse suhtes (mitte tolmused kontod). Iga saadetud sõnum viitas konkreetse firma värsketele töölevõttudele või uudistele.',
+        body: 'Sihikul olid Suurbritannia e-kaubanduse brändide COO-d, Head of Ops-id ja Head of Fulfilment-id, kelle firma käive on £5-50M. Emailid kontrollisime kolme sõltumatu teenusega ja LinkedIn-i profiilid vaatasime üle päris aktiivsuse suhtes. Iga saadetud sõnum viitas konkreetse firma värsketele töölevõttudele või uudistele.',
         outcome: '12% vastust',
       },
       {
         tag: '05',
         category: 'Kinnisvara',
         title: 'Avalikustamata kinnisvara, Baltikum',
-        body: 'Erakliendi soovile otsisime investeerimisküpseid objekte Eestist ja Lätist. Otsing käis vahendajate, otseomanike, avalikustamata pakkumiste ja kohalike kinnisvarajuristide kaudu - viimased kuulevad varadest tihti enne müüki panekut. Iga objekti käisime kohapeal üle vaatamas enne kliendile pakkumist.',
+        body: 'Erakliendi soovil otsisime investeerimisküpseid objekte Eestist ja Lätist. Otsing käis vahendajate, omanike, avalikustamata pakkumiste ja kohalike kinnisvarajuristide kaudu - viimased kuulevad varadest tihti enne müüki panekut. Iga objekti käisime kohapeal üle vaatamas enne kliendile pakkumist.',
         outcome: '15 objekti',
       },
       {
@@ -533,7 +533,7 @@ export const et: Translations = {
         tag: '07',
         category: 'Investorid',
         title: 'Fintech seed round, Euroopa + UK',
-        body: 'Makseteenuste startup-ile otsisime sobivaid fonde Euroopast ja Suurbritanniast. Sõelusime kandidaate investeerimisteesi, kasvufaasi ja tšeki suuruse järgi - mitte massisaatmine. Iga sõnum viitas fondi kõige värskemale sarnasele investeeringule. Ring suletud 12 nädalaga.',
+        body: 'Makseteenuste startup-ile otsisime sobivaid fonde Euroopast ja Suurbritanniast. Sõelusime kandidaate investeerimisteesi, kasvufaasi ja tšeki suuruse järgi - mitte massisaatmine. Iga sõnum viitas fondi kõige värskemale sarnasele investeeringule.',
         outcome: 'Ring suletud',
       },
       {
@@ -554,21 +554,21 @@ export const et: Translations = {
         tag: '10',
         category: 'Kinnisvara',
         title: 'Avalikustamata ärikinnisvara, Berliin',
-        body: 'Balti investor otsis mitmeotstarbelisi objekte eelarves €5-15M. Otsisime vahendajate, otseomanike ja pankade halbade laenude portfellide seast - viimane toob esile varasid, mis avalikult müüki ei jõua kunagi. Iga võimalust hindasime tootluse, üürnike koosseisu ja renoveerimiskulu järgi.',
+        body: 'Balti investor otsis mitmeotstarbelisi objekte eelarves €5-15M. Otsisime vahendajate, omanike ja pankade halbade laenude portfellide seast - viimane toob esile varasid, mis avalikult müüki ei jõua kunagi. Iga võimalust hindasime tootluse, üürnike koosseisu ja renoveerimiskulu järgi.',
         outcome: '3 DD faasis',
       },
       {
         tag: '11',
         category: 'Tarnijad',
         title: 'Kohvitootjad, Brasiilia',
-        body: 'Põhjamaade kohvikuketile leidsime spetsiaalkohvi otseost-partnerid Minas Geraisi ja São Paulo farmidest. Iga farmi Rainforest Alliance ja Fair Trade sertifikaadid kontrollisime ning prooviubad saatsime sertifitseeritud Q-graderile hindamiseks. Klient sai kätte cupping-hinded, hooajalised saagimahud ja otsekontakti iga tootjaga.',
+        body: 'Põhjamaade kohvikuketile leidsime spetsiaalkohvi otseost-partnerid Minas Geraisi ja São Paulo farmidest. Iga farmi Rainforest Alliance ja Fair Trade sertifikaadid kontrollisime ning proovioad saatsime sertifitseeritud Q-graderile hindamiseks. Klient sai kätte cupping-hinded, hooajalised saagimahud ja otsekontakti iga tootjaga.',
         outcome: '6 partnerit',
       },
       {
         tag: '12',
         category: 'Tarnijad',
         title: 'IT arendustiimid, Ukraina',
-        body: 'Berliinis asuv SaaS-firma otsis full-stack arendustiime Kiievist ja Lvivist. Iga tiimi GitHub-i profiili vaatasime üle ja viimased kliendiprojektid kontrollisime otsese soovitaja-kõnega. Töötasuvahemikud, turvakorraldus (SOC 2, ISO 27001) ja ajavööndide kattuvus selgitasime enne intervjuusid.',
+        body: 'Berliinis asuv SaaS-firma otsis full-stack arendustiime Kiievist ja Lvivist. Iga tiimi GitHub-i profiili vaatasime üle ja viimased kliendiprojektid kontrollisime otsese soovitaja-kõnega. Töötasuvahemikud, turvakorraldus (SOC 2, ISO 27001) ja ajavööndi kattuvuse selgitasime enne intervjuusid.',
         outcome: '3 tiimi intervjuus',
       },
       {
@@ -589,7 +589,7 @@ export const et: Translations = {
         tag: '15',
         category: 'Tarnijad',
         title: 'Private-label vein, Portugal',
-        body: 'Skandinaavia jaeketile leidsime veinitootjad Douro ja Alentejo piirkondadest. Iga viinamarjaistanduse mahetoodangu sertifikaadid ja aastase toodangu kontrollisime, proovipudelid saatsime sommelierile hindamiseks. Etiketikujundus ja ekspordi-logistika leppisime kokku enne kliendile üleandmist.',
+        body: 'Skandinaavia jaeketile leidsime veinitootjad Douro ja Alentejo piirkondadest. Iga viinamarjaistanduse mahetoodangu sertifikaadid ja aastase toodangu kontrollisime, proovipudelid saatsime sommelierile hindamiseks. Etiketikujunduse ja ekspordi-logistika leppisime kokku enne kliendile üleandmist.',
         outcome: '3 partnerit',
       },
     ],
@@ -612,7 +612,7 @@ export const et: Translations = {
   coldEmailPage: {
     eyebrow: 'B2B müügikasvatus',
     headline: 'Cold email süsteem.\nVõtmed kätte.',
-    sub: 'Ehitame täpse lead list\'i sinu ideaalsele kliendile, kirjutame sõnumid mis saavad vastuse ja käivitame kampaania. Sina ainult vasta kõnedele.',
+    sub: 'Ehitame täpse lead list\'i sinu ideaalsele kliendile, kirjutame sõnumid mis saavad vastuse ja käivitame kampaania.',
     features: [
       {
         num: '01',
