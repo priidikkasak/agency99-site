@@ -17,6 +17,7 @@ html {
   background-color: #0F0F0D;
   overflow-x: clip;
   overscroll-behavior-x: none;
+  touch-action: pan-y;
   width: 100%;
   max-width: 100%;
 }
@@ -69,9 +70,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
   overscroll-behavior-x: none;
+  touch-action: pan-y;
   width: 100%;
   max-width: 100%;
   position: relative;
+}
+
+/* iOS: 16px+ input font prevents auto-zoom on focus */
+@media (max-width: 767px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
 }
 
 body::before {
