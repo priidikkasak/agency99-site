@@ -4,7 +4,7 @@ import { useI18n } from '@/lib/i18n/context';
 import styles from './ColdEmail.module.css';
 
 const WHATSAPP_URL = 'https://wa.me/3725100017';
-const TELEGRAM_URL = 'https://t.me/agency99io';
+const TELEGRAM_URL = 'https://t.me/agency99sourcing';
 
 export function ColdEmailPage() {
   const { t, lang } = useI18n();

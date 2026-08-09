@@ -6,7 +6,7 @@ import { Section } from './Section';
 import styles from './FinalCTA.module.css';
 
 const WHATSAPP_URL = 'https://wa.me/3725100017';
-const TELEGRAM_URL = 'https://t.me/agency99io';
+const TELEGRAM_URL = 'https://t.me/agency99sourcing';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
