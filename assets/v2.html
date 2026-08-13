@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AGENCY99</title>
+<meta name="description" content="Commodity sourcing. AI agents. Automation.">
+<link rel="canonical" href="https://agency99short.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agency99short.vercel.app/">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="AGENCY99">
+<meta property="og:description" content="Commodity sourcing. AI agents. Automation.">
+<meta property="og:site_name" content="AGENCY99">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AGENCY99">
+<meta name="twitter:description" content="Commodity sourcing. AI agents. Automation.">
+<meta name="theme-color" content="#0F0F0D">
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   AGENCY99 — "Manifest"
+   Swiss editorial grid meets a commodity trading desk. The page is a
+   document: hairline rules, crop marks, a numbered ledger.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@font-face{font-family:'Cabinet Grotesk'; src:url('fonts/CabinetGrotesk-Bold.woff2') format('woff2'); font-weight:700; font-display:swap}
+@font-face{font-family:'Cabinet Grotesk'; src:url('fonts/CabinetGrotesk-ExtraBold.woff2') format('woff2'); font-weight:800; font-display:swap}
+@font-face{font-family:'Geist Mono'; src:url('fonts/GeistMono-Regular.woff2') format('woff2'); font-weight:400; font-display:swap}
+
+:root{
+  --bg:#0C0C0A; --ink:#F2EFE8; --ink-2:#8B8880; --ink-3:#5C5A55;
+  --rule:#232320; --rule-2:#33322E;
+  --acc:#9B8BFF; --acc-lo:#6E5CFF; --acc-hi:#CFC4FF; --live:#B9A8FF;
+  --wa:#25D366; --tg:#2AABEE;
+
+  --pad:clamp(26px,5vw,64px);        /* page gutter */
+  --mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --display:'Cabinet Grotesk',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+
+  --e:cubic-bezier(.16,1,.3,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{height:100%}
+body{
+  min-height:100%; background:var(--bg); color:var(--ink);
+  font-family:var(--mono); -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit; text-decoration:none}
+:focus-visible{outline:1.5px solid var(--acc); outline-offset:4px}
+
+/* ── atmosphere: two soft blooms + a fine grain ───────────────────── */
+.atmos,.grain{position:fixed; inset:0; pointer-events:none}
+.atmos{
+  z-index:0;
+  background:
+    radial-gradient(80% 55% at 88% -8%, rgba(155,139,255,.20), transparent 60%),
+    radial-gradient(70% 50% at -8% 108%, rgba(155,139,255,.09), transparent 62%);
+}
+.grain{
+  z-index:60; opacity:.16; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+
+/* ── page grid ────────────────────────────────────────────────────── */
+.page{
+  position:relative; z-index:3;
+  min-height:100dvh; padding:var(--pad);
+  display:grid; grid-template-columns:minmax(0,1fr);
+  grid-template-rows:auto 1fr auto; gap:clamp(20px,3.6vh,44px);
+  max-width:1560px; margin:0 auto;
+}
+
+/* ── header ───────────────────────────────────────────────────────── */
+.bar{
+  grid-row:1; display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.logo{display:block; height:clamp(34px,4.8vh,54px); width:auto}
+.meta{
+  display:flex; align-items:center; gap:10px;
+  font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3);
+  white-space:nowrap;
+}
+.pulse{
+  width:5px; height:5px; border-radius:50%; background:var(--acc);
+  box-shadow:0 0 0 0 rgba(155,139,255,.55); animation:pulse 2.6s ease-out infinite;
+}
+@keyframes pulse{70%{box-shadow:0 0 0 7px rgba(155,139,255,0)}100%{box-shadow:0 0 0 0 rgba(155,139,255,0)}}
+
+/* ── stage: asymmetric split, type left / ledger right ────────────── */
+.stage{
+  /* the block hangs off the bottom of its row (so the ledger sits right above
+     the contact row) while both columns start on the same top line */
+  grid-row:2; grid-column:1; align-self:end;
+  display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);
+  align-items:start; gap:clamp(24px,4vw,56px);
+}
+
+/* headline — one gradient box so the sweep stays continuous across lines */
+h1{
+  width:fit-content;
+  /* optical alignment: the display face carries a left sidebearing, so at this
+     size the V sits ~3px inside the axis the mono lines below start from */
+  margin-left:-.038em;
+  font-family:var(--display); font-weight:800;
+  font-size:clamp(1.55rem,4.15vw,4.2rem); line-height:.94; letter-spacing:-.022em;
+  text-transform:uppercase;
+  background:linear-gradient(118deg,var(--acc-lo) 0%,var(--acc) 42%,var(--acc-hi) 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:wipe 1.15s var(--e) both;
+}
+@keyframes wipe{
+  from{clip-path:inset(0 0 102% 0); transform:translateY(10px)}
+  to  {clip-path:inset(0 0 -2% 0);  transform:none}
+}
+
+.kicker{
+  margin-top:clamp(18px,2.8vh,30px);
+  font-size:clamp(9px,1.05vw,10.5px); letter-spacing:.28em; text-transform:uppercase;
+  color:var(--acc);
+}
+.stat{
+  margin-top:clamp(12px,1.8vh,18px);
+  display:flex; align-items:baseline; gap:1ch;
+  font-size:clamp(1.05rem,2.1vw,1.5rem); letter-spacing:.02em; text-transform:uppercase;
+  color:var(--ink);
+}
+.stat b{font-weight:400}
+
+/* ── ledger ───────────────────────────────────────────────────────── */
+.ledger{border-top:0}
+.row:last-child{border-bottom:0}
+.row{
+  display:grid; grid-template-columns:26px minmax(0,1fr) auto;
+  align-items:baseline; gap:0 clamp(10px,1.4vw,18px);
+  padding:clamp(10px,1.7vh,15px) 0; border-bottom:1px solid var(--rule);
+  animation:rise .8s var(--e) both;
+}
+.row:nth-child(1){animation-delay:.34s}
+.row:nth-child(2){animation-delay:.44s}
+.row:nth-child(3){animation-delay:.54s}
+@keyframes rise{from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none}}
+
+.idx{font-size:10px; color:var(--ink-3); letter-spacing:.06em}
+.name{
+  display:block; font-family:var(--display); font-weight:700;
+  font-size:clamp(.95rem,1.55vw,1.22rem); letter-spacing:-.015em; color:var(--ink);
+}
+.detail{
+  display:block; margin-top:5px;
+  font-size:clamp(10.5px,1.05vw,11.5px); letter-spacing:.02em; color:var(--ink-2);
+}
+.when{font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap}
+
+.row.live .idx,.row.live .when{color:var(--live)}
+.row.live .name{
+  background:linear-gradient(100deg,var(--acc) 0%,var(--acc-hi) 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent; width:fit-content;
+}
+.caret{
+  display:inline-block; width:6px; height:11px; margin-left:4px; vertical-align:-1px;
+  background:var(--live); animation:blink 1.15s steps(2) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+
+/* ── footer: channels ─────────────────────────────────────────────── */
+.foot{grid-row:3; display:grid; gap:clamp(14px,2.2vh,20px); animation:rise .8s var(--e) .66s both}
+.cta{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(8px,1vw,12px)}
+/* Two elements, two jobs: the anchor carries the idle drift, the face carries
+   every hover change. Sharing one transform made hover snap mid-keyframe. */
+.btn{
+  --c:var(--acc);                            /* each channel sets its own */
+  display:block; border-radius:6px; cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  animation:drift 7s ease-in-out infinite;
+}
+.cta a:nth-child(2){animation-delay:1.1s}
+.cta a:nth-child(3){animation-delay:2.2s}
+@keyframes drift{0%,100%{transform:translateY(0)} 50%{transform:translateY(-2px)}}
+
+
+.face{
+  position:relative; overflow:hidden; isolation:isolate;
+  display:flex; align-items:center; justify-content:flex-start; gap:11px;
+  padding-inline:clamp(16px,1.5vw,22px);
+  height:clamp(54px,7.2vh,64px); border-radius:6px;
+  border:2px solid color-mix(in srgb, var(--c) 45%, transparent);
+  background:color-mix(in srgb, var(--c) 6%, transparent);   /* a surface, not an empty outline */
+  font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--c);
+  box-sizing:border-box;
+  transition:border-width .18s var(--e), border-color .22s var(--e), background .22s var(--e);
+}
+.face svg,.face em{position:relative; z-index:2; font-style:normal}
+.face svg{width:15px; height:15px; flex:none; transition:transform .42s var(--e)}
+
+/* idle: a slow specular sweep so the row still reads as live on touch, where
+   hover never fires */
+.face::after{
+  content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(105deg,transparent 42%,color-mix(in srgb, var(--c) 24%, transparent) 50%,transparent 58%);
+  transform:translateX(-130%); animation:sheen 7s ease-in-out infinite;
+  transition:opacity .25s ease;
+}
+.cta a:nth-child(2) .face::after{animation-delay:1.1s}
+.cta a:nth-child(3) .face::after{animation-delay:2.2s}
+@keyframes sheen{0%,74%{transform:translateX(-130%)} 100%{transform:translateX(130%)}}
+
+/* Hover only where a real pointer exists. On touch the :hover state sticks
+   after the tap and the button stays filled when you navigate back. */
+@media (hover:hover) and (pointer:fine){
+  .btn:hover .face{border-width:3px; border-color:var(--c)}
+}
+/* keyboard focus gets the same treatment on every device */
+.btn:focus-visible .face{border-width:3px; border-color:var(--c)}
+/* touch: a brief press, nothing that can stick */
+.btn:active .face{background:color-mix(in srgb, var(--c) 12%, transparent)}
+
+
+/* ── world map ────────────────────────────────────────────────────
+   The look lives at top level so both breakpoints get it; only the
+   placement differs per screen. */
+.map{display:none}
+.map svg{width:100%; height:auto; overflow:visible; display:block}
+.land{fill:none; stroke:#4A4842; stroke-width:2.5; stroke-linecap:round;
+      transition:stroke .4s var(--e)}
+.origin{fill:#A29E94; opacity:1}
+.node circle{fill:var(--acc)}
+.node .halo{fill:none; stroke:var(--acc); transform-origin:center;
+            animation:ping 2.8s ease-out infinite}
+@keyframes ping{0%{transform:scale(1); opacity:.7} 70%,100%{transform:scale(3.6); opacity:0}}
+.node.home circle{fill:var(--ink)}
+.node.home .halo{stroke:var(--ink)}
+.node text{
+  font-family:var(--mono); font-size:8px; letter-spacing:.16em; text-transform:uppercase;
+  fill:var(--ink-2); opacity:0; transition:opacity .3s var(--e);
+}
+
+@media (min-width:861px){
+  html,body{height:100%; overflow:hidden}   /* one screen here too */
+  .page{height:100dvh; min-height:0; overflow:hidden}
+  .map{
+    /* full-bleed across the cell, pinned to the top of the void, and faded out
+       before it reaches the headline so nothing ever competes with the type */
+    display:block; grid-row:2; grid-column:1; align-self:stretch; justify-self:stretch;
+    width:100%; height:100%; min-height:0; margin-top:calc(var(--gap) * -.5);
+    pointer-events:none;            /* only the nodes stay hoverable */
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 46%,transparent 84%);
+    mask-image:linear-gradient(180deg,#000 0%,#000 46%,transparent 84%);
+    animation:rise 1s var(--e) .5s both;
+  }
+  .node{pointer-events:auto}
+
+  /* the first ledger row carries its own top padding, so the headline needs the
+     same offset for the two columns to start on one optical line */
+  .lede{padding-top:clamp(10px,1.7vh,15px)}
+  .map:hover .land{stroke:#3E3D38}
+  .node:hover text{opacity:1}
+  .node:hover circle{fill:var(--acc-hi)}
+}
+
+/* ═══ phone: exactly one screen, no scroll in either axis ══════════ */
+@media (max-width:860px){
+  html,body{height:100%; overflow:hidden}
+  .page{
+    height:100dvh; min-height:0; overflow:hidden;
+    padding:clamp(18px,4.6vw,30px); gap:clamp(12px,2.2vh,22px);
+  }
+  .logo{height:clamp(26px,4.2vh,40px)}
+
+  /* the map keeps its place on phones: same grid cell as the stage, pinned to
+     the top of it, non-interactive so it can never swallow a tap */
+  /* same treatment as desktop: full-bleed, pinned to the top of the void and
+     faded out before it can reach the headline */
+  .map{
+    display:block; grid-row:2; grid-column:1; align-self:stretch; justify-self:stretch;
+    width:108%; margin-left:-4%; height:100%; min-height:0; pointer-events:none;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 40%,transparent 78%);
+    mask-image:linear-gradient(180deg,#000 0%,#000 40%,transparent 78%);
+  }
+  /* the whole SVG is scaled to ~0.45 here, so strokes have to be thickened or
+     the map dissolves */
+  .land{stroke-width:3.8; stroke:#57544C}
+    .origin{r:3.2; opacity:1}
+  .node circle{r:4.6}
+  .node.home circle{r:5.2}
+  .meta span{display:none}
+
+  .stage{grid-template-columns:1fr; align-items:start; gap:clamp(16px,2.6vh,26px)}
+  h1{font-size:clamp(1.4rem,6.4vw,2.6rem)}
+  .kicker{margin-top:clamp(12px,2vh,20px)}
+  .stat{margin-top:clamp(8px,1.4vh,14px)}
+
+    .row{grid-template-columns:22px minmax(0,1fr) auto; gap:0 10px; padding:clamp(8px,1.35vh,13px) 0}
+  .detail{font-size:10px; letter-spacing:0; margin-top:3px}
+  .when{font-size:9px; letter-spacing:.1em}
+
+  .foot{gap:clamp(10px,1.6vh,16px)}
+  .cta{grid-template-columns:1fr 1fr; gap:8px}
+  .btn.wa{grid-column:1 / -1}
+  .face{height:clamp(44px,6vh,54px)}
+}
+@media (max-width:420px){
+  h1{font-size:clamp(1.15rem,6.4vw,1.9rem)}
+  .kicker{letter-spacing:.2em}
+  .stat{gap:10px}
+  .btn{font-size:11px; letter-spacing:.1em; height:46px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important}
+  h1{clip-path:none}
+}
+</style>
+</head>
+<body>
+
+<div class="atmos"></div>
+
+<div class="page">
+
+  <header class="bar">
+    <a href="/" aria-label="AGENCY99 - home"><img class="logo" src="logo.png" alt="AGENCY99"></a>
+    <p class="meta"><i class="pulse"></i> Tallinn, EU <span>· Sourcing desk open</span></p>
+  </header>
+
+  <section class="map" aria-hidden="true">
+    <svg viewBox="0 0 900 460" preserveAspectRatio="xMidYMin meet" role="img">
+      <path class="land" d="M247 58h.1M254 58h.1M260 58h.1M266 58h.1M273 58h.1M280 58h.1M286 58h.1M344 58h.1M351 58h.1M358 58h.1M364 58h.1M370 58h.1M377 58h.1M384 58h.1M390 58h.1M214 64h.1M221 64h.1M228 64h.1M247 64h.1M254 64h.1M260 64h.1M266 64h.1M273 64h.1M286 64h.1M292 64h.1M299 64h.1M306 64h.1M312 64h.1M318 64h.1M325 64h.1M332 64h.1M338 64h.1M344 64h.1M351 64h.1M358 64h.1M364 64h.1M370 64h.1M377 64h.1M384 64h.1M390 64h.1M396 64h.1M403 64h.1M500 64h.1M507 64h.1M514 64h.1M572 64h.1M682 64h.1M689 64h.1M696 64h.1M169 70h.1M240 70h.1M247 70h.1M254 70h.1M273 70h.1M280 70h.1M286 70h.1M292 70h.1M299 70h.1M306 70h.1M312 70h.1M318 70h.1M325 70h.1M332 70h.1M338 70h.1M344 70h.1M351 70h.1M358 70h.1M364 70h.1M370 70h.1M377 70h.1M384 70h.1M390 70h.1M396 70h.1M488 70h.1M494 70h.1M507 70h.1M162 77h.1M169 77h.1M176 77h.1M182 77h.1M202 77h.1M214 77h.1M221 77h.1M228 77h.1M234 77h.1M240 77h.1M247 77h.1M306 77h.1M312 77h.1M318 77h.1M325 77h.1M332 77h.1M338 77h.1M344 77h.1M351 77h.1M358 77h.1M364 77h.1M370 77h.1M377 77h.1M384 77h.1M390 77h.1M396 77h.1M592 77h.1M598 77h.1M676 77h.1M682 77h.1M689 77h.1M696 77h.1M702 77h.1M708 77h.1M715 77h.1M722 77h.1M728 77h.1M793 77h.1M800 77h.1M806 77h.1M819 77h.1M143 84h.1M150 84h.1M156 84h.1M162 84h.1M169 84h.1M176 84h.1M182 84h.1M195 84h.1M202 84h.1M208 84h.1M214 84h.1M228 84h.1M234 84h.1M240 84h.1M247 84h.1M318 84h.1M325 84h.1M332 84h.1M338 84h.1M344 84h.1M351 84h.1M358 84h.1M364 84h.1M370 84h.1M377 84h.1M384 84h.1M390 84h.1M585 84h.1M624 84h.1M630 84h.1M637 84h.1M656 84h.1M663 84h.1M670 84h.1M676 84h.1M682 84h.1M689 84h.1M696 84h.1M702 84h.1M708 84h.1M715 84h.1M722 84h.1M728 84h.1M734 84h.1M741 84h.1M748 84h.1M754 84h.1M760 84h.1M767 84h.1M800 84h.1M806 84h.1M46 90h.1M52 90h.1M58 90h.1M65 90h.1M72 90h.1M78 90h.1M84 90h.1M91 90h.1M124 90h.1M130 90h.1M162 90h.1M169 90h.1M176 90h.1M182 90h.1M188 90h.1M195 90h.1M214 90h.1M240 90h.1M247 90h.1M260 90h.1M266 90h.1M273 90h.1M280 90h.1M318 90h.1M325 90h.1M332 90h.1M338 90h.1M344 90h.1M351 90h.1M358 90h.1M364 90h.1M370 90h.1M377 90h.1M384 90h.1M390 90h.1M500 90h.1M507 90h.1M514 90h.1M520 90h.1M624 90h.1M630 90h.1M637 90h.1M644 90h.1M650 90h.1M656 90h.1M663 90h.1M670 90h.1M676 90h.1M682 90h.1M689 90h.1M696 90h.1M702 90h.1M708 90h.1M715 90h.1M722 90h.1M728 90h.1M734 90h.1M741 90h.1M748 90h.1M754 90h.1M760 90h.1M767 90h.1M774 90h.1M780 90h.1M786 90h.1M793 90h.1M800 90h.1M806 90h.1M812 90h.1M819 90h.1M826 90h.1M832 90h.1M838 90h.1M845 90h.1M878 90h.1M0 96h.1M6 96h.1M46 96h.1M52 96h.1M58 96h.1M65 96h.1M72 96h.1M78 96h.1M84 96h.1M91 96h.1M98 96h.1M104 96h.1M110 96h.1M117 96h.1M124 96h.1M130 96h.1M136 96h.1M143 96h.1M150 96h.1M156 96h.1M162 96h.1M169 96h.1M176 96h.1M182 96h.1M188 96h.1M195 96h.1M202 96h.1M208 96h.1M214 96h.1M221 96h.1M228 96h.1M234 96h.1M240 96h.1M260 96h.1M273 96h.1M280 96h.1M286 96h.1M318 96h.1M325 96h.1M332 96h.1M338 96h.1M344 96h.1M351 96h.1M358 96h.1M364 96h.1M488 96h.1M494 96h.1M500 96h.1M507 96h.1M514 96h.1M520 96h.1M526 96h.1M533 96h.1M540 96h.1M546 96h.1M552 96h.1M572 96h.1M578 96h.1M585 96h.1M592 96h.1M598 96h.1M604 96h.1M611 96h.1M618 96h.1M624 96h.1M630 96h.1M637 96h.1M644 96h.1M650 96h.1M656 96h.1M663 96h.1M670 96h.1M676 96h.1M682 96h.1M689 96h.1M696 96h.1M702 96h.1M708 96h.1M715 96h.1M722 96h.1M728 96h.1M734 96h.1M741 96h.1M748 96h.1M754 96h.1M760 96h.1M767 96h.1M774 96h.1M780 96h.1M786 96h.1M793 96h.1M800 96h.1M806 96h.1M812 96h.1M819 96h.1M826 96h.1M832 96h.1M838 96h.1M845 96h.1M852 96h.1M858 96h.1M864 96h.1M871 96h.1M878 96h.1M884 96h.1M890 96h.1M897 96h.1M13 103h.1M39 103h.1M46 103h.1M52 103h.1M58 103h.1M65 103h.1M72 103h.1M78 103h.1M84 103h.1M91 103h.1M98 103h.1M104 103h.1M110 103h.1M117 103h.1M124 103h.1M130 103h.1M136 103h.1M143 103h.1M150 103h.1M156 103h.1M162 103h.1M169 103h.1M176 103h.1M182 103h.1M188 103h.1M195 103h.1M202 103h.1M208 103h.1M214 103h.1M221 103h.1M228 103h.1M240 103h.1M260 103h.1M266 103h.1M273 103h.1M280 103h.1M325 103h.1M332 103h.1M338 103h.1M344 103h.1M396 103h.1M403 103h.1M410 103h.1M481 103h.1M488 103h.1M494 103h.1M500 103h.1M514 103h.1M520 103h.1M526 103h.1M533 103h.1M546 103h.1M552 103h.1M559 103h.1M566 103h.1M572 103h.1M578 103h.1M585 103h.1M592 103h.1M598 103h.1M604 103h.1M611 103h.1M618 103h.1M624 103h.1M630 103h.1M637 103h.1M644 103h.1M650 103h.1M656 103h.1M663 103h.1M670 103h.1M676 103h.1M682 103h.1M689 103h.1M696 103h.1M702 103h.1M708 103h.1M715 103h.1M722 103h.1M728 103h.1M734 103h.1M741 103h.1M748 103h.1M754 103h.1M760 103h.1M767 103h.1M774 103h.1M780 103h.1M786 103h.1M793 103h.1M800 103h.1M806 103h.1M812 103h.1M819 103h.1M826 103h.1M832 103h.1M838 103h.1M845 103h.1M852 103h.1M858 103h.1M864 103h.1M871 103h.1M878 103h.1M884 103h.1M890 103h.1M897 103h.1M39 110h.1M46 110h.1M52 110h.1M58 110h.1M65 110h.1M72 110h.1M78 110h.1M84 110h.1M91 110h.1M98 110h.1M104 110h.1M110 110h.1M117 110h.1M124 110h.1M130 110h.1M136 110h.1M143 110h.1M150 110h.1M156 110h.1M162 110h.1M169 110h.1M176 110h.1M182 110h.1M188 110h.1M195 110h.1M202 110h.1M208 110h.1M214 110h.1M260 110h.1M266 110h.1M332 110h.1M338 110h.1M468 110h.1M474 110h.1M481 110h.1M488 110h.1M507 110h.1M514 110h.1M520 110h.1M526 110h.1M533 110h.1M540 110h.1M546 110h.1M552 110h.1M559 110h.1M566 110h.1M572 110h.1M578 110h.1M585 110h.1M592 110h.1M598 110h.1M604 110h.1M611 110h.1M618 110h.1M624 110h.1M630 110h.1M637 110h.1M644 110h.1M650 110h.1M656 110h.1M663 110h.1M670 110h.1M676 110h.1M682 110h.1M689 110h.1M696 110h.1M702 110h.1M708 110h.1M715 110h.1M722 110h.1M728 110h.1M734 110h.1M741 110h.1M748 110h.1M754 110h.1M760 110h.1M767 110h.1M774 110h.1M780 110h.1M786 110h.1M793 110h.1M800 110h.1M806 110h.1M812 110h.1M819 110h.1M826 110h.1M832 110h.1M838 110h.1M845 110h.1M852 110h.1M864 110h.1M871 110h.1M878 110h.1M884 110h.1M46 116h.1M52 116h.1M58 116h.1M65 116h.1M72 116h.1M104 116h.1M110 116h.1M117 116h.1M124 116h.1M130 116h.1M136 116h.1M143 116h.1M150 116h.1M156 116h.1M162 116h.1M169 116h.1M176 116h.1M182 116h.1M188 116h.1M195 116h.1M202 116h.1M208 116h.1M260 116h.1M266 116h.1M273 116h.1M468 116h.1M474 116h.1M481 116h.1M488 116h.1M494 116h.1M526 116h.1M533 116h.1M540 116h.1M546 116h.1M552 116h.1M559 116h.1M566 116h.1M572 116h.1M578 116h.1M585 116h.1M592 116h.1M598 116h.1M604 116h.1M611 116h.1M618 116h.1M624 116h.1M630 116h.1M637 116h.1M644 116h.1M650 116h.1M656 116h.1M663 116h.1M670 116h.1M676 116h.1M682 116h.1M689 116h.1M696 116h.1M702 116h.1M708 116h.1M715 116h.1M722 116h.1M728 116h.1M734 116h.1M741 116h.1M748 116h.1M754 116h.1M760 116h.1M767 116h.1M774 116h.1M780 116h.1M786 116h.1M793 116h.1M800 116h.1M806 116h.1M812 116h.1M819 116h.1M832 116h.1M858 116h.1M58 122h.1M65 122h.1M117 122h.1M124 122h.1M130 122h.1M136 122h.1M143 122h.1M150 122h.1M156 122h.1M162 122h.1M169 122h.1M176 122h.1M182 122h.1M188 122h.1M195 122h.1M202 122h.1M208 122h.1M214 122h.1M221 122h.1M260 122h.1M266 122h.1M273 122h.1M280 122h.1M286 122h.1M292 122h.1M436 122h.1M442 122h.1M474 122h.1M481 122h.1M488 122h.1M507 122h.1M514 122h.1M520 122h.1M526 122h.1M533 122h.1M540 122h.1M546 122h.1M552 122h.1M559 122h.1M566 122h.1M572 122h.1M578 122h.1M585 122h.1M592 122h.1M598 122h.1M604 122h.1M611 122h.1M618 122h.1M624 122h.1M630 122h.1M637 122h.1M644 122h.1M650 122h.1M656 122h.1M663 122h.1M670 122h.1M676 122h.1M682 122h.1M689 122h.1M696 122h.1M702 122h.1M708 122h.1M715 122h.1M722 122h.1M728 122h.1M734 122h.1M741 122h.1M748 122h.1M754 122h.1M760 122h.1M767 122h.1M774 122h.1M780 122h.1M786 122h.1M793 122h.1M845 122h.1M852 122h.1M130 129h.1M136 129h.1M143 129h.1M150 129h.1M156 129h.1M162 129h.1M169 129h.1M176 129h.1M182 129h.1M188 129h.1M195 129h.1M202 129h.1M208 129h.1M214 129h.1M221 129h.1M228 129h.1M234 129h.1M240 129h.1M254 129h.1M260 129h.1M266 129h.1M273 129h.1M280 129h.1M286 129h.1M292 129h.1M299 129h.1M306 129h.1M429 129h.1M436 129h.1M442 129h.1M448 129h.1M474 129h.1M481 129h.1M494 129h.1M500 129h.1M507 129h.1M514 129h.1M520 129h.1M526 129h.1M533 129h.1M540 129h.1M546 129h.1M552 129h.1M559 129h.1M566 129h.1M572 129h.1M578 129h.1M585 129h.1M592 129h.1M598 129h.1M604 129h.1M611 129h.1M618 129h.1M624 129h.1M630 129h.1M637 129h.1M644 129h.1M650 129h.1M656 129h.1M663 129h.1M670 129h.1M676 129h.1M682 129h.1M689 129h.1M696 129h.1M702 129h.1M708 129h.1M715 129h.1M722 129h.1M728 129h.1M734 129h.1M741 129h.1M748 129h.1M754 129h.1M760 129h.1M767 129h.1M774 129h.1M780 129h.1M786 129h.1M845 129h.1M136 136h.1M143 136h.1M150 136h.1M156 136h.1M162 136h.1M169 136h.1M176 136h.1M182 136h.1M188 136h.1M195 136h.1M202 136h.1M208 136h.1M214 136h.1M221 136h.1M228 136h.1M234 136h.1M240 136h.1M247 136h.1M254 136h.1M260 136h.1M266 136h.1M273 136h.1M280 136h.1M286 136h.1M292 136h.1M299 136h.1M306 136h.1M429 136h.1M442 136h.1M448 136h.1M462 136h.1M468 136h.1M474 136h.1M481 136h.1M488 136h.1M494 136h.1M500 136h.1M507 136h.1M514 136h.1M520 136h.1M526 136h.1M533 136h.1M540 136h.1M546 136h.1M552 136h.1M559 136h.1M566 136h.1M572 136h.1M578 136h.1M585 136h.1M592 136h.1M598 136h.1M604 136h.1M611 136h.1M618 136h.1M624 136h.1M630 136h.1M637 136h.1M644 136h.1M650 136h.1M656 136h.1M663 136h.1M670 136h.1M676 136h.1M682 136h.1M689 136h.1M696 136h.1M702 136h.1M708 136h.1M715 136h.1M722 136h.1M728 136h.1M734 136h.1M741 136h.1M748 136h.1M754 136h.1M760 136h.1M767 136h.1M774 136h.1M780 136h.1M786 136h.1M793 136h.1M800 136h.1M806 136h.1M845 136h.1M136 142h.1M143 142h.1M150 142h.1M156 142h.1M162 142h.1M169 142h.1M176 142h.1M182 142h.1M188 142h.1M195 142h.1M202 142h.1M208 142h.1M214 142h.1M221 142h.1M228 142h.1M234 142h.1M240 142h.1M247 142h.1M254 142h.1M260 142h.1M266 142h.1M273 142h.1M280 142h.1M306 142h.1M312 142h.1M448 142h.1M455 142h.1M462 142h.1M468 142h.1M474 142h.1M481 142h.1M488 142h.1M494 142h.1M500 142h.1M507 142h.1M514 142h.1M520 142h.1M526 142h.1M533 142h.1M540 142h.1M546 142h.1M552 142h.1M559 142h.1M566 142h.1M572 142h.1M578 142h.1M585 142h.1M592 142h.1M598 142h.1M604 142h.1M611 142h.1M618 142h.1M624 142h.1M630 142h.1M637 142h.1M644 142h.1M650 142h.1M656 142h.1M663 142h.1M670 142h.1M676 142h.1M682 142h.1M689 142h.1M696 142h.1M702 142h.1M708 142h.1M715 142h.1M722 142h.1M728 142h.1M734 142h.1M741 142h.1M748 142h.1M754 142h.1M760 142h.1M767 142h.1M774 142h.1M780 142h.1M786 142h.1M793 142h.1M800 142h.1M806 142h.1M143 148h.1M150 148h.1M156 148h.1M162 148h.1M169 148h.1M176 148h.1M182 148h.1M188 148h.1M195 148h.1M202 148h.1M208 148h.1M214 148h.1M221 148h.1M228 148h.1M234 148h.1M240 148h.1M247 148h.1M254 148h.1M260 148h.1M266 148h.1M273 148h.1M280 148h.1M286 148h.1M448 148h.1M455 148h.1M462 148h.1M468 148h.1M474 148h.1M481 148h.1M488 148h.1M494 148h.1M500 148h.1M507 148h.1M514 148h.1M520 148h.1M526 148h.1M533 148h.1M546 148h.1M552 148h.1M559 148h.1M566 148h.1M572 148h.1M585 148h.1M592 148h.1M598 148h.1M604 148h.1M611 148h.1M618 148h.1M624 148h.1M630 148h.1M637 148h.1M644 148h.1M650 148h.1M656 148h.1M663 148h.1M670 148h.1M676 148h.1M682 148h.1M689 148h.1M696 148h.1M702 148h.1M708 148h.1M715 148h.1M722 148h.1M728 148h.1M734 148h.1M741 148h.1M748 148h.1M754 148h.1M760 148h.1M767 148h.1M774 148h.1M780 148h.1M786 148h.1M793 148h.1M806 148h.1M143 155h.1M150 155h.1M156 155h.1M162 155h.1M169 155h.1M176 155h.1M182 155h.1M188 155h.1M195 155h.1M202 155h.1M208 155h.1M214 155h.1M221 155h.1M228 155h.1M234 155h.1M240 155h.1M247 155h.1M254 155h.1M260 155h.1M266 155h.1M273 155h.1M286 155h.1M448 155h.1M455 155h.1M462 155h.1M468 155h.1M481 155h.1M494 155h.1M500 155h.1M507 155h.1M514 155h.1M520 155h.1M552 155h.1M559 155h.1M566 155h.1M578 155h.1M585 155h.1M592 155h.1M598 155h.1M604 155h.1M611 155h.1M618 155h.1M624 155h.1M630 155h.1M637 155h.1M644 155h.1M650 155h.1M656 155h.1M663 155h.1M670 155h.1M676 155h.1M682 155h.1M689 155h.1M696 155h.1M702 155h.1M708 155h.1M715 155h.1M722 155h.1M728 155h.1M734 155h.1M741 155h.1M748 155h.1M754 155h.1M760 155h.1M767 155h.1M774 155h.1M780 155h.1M786 155h.1M806 155h.1M812 155h.1M143 162h.1M150 162h.1M156 162h.1M162 162h.1M169 162h.1M176 162h.1M182 162h.1M188 162h.1M195 162h.1M202 162h.1M208 162h.1M214 162h.1M221 162h.1M228 162h.1M234 162h.1M240 162h.1M247 162h.1M254 162h.1M260 162h.1M266 162h.1M429 162h.1M436 162h.1M442 162h.1M448 162h.1M455 162h.1M488 162h.1M500 162h.1M507 162h.1M514 162h.1M520 162h.1M533 162h.1M540 162h.1M559 162h.1M566 162h.1M572 162h.1M592 162h.1M598 162h.1M604 162h.1M611 162h.1M618 162h.1M624 162h.1M630 162h.1M637 162h.1M644 162h.1M650 162h.1M656 162h.1M663 162h.1M670 162h.1M676 162h.1M682 162h.1M689 162h.1M696 162h.1M702 162h.1M708 162h.1M715 162h.1M722 162h.1M728 162h.1M734 162h.1M741 162h.1M748 162h.1M754 162h.1M760 162h.1M767 162h.1M774 162h.1M143 168h.1M150 168h.1M156 168h.1M162 168h.1M169 168h.1M176 168h.1M182 168h.1M188 168h.1M195 168h.1M202 168h.1M208 168h.1M214 168h.1M221 168h.1M228 168h.1M234 168h.1M240 168h.1M247 168h.1M254 168h.1M260 168h.1M429 168h.1M436 168h.1M442 168h.1M448 168h.1M507 168h.1M520 168h.1M526 168h.1M533 168h.1M540 168h.1M546 168h.1M552 168h.1M559 168h.1M566 168h.1M572 168h.1M585 168h.1M592 168h.1M598 168h.1M604 168h.1M611 168h.1M618 168h.1M624 168h.1M630 168h.1M637 168h.1M644 168h.1M650 168h.1M656 168h.1M663 168h.1M670 168h.1M676 168h.1M682 168h.1M689 168h.1M696 168h.1M702 168h.1M708 168h.1M715 168h.1M722 168h.1M728 168h.1M734 168h.1M741 168h.1M767 168h.1M800 168h.1M150 174h.1M156 174h.1M162 174h.1M169 174h.1M176 174h.1M182 174h.1M188 174h.1M195 174h.1M202 174h.1M208 174h.1M214 174h.1M221 174h.1M228 174h.1M234 174h.1M240 174h.1M247 174h.1M254 174h.1M260 174h.1M436 174h.1M455 174h.1M462 174h.1M468 174h.1M474 174h.1M533 174h.1M546 174h.1M552 174h.1M559 174h.1M566 174h.1M572 174h.1M578 174h.1M585 174h.1M592 174h.1M598 174h.1M604 174h.1M611 174h.1M618 174h.1M624 174h.1M630 174h.1M637 174h.1M644 174h.1M650 174h.1M656 174h.1M663 174h.1M670 174h.1M676 174h.1M682 174h.1M689 174h.1M696 174h.1M702 174h.1M708 174h.1M715 174h.1M722 174h.1M728 174h.1M734 174h.1M741 174h.1M748 174h.1M767 174h.1M774 174h.1M793 174h.1M800 174h.1M156 181h.1M162 181h.1M169 181h.1M176 181h.1M182 181h.1M188 181h.1M195 181h.1M202 181h.1M208 181h.1M214 181h.1M221 181h.1M228 181h.1M234 181h.1M240 181h.1M247 181h.1M436 181h.1M442 181h.1M448 181h.1M455 181h.1M462 181h.1M468 181h.1M474 181h.1M540 181h.1M546 181h.1M552 181h.1M559 181h.1M566 181h.1M572 181h.1M578 181h.1M585 181h.1M592 181h.1M598 181h.1M604 181h.1M611 181h.1M618 181h.1M624 181h.1M630 181h.1M637 181h.1M644 181h.1M650 181h.1M656 181h.1M663 181h.1M670 181h.1M676 181h.1M682 181h.1M689 181h.1M696 181h.1M702 181h.1M708 181h.1M715 181h.1M722 181h.1M728 181h.1M734 181h.1M741 181h.1M748 181h.1M162 188h.1M169 188h.1M176 188h.1M182 188h.1M188 188h.1M195 188h.1M202 188h.1M208 188h.1M214 188h.1M221 188h.1M228 188h.1M234 188h.1M240 188h.1M429 188h.1M436 188h.1M442 188h.1M448 188h.1M455 188h.1M462 188h.1M468 188h.1M474 188h.1M481 188h.1M488 188h.1M500 188h.1M507 188h.1M514 188h.1M520 188h.1M526 188h.1M533 188h.1M540 188h.1M546 188h.1M552 188h.1M559 188h.1M566 188h.1M572 188h.1M578 188h.1M585 188h.1M592 188h.1M598 188h.1M604 188h.1M611 188h.1M618 188h.1M624 188h.1M630 188h.1M637 188h.1M644 188h.1M650 188h.1M656 188h.1M663 188h.1M670 188h.1M676 188h.1M682 188h.1M689 188h.1M696 188h.1M702 188h.1M708 188h.1M715 188h.1M722 188h.1M728 188h.1M734 188h.1M741 188h.1M748 188h.1M754 188h.1M176 194h.1M182 194h.1M188 194h.1M195 194h.1M202 194h.1M208 194h.1M247 194h.1M422 194h.1M429 194h.1M436 194h.1M442 194h.1M448 194h.1M455 194h.1M462 194h.1M468 194h.1M474 194h.1M481 194h.1M488 194h.1M494 194h.1M500 194h.1M507 194h.1M514 194h.1M520 194h.1M526 194h.1M533 194h.1M540 194h.1M546 194h.1M552 194h.1M559 194h.1M566 194h.1M578 194h.1M585 194h.1M592 194h.1M598 194h.1M604 194h.1M611 194h.1M618 194h.1M624 194h.1M630 194h.1M637 194h.1M644 194h.1M650 194h.1M656 194h.1M663 194h.1M670 194h.1M676 194h.1M682 194h.1M689 194h.1M696 194h.1M702 194h.1M708 194h.1M715 194h.1M722 194h.1M728 194h.1M734 194h.1M741 194h.1M748 194h.1M754 194h.1M182 200h.1M188 200h.1M195 200h.1M202 200h.1M247 200h.1M416 200h.1M422 200h.1M429 200h.1M436 200h.1M442 200h.1M448 200h.1M455 200h.1M462 200h.1M468 200h.1M474 200h.1M481 200h.1M488 200h.1M494 200h.1M500 200h.1M507 200h.1M514 200h.1M520 200h.1M526 200h.1M533 200h.1M546 200h.1M552 200h.1M559 200h.1M566 200h.1M572 200h.1M578 200h.1M598 200h.1M604 200h.1M611 200h.1M618 200h.1M624 200h.1M630 200h.1M637 200h.1M644 200h.1M650 200h.1M656 200h.1M663 200h.1M670 200h.1M676 200h.1M682 200h.1M689 200h.1M696 200h.1M702 200h.1M708 200h.1M715 200h.1M722 200h.1M728 200h.1M734 200h.1M741 200h.1M748 200h.1M176 207h.1M188 207h.1M195 207h.1M202 207h.1M410 207h.1M416 207h.1M422 207h.1M429 207h.1M436 207h.1M442 207h.1M448 207h.1M455 207h.1M462 207h.1M468 207h.1M474 207h.1M481 207h.1M488 207h.1M494 207h.1M500 207h.1M507 207h.1M514 207h.1M520 207h.1M526 207h.1M533 207h.1M552 207h.1M559 207h.1M566 207h.1M572 207h.1M578 207h.1M585 207h.1M592 207h.1M624 207h.1M630 207h.1M637 207h.1M644 207h.1M650 207h.1M656 207h.1M663 207h.1M670 207h.1M676 207h.1M682 207h.1M689 207h.1M696 207h.1M702 207h.1M708 207h.1M715 207h.1M722 207h.1M728 207h.1M734 207h.1M741 207h.1M188 214h.1M195 214h.1M202 214h.1M228 214h.1M260 214h.1M410 214h.1M416 214h.1M422 214h.1M429 214h.1M436 214h.1M442 214h.1M448 214h.1M455 214h.1M462 214h.1M468 214h.1M474 214h.1M481 214h.1M488 214h.1M494 214h.1M500 214h.1M507 214h.1M514 214h.1M520 214h.1M526 214h.1M533 214h.1M540 214h.1M552 214h.1M559 214h.1M566 214h.1M572 214h.1M578 214h.1M585 214h.1M592 214h.1M637 214h.1M644 214h.1M650 214h.1M656 214h.1M663 214h.1M682 214h.1M689 214h.1M696 214h.1M702 214h.1M708 214h.1M715 214h.1M195 220h.1M202 220h.1M208 220h.1M214 220h.1M221 220h.1M228 220h.1M416 220h.1M422 220h.1M429 220h.1M436 220h.1M442 220h.1M448 220h.1M455 220h.1M462 220h.1M468 220h.1M474 220h.1M481 220h.1M488 220h.1M494 220h.1M500 220h.1M507 220h.1M514 220h.1M520 220h.1M526 220h.1M533 220h.1M540 220h.1M546 220h.1M559 220h.1M566 220h.1M572 220h.1M578 220h.1M585 220h.1M637 220h.1M644 220h.1M650 220h.1M656 220h.1M689 220h.1M696 220h.1M702 220h.1M708 220h.1M715 220h.1M754 220h.1M221 226h.1M228 226h.1M234 226h.1M240 226h.1M410 226h.1M416 226h.1M422 226h.1M429 226h.1M436 226h.1M442 226h.1M448 226h.1M455 226h.1M462 226h.1M468 226h.1M474 226h.1M481 226h.1M488 226h.1M494 226h.1M500 226h.1M507 226h.1M514 226h.1M520 226h.1M526 226h.1M533 226h.1M540 226h.1M546 226h.1M559 226h.1M566 226h.1M572 226h.1M578 226h.1M637 226h.1M644 226h.1M650 226h.1M696 226h.1M702 226h.1M708 226h.1M715 226h.1M722 226h.1M234 233h.1M240 233h.1M410 233h.1M416 233h.1M422 233h.1M429 233h.1M436 233h.1M442 233h.1M448 233h.1M455 233h.1M462 233h.1M468 233h.1M474 233h.1M481 233h.1M488 233h.1M494 233h.1M500 233h.1M507 233h.1M514 233h.1M520 233h.1M526 233h.1M533 233h.1M540 233h.1M546 233h.1M552 233h.1M559 233h.1M644 233h.1M650 233h.1M708 233h.1M715 233h.1M722 233h.1M240 240h.1M266 240h.1M273 240h.1M280 240h.1M292 240h.1M416 240h.1M422 240h.1M429 240h.1M436 240h.1M442 240h.1M448 240h.1M455 240h.1M462 240h.1M468 240h.1M474 240h.1M481 240h.1M488 240h.1M494 240h.1M500 240h.1M507 240h.1M514 240h.1M520 240h.1M526 240h.1M533 240h.1M540 240h.1M546 240h.1M552 240h.1M559 240h.1M566 240h.1M572 240h.1M644 240h.1M715 240h.1M748 240h.1M260 246h.1M266 246h.1M273 246h.1M280 246h.1M286 246h.1M292 246h.1M299 246h.1M422 246h.1M429 246h.1M436 246h.1M442 246h.1M448 246h.1M455 246h.1M462 246h.1M468 246h.1M474 246h.1M481 246h.1M488 246h.1M494 246h.1M500 246h.1M507 246h.1M514 246h.1M520 246h.1M526 246h.1M533 246h.1M540 246h.1M546 246h.1M552 246h.1M559 246h.1M566 246h.1M572 246h.1M650 246h.1M760 246h.1M260 252h.1M266 252h.1M273 252h.1M280 252h.1M286 252h.1M292 252h.1M299 252h.1M306 252h.1M312 252h.1M318 252h.1M429 252h.1M436 252h.1M442 252h.1M468 252h.1M474 252h.1M481 252h.1M488 252h.1M494 252h.1M500 252h.1M507 252h.1M514 252h.1M520 252h.1M526 252h.1M533 252h.1M540 252h.1M546 252h.1M552 252h.1M559 252h.1M566 252h.1M689 252h.1M702 252h.1M741 252h.1M260 259h.1M266 259h.1M273 259h.1M280 259h.1M286 259h.1M292 259h.1M299 259h.1M306 259h.1M312 259h.1M318 259h.1M474 259h.1M481 259h.1M488 259h.1M494 259h.1M500 259h.1M507 259h.1M514 259h.1M520 259h.1M526 259h.1M533 259h.1M540 259h.1M546 259h.1M552 259h.1M559 259h.1M696 259h.1M708 259h.1M734 259h.1M741 259h.1M254 266h.1M260 266h.1M266 266h.1M273 266h.1M280 266h.1M286 266h.1M292 266h.1M299 266h.1M306 266h.1M312 266h.1M318 266h.1M325 266h.1M474 266h.1M481 266h.1M488 266h.1M494 266h.1M500 266h.1M507 266h.1M514 266h.1M520 266h.1M526 266h.1M533 266h.1M540 266h.1M546 266h.1M552 266h.1M702 266h.1M708 266h.1M728 266h.1M734 266h.1M741 266h.1M254 272h.1M260 272h.1M266 272h.1M273 272h.1M280 272h.1M286 272h.1M292 272h.1M299 272h.1M306 272h.1M312 272h.1M318 272h.1M325 272h.1M332 272h.1M338 272h.1M344 272h.1M481 272h.1M488 272h.1M494 272h.1M500 272h.1M507 272h.1M514 272h.1M520 272h.1M526 272h.1M533 272h.1M540 272h.1M546 272h.1M708 272h.1M728 272h.1M734 272h.1M741 272h.1M748 272h.1M754 272h.1M793 272h.1M800 272h.1M254 278h.1M260 278h.1M266 278h.1M273 278h.1M280 278h.1M286 278h.1M292 278h.1M299 278h.1M306 278h.1M312 278h.1M318 278h.1M325 278h.1M332 278h.1M338 278h.1M344 278h.1M351 278h.1M358 278h.1M481 278h.1M488 278h.1M494 278h.1M500 278h.1M507 278h.1M514 278h.1M520 278h.1M526 278h.1M533 278h.1M540 278h.1M546 278h.1M800 278h.1M806 278h.1M812 278h.1M826 278h.1M254 285h.1M260 285h.1M266 285h.1M273 285h.1M280 285h.1M286 285h.1M292 285h.1M299 285h.1M306 285h.1M312 285h.1M318 285h.1M325 285h.1M332 285h.1M338 285h.1M344 285h.1M351 285h.1M358 285h.1M488 285h.1M494 285h.1M500 285h.1M507 285h.1M514 285h.1M520 285h.1M526 285h.1M533 285h.1M540 285h.1M546 285h.1M728 285h.1M734 285h.1M800 285h.1M806 285h.1M819 285h.1M260 292h.1M266 292h.1M273 292h.1M280 292h.1M286 292h.1M292 292h.1M299 292h.1M306 292h.1M312 292h.1M318 292h.1M325 292h.1M332 292h.1M338 292h.1M344 292h.1M351 292h.1M358 292h.1M488 292h.1M494 292h.1M500 292h.1M507 292h.1M514 292h.1M520 292h.1M526 292h.1M533 292h.1M540 292h.1M546 292h.1M826 292h.1M260 298h.1M266 298h.1M273 298h.1M280 298h.1M286 298h.1M292 298h.1M299 298h.1M306 298h.1M312 298h.1M318 298h.1M325 298h.1M332 298h.1M338 298h.1M344 298h.1M351 298h.1M488 298h.1M494 298h.1M500 298h.1M507 298h.1M514 298h.1M520 298h.1M526 298h.1M533 298h.1M540 298h.1M546 298h.1M572 298h.1M780 298h.1M786 298h.1M806 298h.1M266 304h.1M273 304h.1M280 304h.1M286 304h.1M292 304h.1M299 304h.1M306 304h.1M312 304h.1M318 304h.1M325 304h.1M332 304h.1M338 304h.1M344 304h.1M351 304h.1M481 304h.1M488 304h.1M494 304h.1M500 304h.1M507 304h.1M514 304h.1M520 304h.1M526 304h.1M533 304h.1M540 304h.1M546 304h.1M566 304h.1M572 304h.1M767 304h.1M774 304h.1M780 304h.1M786 304h.1M806 304h.1M812 304h.1M280 311h.1M286 311h.1M292 311h.1M299 311h.1M306 311h.1M312 311h.1M318 311h.1M325 311h.1M332 311h.1M338 311h.1M344 311h.1M481 311h.1M488 311h.1M494 311h.1M500 311h.1M507 311h.1M514 311h.1M520 311h.1M526 311h.1M533 311h.1M540 311h.1M566 311h.1M572 311h.1M760 311h.1M767 311h.1M774 311h.1M780 311h.1M786 311h.1M793 311h.1M800 311h.1M806 311h.1M812 311h.1M280 318h.1M286 318h.1M292 318h.1M299 318h.1M306 318h.1M312 318h.1M318 318h.1M325 318h.1M332 318h.1M338 318h.1M344 318h.1M488 318h.1M494 318h.1M500 318h.1M507 318h.1M514 318h.1M520 318h.1M526 318h.1M533 318h.1M566 318h.1M741 318h.1M748 318h.1M754 318h.1M760 318h.1M767 318h.1M774 318h.1M780 318h.1M786 318h.1M793 318h.1M800 318h.1M806 318h.1M812 318h.1M819 318h.1M280 324h.1M286 324h.1M292 324h.1M299 324h.1M306 324h.1M312 324h.1M318 324h.1M325 324h.1M332 324h.1M488 324h.1M494 324h.1M500 324h.1M507 324h.1M514 324h.1M520 324h.1M526 324h.1M533 324h.1M566 324h.1M734 324h.1M741 324h.1M748 324h.1M754 324h.1M760 324h.1M767 324h.1M774 324h.1M780 324h.1M786 324h.1M793 324h.1M800 324h.1M806 324h.1M812 324h.1M819 324h.1M826 324h.1M280 330h.1M286 330h.1M292 330h.1M299 330h.1M306 330h.1M312 330h.1M318 330h.1M325 330h.1M494 330h.1M500 330h.1M507 330h.1M514 330h.1M520 330h.1M526 330h.1M734 330h.1M741 330h.1M748 330h.1M754 330h.1M760 330h.1M767 330h.1M774 330h.1M780 330h.1M786 330h.1M793 330h.1M800 330h.1M806 330h.1M812 330h.1M819 330h.1M826 330h.1M832 330h.1M273 337h.1M280 337h.1M286 337h.1M292 337h.1M299 337h.1M306 337h.1M312 337h.1M318 337h.1M325 337h.1M494 337h.1M500 337h.1M507 337h.1M514 337h.1M520 337h.1M526 337h.1M741 337h.1M748 337h.1M754 337h.1M760 337h.1M767 337h.1M774 337h.1M780 337h.1M786 337h.1M793 337h.1M800 337h.1M806 337h.1M812 337h.1M819 337h.1M826 337h.1M832 337h.1M273 344h.1M280 344h.1M286 344h.1M292 344h.1M299 344h.1M306 344h.1M312 344h.1M318 344h.1M500 344h.1M507 344h.1M514 344h.1M520 344h.1M741 344h.1M748 344h.1M754 344h.1M760 344h.1M767 344h.1M774 344h.1M780 344h.1M786 344h.1M793 344h.1M800 344h.1M806 344h.1M812 344h.1M819 344h.1M826 344h.1M832 344h.1M273 350h.1M280 350h.1M286 350h.1M292 350h.1M299 350h.1M306 350h.1M312 350h.1M500 350h.1M741 350h.1M748 350h.1M800 350h.1M806 350h.1M812 350h.1M819 350h.1M826 350h.1M273 356h.1M280 356h.1M286 356h.1M292 356h.1M299 356h.1M306 356h.1M800 356h.1M806 356h.1M812 356h.1M819 356h.1M273 363h.1M280 363h.1M286 363h.1M292 363h.1M890 363h.1M266 370h.1M273 370h.1M280 370h.1M286 370h.1M819 370h.1M884 370h.1M273 376h.1M280 376h.1M286 376h.1M871 376h.1M878 376h.1M266 382h.1M273 382h.1M280 382h.1M266 389h.1M273 389h.1M280 389h.1M624 389h.1M266 396h.1M273 396h.1M273 402h.1M280 402h.1M286 402h.1"/>
+      <g class="origins">
+        <circle class="origin" cx="458.5" cy="248.7" r="2"/>
+        <circle class="origin" cx="449.5" cy="251" r="2"/>
+        <circle class="origin" cx="439.9" cy="251.7" r="2"/>
+        <circle class="origin" cx="406.4" cy="228.2" r="2"/>
+        <circle class="origin" cx="431" cy="181.1" r="2"/>
+        <circle class="origin" cx="524.8" cy="187" r="2"/>
+        <circle class="origin" cx="531.3" cy="226.3" r="2"/>
+        <circle class="origin" cx="546.9" cy="242.5" r="2"/>
+        <circle class="origin" cx="549.1" cy="275.1" r="2"/>
+        <circle class="origin" cx="548.2" cy="282" r="2"/>
+        <circle class="origin" cx="527.5" cy="339.7" r="2"/>
+        <circle class="origin" cx="446.2" cy="234.1" r="2"/>
+        <circle class="origin" cx="471.3" cy="235" r="2"/>
+        <circle class="origin" cx="640.7" cy="240.2" r="2"/>
+        <circle class="origin" cx="632.2" cy="217.3" r="2"/>
+        <circle class="origin" cx="649.6" cy="247.7" r="2"/>
+        <circle class="origin" cx="679.6" cy="209.1" r="2"/>
+        <circle class="origin" cx="701.3" cy="230.6" r="2"/>
+        <circle class="origin" cx="716.8" cy="238.1" r="2"/>
+        <circle class="origin" cx="717.1" cy="280.5" r="2"/>
+        <circle class="origin" cx="752.5" cy="228.5" r="2"/>
+        <circle class="origin" cx="753.7" cy="187" r="2"/>
+        <circle class="origin" cx="751" cy="174.9" r="2"/>
+        <circle class="origin" cx="617.5" cy="202.9" r="2"/>
+        <circle class="origin" cx="588.2" cy="202" r="2"/>
+        <circle class="origin" cx="522.5" cy="162.5" r="2"/>
+        <circle class="origin" cx="623.1" cy="161.8" r="2"/>
+        <circle class="origin" cx="461.2" cy="135.2" r="2"/>
+        <circle class="origin" cx="475" cy="131.2" r="2"/>
+        <circle class="origin" cx="510.3" cy="122.7" r="2"/>
+        <circle class="origin" cx="496.6" cy="129.2" r="2"/>
+        <circle class="origin" cx="455.4" cy="161.6" r="2"/>
+        <circle class="origin" cx="526.8" cy="148.8" r="2"/>
+        <circle class="origin" cx="334.2" cy="324.9" r="2"/>
+        <circle class="origin" cx="304" cy="351.5" r="2"/>
+        <circle class="origin" cx="250.3" cy="270.5" r="2"/>
+        <circle class="origin" cx="257.4" cy="295.2" r="2"/>
+        <circle class="origin" cx="209.7" cy="217.1" r="2"/>
+        <circle class="origin" cx="224.8" cy="190.2" r="2"/>
+        <circle class="origin" cx="251.6" cy="155.9" r="2"/>
+        <circle class="origin" cx="142.2" cy="141.8" r="2"/>
+        <circle class="origin" cx="828" cy="349.7" r="2"/>
+        <circle class="origin" cx="886.9" cy="357.2" r="2"/>
+      </g>
+      <g class="node n-ginger" transform="translate(468.6,238.7)">
+        <circle class="halo" r="3"/><circle r="3"/>
+        <text x="10" y="3">Kaduna · ginger</text>
+      </g>
+      <g class="node n-pellets" transform="translate(488.8,135.2)">
+        <circle class="halo" r="3"/><circle r="3"/>
+        <text x="-10" y="-8" text-anchor="end">EU · pellets</text>
+      </g>
+      <g class="node home" transform="translate(511.9,116.4)">
+        <circle class="halo" r="3.4"/><circle r="3.4"/>
+        <text x="11" y="3">Tallinn desk</text>
+      </g>
+    </svg>
+  </section>
+
+  <main class="stage">
+
+    <div class="lede">
+      <h1>Verified suppliers.<br>48 hours.</h1>
+      <p class="kicker">Commodity sourcing · AI agents · automation</p>
+      <p class="stat"><b>74</b> successful projects</p>
+    </div>
+
+    <section class="work" aria-label="How it works">
+      <div class="ledger">
+        <article class="row">
+          <span class="idx">01</span>
+          <span>
+            <span class="name">You send one line</span>
+            <span class="detail">Commodity, volume, target price. That is the whole brief.</span>
+          </span>
+          <span class="when">Today</span>
+        </article>
+        <article class="row">
+          <span class="idx">02</span>
+          <span>
+            <span class="name">We screen the market</span>
+            <span class="detail">Registries, plants, certificates, references. Brokers stripped out.</span>
+          </span>
+          <span class="when">24h</span>
+        </article>
+        <article class="row live">
+          <span class="idx">03</span>
+          <span>
+            <span class="name">You get the list</span>
+            <span class="detail">Supplier list with capacity, MOQ, price basis and a direct WhatsApp<i class="caret"></i></span>
+          </span>
+          <span class="when">48h</span>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <nav class="cta" aria-label="Contact">
+      <a class="btn wa" href="https://wa.me/3725100017?text=Commodity%3A%20%0AVolume%3A%20%0ALocation%3A%20%0ATarget%20price%3A%20%0ANeeded%20by%3A%20" target="_blank" rel="noopener">
+        <span class="face">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-1.7-.9-2.9-1.6-4-3.6-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.5-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 18.2c-1.6 0-3.2-.4-4.6-1.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2"/></svg>
+        <em>WhatsApp</em>
+        </span>
+      </a>
+      <a class="btn tg" href="https://t.me/agency99sourcing" target="_blank" rel="noopener">
+        <span class="face">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.8 19c-.2 1-.9 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.4-4.9L18.4 6c.4-.3-.1-.5-.6-.2L7.7 12.2 3.1 10.8c-1-.3-1-1 .2-1.5l17.3-6.7c.8-.3 1.5.2 1.3 1.7"/></svg>
+        <em>Telegram</em>
+        </span>
+      </a>
+      <a class="btn em" href="mailto:priidik@agency99.io?subject=Sourcing%20request&body=Commodity%3A%0D%0AVolume%3A%0D%0ALocation%3A%0D%0ATarget%20price%3A%0D%0ANeeded%20by%3A%0D%0A">
+        <span class="face">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 6.5L21 6"/></svg>
+        <em>Email</em>
+        </span>
+      </a>
+    </nav>
+  </footer>
+
+</div>
+
+<div class="grain"></div>
+</body>
+</html>
