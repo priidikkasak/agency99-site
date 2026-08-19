@@ -1,0 +1,47 @@
+<meta charset="utf-8">
+<title>cover2</title>
+<style>
+@font-face{font-family:'CG';src:url('fonts/CabinetGrotesk-ExtraBold.woff2') format('woff2');font-weight:800}
+@font-face{font-family:'CG';src:url('fonts/CabinetGrotesk-Bold.woff2') format('woff2');font-weight:700}
+@font-face{font-family:'GM';src:url('fonts/GeistMono-Regular.woff2') format('woff2');font-weight:400}
+:root{--bg:#0C0C0A;--ink:#F2EFE8;--ink2:#8B8880;--acc:#9B8BFF}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#EDEBE6;padding:40px}
+.stage{position:relative;overflow:hidden;background:var(--bg);color:var(--ink);font-family:'GM',monospace}
+.bloom{position:absolute;inset:0;background:
+  radial-gradient(55% 150% at 78% 0%, rgba(155,139,255,.18), transparent 60%),
+  radial-gradient(45% 120% at 30% 120%, rgba(155,139,255,.07), transparent 62%)}
+.tag{position:absolute;top:var(--pad);right:var(--pad);display:flex;align-items:center;gap:.6em;
+  font-size:var(--fk);letter-spacing:.22em;color:var(--ink2)}
+.tag .d{width:var(--dot);height:var(--dot);border-radius:50%;background:var(--acc)}
+.block{position:absolute;top:50%;transform:translateY(-50%);left:var(--bx)}
+.kick{font-size:var(--fk);letter-spacing:.22em;text-transform:uppercase;color:var(--ink2);margin-bottom:var(--gap1)}
+.kick .s{opacity:.5;margin:0 .9em}
+.head{font-family:'CG',sans-serif;font-weight:800;line-height:1.0;letter-spacing:-.025em;font-size:var(--fh)}
+.head .hi{color:var(--acc)}
+.sub{margin-top:var(--gap2);font-size:var(--fs);letter-spacing:.02em;color:var(--ink2)}
+.sub .s{opacity:.45;margin:0 1.1em}
+
+#p{width:1584px;height:396px;--pad:34px;--bx:36%;--fh:62px;--fk:13px;--fs:16px;--dot:6px;--gap1:20px;--gap2:22px}
+#c{width:1128px;height:191px;--pad:20px;--bx:25%;--fh:38px;--fk:10px;--fs:11.5px;--dot:5px;--gap1:11px;--gap2:12px;margin-top:40px}
+</style>
+
+<div class="stage" id="p">
+  <div class="bloom"></div>
+  <div class="tag"><span class="d"></span>AGENCY99.IO</div>
+  <div class="block">
+    <div class="kick">Commodity sourcing<span class="s">·</span>AI agents</div>
+    <div class="head">Verified suppliers.<br>Sourced in <span class="hi">48 hours.</span></div>
+    <div class="sub">one-line brief<span class="s">/</span>brokers stripped out<span class="s">/</span>price basis included</div>
+  </div>
+</div>
+
+<div class="stage" id="c">
+  <div class="bloom"></div>
+  <div class="tag"><span class="d"></span>AGENCY99.IO</div>
+  <div class="block">
+    <div class="kick">Commodity sourcing<span class="s">·</span>AI agents<span class="s">·</span>Automation</div>
+    <div class="head">Verified suppliers. Sourced in <span class="hi">48 hours.</span></div>
+    <div class="sub">one-line brief<span class="s">/</span>brokers stripped out<span class="s">/</span>price basis included</div>
+  </div>
+</div>
